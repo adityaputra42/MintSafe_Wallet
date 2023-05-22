@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
                 colorScheme: Style.themeData(false),
                 useMaterial3: true,
               ),
-              home: const ImportWalletPage());
+              home: const CreateNewWalletPage());
         });
   }
 }

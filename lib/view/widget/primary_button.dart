@@ -7,10 +7,12 @@ class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     super.key,
     required this.title,
-    this.height = 52,
+    this.height = 54,
     this.width = double.infinity,
     this.margin = EdgeInsets.zero,
     required this.onPressed,
+    this.disable = false,
+    this.loading = false,
   });
 
   final String title;
@@ -18,6 +20,8 @@ class PrimaryButton extends StatelessWidget {
   final EdgeInsets margin;
   final double height;
   final Function() onPressed;
+  final bool disable;
+  final bool loading;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,15 +31,25 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             elevation: 0,
-            backgroundColor: AppColor.primaryColor,
+            backgroundColor:
+                disable ? AppColor.secondaryColor : AppColor.primaryColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.r))),
-        onPressed: onPressed,
-        child: Text(
-          title,
-          style: AppFont.semibold16.copyWith(color: AppColor.white),
-          textAlign: TextAlign.center,
-        ),
+        onPressed: disable || loading ? () {} : onPressed,
+        child: loading
+            ? Padding(
+                padding: EdgeInsets.all(8.h),
+                child: const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColor.softGreen,
+                  ),
+                ),
+              )
+            : Text(
+                title,
+                style: AppFont.semibold16.copyWith(color: AppColor.white),
+                textAlign: TextAlign.center,
+              ),
       ),
     );
   }

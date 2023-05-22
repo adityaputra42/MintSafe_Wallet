@@ -96,6 +96,8 @@ class ImportWalletPage extends StatelessWidget {
           ),
           PrimaryButton(
             title: 'Import Wallet',
+            disable: false,
+            loading: false,
             onPressed: () {},
             margin: EdgeInsets.only(top: 24.h, bottom: 36.w),
           ),
