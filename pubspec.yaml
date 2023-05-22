@@ -1,0 +1,43 @@
+name: mintsafe_wallet
+description: A new Flutter project.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  flutter_screenutil: ^5.8.1
+  scaffold_gradient_background: ^1.0.3+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - asset/image/
+    - asset/icon/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: asset/font/poppin/Poppins-Bold.ttf
+        - asset: asset/font/poppin/Poppins-SemiBold.ttf
+        - asset: asset/font/poppin/Poppins-Medium.ttf
+        - asset: asset/font/poppin/Poppins-Regular.ttf
+        - asset: asset/font/poppin/Poppins-Light.ttf
+    - family: Roboto
+      fonts:
+        - asset: asset/font/roboto/Roboto-Bold.ttf
+        - asset: asset/font/roboto/Roboto-Medium.ttf
+        - asset: asset/font/roboto/Roboto-Regular.ttf
+        - asset: asset/font/roboto/Roboto-Light.ttf
