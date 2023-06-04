@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/create_password.dart';
+import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/confirm_sheed_pharse.dart';
 import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/stepper.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
@@ -13,12 +13,13 @@ class CreateNewWalletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget body() {
-      return Column(crossAxisAlignment: CrossAxisAlignment.start,
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           16.0.height,
           const StepperCustom(currentStep: 2),
           24.0.height,
-          const CreatePassword()
+          const ConfirmSheedPharse()
         ],
       );
     }

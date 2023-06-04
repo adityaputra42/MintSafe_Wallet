@@ -61,20 +61,20 @@ class InputText extends StatelessWidget {
             maxLines: maxLine,
             style: AppFont.medium14,
             decoration: InputDecoration(
-              suffixIcon: icon,
+              suffixIcon: icon,filled: true,fillColor: AppColor.white,
               hintText: hintText,
               hintStyle: AppFont.reguler14.copyWith(
                   fontWeight: FontWeight.w300, color: AppColor.darkerGray),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16.r),
                 borderSide: const BorderSide(
-                  color: AppColor.darkerGray,
+                  color: Colors.transparent,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16.r),
                 borderSide: const BorderSide(
-                  color: AppColor.darkerGray,
+                  color: Colors.transparent,
                 ),
               ),
               focusedBorder: OutlineInputBorder(

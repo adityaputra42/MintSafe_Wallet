@@ -26,10 +26,13 @@ class SecondaryButton extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
           gradient: AppGradient.secondaryButton,
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 0.3.h, spreadRadius: 0.3.h, color: Colors.black12)
+          ],
           borderRadius: BorderRadius.circular(16.r)),
       child: TextButton(
         style: TextButton.styleFrom(
-          
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.r))),
         onPressed: onPressed,
