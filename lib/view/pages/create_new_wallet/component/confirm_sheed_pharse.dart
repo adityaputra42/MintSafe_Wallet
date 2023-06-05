@@ -142,7 +142,7 @@ class ConfirmSheedPharse extends StatelessWidget {
           disable: false,
           loading: false,
           onPressed: () {
-            Get.to(() => const MainPage());
+            Get.to(() => MainPage());
           },
           margin: EdgeInsets.only(top: 36.h, bottom: 36.w),
         ),

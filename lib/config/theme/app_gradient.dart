@@ -10,4 +10,8 @@ class AppGradient {
       colors: [Color(0xffFFFFFF), Color(0xFFD8F3FF)],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter);
+  static const LinearGradient bottomNavBar = LinearGradient(
+      colors: [Color(0xffFFFFFF), Color(0xFFC6EDFE)],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter);
 }

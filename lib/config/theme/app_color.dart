@@ -21,7 +21,7 @@ class AppColor {
   static const Color yellowWarning = Color(0xFFE3CA88);
 
   static const Color gray = Color(0xFFC7C9D9);
-  static const Color darkerGray = Color(0xFFBFBFBF);
+  static const Color darkerGray = Color(0xFF8A8B99);
   static const Color subtleGray = Color(0xFFF3F4F8);
   static const Color lineStroke = Color(0xFFDDE5E9);
   static const Color white = Color(0xFFFFFFFF);
