@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
+import 'package:mintsafe_wallet/view/pages/main_page.dart';
 
 import '../../../../config/config.dart';
+import '../../../../domain/controller/create_wallet_controller.dart';
 import '../../../widget/widget.dart';
 
 class ConfirmSheedPharse extends StatelessWidget {
-  const ConfirmSheedPharse({super.key});
-
+  const ConfirmSheedPharse({super.key, required this.controller});
+  final CreateWalletController controller;
   @override
   Widget build(BuildContext context) {
     Widget cardPniomoni({required int number, String? text}) {
@@ -135,10 +138,12 @@ class ConfirmSheedPharse extends StatelessWidget {
               ]),
         ),
         PrimaryButton(
-          title: 'Continue',
+          title: 'Confirm',
           disable: false,
           loading: false,
-          onPressed: () {},
+          onPressed: () {
+            Get.to(() => const MainPage());
+          },
           margin: EdgeInsets.only(top: 36.h, bottom: 36.w),
         ),
       ],

@@ -3,11 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 
 import '../../../../config/config.dart';
+import '../../../../domain/controller/create_wallet_controller.dart';
 import '../../../widget/widget.dart';
 
 class SheedPharse extends StatelessWidget {
-  const SheedPharse({super.key});
-
+  const SheedPharse({super.key, required this.controller});
+  final CreateWalletController controller;
   @override
   Widget build(BuildContext context) {
     Widget cardPniomoni({required int number, required String text}) {
@@ -69,7 +70,9 @@ class SheedPharse extends StatelessWidget {
           title: 'Continue',
           disable: false,
           loading: false,
-          onPressed: () {},
+          onPressed: () {
+            controller.changeStep(2);
+          },
           margin: EdgeInsets.only(top: 16.h, bottom: 36.w),
         ),
       ],

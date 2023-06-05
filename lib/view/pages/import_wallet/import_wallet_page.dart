@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/utils/helper/helper.dart';
+import 'package:mintsafe_wallet/view/pages/main_page.dart';
 import 'package:mintsafe_wallet/view/widget/input_text.dart';
 import 'package:mintsafe_wallet/view/widget/primary_button.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
@@ -98,7 +100,9 @@ class ImportWalletPage extends StatelessWidget {
             title: 'Import Wallet',
             disable: false,
             loading: false,
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => const MainPage());
+            },
             margin: EdgeInsets.only(top: 24.h, bottom: 36.w),
           ),
         ],
@@ -111,7 +115,9 @@ class ImportWalletPage extends StatelessWidget {
           title: Row(
         children: [
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Get.back();
+            },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
               color: AppColor.blackText,

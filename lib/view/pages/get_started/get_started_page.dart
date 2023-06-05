@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
+import 'package:mintsafe_wallet/view/pages/page.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
@@ -36,12 +38,24 @@ class GetStartedPage extends StatelessWidget {
               60.0.height,
               SecondaryButton(
                 title: "Create a New Wallet",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CreateNewWalletPage(),
+                      ));
+                },
               ),
               16.0.height,
               PrimaryButton(
                 title: "Import an Existing Wallet",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ImportWalletPage(),
+                      ));
+                },
               )
             ],
           ),

@@ -4,11 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mintsafe_wallet/config/config.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 
+import '../../../../domain/controller/create_wallet_controller.dart';
 import '../../../widget/widget.dart';
 
 class CreatePassword extends StatelessWidget {
-  const CreatePassword({super.key});
-
+  const CreatePassword({super.key, required this.controller});
+  final CreateWalletController controller;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -74,7 +75,9 @@ class CreatePassword extends StatelessWidget {
           title: 'Continue',
           disable: false,
           loading: false,
-          onPressed: () {},
+          onPressed: () {
+            controller.changeStep(1);
+          },
           margin: EdgeInsets.only(top: 24.h, bottom: 36.w),
         ),
       ],
