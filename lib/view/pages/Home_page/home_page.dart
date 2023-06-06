@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/domain/controller/home_controller.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
+import 'package:mintsafe_wallet/view/pages/Home_page/component/nft_list.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/token_list.dart';
 import 'package:mintsafe_wallet/view/widget/card_action.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
@@ -146,7 +147,7 @@ class HomePage extends StatelessWidget {
                   duration: 500,
                   viewportFraction: 0.8,
                   scale: 0.9,
-                  axisDirection: AxisDirection.up,
+                  axisDirection: AxisDirection.down,
                   layout: SwiperLayout.STACK,
                   scrollDirection: Axis.vertical,
                   loop: true,
@@ -214,7 +215,7 @@ class HomePage extends StatelessWidget {
                       16.0.height,
                       controller.tabIndex.value == 0
                           ? const TokenList()
-                          : const SizedBox()
+                          : const NftList()
                       // TabBarView(children: [Wall()])
                     ],
                   ),

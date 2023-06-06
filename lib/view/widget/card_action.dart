@@ -55,7 +55,7 @@ class CardAction extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          cardAction(ontap: scan, title: "Scann", image: AppIcon.scanIcon),
+          cardAction(ontap: scan, title: "Scan", image: AppIcon.scanIcon),
           cardAction(
               ontap: receive, title: "Receive", image: AppIcon.receiveIcon),
           cardAction(

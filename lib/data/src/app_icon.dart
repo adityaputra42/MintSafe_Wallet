@@ -11,4 +11,7 @@ class AppIcon {
   static const String receiveIcon = 'asset/icon/qr_code.png';
   static const String trasnferIcon = 'asset/icon/send.png';
   static const String buyIcon = 'asset/icon/buy_coin.png';
+  static const String sendActivity = 'asset/icon/send_activity.png';
+  static const String receiveActivity = 'asset/icon/receive_activity.png';
+  static const String smartContractCall = 'asset/icon/smart_contract_call.png';
 }
