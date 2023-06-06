@@ -16,7 +16,7 @@ class MainPage extends StatelessWidget {
     body() {
       switch (controller.indexBar.value) {
         case 0:
-          return const HomePage();
+          return HomePage();
         case 1:
           return const Center(
             child: Text("Discover"),
@@ -32,7 +32,7 @@ class MainPage extends StatelessWidget {
           );
 
         default:
-          const HomePage();
+          HomePage();
       }
     }
 
