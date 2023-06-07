@@ -40,6 +40,10 @@ class AppGradient {
       colors: [Color(0xff3F8BAC), Color(0xFF73B0CD)],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight);
+  static const LinearGradient warning = LinearGradient(
+      colors: [Color(0xffFFF6D7), Color(0xFFFFEBA5)],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter);
 }
 
 // [Color(0xff5631FA), Color(0xff627EEA)],

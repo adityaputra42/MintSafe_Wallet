@@ -76,6 +76,11 @@ class NftList extends StatelessWidget {
         // 8.0.height,
         SecondaryButton(
           title: "Add NFT",
+          icon: Icon(
+            Icons.add_circle_outline_rounded,
+            size: 24.h,
+            color: AppColor.primaryColor,
+          ),
           onPressed: () {},
           margin: EdgeInsets.only(bottom: 16.h),
         )

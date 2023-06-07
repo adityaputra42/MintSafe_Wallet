@@ -3,22 +3,24 @@ import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:mintsafe_wallet/config/config.dart';
-import 'package:mintsafe_wallet/data/data.dart';
-import 'package:mintsafe_wallet/utils/extension/extension.dart';
-import 'package:mintsafe_wallet/view/pages/add_token/add_token.dart';
-import 'package:mintsafe_wallet/view/pages/detail_token/detail_token.dart';
-import 'package:mintsafe_wallet/view/widget/widget.dart';
+import 'package:mintsafe_wallet/view/pages/transfer/transfer_page.dart';
+import 'package:mintsafe_wallet/view/widget/tab_bar_custom.dart';
+import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
-class TokenList extends StatelessWidget {
-  const TokenList({super.key});
+import '../../../config/config.dart';
+import '../../../data/data.dart';
+import '../../../utils/utils.dart';
+import '../../widget/widget.dart';
+
+class SelectTokenPage extends StatelessWidget {
+  const SelectTokenPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     Widget cardToken() {
       return GestureDetector(
         onTap: () {
-          Get.to(() => DetailToken());
+          Get.to(() => const TransferPage());
         },
         child: Container(
           width: double.infinity,
@@ -63,26 +65,10 @@ class TokenList extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              "\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(1813.98)}",
-                              style: AppFont.reguler14.copyWith(
-                                  color: AppColor.darkerGray,
-                                  fontFamily: "Roboto"),
-                            ),
-                            4.0.width,
-                            Icon(
-                              Icons.arrow_outward_rounded,
-                              size: 16.h,
-                              color: AppColor.greenBuy,
-                            ),
-                            Text(
-                              "0.10%",
-                              style: AppFont.reguler14
-                                  .copyWith(color: AppColor.greenBuy),
-                            ),
-                          ],
+                        Text(
+                          "ERC-20",
+                          style: AppFont.reguler14.copyWith(
+                              color: AppColor.darkerGray, fontFamily: "Roboto"),
                         ),
                         Text(
                           "\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(0)}",
@@ -100,18 +86,62 @@ class TokenList extends StatelessWidget {
       );
     }
 
-    return Expanded(
-      child: Column(
+    Widget body() {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: Column(
+          children: [
+            16.0.height,
+            const TabbarCustom(
+                titles: ["BNB Chain", "Ethereum", "Arbitreum", "Polygon"],
+                selectedIndex: 0),
+            16.0.height,
+            Expanded(
+                child: ListView.builder(
+              itemBuilder: (context, index) => Padding(
+                padding: EdgeInsets.only(bottom: 12.h),
+                child: cardToken(),
+              ),
+              itemCount: 5,
+            ))
+          ],
+        ),
+      );
+    }
+
+    return ScaffoldGradientBackground(
+      gradient: AppGradient.background,
+      appBar: WidgetHelper.appBar(
+          title: Row(
         children: [
-          Expanded(
-              child: ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 0.5.h),
-            itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.only(bottom: 8.h),
-              child: cardToken(),
+          GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: AppColor.blackText,
+              size: 24.h,
             ),
-            itemCount: 2,
-          )),
+          ),
+          16.0.width,
+          Text(
+            "Select Asset",
+            style: AppFont.medium16,
+          ),
+        ],
+      )),
+      body: body(),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "Couldn't find your token?\nTap the below button to add.",
+            style: AppFont.reguler12.copyWith(
+              color: AppColor.darkerGray,
+            ),
+            textAlign: TextAlign.center,
+          ),
           SecondaryButton(
             title: "Add Token",
             icon: Icon(
@@ -119,11 +149,9 @@ class TokenList extends StatelessWidget {
               size: 24.h,
               color: AppColor.primaryColor,
             ),
-            onPressed: () {
-              Get.to(() => AddTokenPage());
-            },
-            margin: EdgeInsets.only(bottom: 16.h),
-          )
+            onPressed: () {},
+            margin: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 36.h),
+          ),
         ],
       ),
     );

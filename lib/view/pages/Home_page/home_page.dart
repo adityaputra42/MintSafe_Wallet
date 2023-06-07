@@ -9,6 +9,8 @@ import 'package:mintsafe_wallet/domain/controller/home_controller.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/nft_list.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/token_list.dart';
+import 'package:mintsafe_wallet/view/pages/add_network/add_network.dart';
+import 'package:mintsafe_wallet/view/pages/select_token.dart/select_token.dart';
 import 'package:mintsafe_wallet/view/widget/card_action.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
@@ -111,28 +113,33 @@ class HomePage extends StatelessWidget {
                   extentRatio: 0.37,
                   motion: const ScrollMotion(),
                   children: [
-                    Container(
-                      height: 186.h,
-                      width: 130.w,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 2.w, color: AppColor.primaryColor),
-                          borderRadius: BorderRadius.circular(16.r)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.add_circle_outline_rounded,
-                            size: 32.h,
-                            color: AppColor.primaryColor,
-                          ),
-                          4.0.height,
-                          Text(
-                            "Add Network",
-                            style: AppFont.semibold16
-                                .copyWith(color: AppColor.primaryColor),
-                          )
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => const AddNetworkPage());
+                      },
+                      child: Container(
+                        height: 186.h,
+                        width: 130.w,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 2.w, color: AppColor.primaryColor),
+                            borderRadius: BorderRadius.circular(16.r)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.add_circle_outline_rounded,
+                              size: 32.h,
+                              color: AppColor.primaryColor,
+                            ),
+                            4.0.height,
+                            Text(
+                              "Add Network",
+                              style: AppFont.semibold16
+                                  .copyWith(color: AppColor.primaryColor),
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ]),
@@ -157,8 +164,12 @@ class HomePage extends StatelessWidget {
             8.0.height,
             CardAction(
               scan: () {},
-              receive: () {},
-              transfer: () {},
+              receive: () {
+                Get.to(() => const SelectTokenPage());
+              },
+              transfer: () {
+                Get.to(() => const SelectTokenPage());
+              },
             ),
             16.0.height,
             Expanded(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mintsafe_wallet/utils/utils.dart';
 
 import '../../config/config.dart';
 
@@ -12,6 +13,7 @@ class PrimaryButton extends StatelessWidget {
     this.margin = EdgeInsets.zero,
     required this.onPressed,
     this.disable = false,
+    this.icon,
     this.loading = false,
   });
 
@@ -22,6 +24,7 @@ class PrimaryButton extends StatelessWidget {
   final Function() onPressed;
   final bool disable;
   final bool loading;
+  final Widget? icon;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,10 +48,17 @@ class PrimaryButton extends StatelessWidget {
                   ),
                 ),
               )
-            : Text(
-                title,
-                style: AppFont.semibold16.copyWith(color: AppColor.white),
-                textAlign: TextAlign.center,
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  icon ?? const SizedBox(),
+                  icon != null ? 8.0.width : 0.0.width,
+                  Text(
+                    title,
+                    style: AppFont.semibold16.copyWith(color: AppColor.white),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
       ),
     );
