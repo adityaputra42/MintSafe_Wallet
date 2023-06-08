@@ -13,7 +13,10 @@ import '../../../utils/utils.dart';
 class AddNetworkPage extends StatelessWidget {
   AddNetworkPage({super.key});
   final AddNetworkController controller = Get.put(AddNetworkController());
-  Widget body() {
+ 
+  @override
+  Widget build(BuildContext context) {
+     Widget body() {
     return Obx(() {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -81,8 +84,6 @@ class AddNetworkPage extends StatelessWidget {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
     return ScaffoldGradientBackground(
       gradient: AppGradient.background,
       appBar: WidgetHelper.appBar(

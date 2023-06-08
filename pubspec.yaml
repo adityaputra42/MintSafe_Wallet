@@ -18,6 +18,7 @@ dependencies:
   flutter_switch: ^0.3.2
   get: ^4.6.5
   intl: ^0.18.1
+  mobile_scanner: ^3.2.0
   qr_flutter: ^4.1.0
   scaffold_gradient_background: ^1.0.3+1
 

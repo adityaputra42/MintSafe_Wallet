@@ -35,7 +35,7 @@ class GetStartedPage extends StatelessWidget {
                 'Unlock the Future of Digital Assets',
                 style: AppFont.reguler16,
               ),
-              60.0.height,
+              120.0.height,
               SecondaryButton(
                 title: "Create a New Wallet",
                 onPressed: () {

@@ -18,7 +18,7 @@ class SettingPage extends StatelessWidget {
         children: [
           Icon(
             icon,
-            size: 24.h,
+            size: 32.h,
             color: AppColor.primaryColor,
           ),
           12.0.width,

@@ -25,7 +25,7 @@ class AppColor {
   static const Color subtleGray = Color(0xFFF3F4F8);
   static const Color lineStroke = Color(0xFFDDE5E9);
   static const Color white = Color(0xFFFFFFFF);
-  static const Color whiteBackground = Color(0xFFF5F4FD);
+  static const Color whiteBackground = Color(0xFFF4F7FE);
 
   static const Color blackText = Color(0xFF404040);
   static const Color softBlack = Color(0xFF3A3535);

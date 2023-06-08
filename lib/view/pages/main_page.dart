@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/domain/controller/controller.dart';
+import 'package:mintsafe_wallet/view/pages/dapp/dapp_page.dart';
+import 'package:mintsafe_wallet/view/pages/discover/discover_page.dart';
 import 'package:mintsafe_wallet/view/pages/setting/setting_page.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
@@ -19,13 +21,9 @@ class MainPage extends StatelessWidget {
         case 0:
           return HomePage();
         case 1:
-          return const Center(
-            child: Text("Discover"),
-          );
+          return const DiscoverPage();
         case 2:
-          return const Center(
-            child: Text("DApp"),
-          );
+          return const DAppPage();
 
         case 3:
           return const SettingPage();

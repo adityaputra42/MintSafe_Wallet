@@ -5,8 +5,9 @@ import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/utils/extension/extension.dart';
 
 class Empty extends StatelessWidget {
-  const Empty({super.key, required this.title});
+  const Empty({super.key, required this.title, this.width=120});
   final String title;
+  final double width;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -15,9 +16,9 @@ class Empty extends StatelessWidget {
         children: [
           Image.asset(
             AppImage.empty,
-            width: 120.w,
+            width: width.w,
           ),
-          16.0.height,
+          8.0.height,
           Text(
             title,
             style: AppFont.medium14.copyWith(color: AppColor.primaryColor),

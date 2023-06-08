@@ -10,4 +10,16 @@ class AppImage {
   static const String medium = 'asset/image/medium.png';
   static const String website = 'asset/image/website.png';
   static const String explorer = 'asset/image/explorer.png';
+
+  static const String pancakeSwap = 'asset/image/pancake.png';
+
+  static const String opensea = 'asset/image/opensea.png';
+
+  static const String uniswap = 'asset/image/uniswap.png';
+
+  static const String quickswap = 'asset/image/quickswap.png';
+
+  static const String ens = 'asset/image/ens.png';
+
+  static const String chainlink = 'asset/image/chainlink.png';
 }

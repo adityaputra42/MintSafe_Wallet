@@ -23,19 +23,15 @@ class SecondaryButton extends StatelessWidget {
   final Function() onPressed;
   @override
   Widget build(BuildContext context) {
+    //
     return Container(
       width: width,
       height: height.h,
       margin: margin,
-      decoration: BoxDecoration(
-          gradient: AppGradient.secondaryButton,
-          boxShadow: [
-            BoxShadow(
-                blurRadius: 0.3.h, spreadRadius: 0.3.h, color: Colors.black12)
-          ],
-          borderRadius: BorderRadius.circular(16.r)),
-      child: TextButton(
-        style: TextButton.styleFrom(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            elevation: 0,
+            backgroundColor: const Color(0xffD2F1FF),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.r))),
         onPressed: onPressed,

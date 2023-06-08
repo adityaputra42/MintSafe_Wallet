@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class AppGradient {
   static const LinearGradient background = LinearGradient(colors: [
     Color(0xffF4F7FE),
-    Color(0xFFE0F5FF),
+        Color(0xffF4F7FE),
+    // Color(0xFFE0F5FF),
   ], begin: Alignment.topLeft, end: Alignment.bottomRight);
 
   static const LinearGradient secondaryButton = LinearGradient(
@@ -12,7 +13,8 @@ class AppGradient {
       end: Alignment.bottomCenter);
   static const LinearGradient bottomNavBar = LinearGradient(colors: [
     Color(0xffFFFFFF),
-    Color(0xFFC6EDFE),
+    Color(0xffFFFFFF),
+    // Color(0xFFC6EDFE),
   ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
   static const LinearGradient cardETH = LinearGradient(
       colors: [Color(0xff4765FF), Color(0xFF7B88FF)],
