@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/domain/controller/controller.dart';
+import 'package:mintsafe_wallet/view/pages/setting/setting_page.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../config/config.dart';
@@ -27,9 +28,7 @@ class MainPage extends StatelessWidget {
           );
 
         case 3:
-          return const Center(
-            child: Text("Setting"),
-          );
+          return const SettingPage();
 
         default:
           HomePage();
@@ -67,13 +66,13 @@ class MainPage extends StatelessWidget {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.walletInactive,
-                            width: 36.h,
+                            width: 32.h,
                           )),
                       activeIcon: Padding(
                         padding: EdgeInsets.all(4.h),
                         child: Image.asset(
                           AppIcon.walletActive,
-                          width: 36.h,
+                          width: 32.h,
                         ),
                       ),
                       label: 'Wallet',
@@ -83,13 +82,13 @@ class MainPage extends StatelessWidget {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.diacoverInactive,
-                            width: 36.h,
+                            width: 32.h,
                           )),
                       activeIcon: Padding(
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.discoverActive,
-                            width: 36.h,
+                            width: 32.h,
                           )),
                       label: 'Discover',
                     ),
@@ -99,13 +98,13 @@ class MainPage extends StatelessWidget {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.dappInactive,
-                            width: 36.h,
+                            width: 32.h,
                           )),
                       activeIcon: Padding(
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.dappActive,
-                            width: 36.h,
+                            width: 32.h,
                           )),
                       label: 'DApp',
                     ),
@@ -114,13 +113,13 @@ class MainPage extends StatelessWidget {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.settingInactive,
-                            width: 36.h,
+                            width: 32.h,
                           )),
                       activeIcon: Padding(
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.settingActive,
-                            width: 36.h,
+                            width: 32.h,
                           )),
                       label: 'Settings',
                     ),

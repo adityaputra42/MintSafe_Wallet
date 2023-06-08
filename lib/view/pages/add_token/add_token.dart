@@ -79,12 +79,12 @@ class AddTokenPage extends StatelessWidget {
                     tabs: const [
                       Tab(
                         child: Text(
-                          "Token",
+                          "Search Token",
                         ),
                       ),
                       Tab(
                         child: Text(
-                          "NFT",
+                          "Custom Token",
                         ),
                       ),
                     ],

@@ -3,6 +3,7 @@ import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
+import 'package:mintsafe_wallet/view/widget/warning.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
@@ -40,30 +41,9 @@ class ReceiveTokenPage extends StatelessWidget {
               style: AppFont.medium14.copyWith(fontSize: 20),
             ),
             24.0.height,
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(16.w),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.r),
-                  gradient: AppGradient.warning),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.warning_rounded,
-                    size: 32.h,
-                    color: const Color(0xffF7931A),
-                  ),
-                  12.0.width,
-                  Expanded(
-                    child: Text(
-                      "Send only ERC-20 to this address, or you might loose your funds.",
-                      style: AppFont.reguler16,
-                      overflow: TextOverflow.clip,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const Warning(
+                warning:
+                    "Send only ERC-20 to this address, or you might loose your funds."),
             36.0.height,
             Container(
               width: double.infinity,

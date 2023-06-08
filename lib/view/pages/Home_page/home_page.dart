@@ -109,13 +109,14 @@ class HomePage extends StatelessWidget {
             ),
             24.0.height,
             Slidable(
+              closeOnScroll: false,
               startActionPane: ActionPane(
                   extentRatio: 0.37,
                   motion: const ScrollMotion(),
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => const AddNetworkPage());
+                        Get.to(() => AddNetworkPage());
                       },
                       child: Container(
                         height: 186.h,
