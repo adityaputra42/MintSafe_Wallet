@@ -1,5 +1,5 @@
 class AppImage {
-  static const String logo = 'asset/image/logo_mintsafe.png';
+  static const String logo = 'asset/image/logo.png';
   static const String avatar = 'asset/image/avatar.png';
   static const String masking = 'asset/image/masking_card.png';
   static const String empty = 'asset/image/empty.png';
@@ -22,4 +22,5 @@ class AppImage {
   static const String ens = 'asset/image/ens.png';
 
   static const String chainlink = 'asset/image/chainlink.png';
+  static const String bnbnews = 'asset/image/bnb.png';
 }

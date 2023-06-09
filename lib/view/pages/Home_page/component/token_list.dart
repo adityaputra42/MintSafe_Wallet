@@ -24,10 +24,13 @@ class TokenList extends StatelessWidget {
           width: double.infinity,
           padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 12.w),
           height: 60.h,
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-                spreadRadius: 0.4, blurRadius: 0.5.h, color: Colors.black12)
-          ], borderRadius: BorderRadius.circular(12.r), color: Colors.white),
+          decoration: BoxDecoration(
+              // boxShadow: [
+              //   BoxShadow(
+              //       spreadRadius: 0.4, blurRadius: 0.5.h, color: Colors.black12)
+              // ],
+              borderRadius: BorderRadius.circular(12.r),
+              color: Colors.white),
           child: Row(
             children: [
               ClipPolygon(
