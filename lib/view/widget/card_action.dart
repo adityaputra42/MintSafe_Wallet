@@ -26,8 +26,8 @@ class CardAction extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 48.h,
-              height: 48.h,
+              width: 44.h,
+              height: 44.h,
               padding: EdgeInsets.all(6.h),
               decoration: BoxDecoration(
                   boxShadow: [
@@ -37,13 +37,13 @@ class CardAction extends StatelessWidget {
                         color: Colors.black12)
                   ],
                   borderRadius: BorderRadius.circular(8.r),
-                  color: AppColor.primaryColor),
+                  color: AppColor.secondaryColor),
               child: Image.asset(image),
             ),
             8.0.height,
             Text(
               title,
-              style: AppFont.semibold14,
+              style: AppFont.medium14 .copyWith(color: Colors.white),
             )
           ],
         ),

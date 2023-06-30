@@ -1,15 +1,12 @@
-// import 'package:card_stack_widget/card_stack_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/domain/controller/home_controller.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/nft_list.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/token_list.dart';
-import 'package:mintsafe_wallet/view/pages/add_network/add_network.dart';
 import 'package:mintsafe_wallet/view/pages/scan/scann_page.dart';
 import 'package:mintsafe_wallet/view/pages/select_token.dart/select_token.dart';
 import 'package:mintsafe_wallet/view/widget/card_action.dart';
@@ -23,20 +20,20 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget cardWallet(LinearGradient gradient) {
+    Widget cardWallet() {
       return Container(
         width: double.infinity,
-        height: 400.h,
+        height: 210.h,
+        padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.r),
-            gradient: gradient,
+            borderRadius: BorderRadius.circular(12.r),
+            color: AppColor.primaryColor,
             image: const DecorationImage(
                 image: AssetImage(AppImage.masking), fit: BoxFit.cover)),
         child: Center(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              16.0.height,
               Text("~\$123.673",
                   style: AppFont.semibold24.copyWith(
                     color: AppColor.white,
@@ -56,7 +53,22 @@ class HomePage extends StatelessWidget {
                     color: AppColor.greenBuy,
                   )
                 ],
-              )
+              ),
+              const Spacer(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: CardAction(
+                  scan: () {
+                    Get.to(() => const ScannPage());
+                  },
+                  receive: () {
+                    Get.to(() => const SelectTokenPage());
+                  },
+                  transfer: () {
+                    Get.to(() => const SelectTokenPage());
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -93,86 +105,45 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 8.0.width,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Hi, Welcome Back",
-                      style: AppFont.reguler12,
-                    ),
-                    Text(
-                      "Dompet Saya",
-                      style: AppFont.medium14,
-                    )
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Hi, Welcome Back",
+                        style: AppFont.reguler12,
+                      ),
+                      Text(
+                        "Dompet Saya",
+                        style: AppFont.medium14,
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.r),
+                      color: AppColor.secondaryColor.withOpacity(0.25)),
+                  child: Row(
+                    children: [
+                      Text("Ethereum Mainet",
+                          style: AppFont.medium12
+                              .copyWith(color: AppColor.primaryColor)),
+                      4.0.width,
+                      Icon(
+                        Icons.expand_more_rounded,
+                        color: AppColor.primaryColor,
+                        size: 24.w,
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
             24.0.height,
-            Slidable(
-              closeOnScroll: false,
-              startActionPane: ActionPane(
-                  extentRatio: 0.37,
-                  motion: const ScrollMotion(),
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(() => AddNetworkPage());
-                      },
-                      child: Container(
-                        height: 186.h,
-                        width: 130.w,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 2.w, color: AppColor.primaryColor),
-                            borderRadius: BorderRadius.circular(16.r)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.add_circle_outline_rounded,
-                              size: 32.h,
-                              color: AppColor.primaryColor,
-                            ),
-                            4.0.height,
-                            Text(
-                              "Add Network",
-                              style: AppFont.semibold16
-                                  .copyWith(color: AppColor.primaryColor),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ]),
-              child: SizedBox(
-                height: 204.h,
-                child: Swiper(
-                  itemBuilder: (context, index) =>
-                      cardWallet(controller.cardList[index]),
-                  itemCount: controller.cardList.length,
-                  itemWidth: double.infinity,
-                  itemHeight: 190.h,
-                  duration: 500,
-                  viewportFraction: 0.8,
-                  scale: 0.9,
-                  axisDirection: AxisDirection.down,
-                  layout: SwiperLayout.STACK,
-                  scrollDirection: Axis.vertical,
-                  loop: true,
-                ),
-              ),
-            ),
-            8.0.height,
-            CardAction(
-              scan: () {Get.to(()=>const ScannPage());},
-              receive: () {
-                Get.to(() => const SelectTokenPage());
-              },
-              transfer: () {
-                Get.to(() => const SelectTokenPage());
-              },
-            ),
+            cardWallet(),
             16.0.height,
             Expanded(
               child: Obx(() {

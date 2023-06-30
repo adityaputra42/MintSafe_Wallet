@@ -6,12 +6,12 @@ import 'package:intl/intl.dart';
 import 'package:mintsafe_wallet/domain/controller/detail_token_controller.dart';
 import 'package:mintsafe_wallet/view/pages/detail_token/component/activity.dart';
 import 'package:mintsafe_wallet/view/pages/detail_token/component/info_token.dart';
+import 'package:mintsafe_wallet/view/widget/widget.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 import '../../../data/data.dart';
 import '../../../utils/utils.dart';
-import '../../widget/card_action.dart';
 
 class DetailToken extends StatelessWidget {
   DetailToken({super.key});
@@ -21,9 +21,10 @@ class DetailToken extends StatelessWidget {
     Widget cardWallet() {
       return Container(
         width: double.infinity,
-        height: 190.h,
+        height: 210.h,
+        padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(12.r),
             gradient: AppGradient.cardZK,
             image: const DecorationImage(
                 image: AssetImage(AppImage.masking), fit: BoxFit.cover)),
@@ -33,8 +34,8 @@ class DetailToken extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 48.h,
-                height: 48.h,
+                width: 42.h,
+                height: 42.h,
                 child: ClipPolygon(
                   sides: 6,
                   rotate: 0,
@@ -56,7 +57,7 @@ class DetailToken extends StatelessWidget {
                   style: AppFont.reguler16.copyWith(
                     color: AppColor.white,
                   )),
-              8.0.height,
+              4.0.height,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -71,7 +72,7 @@ class DetailToken extends StatelessWidget {
                     color: AppColor.greenBuy,
                   )
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -80,6 +81,9 @@ class DetailToken extends StatelessWidget {
 
     return ScaffoldGradientBackground(
       gradient: AppGradient.background,
+      // bottomNavigationBar: Row(
+      //   children: [PrimaryButton(title: "Send", onPressed: () {}, height: 48.w,)],
+      // ),
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -106,12 +110,6 @@ class DetailToken extends StatelessWidget {
           children: [
             16.0.height,
             cardWallet(),
-            16.0.height,
-            CardAction(
-              scan: () {},
-              receive: () {},
-              transfer: () {},
-            ),
             16.0.height,
             Expanded(
               child: Obx(() {
@@ -174,6 +172,35 @@ class DetailToken extends StatelessWidget {
                 );
               }),
             ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                  spreadRadius: 2,
+                  blurRadius: 2,
+                  color: AppColor.primaryColor.withOpacity(0.1))
+            ],
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(12.r),
+                topRight: Radius.circular(12.r))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            PrimaryButton(
+              title: "Send",
+              onPressed: () {},
+              width: MediaQuery.of(context).size.width * 0.43,
+            ),
+            SecondaryButton(
+              title: "Receive",
+              onPressed: () {},
+              width: MediaQuery.of(context).size.width * 0.43,
+            )
           ],
         ),
       ),
