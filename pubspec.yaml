@@ -1,24 +1,49 @@
 name: mintsafe_wallet
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
+  bip39: ^1.0.6
+  blockies_ethereum: ^0.0.2
+  build_runner: ^2.4.6
+  connectivity_checker: ^1.1.0
+  convert: ^3.1.1
   cupertino_icons: ^1.0.2
+  dart_bip32_bip44: ^0.2.0
+  encrypt: ^5.0.1
+  erc20: ^1.0.1
+  eth_abi_codec:
+    git:
+      url: https://github.com/nbltrust/dart-eth-abi-codec.git
+      ref: 2.0.0
+  eth_sig_util: ^0.0.9
+  ethereum_addresses: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_inappwebview: ^5.7.2+3
   flutter_polygon: ^0.3.0+2
   flutter_screenutil: ^5.8.1
   flutter_switch: ^0.3.2
   get: ^4.6.5
+  http: ^0.13.5
   intl: ^0.18.1
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  isar_generator: ^3.1.0+1
   mobile_scanner: ^3.2.0
+  number_system: ^0.0.6+8
+  path_provider: ^2.0.15
   qr_flutter: ^4.1.0
   scaffold_gradient_background: ^1.0.3+1
+  url_launcher: ^6.1.11
+  wallet_connect: ^1.0.4
+  web3_provider: ^1.1.4
+  web3dart: ^2.6.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -30,6 +55,8 @@ flutter:
   assets:
     - asset/image/
     - asset/icon/
+    - asset/abi/ERC-20.json
+    - asset/abi/chain.json
 
   fonts:
     - family: Poppins

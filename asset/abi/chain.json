@@ -1,0 +1,22 @@
+[
+  {
+      "name" : "Specta Mainnet",
+      "symbol" : "SPC",
+      "RPC" : "https://rpc.spectachains.org",
+      "chainId" : "503",
+      "explorer" : "https://explorer.spectachains.org",
+      "isTestnet" : false
+      
+  },
+  {
+      "name" : "Specta Testnet",
+      "symbol" : "T-SPC",
+      "RPC" : "https://rpctestnet.spectachains.org",
+      "chainId" : "1503",
+      "explorer" : "https://testnet.spectachains.org",
+      "isTestnet" : true
+  }
+ 
+
+ 
+]
