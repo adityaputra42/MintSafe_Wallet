@@ -22,36 +22,32 @@ class CardAction extends StatelessWidget {
         {Function()? ontap, required String title, required String image}) {
       return GestureDetector(
         onTap: ontap,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 44.h,
-              height: 44.h,
-              padding: EdgeInsets.all(6.h),
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        blurRadius: 0.7.h,
-                        spreadRadius: 0.4.h,
-                        color: Colors.black12)
-                  ],
-                  borderRadius: BorderRadius.circular(8.r),
-                  color: AppColor.secondaryColor),
-              child: Image.asset(image),
-            ),
-            8.0.height,
-            Text(
-              title,
-              style: AppFont.medium14 .copyWith(color: Colors.white),
-            )
-          ],
+        child: Container(
+          width: MediaQuery.of(context).size.width*0.24,
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    blurRadius: 1.h,
+                    spreadRadius:1.h,
+                    color: AppColor.primaryColor.withOpacity(0.2))
+              ],
+              borderRadius: BorderRadius.circular(8.r),
+              color: AppColor.secondaryColor),
+          child: Row(mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(image, width: 20.w,height: 20.h,) ,8.0.width,Text(
+          title,
+          style: AppFont.medium14 .copyWith(color: Colors.white),
+        )
+            ],
+          ),
         ),
       );
     }
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -60,7 +56,7 @@ class CardAction extends StatelessWidget {
               ontap: receive, title: "Receive", image: AppIcon.receiveIcon),
           cardAction(
               ontap: transfer, title: "Transfer", image: AppIcon.trasnferIcon),
-          cardAction(ontap: buy, title: "Buy", image: AppIcon.buyIcon),
+          
         ],
       ),
     );

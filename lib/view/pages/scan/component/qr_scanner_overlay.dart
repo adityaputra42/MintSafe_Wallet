@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:mintsafe_wallet/utils/utils.dart';
 
 import '../../../../../../config/config.dart';
 
@@ -51,6 +53,41 @@ class QRScannerOverlay extends StatelessWidget {
           ),
         ),
       ),
+      Container(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        width: double.infinity,
+        margin: EdgeInsets.only(top: 48.h),
+        height: 60.h,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: Container(
+                width: 32.w,
+                height: 32.w,
+                decoration: BoxDecoration(
+                    color: AppColor.secondaryColor.withOpacity(0.4),
+                    borderRadius: BorderRadius.circular(8.r)),
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: AppColor.white,
+                  size: 22.h,
+                ),
+              ),
+            ),
+            16.0.width,
+            Text(
+              "Scan Qr Code",
+              style: AppFont.medium16.copyWith(color: AppColor.white),
+              textAlign: TextAlign.center,
+            ),
+            
+          ],
+        ),
+      )
     ]);
   }
 }

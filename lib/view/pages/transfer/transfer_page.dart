@@ -3,7 +3,7 @@ import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:mintsafe_wallet/view/pages/select_token.dart/select_token.dart';
+import 'package:mintsafe_wallet/view/pages/select_token/select_token.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';

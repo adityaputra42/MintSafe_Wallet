@@ -21,7 +21,7 @@ class DetailToken extends StatelessWidget {
     Widget cardWallet() {
       return Container(
         width: double.infinity,
-        height: 210.h,
+        height: 190.h,
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
@@ -73,6 +73,7 @@ class DetailToken extends StatelessWidget {
                   )
                 ],
               ),
+             
             ],
           ),
         ),
@@ -193,14 +194,17 @@ class DetailToken extends StatelessWidget {
           children: [
             PrimaryButton(
               title: "Send",
+              activeColor: AppColor.secondaryColor,
               onPressed: () {},
               width: MediaQuery.of(context).size.width * 0.43,
             ),
-            SecondaryButton(
-              title: "Receive",
+             PrimaryButton(
+              title: "Recaive",
+              activeColor: AppColor.greenBuy,
               onPressed: () {},
               width: MediaQuery.of(context).size.width * 0.43,
-            )
+            ),
+          
           ],
         ),
       ),

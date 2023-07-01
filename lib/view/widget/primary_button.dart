@@ -13,6 +13,8 @@ class PrimaryButton extends StatelessWidget {
     this.margin = EdgeInsets.zero,
     required this.onPressed,
     this.disable = false,
+    this.activeColor = AppColor.primaryColor,
+    this.disableColor = AppColor.secondaryColor,
     this.icon,
     this.loading = false,
   });
@@ -22,6 +24,8 @@ class PrimaryButton extends StatelessWidget {
   final EdgeInsets margin;
   final double height;
   final Function() onPressed;
+  final Color activeColor;
+  final Color disableColor;
   final bool disable;
   final bool loading;
   final Widget? icon;
@@ -35,7 +39,7 @@ class PrimaryButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             elevation: 0,
             backgroundColor:
-                disable ? AppColor.secondaryColor : AppColor.primaryColor,
+                disable ? disableColor : activeColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.r))),
         onPressed: disable || loading ? () {} : onPressed,

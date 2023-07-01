@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,8 +6,9 @@ import 'package:mintsafe_wallet/domain/controller/home_controller.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/nft_list.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/token_list.dart';
+import 'package:mintsafe_wallet/view/pages/change_network.dart/change_netwoork.dart';
 import 'package:mintsafe_wallet/view/pages/scan/scann_page.dart';
-import 'package:mintsafe_wallet/view/pages/select_token.dart/select_token.dart';
+import 'package:mintsafe_wallet/view/pages/select_token/select_token.dart';
 import 'package:mintsafe_wallet/view/widget/card_action.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
@@ -23,54 +23,54 @@ class HomePage extends StatelessWidget {
     Widget cardWallet() {
       return Container(
         width: double.infinity,
-        height: 210.h,
+        height: 190.h,
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
             color: AppColor.primaryColor,
             image: const DecorationImage(
                 image: AssetImage(AppImage.masking), fit: BoxFit.cover)),
-        child: Center(
-          child: Column(
-            children: [
-              16.0.height,
-              Text("~\$123.673",
-                  style: AppFont.semibold24.copyWith(
-                    color: AppColor.white,
-                  )),
-              8.0.height,
-              Row(
+        child: Column(
+          children: [
+            Expanded(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("0xfhas7gjkd....ashajk3q9c",
-                      style: AppFont.medium14.copyWith(
+                  Text("~\$123.673",
+                      style: AppFont.semibold24.copyWith(
                         color: AppColor.white,
                       )),
-                  8.0.width,
-                  Icon(
-                    Icons.copy,
-                    size: 18.h,
-                    color: AppColor.greenBuy,
-                  )
+                  8.0.height,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("0xfhas7gjkd....ashajk3q9c",
+                          style: AppFont.medium14.copyWith(
+                            color: AppColor.white,
+                          )),
+                      8.0.width,
+                      Icon(
+                        Icons.copy,
+                        size: 18.h,
+                        color: AppColor.greenBuy,
+                      )
+                    ],
+                  ),
                 ],
               ),
-              const Spacer(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.w),
-                child: CardAction(
-                  scan: () {
-                    Get.to(() => const ScannPage());
-                  },
-                  receive: () {
-                    Get.to(() => const SelectTokenPage());
-                  },
-                  transfer: () {
-                    Get.to(() => const SelectTokenPage());
-                  },
-                ),
-              ),
-            ],
-          ),
+            ),
+            CardAction(
+              scan: () {
+                Get.to(() => const ScannPage());
+              },
+              receive: () {
+                Get.to(() => const SelectTokenPage());
+              },
+              transfer: () {
+                Get.to(() => const SelectTokenPage());
+              },
+            ),
+          ],
         ),
       );
     }
@@ -120,24 +120,28 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
-                      color: AppColor.secondaryColor.withOpacity(0.25)),
-                  child: Row(
-                    children: [
-                      Text("Ethereum Mainet",
-                          style: AppFont.medium12
-                              .copyWith(color: AppColor.primaryColor)),
-                      4.0.width,
-                      Icon(
-                        Icons.expand_more_rounded,
-                        color: AppColor.primaryColor,
-                        size: 24.w,
-                      ),
-                    ],
+                GestureDetector(onTap: () {
+                  Get.to(()=>const ChangeNetwork());
+                },
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        color: AppColor.secondaryColor.withOpacity(0.25)),
+                    child: Row(
+                      children: [
+                        Text("Ethereum Mainet",
+                            style: AppFont.medium14
+                                .copyWith(color: AppColor.primaryColor)),
+                        4.0.width,
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: AppColor.primaryColor,
+                          size: 14.w,
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],
