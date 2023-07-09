@@ -24,7 +24,7 @@ class SettingPage extends StatelessWidget {
           Expanded(
               child: Text(
             title,
-            style: AppFont.medium16,
+            style: AppFont.medium16.copyWith(color: AppColor.textDark),
           )),
           8.0.width,
           widget ?? const SizedBox(),
@@ -33,7 +33,7 @@ class SettingPage extends StatelessWidget {
     }
 
     return Scaffold(
-    backgroundColor: AppColor.bgLight,
+    backgroundColor: AppColor.bgDark,
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -61,17 +61,17 @@ class SettingPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                8.0.width,
+                12.0.width,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Wallets",
-                      style: AppFont.reguler16,
+                      style: AppFont.reguler16.copyWith(color: AppColor.grayColor),
                     ),
                     Text(
                       "Dompet Saya",
-                      style: AppFont.medium16,
+                      style: AppFont.medium16.copyWith(color: AppColor.textDark),
                     )
                   ],
                 )

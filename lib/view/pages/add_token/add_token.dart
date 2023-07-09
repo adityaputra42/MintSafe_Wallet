@@ -15,7 +15,7 @@ class AddTokenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     backgroundColor: AppColor.bgLight,
+     backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -25,14 +25,14 @@ class AddTokenPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textLight,
+              color: AppColor.textDark,
               size: 24.h,
             ),
           ),
           16.0.width,
           Text(
             "Add Token",
-            style: AppFont.medium16,
+            style: AppFont.medium16.copyWith(color: AppColor.textDark)
           ),
         ],
       )),
@@ -51,7 +51,7 @@ class AddTokenPage extends StatelessWidget {
                   padding: EdgeInsets.all(5.h),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
-                      color: Colors.white,
+                      color: AppColor.cardDark,
                       boxShadow:[
                         BoxShadow(
                             spreadRadius: 1,
@@ -64,8 +64,8 @@ class AddTokenPage extends StatelessWidget {
                         color: AppColor.primaryColor,
                         borderRadius: BorderRadius.circular(10.r)),
                     isScrollable: false,
-                    dividerColor: Colors.white,
-                    indicatorColor: AppColor.textDark,
+                    dividerColor: AppColor.cardDark,
+                    indicatorColor: AppColor.cardDark,
                     labelColor: AppColor.textDark,
                     labelPadding: EdgeInsets.zero,
                     labelStyle: AppFont.semibold16,

@@ -90,7 +90,7 @@ class DetailToken extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColor.bgLight,
+      backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -100,14 +100,14 @@ class DetailToken extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textLight,
+              color: AppColor.textDark,
               size: 24.h,
             ),
           ),
           16.0.width,
           Text(
             "Ethereum Mainet",
-            style: AppFont.medium16,
+            style: AppFont.medium16.copyWith(color: AppColor.textDark),
           ),
         ],
       )),
@@ -131,7 +131,7 @@ class DetailToken extends StatelessWidget {
                         padding: EdgeInsets.all(5.h),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.r),
-                            color: Colors.white,
+                            color: AppColor.cardDark,
                             boxShadow: [
                               BoxShadow(
                                   spreadRadius: 1,
@@ -145,8 +145,8 @@ class DetailToken extends StatelessWidget {
                               color: AppColor.primaryColor,
                               borderRadius: BorderRadius.circular(10.r)),
                           isScrollable: false,
-                          dividerColor: Colors.white,
-                          indicatorColor: AppColor.textDark,
+                          dividerColor: AppColor.cardDark,
+                          indicatorColor: AppColor.cardDark,
                           labelColor: AppColor.textDark,
                           labelPadding: EdgeInsets.zero,
                           labelStyle: AppFont.semibold16,
@@ -184,9 +184,9 @@ class DetailToken extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColor.cardDark,
             boxShadow: [
               BoxShadow(
                   spreadRadius: 1,
@@ -194,8 +194,8 @@ class DetailToken extends StatelessWidget {
                   color: AppColor.primaryColor.withOpacity(0.25))
             ],
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12.r),
-                topRight: Radius.circular(12.r))),
+                topLeft: Radius.circular(24.r),
+                topRight: Radius.circular(24.r))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

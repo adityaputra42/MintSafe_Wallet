@@ -22,12 +22,12 @@ class ImportWalletPage extends StatelessWidget {
           16.0.height,
           Text(
             'Import via Seed Phrase',
-            style: AppFont.semibold18,
+            style: AppFont.medium16.copyWith(color: AppColor.textDark)
           ),
           4.0.height,
           Text(
             'To import an existing wallet, please enter the recovery seed phrase here:',
-            style: AppFont.reguler14,
+            style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
           ),
           24.0.height,
           InputText(
@@ -75,7 +75,7 @@ class ImportWalletPage extends StatelessWidget {
                 title: Text.rich(
                   TextSpan(
                     text: 'I read and agreed to the',
-                    style: AppFont.reguler14,
+                    style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
                     children: [
                       TextSpan(
                           text: ' Term of Service',
@@ -109,7 +109,7 @@ class ImportWalletPage extends StatelessWidget {
     }
 
     return Scaffold(
-    backgroundColor: AppColor.bgLight,
+    backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -119,14 +119,14 @@ class ImportWalletPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textLight,
+              color: AppColor.textDark,
               size: 24.h,
             ),
           ),
           16.0.width,
           Text(
             "Import an Existing Wallet",
-            style: AppFont.medium16,
+            style: AppFont.medium16.copyWith(color: AppColor.textDark),
           ),
         ],
       )),

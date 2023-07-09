@@ -49,7 +49,7 @@ class InfoToken extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.4,
               child: Text(
                 "ETH",
-                style: AppFont.medium14,
+                style: AppFont.medium14.copyWith(color: AppColor.textDark),
               ),
             )
           ],
@@ -69,7 +69,7 @@ class InfoToken extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.4,
               child: Text(
                 "Ethereum mainet",
-                style: AppFont.medium14,
+                style: AppFont.medium14.copyWith(color: AppColor.textDark),
               ),
             )
           ],
@@ -89,7 +89,7 @@ class InfoToken extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.4,
               child: Text(
                 "Detial Token",
-                style: AppFont.medium14,
+                style: AppFont.medium14.copyWith(color: AppColor.textDark),
               ),
             )
           ],

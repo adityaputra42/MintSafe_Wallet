@@ -25,8 +25,8 @@ class DAppPage extends StatelessWidget {
                 sides: 6,
                 rotate: 0,
                 child: Container(
-                    padding: EdgeInsets.all(1.h),
-                    color: Colors.white,
+                    padding: EdgeInsets.all(0.25.h),
+                    color: AppColor.textDark,
                     child: Image.asset(
                       image,
                       fit: BoxFit.cover,
@@ -40,7 +40,7 @@ class DAppPage extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: AppFont.medium16,
+                  style: AppFont.medium16.copyWith(color: AppColor.textDark),
                 ),
                 Text(
                   subtitle,
@@ -75,7 +75,7 @@ class DAppPage extends StatelessWidget {
             children: [
               Text(
                 "History",
-                style: AppFont.medium16,
+                style: AppFont.medium16.copyWith(color: AppColor.textDark),
               ), Text(
                 "View all",
                 style: AppFont.medium14.copyWith(color: AppColor.primaryColor),
@@ -104,41 +104,10 @@ class DAppPage extends StatelessWidget {
               16.0.height,
             ],
           ),
-          // Text(
-          //   "Top",
-          //   style: AppFont.medium16,
-          // ),
-          // 16.0.height,
-          //  Wrap(
-          //   crossAxisAlignment: WrapCrossAlignment.center,
-          //   runAlignment: WrapAlignment.center,
-          //   alignment: WrapAlignment.center,
-          //   spacing: 16.h,
-          //   runSpacing: 8.h,
-          //   direction: Axis.horizontal,
-          //   children: [
-
-          //     cardDefi(AppImage.pancakeSwap, "PancakeSwap",
-          //         "Trade, earn and win crypto"),
-
-          //     cardDefi(AppImage.uniswap, "UniSwap",
-          //         "Trade, earn and win crypto"),
-
-          //     cardDefi(AppImage.opensea, "OpenSea",
-          //         "Trade, earn and win crypto"),
-
-          //     cardDefi(AppImage.quickswap, "QuickSwap",
-          //         "Trade, earn and win crypto"),
-
-          //     cardDefi(AppImage.ens, "Ens ETH",
-          //         "Trade, earn and win crypto"),
-
-          //     cardDefi(AppImage.chainlink, "ChainLink",
-          //         "Trade, earn and win crypto")
-          //   ]),
+         
           Text(
             "Recomendation",
-            style: AppFont.medium16,
+            style: AppFont.medium16.copyWith(color: AppColor.textDark),
           ),
           16.0.height,
           Column(
@@ -166,7 +135,7 @@ class DAppPage extends StatelessWidget {
           24.0.height,
           Text(
             "Top",
-            style: AppFont.medium16,
+            style: AppFont.medium16.copyWith(color: AppColor.textDark),
           ),
           16.0.height,
           Column(
@@ -197,13 +166,13 @@ class DAppPage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColor.bgLight,
+      backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
         title: SizedBox(
           height: 54.h,
           child: TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            style: AppFont.medium14,
+            style: AppFont.medium14.copyWith(color: AppColor.textDark),
             decoration: InputDecoration(
                 suffixIcon: Icon(
                   Icons.search,

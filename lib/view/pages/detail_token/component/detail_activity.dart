@@ -65,7 +65,7 @@ class DetailActivity extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColor.bgLight,
+      backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -75,14 +75,14 @@ class DetailActivity extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textLight,
+              color: AppColor.textDark,
               size: 24.h,
             ),
           ),
           16.0.width,
           Text(
             "Smart Contract Call Ethereum Mainet",
-            style: AppFont.medium16,
+            style: AppFont.medium16.copyWith(color: AppColor.textDark),
           ),
         ],
       )),
@@ -102,7 +102,7 @@ class DetailActivity extends StatelessWidget {
                 ),
                 Text(
                   DateFormat("MMM dd, yyyy HH:mm:ss").format(DateTime.now()),
-                  style: AppFont.medium14,
+                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
                 ),
               ],
             ),
@@ -117,7 +117,7 @@ class DetailActivity extends StatelessWidget {
                 Text(
                   "Succes",
                   style:
-                      AppFont.medium14.copyWith(color: AppColor.primaryColor),
+                      AppFont.medium14.copyWith(color: AppColor.textDark).copyWith(color: AppColor.primaryColor),
                 ),
               ],
             ),
@@ -131,7 +131,7 @@ class DetailActivity extends StatelessWidget {
                 ),
                 Text(
                   "0xff2342......sdhe72kjsjksdj",
-                  style: AppFont.medium14,
+                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
                 ),
               ],
             ),
@@ -145,7 +145,7 @@ class DetailActivity extends StatelessWidget {
                 ),
                 Text(
                   "0xds7hfjwq87.....aas89has7",
-                  style: AppFont.medium14,
+                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
                 ),
               ],
             ),
@@ -159,7 +159,7 @@ class DetailActivity extends StatelessWidget {
                 ),
                 Text(
                   "${NumberFormat.currency(symbol: '', decimalDigits: 4, locale: "en_US").format(0)} ETH",
-                  style: AppFont.medium14,
+                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
                 ),
               ],
             ),

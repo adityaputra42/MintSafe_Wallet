@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/config/theme/style.dart';
 import 'package:mintsafe_wallet/domain/binding/db_binding.dart';
-import 'package:mintsafe_wallet/view/pages/page.dart';
+import 'package:mintsafe_wallet/view/pages/spalsh/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
                 colorScheme: Style.themeData(false),
                 useMaterial3: true,
               ),
-              home: const GetStartedPage());
+              home: SplashScreen());
         });
   }
 }

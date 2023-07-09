@@ -31,7 +31,7 @@ class SearchNetwork extends StatelessWidget {
           Expanded(
               child: Text(
             "Ethereum Mainet",
-            style: AppFont.medium16,
+            style: AppFont.medium16.copyWith(color: AppColor.textDark)
           )),
           16.0.width,
           Icon(
@@ -50,7 +50,7 @@ class SearchNetwork extends StatelessWidget {
           height: 54.h,
           child: TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            style: AppFont.medium14,
+            style: AppFont.medium14.copyWith(color: AppColor.textDark),
             decoration: InputDecoration(
                 suffixIcon: Icon(
                   Icons.search,

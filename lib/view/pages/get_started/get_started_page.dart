@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
@@ -14,49 +16,56 @@ class GetStartedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    backgroundColor: AppColor.bgLight,
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                AppImage.logo,
-                width: 140.w,
-              ),
-              24.0.height,
-              Text(
-                'MintSafe',
-                style: AppFont.semibold24,
-              ),
-              Text(
-                'Unlock the Future of Digital Assets',
-                style: AppFont.reguler16,
-              ),
-              120.0.height,
-              SecondaryButton(
-                title: "Create a New Wallet",
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CreateNewWalletPage(),
-                      ));
-                },
-              ),
-              16.0.height,
-              PrimaryButton(
-                title: "Import an Existing Wallet",
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ImportWalletPage(),
-                      ));
-                },
-              )
-            ],
+      backgroundColor: AppColor.bgDark,
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(AppImage.maskGs), fit: BoxFit.cover)),
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  AppImage.logo,
+                  width: 160.w,
+                ),
+                24.0.height,
+                Text(
+                  'MintSafe',
+                  style: AppFont.semibold24.copyWith(color: AppColor.textDark),
+                ),
+                Text(
+                  'Unlock the Future of Digital Assets',
+                  style: AppFont.reguler16.copyWith(color: AppColor.grayColor),
+                ),
+                80.0.height,
+                PrimaryButton(
+                  title: "Create a New Wallet",
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CreateNewWalletPage(),
+                        ));
+                  },
+                ),
+                24.0.height,
+                Text.rich(TextSpan(children: [
+                  TextSpan(
+                      text: 'Have an existing wallet? ',
+                      style: AppFont.reguler16
+                          .copyWith(color: AppColor.grayColor)),
+                  TextSpan(
+                      text: 'Import Wallet',
+                      style: AppFont.medium16
+                          .copyWith(color: AppColor.primaryColor),recognizer:TapGestureRecognizer()
+                            ..onTap = () => Get.to(()=>const ImportWalletPage()),
+                         )
+                ]))
+              ],
+            ),
           ),
         ),
       ),

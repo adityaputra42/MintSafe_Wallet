@@ -48,7 +48,7 @@ class InputText extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: AppFont.medium16),
+              Text(title, style: AppFont.medium16.copyWith(color: AppColor.textDark)),
               crossTitle ?? const SizedBox()
             ],
           ),
@@ -65,7 +65,7 @@ class InputText extends StatelessWidget {
               controller: controller,
               onTap: ontaped,
               maxLines: maxLine,
-              style: AppFont.medium14,
+              style: AppFont.medium14.copyWith(color: AppColor.textDark),
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 12.h),
                 suffixIcon: icon,

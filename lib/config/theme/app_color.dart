@@ -8,13 +8,13 @@ class AppColor {
   static const Color redColor = Color(0xffF25252);
 
   // Ligth Mode
-  static const Color bgLight = Color(0xffF0FFFE);
+  static const Color bgLight = Color(0xffF5F4FF);
   static const Color cardLight = Color(0xffFFFFFF);
   static const Color textLight = Color(0xff282831);
 
 // Dark Mode
-  static const Color bgDark = Color(0xff22222B);
-  static const Color cardDark = Color(0xff282831);
+  static const Color bgDark = Color(0xff1A2028);
+  static const Color cardDark = Color(0xff323A45);
   static const Color textDark = Color(0xffFFFFFF);
   
 }

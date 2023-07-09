@@ -17,8 +17,10 @@ class SheedPharse extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.425,
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
-              blurRadius:1.h, spreadRadius: 1.h, color: AppColor.primaryColor.withOpacity(0.15))
-        ], borderRadius: BorderRadius.circular(8.r), color: AppColor.textDark),
+              blurRadius: 0.5,
+              spreadRadius: 0.7,
+              color: AppColor.primaryColor.withOpacity(0.15))
+        ], borderRadius: BorderRadius.circular(8.r), color: AppColor.cardDark),
         child: Center(
           child: Text("$number. $text",
               style: AppFont.medium16.copyWith(
@@ -29,15 +31,16 @@ class SheedPharse extends StatelessWidget {
     }
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Secret recovery phrase',
-          style: AppFont.semibold18,
+          style: AppFont.medium16.copyWith(color: AppColor.textDark),
         ),
+        4.0.height,
         Text(
           "This 12-word phrase allows you to recover your wallet and access to the coins inside.",
-          style: AppFont.reguler14,
+          style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
         ),
         24.0.height,
         Wrap(

@@ -36,7 +36,7 @@ class ReceiveTokenPage extends StatelessWidget {
             16.0.height,
             Text(
               "ETH (ERC-20)",
-              style: AppFont.medium14.copyWith(fontSize: 20),
+              style: AppFont.medium14.copyWith(fontSize: 20,color: AppColor.textDark),
             ),
             24.0.height,
             const Warning(
@@ -46,34 +46,48 @@ class ReceiveTokenPage extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 382.h,
-              padding: EdgeInsets.all(24.w),
+              padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                        spreadRadius: 0.5.h,
-                        blurRadius: 0.5.h,
-                        color: Colors.black12)
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        color: AppColor.primaryColor.withOpacity(0.25))
                   ],
-                  borderRadius: BorderRadius.circular(16.r),
-                  color: Colors.white),
+                  borderRadius: BorderRadius.circular(12.r),
+                  color: AppColor.cardDark),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  QrImageView(
-                    data: '0xffjs67HKuydy32sdsjkajsd8712124jd343da6ge7',
-                    version: QrVersions.auto,
-                    size: 240.h,
-                    gapless: false,
-                    // embeddedImage: AssetImage(AppImage.logo),
-                    // embeddedImageStyle: QrEmbeddedImageStyle(
-                    //   size: Size(80, 80),
-                    // ),
+                  Container(
+                    width: 220.w,
+                    height: 220.w,
+                    padding: EdgeInsets.all(26.h),
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(width: 1, color: AppColor.primaryColor),
+                        borderRadius: BorderRadius.circular(12.r),
+                        color: AppColor.primaryColor.withOpacity(0.25)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.r),
+                          color: AppColor.cardLight),
+                      child: QrImageView(
+                        data: '0xffjs67HKuydy32sdsjkajsd8712124jd343da6ge7',
+                        version: QrVersions.auto,
+                        size: 240.h,
+                        gapless: false,
+                        
+                      ),
+                    ),
                   ),
-                  36.0.height,
+                  32.0.height,
                   Text(
-                    "0xffjs67HKuydy32sdsjkajsd8712124jd343d...",
-                    style: AppFont.reguler16,
+                    "0xffjs67HKuydy32sdsjkajsd8712124jd343d",
+                    style: AppFont.medium16
+                        .copyWith(color: AppColor.primaryColor),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -84,7 +98,7 @@ class ReceiveTokenPage extends StatelessWidget {
     }
 
     return Scaffold(
-    backgroundColor: AppColor.bgLight,
+      backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -94,20 +108,31 @@ class ReceiveTokenPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textLight,
+              color: AppColor.textDark,
               size: 24.h,
             ),
           ),
           16.0.width,
           Text(
             "Receive ETH",
-            style: AppFont.medium16,
+            style: AppFont.medium16.copyWith(color: AppColor.textDark),
           ),
         ],
       )),
       body: body(),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(right: 24.w, left: 24.w, bottom: 36.h),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        decoration: BoxDecoration(
+            color: AppColor.cardDark,
+            boxShadow: [
+              BoxShadow(
+                  spreadRadius: 1,
+                  blurRadius: 1,
+                  color: AppColor.primaryColor.withOpacity(0.25))
+            ],
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(24.r),
+                topRight: Radius.circular(24.r))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

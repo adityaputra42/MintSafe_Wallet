@@ -24,10 +24,13 @@ class SelectTokenPage extends StatelessWidget {
           width: double.infinity,
           padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 12.w),
           height: 60.h,
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-                spreadRadius: 0.4, blurRadius: 0.5.h, color: Colors.black12)
-          ], borderRadius: BorderRadius.circular(12.r), color: Colors.white),
+          decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                    spreadRadius: 0.3, blurRadius: .5, color: Colors.black12)
+              ],
+              borderRadius: BorderRadius.circular(12.r),
+              color: AppColor.cardDark),
           child: Row(
             children: [
               ClipPolygon(
@@ -35,7 +38,7 @@ class SelectTokenPage extends StatelessWidget {
                 rotate: 0,
                 child: Container(
                     padding: EdgeInsets.all(1.h),
-                    color: Colors.white,
+                    color: AppColor.cardDark,
                     child: Image.asset(AppImage.eth)),
               ),
               8.0.width,
@@ -48,14 +51,15 @@ class SelectTokenPage extends StatelessWidget {
                       children: [
                         Text(
                           "Ethereum",
-                          style: AppFont.medium16,
+                          style: AppFont.medium16
+                              .copyWith(color: AppColor.textDark),
                         ),
                         Text(
                           NumberFormat.currency(
                                   symbol: '', decimalDigits: 4, locale: "en_US")
                               .format(0),
-                          style:
-                              AppFont.medium16.copyWith(fontFamily: "Roboto"),
+                          style: AppFont.medium16.copyWith(
+                              fontFamily: "Roboto", color: AppColor.textDark),
                         )
                       ],
                     ),
@@ -108,7 +112,7 @@ class SelectTokenPage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColor.bgLight,
+      backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -118,15 +122,13 @@ class SelectTokenPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textLight,
+              color: AppColor.textDark,
               size: 24.h,
             ),
           ),
           16.0.width,
-          Text(
-            "Select Asset",
-            style: AppFont.medium16,
-          ),
+          Text("Select Asset",
+              style: AppFont.medium16.copyWith(color: AppColor.textDark)),
         ],
       )),
       body: body(),

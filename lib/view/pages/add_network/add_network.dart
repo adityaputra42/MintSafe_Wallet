@@ -31,7 +31,7 @@ class AddNetworkPage extends StatelessWidget {
                   padding: EdgeInsets.all(5.h),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
-                      color: Colors.white,
+                      color: AppColor.cardDark,
                       boxShadow: [
                         BoxShadow(
                             spreadRadius: 1,
@@ -44,11 +44,11 @@ class AddNetworkPage extends StatelessWidget {
                         color: AppColor.primaryColor,
                         borderRadius: BorderRadius.circular(10.r)),
                     isScrollable: false,
-                    dividerColor: Colors.white,
-                    indicatorColor: AppColor.textDark,
+                    indicatorColor: AppColor.cardDark,
+                    dividerColor: AppColor.cardDark,
                     labelColor: AppColor.textDark,
                     labelPadding: EdgeInsets.zero,
-                    labelStyle: AppFont.semibold16,
+                    labelStyle: AppFont.semibold16.copyWith(color: AppColor.textDark),
                     unselectedLabelColor: AppColor.grayColor,
                     unselectedLabelStyle: AppFont.medium16,
                     indicatorSize: TabBarIndicatorSize.tab,
@@ -86,7 +86,7 @@ class AddNetworkPage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColor.bgLight,
+      backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -96,14 +96,14 @@ class AddNetworkPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textLight,
+              color: AppColor.textDark,
               size: 24.h,
             ),
           ),
           16.0.width,
           Text(
             "Add Network",
-            style: AppFont.medium16,
+            style: AppFont.medium16.copyWith(color: AppColor.textDark),
           ),
         ],
       )),

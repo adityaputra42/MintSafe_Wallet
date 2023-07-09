@@ -36,7 +36,7 @@ class Activity extends StatelessWidget {
                   children: [
                     Text(
                       "Smart Contract Call",
-                      style: AppFont.medium16,
+                      style: AppFont.medium16.copyWith(color: AppColor.textDark),
                     ),
                     Text(
                       "0.00 ETH",

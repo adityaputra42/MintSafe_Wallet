@@ -7,6 +7,7 @@ import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/nft_list.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/token_list.dart';
 import 'package:mintsafe_wallet/view/pages/change_network.dart/change_netwoork.dart';
+import 'package:mintsafe_wallet/view/pages/receive_token/receive_token.dart';
 import 'package:mintsafe_wallet/view/pages/scan/scann_page.dart';
 import 'package:mintsafe_wallet/view/pages/select_token/select_token.dart';
 import 'package:mintsafe_wallet/view/widget/card_action.dart';
@@ -69,7 +70,7 @@ class HomePage extends StatelessWidget {
                 Get.to(() => const ScannPage());
               },
               receive: () {
-                Get.to(() => const SelectTokenPage());
+                Get.to(() => const ReceiveTokenPage());
               },
               transfer: () {
                 Get.to(() => const SelectTokenPage());
@@ -81,7 +82,7 @@ class HomePage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColor.bgLight,
+      backgroundColor: AppColor.bgDark,
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -109,18 +110,18 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                8.0.width,
+                12.0.width,
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Hi, Welcome Back",
-                        style: AppFont.reguler12,
+                        style: AppFont.reguler12.copyWith(color: AppColor.grayColor),
                       ),
                       Text(
                         "Dompet Saya",
-                        style: AppFont.medium14,
+                        style: AppFont.medium14.copyWith(color: AppColor.textDark),
                       )
                     ],
                   ),
@@ -134,7 +135,7 @@ class HomePage extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.r),
-                        color: AppColor.secondaryColor.withOpacity(0.1)),
+                        color: AppColor.primaryColor.withOpacity(0.15)),
                     child: Row(
                       children: [
                         Text("Ethereum Mainet",
@@ -168,7 +169,7 @@ class HomePage extends StatelessWidget {
                         padding: EdgeInsets.all(5.h),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12.r),
-                          color: Colors.white,
+                          color: AppColor.cardDark,
                           boxShadow: [
                             BoxShadow(
                                 blurRadius: 0.5,
@@ -182,8 +183,8 @@ class HomePage extends StatelessWidget {
                               color: AppColor.primaryColor,
                               borderRadius: BorderRadius.circular(10.r)),
                           isScrollable: false,
-                          dividerColor: Colors.white,
-                          indicatorColor: AppColor.textDark,
+                          dividerColor: AppColor.cardDark,
+                          indicatorColor: AppColor.cardDark,
                           labelColor: AppColor.textDark,
                           labelPadding: EdgeInsets.zero,
                           labelStyle: AppFont.semibold16,

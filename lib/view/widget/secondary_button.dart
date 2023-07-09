@@ -32,7 +32,7 @@ class SecondaryButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             elevation: 0,
             side: BorderSide(width: 1.h, color: AppColor.primaryColor),
-            backgroundColor: AppColor.bgLight,
+            backgroundColor: Colors.transparent,
           
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.r))),

@@ -17,11 +17,12 @@ class CreatePassword extends StatelessWidget {
       children: [
         Text(
           'Create a password',
-          style: AppFont.semibold18,
+          style: AppFont.medium16.copyWith(color: AppColor.textDark),
         ),
+        4.0.height,
         Text(
           "You'll use this to unlock your wallet",
-          style: AppFont.reguler14,
+          style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
         ),
         24.0.height,
         InputText(
@@ -51,7 +52,7 @@ class CreatePassword extends StatelessWidget {
               title: Text.rich(
                 TextSpan(
                   text: 'I read and agreed to the',
-                  style: AppFont.reguler14,
+                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
                   children: [
                     TextSpan(
                         text: ' Term of Service',
@@ -65,7 +66,7 @@ class CreatePassword extends StatelessWidget {
               dense: true,
               contentPadding: EdgeInsets.zero,
               controlAffinity: ListTileControlAffinity.leading,
-              value: false,
+              value: true,
               activeColor: AppColor.primaryColor,
               onChanged: (newValue) async {},
               shape: RoundedRectangleBorder(

@@ -16,7 +16,7 @@ class DiscoverPage extends StatelessWidget {
         height: 220.h,
         width: double.infinity,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(12.r),
             image: const DecorationImage(
                 image: AssetImage(AppImage.bnbnews), fit: BoxFit.cover)),
         child: Align(
@@ -58,7 +58,7 @@ class DiscoverPage extends StatelessWidget {
             width: 140.w,
             margin: EdgeInsets.only(right: 16.w),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(10.r),
                 image: const DecorationImage(
                     image: AssetImage(AppImage.bnbnews), fit: BoxFit.cover)),
           ),
@@ -68,7 +68,7 @@ class DiscoverPage extends StatelessWidget {
               children: [
                 Text(
                   "BNB Naik Drastis",
-                  style: AppFont.medium16,
+                  style: AppFont.medium16.copyWith(color: AppColor.textDark),
                   maxLines: 1,
                 ),
                 Text(
@@ -91,21 +91,21 @@ class DiscoverPage extends StatelessWidget {
     }
 
     return Scaffold(
-     backgroundColor: AppColor.bgLight,
+     backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
           title: Padding(
         padding: EdgeInsets.only(left: 8.w),
         child: Text(
           "Discover",
-          style: AppFont.semibold20,
+          style: AppFont.semibold20.copyWith(color: AppColor.textDark),
         ),
       )),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: ListView(
           children: [
+            16.0.height,
             newsFirst(),
-
             16.0.height,
             Column(
               children: [

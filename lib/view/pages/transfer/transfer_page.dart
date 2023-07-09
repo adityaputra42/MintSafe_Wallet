@@ -9,6 +9,7 @@ import '../../../config/config.dart';
 import '../../../data/data.dart';
 import '../../../utils/utils.dart';
 import '../../widget/widget.dart';
+import 'components/set_gas_fee.dart';
 
 class TransferPage extends StatelessWidget {
   const TransferPage({super.key});
@@ -50,7 +51,7 @@ class TransferPage extends StatelessWidget {
                     Expanded(
                       child: Text(
                         "Ethereum",
-                        style: AppFont.medium14,
+                        style: AppFont.medium14.copyWith(color: AppColor.textDark),
                       ),
                     ),
                     8.0.width,
@@ -91,51 +92,53 @@ class TransferPage extends StatelessWidget {
               hintText: "Receive amount",
               crossTitle: Text(
                 "Available : ${NumberFormat.currency(symbol: '', decimalDigits: 4, locale: "en_US").format(0)} ETH",
-                style: AppFont.reguler12,
+                style: AppFont.reguler12.copyWith(color: AppColor.textDark),
               ),
             ),
-            Text("Gas fee", style: AppFont.medium16),
+            Text("Gas fee", style: AppFont.medium16.copyWith(color: AppColor.textDark)),
             8.0.height,
-            Container(
-              width: double.infinity,
-              height: 54.h,
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 7.h),
-              decoration: BoxDecoration(
-            border: Border.all(width: 0.5,color: AppColor.grayColor),
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: Row(crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${NumberFormat.currency(symbol: '', decimalDigits: 6, locale: "en_US").format(0.000193)} ETH",
-                          style: AppFont.medium14,
-                        ),
-                        Text(
-                          "\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(0.092)}",
-                          style: AppFont.reguler12.copyWith(
-                            color: AppColor.grayColor,
+            GestureDetector(onTap: () => Get.to(()=>SetGasFee()),
+              child: Container(
+                width: double.infinity,
+                height: 54.h,
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 7.h),
+                decoration: BoxDecoration(
+              border: Border.all(width: 0.5,color: AppColor.grayColor),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Row(crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${NumberFormat.currency(symbol: '', decimalDigits: 6, locale: "en_US").format(0.000193)} ETH",
+                            style: AppFont.medium14.copyWith(color: AppColor.textDark),
                           ),
-                        ),
-                      ],
+                          Text(
+                            "\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(0.092)}",
+                            style: AppFont.reguler12.copyWith(
+                              color: AppColor.grayColor,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  8.0.width,
-                  Text(
-                    "3.00 GWEI",
-                    style:
-                        AppFont.reguler12.copyWith(color: AppColor.grayColor),
-                  ),
-                  8.0.width,
-                  Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: AppColor.grayColor,
-                    size: 16.h,
-                  )
-                ],
+                    8.0.width,
+                    Text(
+                      "3.00 GWEI",
+                      style:
+                          AppFont.reguler12.copyWith(color: AppColor.grayColor),
+                    ),
+                    8.0.width,
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: AppColor.grayColor,
+                      size: 16.h,
+                    )
+                  ],
+                ),
               ),
             ),
           ],
@@ -144,7 +147,7 @@ class TransferPage extends StatelessWidget {
     }
 
     return Scaffold(
-    backgroundColor: AppColor.bgLight,
+    backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -154,14 +157,14 @@ class TransferPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textLight,
+              color: AppColor.textDark,
               size: 24.h,
             ),
           ),
           16.0.width,
           Text(
             "Transfer",
-            style: AppFont.medium16,
+            style: AppFont.medium16.copyWith(color: AppColor.textDark),
           ),
         ],
       )),
@@ -169,7 +172,7 @@ class TransferPage extends StatelessWidget {
       bottomNavigationBar: PrimaryButton(
         title: "Continue",
         onPressed: () {},
-        margin: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 36.h),
+        margin: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
       ),
     );
   }

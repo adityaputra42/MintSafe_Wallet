@@ -16,14 +16,15 @@ class ChangeNetwork extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget cardNetwork({bool isActive = false}) {
       return Container(
+        margin: EdgeInsets.symmetric(horizontal: 1.w),
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
-            color: Colors.white,
+            color: AppColor.cardDark,
             boxShadow: [
               BoxShadow(
-                  spreadRadius: 1,
-                  blurRadius: 1,
+                  spreadRadius: 0.5,
+                  blurRadius: 0.7,
                   color: AppColor.primaryColor.withOpacity(0.15))
             ]),
         child: Row(
@@ -44,7 +45,7 @@ class ChangeNetwork extends StatelessWidget {
             Expanded(
                 child: Text(
               "Ethereum Mainet",
-              style: AppFont.medium16,
+              style: AppFont.medium16.copyWith(color: AppColor.textDark),
             )),
             16.0.width,
             isActive
@@ -63,33 +64,30 @@ class ChangeNetwork extends StatelessWidget {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
-          children: [16.0.height,
+          children: [
+            16.0.height,
             SizedBox(
               height: 54.h,
               child: TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                style: AppFont.medium14,
+                style: AppFont.medium14.copyWith(color: AppColor.textDark),
                 decoration: InputDecoration(
                     suffixIcon: Icon(
                       Icons.search,
                       size: 20.w,
                     ),
-                    
                     hintText: "Search",
                     hintStyle: AppFont.reguler14.copyWith(
-                        fontWeight: FontWeight.w300,
-                        color: AppColor.grayColor),
+                        fontWeight: FontWeight.w300, color: AppColor.grayColor),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.r),
                       borderSide: const BorderSide(
-                        color: AppColor.grayColor,width: 0.5
-                      ),
+                          color: AppColor.grayColor, width: 0.5),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.r),
                       borderSide: const BorderSide(
-                        color: AppColor.grayColor,width: 0.5
-                      ),
+                          color: AppColor.grayColor, width: 0.5),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.r),
@@ -104,7 +102,7 @@ class ChangeNetwork extends StatelessWidget {
             Expanded(
                 child: ListView.builder(
               itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.only(bottom: 12.h),
+                padding: EdgeInsets.only(bottom: 8.h),
                 child: cardNetwork(isActive: index == 1 ? true : false),
               ),
               itemCount: 15,
@@ -115,7 +113,7 @@ class ChangeNetwork extends StatelessWidget {
     }
 
     return Scaffold(
-        backgroundColor: AppColor.bgLight,
+        backgroundColor: AppColor.bgDark,
         appBar: WidgetHelper.appBar(
             title: Row(
           children: [
@@ -125,14 +123,14 @@ class ChangeNetwork extends StatelessWidget {
               },
               child: Icon(
                 Icons.arrow_back_ios_new_rounded,
-                color: AppColor.textLight,
+                color: AppColor.textDark,
                 size: 24.h,
               ),
             ),
             16.0.width,
             Text(
               "Change Network",
-              style: AppFont.medium16,
+              style: AppFont.medium16.copyWith(color: AppColor.textDark),
             ),
           ],
         )),

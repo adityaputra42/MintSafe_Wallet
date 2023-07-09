@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
-import 'package:mintsafe_wallet/view/pages/main_page.dart';
+import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/succes_create_wallet.dart';
 
 import '../../../../config/config.dart';
 import '../../../../domain/controller/create_wallet_controller.dart';
@@ -20,8 +20,10 @@ class ConfirmSheedPharse extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.425,
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
-              blurRadius: 0.5.h, spreadRadius: 0.5.h, color: AppColor.primaryColor.withOpacity(0.15))
-        ], borderRadius: BorderRadius.circular(8.r), color: AppColor.textDark),
+              blurRadius: 0.5.h,
+              spreadRadius: 0.5.h,
+              color: AppColor.primaryColor.withOpacity(0.15))
+        ], borderRadius: BorderRadius.circular(8.r), color: AppColor.cardDark),
         child: Text("$number. ${text ?? ''}",
             style: AppFont.medium16.copyWith(
               color: AppColor.primaryColor,
@@ -37,7 +39,7 @@ class ConfirmSheedPharse extends StatelessWidget {
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                  blurRadius: 0.3.h, spreadRadius: 0.3.h, color: Colors.black12)
+                  blurRadius: 0.7.h, spreadRadius: 0.7.h, color: AppColor.primaryColor.withOpacity(0.15))
             ],
             borderRadius: BorderRadius.circular(8.r),
             color: AppColor.primaryColor),
@@ -51,15 +53,16 @@ class ConfirmSheedPharse extends StatelessWidget {
     }
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Secret recovery phrase',
-          style: AppFont.semibold18,
+          style: AppFont.medium16.copyWith(color: AppColor.textDark),
         ),
+        4.0.height,
         Text(
           "This 12-word phrase allows you to recover your wallet and access to the coins inside.",
-          style: AppFont.reguler14,
+          style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
         ),
         24.0.height,
         Wrap(
@@ -110,11 +113,16 @@ class ConfirmSheedPharse extends StatelessWidget {
         16.0.height,
         Container(
           width: double.infinity,
-          padding: EdgeInsets.all(16.h),
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-                blurRadius: 1.h, spreadRadius: 1.h, color: AppColor.primaryColor.withOpacity(0.15))
-          ], borderRadius: BorderRadius.circular(16.r), color: AppColor.textDark),
+          padding: EdgeInsets.all(12.h),
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    blurRadius: 1,
+                    spreadRadius: 1,
+                    color: AppColor.primaryColor.withOpacity(0.15))
+              ],
+              borderRadius: BorderRadius.circular(12.r),
+              color: AppColor.cardDark),
           child: Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               runAlignment: WrapAlignment.center,
@@ -142,7 +150,7 @@ class ConfirmSheedPharse extends StatelessWidget {
           disable: false,
           loading: false,
           onPressed: () {
-            Get.to(() => MainPage());
+            Get.to(() =>const SuccesCreateWallet());
           },
           margin: EdgeInsets.only(top: 36.h, bottom: 36.w),
         ),

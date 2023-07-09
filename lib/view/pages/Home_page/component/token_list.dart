@@ -25,10 +25,12 @@ class TokenList extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 12.w),
           height: 60.h,
           decoration: BoxDecoration(
-              boxShadow: [BoxShadow(blurRadius: 1,spreadRadius: 1,color: AppColor.primaryColor.withOpacity(0.15))],
-            
+              boxShadow: const [
+                BoxShadow(
+                    blurRadius: 0.3, spreadRadius: 0.5, color: Colors.black12)
+              ],
               borderRadius: BorderRadius.circular(12.r),
-              color: Colors.white),
+              color: AppColor.cardDark),
           child: Row(
             children: [
               ClipPolygon(
@@ -36,7 +38,7 @@ class TokenList extends StatelessWidget {
                 rotate: 0,
                 child: Container(
                     padding: EdgeInsets.all(1.h),
-                    color: Colors.white,
+                    color: AppColor.cardDark,
                     child: Image.asset(AppImage.eth)),
               ),
               8.0.width,
@@ -49,14 +51,15 @@ class TokenList extends StatelessWidget {
                       children: [
                         Text(
                           "Ethereum",
-                          style: AppFont.medium16,
+                          style: AppFont.medium16
+                              .copyWith(color: AppColor.textDark),
                         ),
                         Text(
                           NumberFormat.currency(
                                   symbol: '', decimalDigits: 4, locale: "en_US")
                               .format(0),
-                          style:
-                              AppFont.medium16.copyWith(fontFamily: "Roboto"),
+                          style: AppFont.medium16.copyWith(
+                              fontFamily: "Roboto", color: AppColor.textDark),
                         )
                       ],
                     ),

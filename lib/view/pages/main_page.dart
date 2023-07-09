@@ -34,13 +34,12 @@ class MainPage extends StatelessWidget {
 
     return Obx(() {
       return Scaffold(
-        backgroundColor: AppColor.bgLight,
+        backgroundColor: AppColor.bgDark,
         body: body(),
         bottomNavigationBar: Container(
           width: double.infinity,
-        
           decoration: BoxDecoration(
-              gradient: AppGradient.bottomNavBar,
+              color: AppColor.cardDark,
               boxShadow: [
                 BoxShadow(
                     spreadRadius: 1.h,
@@ -86,7 +85,8 @@ class MainPage extends StatelessWidget {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.discoverActive,
-                            width: 32.h, color: AppColor.primaryColor,
+                            width: 32.h,
+                            color: AppColor.primaryColor,
                           )),
                       label: 'Discover',
                     ),
@@ -102,7 +102,8 @@ class MainPage extends StatelessWidget {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.dappActive,
-                            width: 32.h, color: AppColor.primaryColor,
+                            width: 32.h,
+                            color: AppColor.primaryColor,
                           )),
                       label: 'DApp',
                     ),
@@ -117,7 +118,8 @@ class MainPage extends StatelessWidget {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.settingActive,
-                            width: 32.h, color: AppColor.primaryColor,
+                            width: 32.h,
+                            color: AppColor.primaryColor,
                           )),
                       label: 'Settings',
                     ),
