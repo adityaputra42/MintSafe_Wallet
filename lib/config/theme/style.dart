@@ -13,7 +13,7 @@ class Style {
         onError: Colors.blue,
         background: Colors.blue,
         onBackground: Colors.blue,
-        surface: AppColor.darkerGray,
-        onSurface: AppColor.darkerGray);
+        surface: AppColor.grayColor,
+        onSurface: AppColor.grayColor);
   }
 }

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 import 'package:mintsafe_wallet/view/pages/page.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 import '../../widget/widget.dart';
@@ -14,8 +13,8 @@ class GetStartedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+    backgroundColor: AppColor.bgLight,
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),

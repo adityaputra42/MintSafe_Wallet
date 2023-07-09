@@ -73,7 +73,7 @@ class QRScannerOverlay extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.r)),
                 child: Icon(
                   Icons.arrow_back_ios_new_rounded,
-                  color: AppColor.white,
+                  color: AppColor.textDark,
                   size: 22.h,
                 ),
               ),
@@ -81,7 +81,7 @@ class QRScannerOverlay extends StatelessWidget {
             16.0.width,
             Text(
               "Scan Qr Code",
-              style: AppFont.medium16.copyWith(color: AppColor.white),
+              style: AppFont.medium16.copyWith(color: AppColor.textDark),
               textAlign: TextAlign.center,
             ),
             

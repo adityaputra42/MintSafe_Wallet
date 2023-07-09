@@ -17,9 +17,12 @@ class InfoToken extends StatelessWidget {
           padding: EdgeInsets.all(10.h),
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: Color(0xffD0F0FF),
+            color:AppColor.secondaryColor,
           ),
-          child: Image.asset(image),
+          child: Image.asset(
+            image,
+            color: AppColor.primaryColor,
+          ),
         ),
       );
     }
@@ -39,7 +42,7 @@ class InfoToken extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.4,
               child: Text(
                 "Token name",
-                style: AppFont.reguler14.copyWith(color: AppColor.darkerGray),
+                style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
               ),
             ),
             SizedBox(
@@ -59,7 +62,7 @@ class InfoToken extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.4,
               child: Text(
                 "Project name",
-                style: AppFont.reguler14.copyWith(color: AppColor.darkerGray),
+                style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
               ),
             ),
             SizedBox(
@@ -79,7 +82,7 @@ class InfoToken extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.4,
               child: Text(
                 "Total circulation",
-                style: AppFont.reguler14.copyWith(color: AppColor.darkerGray),
+                style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
               ),
             ),
             SizedBox(
@@ -100,7 +103,7 @@ class InfoToken extends StatelessWidget {
         Text(
           "Binance Coin is a token issued by Binance, referred to as BNB, which is a decentralized blockchain digital asset based on Ethereum. The total amount of issuance is constant at 200 million.",
           style: AppFont.reguler14.copyWith(
-            color: AppColor.darkerGray,
+            color: AppColor.grayColor,
           ),
           textAlign: TextAlign.justify,
         ),

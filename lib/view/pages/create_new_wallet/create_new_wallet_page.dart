@@ -6,7 +6,6 @@ import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/confirm_s
 import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/create_password.dart';
 import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/sheed_pharse.dart';
 import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/stepper.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 import '../../../utils/utils.dart';
@@ -44,8 +43,8 @@ class CreateNewWalletPage extends StatelessWidget {
       });
     }
 
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+    backgroundColor: AppColor.bgLight,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -56,7 +55,7 @@ class CreateNewWalletPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.blackText,
+              color: AppColor.textLight,
               size: 24.h,
             ),
           ),

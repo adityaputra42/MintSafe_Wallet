@@ -33,26 +33,17 @@ class TabbarCustom extends StatelessWidget {
                             vertical: 6.h, horizontal: 8.w),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
-                            gradient: titles.indexOf(e) == selectedIndex
-                                ? const LinearGradient(colors: [
-                                    AppColor.primaryColor,
-                                    AppColor.primaryColor
-                                  ])
-                                : AppGradient.secondaryButton,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 0.5.h,
-                                  spreadRadius: 0.5.h,
-                                  color: Colors.black12)
-                            ]),
+                            color: titles.indexOf(e) == selectedIndex? AppColor.primaryColor:Colors.transparent,
+                           
+                           border: Border.all(width: 1.h,color: AppColor.primaryColor)),
                         child: Center(
                           child: Text(
                             e,
                             style: (titles.indexOf(e) == selectedIndex
                                 ? AppFont.medium14
-                                    .copyWith(color: AppColor.white)
+                                    .copyWith(color: AppColor.textDark)
                                 : AppFont.reguler14
-                                    .copyWith(color: AppColor.darkerGray)),
+                                    .copyWith(color: AppColor.primaryColor)),
                             textAlign: TextAlign.center,
                           ),
                         ),

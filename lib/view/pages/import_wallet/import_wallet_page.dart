@@ -7,7 +7,6 @@ import 'package:mintsafe_wallet/utils/helper/helper.dart';
 import 'package:mintsafe_wallet/view/pages/main_page.dart';
 import 'package:mintsafe_wallet/view/widget/input_text.dart';
 import 'package:mintsafe_wallet/view/widget/primary_button.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 
@@ -109,8 +108,8 @@ class ImportWalletPage extends StatelessWidget {
       );
     }
 
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+    backgroundColor: AppColor.bgLight,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -120,7 +119,7 @@ class ImportWalletPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.blackText,
+              color: AppColor.textLight,
               size: 24.h,
             ),
           ),

@@ -36,7 +36,7 @@ class SearchToken extends StatelessWidget {
           Icon(
             Icons.check_circle_outline_rounded,
             size: 24.w,
-            color: AppColor.darkerGray,
+            color: AppColor.grayColor,
           )
         ],
       );
@@ -55,25 +55,24 @@ class SearchToken extends StatelessWidget {
                     Icons.search,
                     size: 20.w,
                   ),
-                  filled: true,
-                  fillColor: AppColor.white,
+                  
                   hintText: "Search",
                   hintStyle: AppFont.reguler14.copyWith(
-                      fontWeight: FontWeight.w300, color: AppColor.darkerGray),
+                      fontWeight: FontWeight.w300, color: AppColor.grayColor),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.r),
+                    borderRadius: BorderRadius.circular(12.r),
                     borderSide: const BorderSide(
-                      color: Colors.transparent,
+                      color: AppColor.grayColor,width: 0.5
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.r),
+                    borderRadius: BorderRadius.circular(12.r),
                     borderSide: const BorderSide(
-                      color: Colors.transparent,
+                      color: AppColor.grayColor,width: 0.5
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.r),
+                    borderRadius: BorderRadius.circular(12.r),
                     borderSide: const BorderSide(color: AppColor.primaryColor),
                   ),
                   contentPadding:

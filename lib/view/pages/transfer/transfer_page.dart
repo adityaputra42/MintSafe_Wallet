@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mintsafe_wallet/view/pages/select_token/select_token.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 import '../../../data/data.dart';
@@ -27,17 +26,17 @@ class TransferPage extends StatelessWidget {
               onTap: () => Get.to(() => const SelectTokenPage()),
               child: Container(
                 width: double.infinity,
-                height: 60.h,
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                height: 54.h,
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 7.h),
                 decoration: BoxDecoration(
-                  color: AppColor.white,
-                  borderRadius: BorderRadius.circular(16.r),
+                 border: Border.all(width: 0.5,color: AppColor.grayColor),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Row(
                   children: [
                     SizedBox(
-                      width: 36.h,
-                      height: 36.h,
+                      width: 32.h,
+                      height: 32.h,
                       child: ClipPolygon(
                         sides: 6,
                         rotate: 0,
@@ -58,12 +57,12 @@ class TransferPage extends StatelessWidget {
                     Text(
                       "ERC-20",
                       style: AppFont.reguler12
-                          .copyWith(color: AppColor.darkerGray),
+                          .copyWith(color: AppColor.grayColor),
                     ),
                     8.0.width,
                     Icon(
                       Icons.arrow_forward_ios_rounded,
-                      color: AppColor.darkerGray,
+                      color: AppColor.grayColor,
                       size: 16.h,
                     )
                   ],
@@ -99,13 +98,13 @@ class TransferPage extends StatelessWidget {
             8.0.height,
             Container(
               width: double.infinity,
-              height: 60.h,
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+              height: 54.h,
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 7.h),
               decoration: BoxDecoration(
-                color: AppColor.white,
-                borderRadius: BorderRadius.circular(16.r),
+            border: Border.all(width: 0.5,color: AppColor.grayColor),
+                borderRadius: BorderRadius.circular(12.r),
               ),
-              child: Row(
+              child: Row(crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                     child: Column(
@@ -118,7 +117,7 @@ class TransferPage extends StatelessWidget {
                         Text(
                           "\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(0.092)}",
                           style: AppFont.reguler12.copyWith(
-                            color: AppColor.darkerGray,
+                            color: AppColor.grayColor,
                           ),
                         ),
                       ],
@@ -128,12 +127,12 @@ class TransferPage extends StatelessWidget {
                   Text(
                     "3.00 GWEI",
                     style:
-                        AppFont.reguler12.copyWith(color: AppColor.darkerGray),
+                        AppFont.reguler12.copyWith(color: AppColor.grayColor),
                   ),
                   8.0.width,
                   Icon(
                     Icons.arrow_forward_ios_rounded,
-                    color: AppColor.darkerGray,
+                    color: AppColor.grayColor,
                     size: 16.h,
                   )
                 ],
@@ -144,8 +143,8 @@ class TransferPage extends StatelessWidget {
       );
     }
 
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+    backgroundColor: AppColor.bgLight,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -155,7 +154,7 @@ class TransferPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.blackText,
+              color: AppColor.textLight,
               size: 24.h,
             ),
           ),

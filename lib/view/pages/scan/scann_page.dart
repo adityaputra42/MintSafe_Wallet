@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../../../../config/config.dart';
 import 'component/qr_scanner_overlay.dart';
@@ -33,8 +32,8 @@ class ScannPage extends StatelessWidget {
       );
     }
 
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+    backgroundColor: AppColor.bgLight,
     
       body: scan(),
     );

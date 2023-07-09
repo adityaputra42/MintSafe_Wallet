@@ -67,26 +67,26 @@ class InputText extends StatelessWidget {
               maxLines: maxLine,
               style: AppFont.medium14,
               decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 12.h),
                 suffixIcon: icon,
-                filled: true,
-                fillColor: AppColor.white,
+               
                 hintText: hintText,
                 hintStyle: AppFont.reguler14.copyWith(
-                    fontWeight: FontWeight.w300, color: AppColor.darkerGray),
+                    fontWeight: FontWeight.w300, color: AppColor.grayColor),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: const BorderSide(
-                    color: Colors.transparent,
+                    color: AppColor.grayColor,width: 0.5
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: const BorderSide(
-                    color: Colors.transparent,
+                     color: AppColor.grayColor,width: 0.5
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: const BorderSide(color: AppColor.primaryColor),
                 ),
               )

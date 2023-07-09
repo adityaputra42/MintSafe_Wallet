@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import '../../config/config.dart';
 
 class WidgetHelper {
- static appBar({required Widget title, }) {
+  static appBar({
+    required Widget title,
+  }) {
     return AppBar(
+      elevation: 1,
+      shadowColor: AppColor.primaryColor.withOpacity(0.25),
       title: title,
       automaticallyImplyLeading: false,
-     centerTitle: false,
-      backgroundColor: AppColor.whiteBackground,
+      centerTitle: false,
+      backgroundColor: AppColor.bgLight,
     );
   }
 }

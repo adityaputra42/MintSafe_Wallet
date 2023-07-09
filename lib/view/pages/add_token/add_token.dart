@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:mintsafe_wallet/domain/controller/add_token_controller.dart';
 import 'package:mintsafe_wallet/view/pages/add_token/component/custom_token.dart';
 import 'package:mintsafe_wallet/view/pages/add_token/component/search_token.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 import '../../../utils/utils.dart';
@@ -15,8 +14,8 @@ class AddTokenPage extends StatelessWidget {
   final AddTokenController controller = Get.put(AddTokenController());
   @override
   Widget build(BuildContext context) {
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+     backgroundColor: AppColor.bgLight,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -26,7 +25,7 @@ class AddTokenPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.blackText,
+              color: AppColor.textLight,
               size: 24.h,
             ),
           ),
@@ -49,28 +48,28 @@ class AddTokenPage extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   height: 60.h,
-                  padding: EdgeInsets.all(4.h),
+                  padding: EdgeInsets.all(5.h),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.r),
+                      borderRadius: BorderRadius.circular(12.r),
                       color: Colors.white,
-                      boxShadow: const [
+                      boxShadow:[
                         BoxShadow(
                             spreadRadius: 1,
                             blurRadius: 1,
-                            color: Colors.white12)
+                            color: AppColor.primaryColor.withOpacity(0.15))
                       ]),
                   child: TabBar(
                     // automaticIndicatorColorAdjustment: false,
                     indicator: BoxDecoration(
                         color: AppColor.primaryColor,
-                        borderRadius: BorderRadius.circular(12.r)),
+                        borderRadius: BorderRadius.circular(10.r)),
                     isScrollable: false,
                     dividerColor: Colors.white,
-                    indicatorColor: AppColor.white,
-                    labelColor: AppColor.white,
+                    indicatorColor: AppColor.textDark,
+                    labelColor: AppColor.textDark,
                     labelPadding: EdgeInsets.zero,
                     labelStyle: AppFont.semibold16,
-                    unselectedLabelColor: AppColor.darkerGray,
+                    unselectedLabelColor: AppColor.grayColor,
                     unselectedLabelStyle: AppFont.medium16,
                     indicatorSize: TabBarIndicatorSize.tab,
                     onTap: (index) {

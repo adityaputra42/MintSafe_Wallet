@@ -25,10 +25,8 @@ class TokenList extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 12.w),
           height: 60.h,
           decoration: BoxDecoration(
-              // boxShadow: [
-              //   BoxShadow(
-              //       spreadRadius: 0.4, blurRadius: 0.5.h, color: Colors.black12)
-              // ],
+              boxShadow: [BoxShadow(blurRadius: 1,spreadRadius: 1,color: AppColor.primaryColor.withOpacity(0.15))],
+            
               borderRadius: BorderRadius.circular(12.r),
               color: Colors.white),
           child: Row(
@@ -71,26 +69,26 @@ class TokenList extends StatelessWidget {
                             Text(
                               "\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(1813.98)}",
                               style: AppFont.reguler14.copyWith(
-                                  color: AppColor.darkerGray,
+                                  color: AppColor.grayColor,
                                   fontFamily: "Roboto"),
                             ),
                             4.0.width,
                             Icon(
                               Icons.arrow_outward_rounded,
                               size: 16.h,
-                              color: AppColor.greenBuy,
+                              color: AppColor.primaryColor,
                             ),
                             Text(
                               "0.10%",
                               style: AppFont.reguler14
-                                  .copyWith(color: AppColor.greenBuy),
+                                  .copyWith(color: AppColor.primaryColor),
                             ),
                           ],
                         ),
                         Text(
                           "\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(0)}",
                           style: AppFont.reguler14.copyWith(
-                              color: AppColor.darkerGray, fontFamily: "Roboto"),
+                              color: AppColor.grayColor, fontFamily: "Roboto"),
                         ),
                       ],
                     )

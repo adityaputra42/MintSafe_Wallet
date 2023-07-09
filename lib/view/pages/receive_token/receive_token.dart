@@ -3,9 +3,7 @@ import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
-import 'package:mintsafe_wallet/view/widget/warning.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 import '../../../data/data.dart';
@@ -85,8 +83,8 @@ class ReceiveTokenPage extends StatelessWidget {
       );
     }
 
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+    backgroundColor: AppColor.bgLight,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -96,7 +94,7 @@ class ReceiveTokenPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.blackText,
+              color: AppColor.textLight,
               size: 24.h,
             ),
           ),
@@ -119,7 +117,7 @@ class ReceiveTokenPage extends StatelessWidget {
               icon: Icon(
                 Icons.copy_rounded,
                 size: 24.h,
-                color: AppColor.white,
+                color: AppColor.textDark,
               ),
               onPressed: () {},
             ),

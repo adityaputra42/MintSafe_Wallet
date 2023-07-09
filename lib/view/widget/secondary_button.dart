@@ -32,10 +32,10 @@ class SecondaryButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             elevation: 0,
             side: BorderSide(width: 1.h, color: AppColor.primaryColor),
-            backgroundColor: AppColor.whiteBackground,
-            // const Color(0xffD2F1FF),
+            backgroundColor: AppColor.bgLight,
+          
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.r))),
+                borderRadius: BorderRadius.circular(12.r))),
         onPressed: onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

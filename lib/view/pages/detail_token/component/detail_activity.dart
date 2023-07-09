@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mintsafe_wallet/view/widget/primary_button.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../../config/config.dart';
 import '../../../../data/data.dart';
@@ -18,10 +17,16 @@ class DetailActivity extends StatelessWidget {
     Widget cardWallet() {
       return Container(
         width: double.infinity,
-        height: 190.h,
+        height: 200.h,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.r),
-            gradient: AppGradient.cardZK,
+            borderRadius: BorderRadius.circular(12.r),
+            boxShadow: [
+              BoxShadow(
+                  spreadRadius: 1,
+                  blurRadius: 1,
+                  color: AppColor.primaryColor.withOpacity(0.15))
+            ],
+            color: AppColor.primaryColor,
             image: const DecorationImage(
                 image: AssetImage(AppImage.masking), fit: BoxFit.cover)),
         child: Center(
@@ -45,13 +50,13 @@ class DetailActivity extends StatelessWidget {
               Text(
                 "- ${NumberFormat.currency(symbol: '', decimalDigits: 4, locale: "en_US").format(0)} ETH",
                 style: AppFont.semibold24.copyWith(
-                  color: AppColor.white,
+                  color: AppColor.textDark,
                 ),
               ),
               Text(
                   "~\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(0)}",
                   style: AppFont.reguler16.copyWith(
-                    color: AppColor.white,
+                    color: AppColor.textDark,
                   )),
             ],
           ),
@@ -59,8 +64,8 @@ class DetailActivity extends StatelessWidget {
       );
     }
 
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+      backgroundColor: AppColor.bgLight,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -70,7 +75,7 @@ class DetailActivity extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.blackText,
+              color: AppColor.textLight,
               size: 24.h,
             ),
           ),
@@ -93,7 +98,7 @@ class DetailActivity extends StatelessWidget {
               children: [
                 Text(
                   "Date",
-                  style: AppFont.reguler14.copyWith(color: AppColor.darkerGray),
+                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
                 ),
                 Text(
                   DateFormat("MMM dd, yyyy HH:mm:ss").format(DateTime.now()),
@@ -107,11 +112,12 @@ class DetailActivity extends StatelessWidget {
               children: [
                 Text(
                   "State",
-                  style: AppFont.reguler14.copyWith(color: AppColor.darkerGray),
+                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
                 ),
                 Text(
                   "Succes",
-                  style: AppFont.medium14.copyWith(color: AppColor.greenBuy),
+                  style:
+                      AppFont.medium14.copyWith(color: AppColor.primaryColor),
                 ),
               ],
             ),
@@ -121,7 +127,7 @@ class DetailActivity extends StatelessWidget {
               children: [
                 Text(
                   "To",
-                  style: AppFont.reguler14.copyWith(color: AppColor.darkerGray),
+                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
                 ),
                 Text(
                   "0xff2342......sdhe72kjsjksdj",
@@ -135,7 +141,7 @@ class DetailActivity extends StatelessWidget {
               children: [
                 Text(
                   "TxID",
-                  style: AppFont.reguler14.copyWith(color: AppColor.darkerGray),
+                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
                 ),
                 Text(
                   "0xds7hfjwq87.....aas89has7",
@@ -149,7 +155,7 @@ class DetailActivity extends StatelessWidget {
               children: [
                 Text(
                   "Network Fee",
-                  style: AppFont.reguler14.copyWith(color: AppColor.darkerGray),
+                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
                 ),
                 Text(
                   "${NumberFormat.currency(symbol: '', decimalDigits: 4, locale: "en_US").format(0)} ETH",

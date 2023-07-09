@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mintsafe_wallet/view/pages/transfer/transfer_page.dart';
-import 'package:mintsafe_wallet/view/widget/tab_bar_custom.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 import '../../../data/data.dart';
@@ -68,12 +66,12 @@ class SelectTokenPage extends StatelessWidget {
                         Text(
                           "ERC-20",
                           style: AppFont.reguler14.copyWith(
-                              color: AppColor.darkerGray, fontFamily: "Roboto"),
+                              color: AppColor.grayColor, fontFamily: "Roboto"),
                         ),
                         Text(
                           "\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(0)}",
                           style: AppFont.reguler14.copyWith(
-                              color: AppColor.darkerGray, fontFamily: "Roboto"),
+                              color: AppColor.grayColor, fontFamily: "Roboto"),
                         ),
                       ],
                     )
@@ -109,8 +107,8 @@ class SelectTokenPage extends StatelessWidget {
       );
     }
 
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+      backgroundColor: AppColor.bgLight,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -120,7 +118,7 @@ class SelectTokenPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.blackText,
+              color: AppColor.textLight,
               size: 24.h,
             ),
           ),
@@ -138,7 +136,7 @@ class SelectTokenPage extends StatelessWidget {
           Text(
             "Couldn't find your token?\nTap the below button to add.",
             style: AppFont.reguler12.copyWith(
-              color: AppColor.darkerGray,
+              color: AppColor.grayColor,
             ),
             textAlign: TextAlign.center,
           ),

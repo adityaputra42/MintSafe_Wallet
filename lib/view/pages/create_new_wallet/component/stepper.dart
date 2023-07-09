@@ -21,18 +21,18 @@ class StepperCustom extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: (controller.stepIndex.value >= 0)
                     ? AppColor.primaryColor
-                    : AppColor.darkerGray),
+                    : AppColor.grayColor),
             child: Center(
               child: controller.stepIndex.value > 0
                   ? Icon(
                       Icons.check,
                       size: 20.h,
-                      color: AppColor.white,
+                      color: AppColor.textDark,
                     )
                   : Text(
                       "1",
                       style: AppFont.medium14.copyWith(
-                          color: AppColor.white,
+                          color: AppColor.textDark,
                           fontSize: (controller.stepIndex.value == 0)
                               ? 20.sp
                               : 14.sp),
@@ -44,7 +44,7 @@ class StepperCustom extends StatelessWidget {
             height: 3.w,
             color: (controller.stepIndex.value >= 1)
                 ? AppColor.primaryColor
-                : AppColor.darkerGray,
+                : AppColor.grayColor,
           ),
           Container(
             width: (controller.stepIndex.value == 1) ? 40.w : 32.w,
@@ -53,18 +53,18 @@ class StepperCustom extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: (controller.stepIndex.value >= 1)
                     ? AppColor.primaryColor
-                    : AppColor.darkerGray),
+                    : AppColor.grayColor),
             child: Center(
               child: controller.stepIndex.value > 1
                   ? Icon(
                       Icons.check,
                       size: 20.h,
-                      color: AppColor.white,
+                      color: AppColor.textDark,
                     )
                   : Text(
                       "2",
                       style: AppFont.medium14.copyWith(
-                          color: AppColor.white,
+                          color: AppColor.textDark,
                           fontSize: (controller.stepIndex.value == 1)
                               ? 20.sp
                               : 14.sp),
@@ -76,7 +76,7 @@ class StepperCustom extends StatelessWidget {
             height: 3.w,
             color: (controller.stepIndex.value >= 2)
                 ? AppColor.primaryColor
-                : AppColor.darkerGray,
+                : AppColor.grayColor,
           ),
           Container(
             width: (controller.stepIndex.value == 2) ? 40.w : 32.w,
@@ -85,18 +85,18 @@ class StepperCustom extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: (controller.stepIndex.value >= 2)
                     ? AppColor.primaryColor
-                    : AppColor.darkerGray),
+                    : AppColor.grayColor),
             child: Center(
               child: controller.stepIndex.value > 2
                   ? Icon(
                       Icons.check,
                       size: 20.h,
-                      color: AppColor.white,
+                      color: AppColor.textDark,
                     )
                   : Text(
                       "3",
                       style: AppFont.medium14.copyWith(
-                          color: AppColor.white,
+                          color: AppColor.textDark,
                           fontSize: (controller.stepIndex.value == 2)
                               ? 20.sp
                               : 14.sp),

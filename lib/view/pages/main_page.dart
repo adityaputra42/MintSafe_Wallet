@@ -6,7 +6,6 @@ import 'package:mintsafe_wallet/domain/controller/controller.dart';
 import 'package:mintsafe_wallet/view/pages/dapp/dapp_page.dart';
 import 'package:mintsafe_wallet/view/pages/discover/discover_page.dart';
 import 'package:mintsafe_wallet/view/pages/setting/setting_page.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../config/config.dart';
 import 'Home_page/home_page.dart';
@@ -34,19 +33,19 @@ class MainPage extends StatelessWidget {
     }
 
     return Obx(() {
-      return ScaffoldGradientBackground(
-        gradient: AppGradient.background,
+      return Scaffold(
+        backgroundColor: AppColor.bgLight,
         body: body(),
         bottomNavigationBar: Container(
           width: double.infinity,
-          // height: 80.h,
+        
           decoration: BoxDecoration(
               gradient: AppGradient.bottomNavBar,
               boxShadow: [
                 BoxShadow(
-                    spreadRadius: 0.5.h,
-                    blurRadius: 0.5.h,
-                    color: Colors.black12)
+                    spreadRadius: 1.h,
+                    blurRadius: 1.h,
+                    color: AppColor.primaryColor.withOpacity(0.25))
               ],
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(24.w),
@@ -71,6 +70,7 @@ class MainPage extends StatelessWidget {
                         child: Image.asset(
                           AppIcon.walletActive,
                           width: 32.h,
+                          color: AppColor.primaryColor,
                         ),
                       ),
                       label: 'Wallet',
@@ -86,7 +86,7 @@ class MainPage extends StatelessWidget {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.discoverActive,
-                            width: 32.h,
+                            width: 32.h, color: AppColor.primaryColor,
                           )),
                       label: 'Discover',
                     ),
@@ -102,7 +102,7 @@ class MainPage extends StatelessWidget {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.dappActive,
-                            width: 32.h,
+                            width: 32.h, color: AppColor.primaryColor,
                           )),
                       label: 'DApp',
                     ),
@@ -117,7 +117,7 @@ class MainPage extends StatelessWidget {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.settingActive,
-                            width: 32.h,
+                            width: 32.h, color: AppColor.primaryColor,
                           )),
                       label: 'Settings',
                     ),
@@ -128,10 +128,10 @@ class MainPage extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   selectedItemColor: AppColor.primaryColor,
                   selectedLabelStyle: AppFont.semibold12,
-                  unselectedItemColor: AppColor.darkerGray,
+                  unselectedItemColor: AppColor.grayColor,
                   showUnselectedLabels: true,
                   unselectedLabelStyle:
-                      AppFont.medium12.copyWith(color: AppColor.darkerGray),
+                      AppFont.medium12.copyWith(color: AppColor.grayColor),
                 ),
                 // evm.isLoadingNetwork.value
                 //     ? Container(

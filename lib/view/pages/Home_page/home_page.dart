@@ -10,7 +10,6 @@ import 'package:mintsafe_wallet/view/pages/change_network.dart/change_netwoork.d
 import 'package:mintsafe_wallet/view/pages/scan/scann_page.dart';
 import 'package:mintsafe_wallet/view/pages/select_token/select_token.dart';
 import 'package:mintsafe_wallet/view/widget/card_action.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 
@@ -23,11 +22,17 @@ class HomePage extends StatelessWidget {
     Widget cardWallet() {
       return Container(
         width: double.infinity,
-        height: 190.h,
+        height: 200.h,
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
             color: AppColor.primaryColor,
+            boxShadow: [
+              BoxShadow(
+                  blurRadius: 1,
+                  spreadRadius: 1,
+                  color: AppColor.primaryColor.withOpacity(0.15))
+            ],
             image: const DecorationImage(
                 image: AssetImage(AppImage.masking), fit: BoxFit.cover)),
         child: Column(
@@ -38,7 +43,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Text("~\$123.673",
                       style: AppFont.semibold24.copyWith(
-                        color: AppColor.white,
+                        color: AppColor.textDark,
                       )),
                   8.0.height,
                   Row(
@@ -46,13 +51,13 @@ class HomePage extends StatelessWidget {
                     children: [
                       Text("0xfhas7gjkd....ashajk3q9c",
                           style: AppFont.medium14.copyWith(
-                            color: AppColor.white,
+                            color: AppColor.textDark,
                           )),
                       8.0.width,
                       Icon(
                         Icons.copy,
                         size: 18.h,
-                        color: AppColor.greenBuy,
+                        color: AppColor.textDark,
                       )
                     ],
                   ),
@@ -75,8 +80,8 @@ class HomePage extends StatelessWidget {
       );
     }
 
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+      backgroundColor: AppColor.bgLight,
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -88,7 +93,7 @@ class HomePage extends StatelessWidget {
                 Container(
                   width: 48.w,
                   height: 48.w,
-                  padding: EdgeInsets.all(3.h),
+                  padding: EdgeInsets.all(2.h),
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border:
@@ -120,15 +125,16 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                GestureDetector(onTap: () {
-                  Get.to(()=>const ChangeNetwork());
-                },
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const ChangeNetwork());
+                  },
                   child: Container(
                     padding:
                         EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.r),
-                        color: AppColor.secondaryColor.withOpacity(0.25)),
+                        color: AppColor.secondaryColor.withOpacity(0.1)),
                     child: Row(
                       children: [
                         Text("Ethereum Mainet",
@@ -159,28 +165,29 @@ class HomePage extends StatelessWidget {
                       Container(
                         width: double.infinity,
                         height: 60.h,
-                        padding: EdgeInsets.all(4.h),
+                        padding: EdgeInsets.all(5.h),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.r),
-                            color: Colors.white,
-                            boxShadow: const [
-                              BoxShadow(
-                                  spreadRadius: 1,
-                                  blurRadius: 1,
-                                  color: Colors.white12)
-                            ]),
+                          borderRadius: BorderRadius.circular(12.r),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 0.5,
+                                spreadRadius: 0.5,
+                                color: AppColor.primaryColor.withOpacity(0.15))
+                          ],
+                        ),
                         child: TabBar(
                           // automaticIndicatorColorAdjustment: false,
                           indicator: BoxDecoration(
                               color: AppColor.primaryColor,
-                              borderRadius: BorderRadius.circular(12.r)),
+                              borderRadius: BorderRadius.circular(10.r)),
                           isScrollable: false,
                           dividerColor: Colors.white,
-                          indicatorColor: AppColor.white,
-                          labelColor: AppColor.white,
+                          indicatorColor: AppColor.textDark,
+                          labelColor: AppColor.textDark,
                           labelPadding: EdgeInsets.zero,
                           labelStyle: AppFont.semibold16,
-                          unselectedLabelColor: AppColor.darkerGray,
+                          unselectedLabelColor: AppColor.grayColor,
                           unselectedLabelStyle: AppFont.medium16,
                           indicatorSize: TabBarIndicatorSize.tab,
                           onTap: (index) {

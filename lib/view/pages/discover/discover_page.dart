@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:mintsafe_wallet/data/data.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 import '../../../utils/utils.dart';
@@ -28,8 +27,8 @@ class DiscoverPage extends StatelessWidget {
             height: 60.h,
             decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
-                AppColor.blackText.withOpacity(0.1),
-                AppColor.blackText.withOpacity(0.6),
+                AppColor.textLight.withOpacity(0.1),
+                AppColor.textLight.withOpacity(0.6),
               ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
               borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(16.r), top: Radius.circular(4.r)),
@@ -38,12 +37,12 @@ class DiscoverPage extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 "BNB Naik Drastis kapan ya",
-                style: AppFont.medium16.copyWith(color: AppColor.white),
+                style: AppFont.medium16.copyWith(color: AppColor.textDark),
                 maxLines: 1,
               ),
               Text(
                 DateFormat("MMM dd, yyyy").format(DateTime.now()),
-                style: AppFont.reguler12.copyWith(color: AppColor.white),
+                style: AppFont.reguler12.copyWith(color: AppColor.textDark),
               )
             ]),
           ),
@@ -74,14 +73,14 @@ class DiscoverPage extends StatelessWidget {
                 ),
                 Text(
                   "Lorem ipsum dolor sit, amet consectetur askadi pisicing elit. Aut labore,amet consectetur askadi pisicing elit. Aut labore",
-                  style: AppFont.reguler14.copyWith(color: AppColor.darkerGray),
+                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
                   maxLines: 3,
                   textAlign: TextAlign.justify,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   DateFormat("MMM dd, yyyy").format(DateTime.now()),
-                  style: AppFont.reguler14.copyWith(color: AppColor.darkerGray),
+                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
                   maxLines: 1,
                 )
               ],
@@ -91,8 +90,8 @@ class DiscoverPage extends StatelessWidget {
       );
     }
 
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+     backgroundColor: AppColor.bgLight,
       appBar: WidgetHelper.appBar(
           title: Padding(
         padding: EdgeInsets.only(left: 8.w),

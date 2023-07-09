@@ -41,14 +41,14 @@ class PrimaryButton extends StatelessWidget {
             backgroundColor:
                 disable ? disableColor : activeColor,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.r))),
+                borderRadius: BorderRadius.circular(12.r))),
         onPressed: disable || loading ? () {} : onPressed,
         child: loading
             ? Padding(
                 padding: EdgeInsets.all(8.h),
                 child: const Center(
                   child: CircularProgressIndicator(
-                    color: AppColor.softGreen,
+                    color: AppColor.secondaryColor,
                   ),
                 ),
               )
@@ -59,7 +59,7 @@ class PrimaryButton extends StatelessWidget {
                   icon != null ? 8.0.width : 0.0.width,
                   Text(
                     title,
-                    style: AppFont.semibold16.copyWith(color: AppColor.white),
+                    style: AppFont.semibold16.copyWith(color: AppColor.textDark),
                     textAlign: TextAlign.center,
                   ),
                 ],

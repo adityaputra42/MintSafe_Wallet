@@ -20,8 +20,8 @@ class ConfirmSheedPharse extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.425,
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
-              blurRadius: 0.3.h, spreadRadius: 0.3.h, color: Colors.black12)
-        ], borderRadius: BorderRadius.circular(8.r), color: AppColor.white),
+              blurRadius: 0.5.h, spreadRadius: 0.5.h, color: AppColor.primaryColor.withOpacity(0.15))
+        ], borderRadius: BorderRadius.circular(8.r), color: AppColor.textDark),
         child: Text("$number. ${text ?? ''}",
             style: AppFont.medium16.copyWith(
               color: AppColor.primaryColor,
@@ -44,7 +44,7 @@ class ConfirmSheedPharse extends StatelessWidget {
         child: Center(
           child: Text(text,
               style: AppFont.medium16.copyWith(
-                color: AppColor.white,
+                color: AppColor.textDark,
               )),
         ),
       );
@@ -113,8 +113,8 @@ class ConfirmSheedPharse extends StatelessWidget {
           padding: EdgeInsets.all(16.h),
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
-                blurRadius: 0.3.h, spreadRadius: 0.3.h, color: Colors.black12)
-          ], borderRadius: BorderRadius.circular(16.r), color: AppColor.white),
+                blurRadius: 1.h, spreadRadius: 1.h, color: AppColor.primaryColor.withOpacity(0.15))
+          ], borderRadius: BorderRadius.circular(16.r), color: AppColor.textDark),
           child: Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               runAlignment: WrapAlignment.center,

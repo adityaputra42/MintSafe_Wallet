@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/config/theme/style.dart';
+import 'package:mintsafe_wallet/domain/binding/db_binding.dart';
 import 'package:mintsafe_wallet/view/pages/page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  DbBindings().dependencies();
   runApp(const MyApp());
 }
 

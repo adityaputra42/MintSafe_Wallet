@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/utils/helper/helper.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 
@@ -45,7 +44,7 @@ class DAppPage extends StatelessWidget {
                 ),
                 Text(
                   subtitle,
-                  style: AppFont.reguler14.copyWith(color: AppColor.darkerGray),
+                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
@@ -57,7 +56,7 @@ class DAppPage extends StatelessWidget {
                       Icon(
                         Icons.delete_outline_rounded,
                         size: 24.h,
-                        color: AppColor.redNotif,
+                        color: AppColor.redColor,
                       ),
                     ],
                   )
@@ -197,8 +196,8 @@ class DAppPage extends StatelessWidget {
       );
     }
 
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+      backgroundColor: AppColor.bgLight,
       appBar: WidgetHelper.appBar(
         title: SizedBox(
           height: 54.h,
@@ -210,25 +209,24 @@ class DAppPage extends StatelessWidget {
                   Icons.search,
                   size: 20.w,
                 ),
-                filled: true,
-                fillColor: AppColor.white,
+               
                 hintText: "Search",
                 hintStyle: AppFont.reguler14.copyWith(
-                    fontWeight: FontWeight.w300, color: AppColor.darkerGray),
+                    fontWeight: FontWeight.w300, color: AppColor.grayColor),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: const BorderSide(
-                    color: Colors.transparent,
+                    color: AppColor.grayColor, width: 0.5
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: const BorderSide(
-                    color: Colors.transparent,
+                    color: AppColor.grayColor, width: 0.5
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: const BorderSide(color: AppColor.primaryColor),
                 ),
                 contentPadding:

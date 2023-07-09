@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 import '../../../data/src/src.dart';
@@ -33,8 +32,8 @@ class SettingPage extends StatelessWidget {
       );
     }
 
-    return ScaffoldGradientBackground(
-      gradient: AppGradient.background,
+    return Scaffold(
+    backgroundColor: AppColor.bgLight,
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -81,7 +80,7 @@ class SettingPage extends StatelessWidget {
             12.0.height,
             const Divider(
               thickness: 1,
-              color: AppColor.darkerGray,
+              color: AppColor.grayColor,
             ),
             16.0.height,
             cardMenu(icon: Icons.people_outline_rounded, title: "Contact"),
@@ -99,7 +98,7 @@ class SettingPage extends StatelessWidget {
                 width: 42.w,
                 height: 22.h,
                 activeColor: AppColor.primaryColor,
-                inactiveColor: AppColor.gray,
+                inactiveColor: AppColor.grayColor,
                 valueFontSize: .0,
                 toggleSize: 18.h,
                 value: true,

@@ -32,8 +32,8 @@ class NftList extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(
                     top: Radius.circular(8.r), bottom: Radius.circular(16.r)),
                 gradient: LinearGradient(colors: [
-                  AppColor.blackText.withOpacity(0.2),
-                  AppColor.blackText.withOpacity(0.6),
+                  AppColor.textLight.withOpacity(0.2),
+                  AppColor.textLight.withOpacity(0.6),
                 ])),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -41,11 +41,11 @@ class NftList extends StatelessWidget {
               children: [
                 Text(
                   "OpenPad AI Launchpad",
-                  style: AppFont.medium14.copyWith(color: AppColor.white),
+                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
                 ),
                 Text(
                   "2 Items",
-                  style: AppFont.reguler12.copyWith(color: AppColor.white),
+                  style: AppFont.reguler12.copyWith(color: AppColor.textDark),
                 )
               ],
             ),

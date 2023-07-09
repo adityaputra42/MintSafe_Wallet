@@ -3,7 +3,6 @@ import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/view/pages/add_network/add_network.dart';
-import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 import '../../../config/config.dart';
 import '../../../data/data.dart';
@@ -25,7 +24,7 @@ class ChangeNetwork extends StatelessWidget {
               BoxShadow(
                   spreadRadius: 1,
                   blurRadius: 1,
-                  color: AppColor.primaryColor.withOpacity(0.1))
+                  color: AppColor.primaryColor.withOpacity(0.15))
             ]),
         child: Row(
           children: [
@@ -64,7 +63,7 @@ class ChangeNetwork extends StatelessWidget {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
-          children: [
+          children: [16.0.height,
             SizedBox(
               height: 54.h,
               child: TextFormField(
@@ -75,26 +74,25 @@ class ChangeNetwork extends StatelessWidget {
                       Icons.search,
                       size: 20.w,
                     ),
-                    filled: true,
-                    fillColor: AppColor.white,
+                    
                     hintText: "Search",
                     hintStyle: AppFont.reguler14.copyWith(
                         fontWeight: FontWeight.w300,
-                        color: AppColor.darkerGray),
+                        color: AppColor.grayColor),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16.r),
+                      borderRadius: BorderRadius.circular(12.r),
                       borderSide: const BorderSide(
-                        color: Colors.transparent,
+                        color: AppColor.grayColor,width: 0.5
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16.r),
+                      borderRadius: BorderRadius.circular(12.r),
                       borderSide: const BorderSide(
-                        color: Colors.transparent,
+                        color: AppColor.grayColor,width: 0.5
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16.r),
+                      borderRadius: BorderRadius.circular(12.r),
                       borderSide:
                           const BorderSide(color: AppColor.primaryColor),
                     ),
@@ -109,15 +107,15 @@ class ChangeNetwork extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 12.h),
                 child: cardNetwork(isActive: index == 1 ? true : false),
               ),
-              itemCount: 10,
+              itemCount: 15,
             ))
           ],
         ),
       );
     }
 
-    return ScaffoldGradientBackground(
-        gradient: AppGradient.background,
+    return Scaffold(
+        backgroundColor: AppColor.bgLight,
         appBar: WidgetHelper.appBar(
             title: Row(
           children: [
@@ -127,7 +125,7 @@ class ChangeNetwork extends StatelessWidget {
               },
               child: Icon(
                 Icons.arrow_back_ios_new_rounded,
-                color: AppColor.blackText,
+                color: AppColor.textLight,
                 size: 24.h,
               ),
             ),
@@ -145,7 +143,7 @@ class ChangeNetwork extends StatelessWidget {
             Text(
               "Couldn't find your network?\nTap the below button to add.",
               style: AppFont.reguler12.copyWith(
-                color: AppColor.darkerGray,
+                color: AppColor.grayColor,
               ),
               textAlign: TextAlign.center,
             ),

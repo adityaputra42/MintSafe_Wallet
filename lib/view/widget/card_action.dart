@@ -33,12 +33,12 @@ class CardAction extends StatelessWidget {
                     color: AppColor.primaryColor.withOpacity(0.2))
               ],
               borderRadius: BorderRadius.circular(8.r),
-              color: AppColor.secondaryColor),
+              color:AppColor.secondaryColor),
           child: Row(mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(image, width: 20.w,height: 20.h,) ,8.0.width,Text(
+              Image.asset(image, width: 20.w,height: 20.h,color: AppColor.primaryColor,) ,8.0.width,Text(
           title,
-          style: AppFont.medium14 .copyWith(color: Colors.white),
+          style: AppFont.medium14 .copyWith(color: AppColor.primaryColor),
         )
             ],
           ),

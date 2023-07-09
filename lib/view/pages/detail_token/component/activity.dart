@@ -24,8 +24,8 @@ class Activity extends StatelessWidget {
               height: 40.w,
               padding: EdgeInsets.all(8.h),
               decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: Color(0xffD0F0FF)),
-              child: Image.asset(AppIcon.smartContractCall),
+                  shape: BoxShape.circle, color:AppColor.secondaryColor),
+              child: Image.asset(AppIcon.smartContractCall,color: AppColor.primaryColor,),
             ),
             16.0.width,
             Expanded(
@@ -36,12 +36,12 @@ class Activity extends StatelessWidget {
                   children: [
                     Text(
                       "Smart Contract Call",
-                      style: AppFont.semibold16,
+                      style: AppFont.medium16,
                     ),
                     Text(
                       "0.00 ETH",
                       style:
-                          AppFont.medium16.copyWith(color: AppColor.redNotif),
+                          AppFont.medium16.copyWith(color: AppColor.redColor),
                     )
                   ],
                 ),
@@ -51,12 +51,12 @@ class Activity extends StatelessWidget {
                     Text(
                       "To : 0xf57229.....8dg82s8",
                       style: AppFont.reguler14
-                          .copyWith(color: AppColor.darkerGray),
+                          .copyWith(color: AppColor.grayColor),
                     ),
                     Text(
                       DateFormat("MMM dd, yyyy").format(DateTime.now()),
                       style: AppFont.reguler14
-                          .copyWith(color: AppColor.darkerGray),
+                          .copyWith(color: AppColor.grayColor),
                     )
                   ],
                 )
