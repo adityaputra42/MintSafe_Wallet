@@ -22,8 +22,7 @@ class TokenList extends StatelessWidget {
         },
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 12.w),
-          height: 60.h,
+          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
           decoration: BoxDecoration(
               boxShadow: const [
                 BoxShadow(
@@ -33,13 +32,17 @@ class TokenList extends StatelessWidget {
               color: AppColor.cardDark),
           child: Row(
             children: [
-              ClipPolygon(
-                sides: 6,
-                rotate: 0,
-                child: Container(
-                    padding: EdgeInsets.all(1.h),
-                    color: AppColor.cardDark,
-                    child: Image.asset(AppImage.eth)),
+              SizedBox(
+                height: 48.h,
+                width: 48.h,
+                child: ClipPolygon(
+                  sides: 6,
+                  rotate: 0,
+                  child: Container(
+                      padding: EdgeInsets.all(1.h),
+                      color: AppColor.cardDark,
+                      child: Image.asset(AppImage.eth)),
+                ),
               ),
               8.0.width,
               Expanded(
@@ -107,6 +110,7 @@ class TokenList extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
+       
           Expanded(
               child: ListView.builder(
             padding: EdgeInsets.symmetric(horizontal: 0.5.h),
@@ -114,7 +118,7 @@ class TokenList extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 8.h),
               child: cardToken(),
             ),
-            itemCount: 2,
+            itemCount: 3,
           )),
           SecondaryButton(
             title: "Add Token",

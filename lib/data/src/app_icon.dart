@@ -14,4 +14,8 @@ class AppIcon {
   static const String sendActivity = 'asset/icon/send_activity.png';
   static const String receiveActivity = 'asset/icon/receive_activity.png';
   static const String smartContractCall = 'asset/icon/smart_contract_call.png';
+  static const String chnageIcon = 'asset/icon/change_icon.png';
+  static const String createWalletIcon = 'asset/icon/create_wallet_icon.png';
+  static const String importPharseIcon = 'asset/icon/import_pharse_icon.png';
+  static const String importKeyIcon = 'asset/icon/import_key_icon.png';
 }

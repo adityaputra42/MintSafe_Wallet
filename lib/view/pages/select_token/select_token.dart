@@ -18,7 +18,7 @@ class SelectTokenPage extends StatelessWidget {
     Widget cardToken() {
       return GestureDetector(
         onTap: () {
-          Get.to(() => const TransferPage());
+          Get.to(() => TransferPage());
         },
         child: Container(
           width: double.infinity,

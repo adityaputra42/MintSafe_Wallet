@@ -28,10 +28,7 @@ class MyApp extends StatelessWidget {
           return GetMaterialApp(
               title: 'MintSafe Wallet',
               debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                colorScheme: Style.themeData(false),
-                useMaterial3: true,
-              ),
+               theme: Styles.themeData(false, context),
               home: SplashScreen());
         });
   }

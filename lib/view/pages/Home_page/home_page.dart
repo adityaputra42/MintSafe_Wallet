@@ -6,7 +6,8 @@ import 'package:mintsafe_wallet/domain/controller/home_controller.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/nft_list.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/token_list.dart';
-import 'package:mintsafe_wallet/view/pages/change_network.dart/change_netwoork.dart';
+import 'package:mintsafe_wallet/view/pages/change_network.dart/change_network.dart';
+import 'package:mintsafe_wallet/view/pages/change_wallet/change_wallet.dart';
 import 'package:mintsafe_wallet/view/pages/receive_token/receive_token.dart';
 import 'package:mintsafe_wallet/view/pages/scan/scann_page.dart';
 import 'package:mintsafe_wallet/view/pages/select_token/select_token.dart';
@@ -89,69 +90,93 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             24.0.height,
-            Row(
-              children: [
-                Container(
-                  width: 48.w,
-                  height: 48.w,
-                  padding: EdgeInsets.all(2.h),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border:
-                          Border.all(width: 2.h, color: AppColor.primaryColor)),
-                  child: Container(
-                    padding: EdgeInsets.all(6.w),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColor.primaryColor,
-                    ),
-                    child: Image.asset(
-                      AppImage.avatar,
-                    ),
-                  ),
-                ),
-                12.0.width,
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Hi, Welcome Back",
-                        style: AppFont.reguler12.copyWith(color: AppColor.grayColor),
-                      ),
-                      Text(
-                        "Dompet Saya",
-                        style: AppFont.medium14.copyWith(color: AppColor.textDark),
-                      )
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.to(() => const ChangeNetwork());
-                  },
-                  child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
-                        color: AppColor.primaryColor.withOpacity(0.15)),
-                    child: Row(
+            GestureDetector(onTap: () {
+              Get.to(()=>ChangeWallet());
+            },
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 48.w,
+                    height: 48.w,
+                    child: Stack(
                       children: [
-                        Text("Ethereum Mainet",
-                            style: AppFont.medium14
-                                .copyWith(color: AppColor.primaryColor)),
-                        4.0.width,
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: AppColor.primaryColor,
-                          size: 14.w,
+                        Container(
+                          width: 48.w,
+                          height: 48.w,
+                          padding: EdgeInsets.all(2.h),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: 2.h, color: AppColor.primaryColor)),
+                          child: Container(
+                            padding: EdgeInsets.all(6.w),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColor.primaryColor,
+                            ),
+                            child: Image.asset(
+                              AppImage.avatar,
+                            ),
+                          ),
                         ),
+                        Align(alignment: Alignment.bottomRight,
+                          child: Container(
+                            width: 16.w,
+                            height: 16.w,
+                            padding: EdgeInsets.all(2.h),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4.r),
+                                color: AppColor.secondaryColor),child: Image.asset(AppIcon.chnageIcon),
+                          ),
+                        )
                       ],
                     ),
                   ),
-                )
-              ],
+                  12.0.width,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Hi, Welcome Back",
+                          style: AppFont.reguler12
+                              .copyWith(color: AppColor.grayColor),
+                        ),
+                        Text(
+                          "Dompet Saya",
+                          style:
+                              AppFont.medium14.copyWith(color: AppColor.textDark),
+                        )
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => const ChangeNetwork());
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.r),
+                          color: AppColor.primaryColor.withOpacity(0.15)),
+                      child: Row(
+                        children: [
+                          Text("Ethereum Mainet",
+                              style: AppFont.medium14
+                                  .copyWith(color: AppColor.primaryColor)),
+                          4.0.width,
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: AppColor.primaryColor,
+                            size: 14.w,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
             24.0.height,
             cardWallet(),

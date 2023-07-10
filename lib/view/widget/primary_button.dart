@@ -14,7 +14,7 @@ class PrimaryButton extends StatelessWidget {
     required this.onPressed,
     this.disable = false,
     this.activeColor = AppColor.primaryColor,
-    this.disableColor = AppColor.secondaryColor,
+    this.disableColor = AppColor.grayColor,
     this.icon,
     this.loading = false,
   });

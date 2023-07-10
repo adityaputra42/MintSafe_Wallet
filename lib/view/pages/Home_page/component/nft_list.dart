@@ -41,7 +41,7 @@ class NftList extends StatelessWidget {
               children: [
                 Text(
                   "OpenPad AI Launchpad",
-                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                  style: AppFont.medium14.copyWith(color: AppColor.textDark),overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   "2 Items",

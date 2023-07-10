@@ -3,17 +3,18 @@ import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mintsafe_wallet/domain/controller/transfer_controller.dart';
 import 'package:mintsafe_wallet/view/pages/select_token/select_token.dart';
 
 import '../../../config/config.dart';
 import '../../../data/data.dart';
 import '../../../utils/utils.dart';
 import '../../widget/widget.dart';
-import 'components/set_gas_fee.dart';
+import 'components/set_gas_fee/set_gas_fee.dart';
 
 class TransferPage extends StatelessWidget {
-  const TransferPage({super.key});
-
+   TransferPage({super.key});
+final Transfercontroller controller = Get.put(Transfercontroller());
   @override
   Widget build(BuildContext context) {
     Widget body() {
@@ -100,7 +101,7 @@ class TransferPage extends StatelessWidget {
             GestureDetector(onTap: () => Get.to(()=>SetGasFee()),
               child: Container(
                 width: double.infinity,
-                height: 54.h,
+               
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 7.h),
                 decoration: BoxDecoration(
               border: Border.all(width: 0.5,color: AppColor.grayColor),

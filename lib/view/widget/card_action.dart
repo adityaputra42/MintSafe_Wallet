@@ -23,7 +23,7 @@ class CardAction extends StatelessWidget {
       return GestureDetector(
         onTap: ontap,
         child: Container(
-          width: MediaQuery.of(context).size.width*0.24,
+          width: MediaQuery.of(context).size.width*0.25,
           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
           decoration: BoxDecoration(
               boxShadow: [
@@ -47,7 +47,7 @@ class CardAction extends StatelessWidget {
     }
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12.w),
+      padding: EdgeInsets.symmetric(horizontal: 8.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

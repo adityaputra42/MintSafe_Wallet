@@ -111,7 +111,7 @@ class AddNetworkPage extends StatelessWidget {
       bottomNavigationBar: PrimaryButton(
         title: "Confirm",
         onPressed: () {},
-        margin: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 36.h),
+        margin: EdgeInsets.symmetric(horizontal: 24.w,vertical: 16.h),
       ),
     );
   }
