@@ -40,61 +40,58 @@ class InputText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(title, style: AppFont.medium16.copyWith(color: AppColor.textDark)),
-              crossTitle ?? const SizedBox()
-            ],
-          ),
-          8.0.height,
-          TextFormField(
-              focusNode: focusNode,
-              onChanged: onChange,
-              validator: validator,
-              textInputAction: textInputAction,
-              inputFormatters: inputFormatters,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              keyboardType: keyboardType,
-              obscureText: obscureText,
-              controller: controller,
-              onTap: ontaped,
-              maxLines: maxLine,
-              style: AppFont.medium14.copyWith(color: AppColor.textDark),
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 12.h),
-                suffixIcon: icon,
-               
-                hintText: hintText,
-                hintStyle: AppFont.reguler14.copyWith(
-                    fontWeight: FontWeight.w300, color: AppColor.grayColor),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                  borderSide: const BorderSide(
-                    color: AppColor.grayColor,width: 0.5
-                  ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(title, style: AppFont.medium16.copyWith(color: AppColor.textDark)),
+            crossTitle ?? const SizedBox()
+          ],
+        ),
+        8.0.height,
+        TextFormField(
+            focusNode: focusNode,
+            onChanged: onChange,
+            validator: validator,
+            textInputAction: textInputAction,
+            inputFormatters: inputFormatters,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: keyboardType,
+            obscureText: obscureText,
+            controller: controller,
+            onTap: ontaped,
+            maxLines: maxLine,
+            style: AppFont.medium14.copyWith(color: AppColor.textDark),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 12.h),
+              suffixIcon: icon,
+             
+              hintText: hintText,
+              hintStyle: AppFont.reguler14.copyWith(
+                  fontWeight: FontWeight.w300, color: AppColor.grayColor),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12.r),
+                borderSide: const BorderSide(
+                  color: AppColor.grayColor,width: 0.5
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                  borderSide: const BorderSide(
-                     color: AppColor.grayColor,width: 0.5
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                  borderSide: const BorderSide(color: AppColor.primaryColor),
-                ),
-              )
-              // contentPadding:
-              //     EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h)),
               ),
-        ],
-      ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12.r),
+                borderSide: const BorderSide(
+                   color: AppColor.grayColor,width: 0.5
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12.r),
+                borderSide: const BorderSide(color: AppColor.primaryColor),
+              ),
+            )
+            // contentPadding:
+            //     EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h)),
+            ),
+      ],
     );
   }
 }

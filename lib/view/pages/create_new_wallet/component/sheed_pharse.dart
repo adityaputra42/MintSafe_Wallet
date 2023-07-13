@@ -14,19 +14,17 @@ class SheedPharse extends StatelessWidget {
     Widget cardPniomoni({required int number, required String text}) {
       return Container(
         height: 42.h,
-        width: MediaQuery.of(context).size.width * 0.425,
+        width: MediaQuery.of(context).size.width * 0.425,padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 10.h),
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
               blurRadius: 0.5,
               spreadRadius: 0.7,
               color: AppColor.primaryColor.withOpacity(0.15))
         ], borderRadius: BorderRadius.circular(8.r), color: AppColor.cardDark),
-        child: Center(
-          child: Text("$number. $text",
-              style: AppFont.medium16.copyWith(
-                color: AppColor.primaryColor,
-              )),
-        ),
+        child: Text("$number. $text",
+            style: AppFont.medium16.copyWith(
+              color: AppColor.primaryColor,
+            )),
       );
     }
 
@@ -50,20 +48,11 @@ class SheedPharse extends StatelessWidget {
             spacing: 16.h,
             runSpacing: 8.h,
             direction: Axis.horizontal,
-            children: [
-              cardPniomoni(number: 1, text: "Gasket"),
-              cardPniomoni(number: 2, text: "Piston"),
-              cardPniomoni(number: 3, text: "Allow"),
-              cardPniomoni(number: 4, text: "Minion"),
-              cardPniomoni(number: 5, text: "puly"),
-              cardPniomoni(number: 6, text: "Engine"),
-              cardPniomoni(number: 7, text: "Break"),
-              cardPniomoni(number: 8, text: "Velg"),
-              cardPniomoni(number: 9, text: "crank"),
-              cardPniomoni(number: 10, text: "gardan"),
-              cardPniomoni(number: 11, text: "casis"),
-              cardPniomoni(number: 12, text: "body"),
-            ]),
+            children: controller.mnemonic
+                        .map(
+                          (e) => cardPniomoni(number: e['id'], text: e['data']),
+                        )
+                        .toList()),
         SecondaryButton(
           title: "Backup Pharse",
           onPressed: () {},
@@ -75,6 +64,7 @@ class SheedPharse extends StatelessWidget {
           loading: false,
           onPressed: () {
             controller.changeStep(2);
+            controller.setRandom();
           },
           margin: EdgeInsets.only(top: 16.h, bottom: 36.w),
         ),

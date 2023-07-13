@@ -174,7 +174,6 @@ class DBController extends GetxController {
     });
   }
 
-  /// ######################### TOKEN #######################
   Future<List<Result>> getAllToken() async {
     List<Result> tokens = [];
     await isar.txn(() async {
@@ -205,8 +204,7 @@ class DBController extends GetxController {
 
   Future<void> deleteToken(int id) async {
     await isar.writeTxn(() async {
-      print("=================>");
-      print(id);
+    
       await isar.results.delete(id);
     });
   }

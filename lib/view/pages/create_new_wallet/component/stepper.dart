@@ -15,8 +15,8 @@ class StepperCustom extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: (controller.stepIndex.value == 0) ? 40.w : 32.w,
-            height: (controller.stepIndex.value == 0) ? 40.w : 32.w,
+            width: (controller.stepIndex.value == 0) ? 36.w : 28.w,
+            height: (controller.stepIndex.value == 0) ? 36.w : 28.w,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: (controller.stepIndex.value >= 0)
@@ -34,21 +34,21 @@ class StepperCustom extends StatelessWidget {
                       style: AppFont.medium14.copyWith(
                           color: AppColor.textDark,
                           fontSize: (controller.stepIndex.value == 0)
-                              ? 20.sp
+                              ? 16.sp
                               : 14.sp),
                     ),
             ),
           ),
           Container(
-            width: 80.w,
-            height: 3.w,
+            width: 100.w,
+            height: 2.w,
             color: (controller.stepIndex.value >= 1)
                 ? AppColor.primaryColor
                 : AppColor.grayColor,
           ),
           Container(
-            width: (controller.stepIndex.value == 1) ? 40.w : 32.w,
-            height: (controller.stepIndex.value == 1) ? 40.w : 32.w,
+            width: (controller.stepIndex.value == 1) ? 36.w : 28.w,
+            height: (controller.stepIndex.value == 1) ? 36.w : 28.w,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: (controller.stepIndex.value >= 1)
@@ -66,21 +66,21 @@ class StepperCustom extends StatelessWidget {
                       style: AppFont.medium14.copyWith(
                           color: AppColor.textDark,
                           fontSize: (controller.stepIndex.value == 1)
-                              ? 20.sp
+                              ? 16.sp
                               : 14.sp),
                     ),
             ),
           ),
           Container(
-            width: 80.w,
-            height: 3.w,
+            width: 100.w,
+            height: 2.w,
             color: (controller.stepIndex.value >= 2)
                 ? AppColor.primaryColor
                 : AppColor.grayColor,
           ),
           Container(
-            width: (controller.stepIndex.value == 2) ? 40.w : 32.w,
-            height: (controller.stepIndex.value == 2) ? 40.w : 32.w,
+            width: (controller.stepIndex.value == 2) ? 36.w : 28.w,
+            height: (controller.stepIndex.value == 2) ? 36.w : 28.w,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: (controller.stepIndex.value >= 2)
@@ -98,7 +98,7 @@ class StepperCustom extends StatelessWidget {
                       style: AppFont.medium14.copyWith(
                           color: AppColor.textDark,
                           fontSize: (controller.stepIndex.value == 2)
-                              ? 20.sp
+                              ? 16.sp
                               : 14.sp),
                     ),
             ),

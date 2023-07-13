@@ -35,16 +35,14 @@ class CreateNewWalletPage extends StatelessWidget {
                     ? SheedPharse(
                         controller: controller,
                       )
-                    : ConfirmSheedPharse(
-                        controller: controller,
-                      )
+                    : ConfirmSheedPharse()
           ],
         );
       });
     }
 
     return Scaffold(
-    backgroundColor: AppColor.bgDark,
+      backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
