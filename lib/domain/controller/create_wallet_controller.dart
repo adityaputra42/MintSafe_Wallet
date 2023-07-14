@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:math';
 
+// import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +33,7 @@ class CreateWalletController extends GetxController {
   DBController db = Get.find();
   var isPasswordHide = true.obs;
   var isConfirmHide = true.obs;
-  var isAggree = true.obs;
+  var isAggree = false.obs;
 
   var strengthPassword = ''.obs;
   var color = AppColor.redColor.obs;
@@ -75,49 +77,37 @@ class CreateWalletController extends GetxController {
     randomValue.value = randomMnemonic[Random().nextInt(12)]['id'];
   }
 
+  validatePharse() {
+    confirmPharse.sort((a, b) => a['id'].compareTo(b['id']));
+    dev.log("confirm => $confirmPharse");
+    dev.log("origin ==> $mnemonic");
+    var listOrigin = jsonEncode(mnemonic);
+    var listConfirm = jsonEncode(confirmPharse);
+    dev.log((listOrigin == listConfirm).toString());
 
-validatePharse(){
-  confirmPharse.sort((a, b) => a['id'].compareTo(b['id']));
-  if(confirmPharse == mnemonic){
-    Get.snackbar("Succes", "Pharse Match",backgroundColor: AppColor.primaryColor,colorText: AppColor.textDark);
-  }else{
-   Get.snackbar("Fail", "Pharse Didn't Match",backgroundColor: AppColor.redColor,colorText: AppColor.textDark);
-   confirmPharse.clear();
-   setRandom();
-   }
+    if (listOrigin == listConfirm) {
+      Get.snackbar("Succes", "Pharse Match",
+          backgroundColor: AppColor.primaryColor, colorText: AppColor.textDark);
+    } else {
+      Get.snackbar("Fail", "Pharse Didn't Match",
+          backgroundColor: AppColor.redColor, colorText: AppColor.textDark);
+      confirmPharse.clear();
+      setRandom();
+    }
+  }
 
-}
   void onAccept(String value, {int? id}) {
     setConfrimPharse(id: id ?? 0, text: value);
   }
 
   void setConfrimPharse({required int id, required String text}) {
-    confirmPharse.add({"id": id, "data": text});
-    randomMnemonic.removeWhere((element) => element['data'] == text);
-    dev.log("drag confirm pharse=> $confirmPharse");
-  }
-
-
-
-  void changeCurrentSeedPharse() async {
-    if (confirmValue.value != '') {
-      if (confirmValue.value ==
-          mnemonic.singleWhere(
-              (element) => element['id'] == (randomValue.value))['data']) {
-        // currentConfirmSeedPharse.value++;
-        setRandom();
-        confirmValue.value = '';
-
-        // if (currentConfirmSeedPharse.value >= 3) {
-        //   await saveNewWallet();
-        //   print("ADDRESS SAVED");
-        // }
-      } else {
-        setRandom();
-        confirmValue.value = '';
-      }
+    if (!confirmPharse.any((element) => element['id'] == id) ||
+        confirmPharse.isEmpty) {
+      confirmPharse.add({"id": id, "data": text});
+      randomMnemonic.removeWhere((element) => element['data'] == text);
     }
   }
+
 
   List<Map<String, dynamic>> generateMnemonic() {
     String mnemonic = WalletRepository().generateMnemonic();

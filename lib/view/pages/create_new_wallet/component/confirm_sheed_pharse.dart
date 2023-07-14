@@ -8,7 +8,7 @@ import '../../../../domain/controller/create_wallet_controller.dart';
 import '../../../widget/widget.dart';
 
 class ConfirmSheedPharse extends StatelessWidget {
-  ConfirmSheedPharse({
+ConfirmSheedPharse({
     super.key,
   });
 
@@ -73,6 +73,25 @@ class ConfirmSheedPharse extends StatelessWidget {
                   color: AppColor.textDark,
                 )),
           ),
+        ),childWhenDragging: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          height: 42.h,
+          width: MediaQuery.of(context).size.width * 0.258,
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    blurRadius: 0.7.h,
+                    spreadRadius: 0.7.h,
+                    color: AppColor.primaryColor.withOpacity(0.15))
+              ],
+              borderRadius: BorderRadius.circular(8.r),
+              color: AppColor.bgDark),
+          child: Center(
+            child: Text(text,
+                style: AppFont.medium16.copyWith(
+                  color: AppColor.grayColor,
+                )),
+          ),
         ),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
@@ -107,7 +126,7 @@ class ConfirmSheedPharse extends StatelessWidget {
           ),
           4.0.height,
           Text(
-            "This 12-word phrase allows you to recover your wallet and access to the coins inside.",
+            "Drag and drop to sort your phrases exactly as you saw them on the previous screen",
             style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
           ),
           24.0.height,
