@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:mintsafe_wallet/domain/controller/create_wallet_controller.dart';
 import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/confirm_sheed_pharse.dart';
 import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/create_password.dart';
 import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/sheed_pharse.dart';
@@ -10,31 +10,26 @@ import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/stepper.d
 import '../../../config/config.dart';
 import '../../../utils/utils.dart';
 
-class CreateNewWalletPage extends StatelessWidget {
-  CreateNewWalletPage({super.key});
+final stepProvider = StateProvider<int>((ref) => 0);
 
-  final CreateWalletController controller = Get.put(CreateWalletController());
+class CreateNewWalletPage extends ConsumerWidget {
+  const CreateNewWalletPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var indexStep = ref.watch(stepProvider);
     Widget body() {
       return Obx(() {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             16.0.height,
-            StepperCustom(
-              controller: controller,
-            ),
+            const StepperCustom(),
             24.0.height,
-            controller.stepIndex.value == 0
-                ? CreatePassword(
-                    controller: controller,
-                  )
-                : controller.stepIndex.value == 1
-                    ? SheedPharse(
-                        controller: controller,
-                      )
+            indexStep == 0
+                ? const CreatePassword()
+                : indexStep == 1
+                    ? const SheedPharse()
                     : ConfirmSheedPharse()
           ],
         );
@@ -48,8 +43,8 @@ class CreateNewWalletPage extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              controller.changeStep(0);
-              Get.back();
+              ref.read(stepProvider.notifier).state = 0;
+              Navigator.pop(context);
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,

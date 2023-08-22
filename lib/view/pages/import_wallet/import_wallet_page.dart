@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/utils/helper/helper.dart';
-import 'package:mintsafe_wallet/view/pages/main_page.dart';
 import 'package:mintsafe_wallet/view/widget/input_text.dart';
 import 'package:mintsafe_wallet/view/widget/primary_button.dart';
 

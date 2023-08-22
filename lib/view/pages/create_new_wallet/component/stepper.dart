@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:mintsafe_wallet/domain/controller/create_wallet_controller.dart';
 
 import '../../../../config/config.dart';
+import '../create_new_wallet_page.dart';
 
-class StepperCustom extends StatelessWidget {
-  const StepperCustom({super.key, required this.controller});
-  final CreateWalletController controller;
+class StepperCustom extends ConsumerWidget {
+  const StepperCustom({super.key, });
+ 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var index = ref.watch(stepProvider);
     return Obx(() {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: (controller.stepIndex.value == 0) ? 36.w : 28.w,
-            height: (controller.stepIndex.value == 0) ? 36.w : 28.w,
+            width: (index == 0) ? 36.w : 28.w,
+            height: (index == 0) ? 36.w : 28.w,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: (controller.stepIndex.value >= 0)
+                color: (index >= 0)
                     ? AppColor.primaryColor
                     : AppColor.grayColor),
             child: Center(
-              child: controller.stepIndex.value > 0
+              child: index > 0
                   ? Icon(
                       Icons.check,
                       size: 20.h,
@@ -33,7 +35,7 @@ class StepperCustom extends StatelessWidget {
                       "1",
                       style: AppFont.medium14.copyWith(
                           color: AppColor.textDark,
-                          fontSize: (controller.stepIndex.value == 0)
+                          fontSize: (index == 0)
                               ? 16.sp
                               : 14.sp),
                     ),
@@ -42,20 +44,20 @@ class StepperCustom extends StatelessWidget {
           Container(
             width: 100.w,
             height: 2.w,
-            color: (controller.stepIndex.value >= 1)
+            color: (index >= 1)
                 ? AppColor.primaryColor
                 : AppColor.grayColor,
           ),
           Container(
-            width: (controller.stepIndex.value == 1) ? 36.w : 28.w,
-            height: (controller.stepIndex.value == 1) ? 36.w : 28.w,
+            width: (index == 1) ? 36.w : 28.w,
+            height: (index == 1) ? 36.w : 28.w,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: (controller.stepIndex.value >= 1)
+                color: (index >= 1)
                     ? AppColor.primaryColor
                     : AppColor.grayColor),
             child: Center(
-              child: controller.stepIndex.value > 1
+              child: index > 1
                   ? Icon(
                       Icons.check,
                       size: 20.h,
@@ -65,7 +67,7 @@ class StepperCustom extends StatelessWidget {
                       "2",
                       style: AppFont.medium14.copyWith(
                           color: AppColor.textDark,
-                          fontSize: (controller.stepIndex.value == 1)
+                          fontSize: (index == 1)
                               ? 16.sp
                               : 14.sp),
                     ),
@@ -74,20 +76,20 @@ class StepperCustom extends StatelessWidget {
           Container(
             width: 100.w,
             height: 2.w,
-            color: (controller.stepIndex.value >= 2)
+            color: (index >= 2)
                 ? AppColor.primaryColor
                 : AppColor.grayColor,
           ),
           Container(
-            width: (controller.stepIndex.value == 2) ? 36.w : 28.w,
-            height: (controller.stepIndex.value == 2) ? 36.w : 28.w,
+            width: (index == 2) ? 36.w : 28.w,
+            height: (index == 2) ? 36.w : 28.w,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: (controller.stepIndex.value >= 2)
+                color: (index >= 2)
                     ? AppColor.primaryColor
                     : AppColor.grayColor),
             child: Center(
-              child: controller.stepIndex.value > 2
+              child: index > 2
                   ? Icon(
                       Icons.check,
                       size: 20.h,
@@ -97,18 +99,13 @@ class StepperCustom extends StatelessWidget {
                       "3",
                       style: AppFont.medium14.copyWith(
                           color: AppColor.textDark,
-                          fontSize: (controller.stepIndex.value == 2)
+                          fontSize: (index == 2)
                               ? 16.sp
                               : 14.sp),
                     ),
             ),
           ),
-          // Container(
-          //   width: 30.w,
-          //   height: 3.w,
-          //   color:
-          //       (currentStep >= 3) ? AppColor.primaryColor : AppColor.softGreen,
-          // ),
+         
         ],
       );
     });

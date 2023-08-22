@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+
 
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
@@ -58,11 +58,15 @@ class GetStartedPage extends StatelessWidget {
                       style: AppFont.reguler16
                           .copyWith(color: AppColor.grayColor)),
                   TextSpan(
-                      text: 'Import Wallet',
-                      style: AppFont.medium16
-                          .copyWith(color: AppColor.primaryColor),recognizer:TapGestureRecognizer()
-                            ..onTap = () => Get.to(()=>const ImportWalletPage()),
-                         )
+                    text: 'Import Wallet',
+                    style:
+                        AppFont.medium16.copyWith(color: AppColor.primaryColor),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ImportWalletPage())),
+                  )
                 ]))
               ],
             ),

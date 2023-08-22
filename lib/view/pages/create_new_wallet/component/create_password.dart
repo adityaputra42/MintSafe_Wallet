@@ -1,18 +1,27 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/config/config.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
+import 'package:mintsafe_wallet/view/pages/page.dart';
 
-import '../../../../domain/controller/create_wallet_controller.dart';
 import '../../../widget/widget.dart';
 
-class CreatePassword extends StatelessWidget {
-  const CreatePassword({super.key, required this.controller});
-  final CreateWalletController controller;
+final obsecurePassword = StateProvider<bool>((ref) => false);
+
+final obsecureConfirmPassword = StateProvider<bool>((ref) => false);
+
+final tosProvider = StateProvider<bool>((ref) => false);
+
+class CreatePassword extends ConsumerWidget {
+  const CreatePassword({
+    super.key,
+  });
+  // final CreateWalletController controller;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Obx(() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,41 +39,27 @@ class CreatePassword extends StatelessWidget {
           InputText(
             title: "Password",
             hintText: 'Enter your password',
-            controller: controller.password,
-            onChange: controller.onChangePassword,
-            obscureText: controller.isPasswordHide.value,
             textInputAction: TextInputAction.next,
             icon: GestureDetector(
-              onTap: () => controller.changeHidePassword(),
+              onTap: () => ref.read(obsecurePassword.notifier).state =
+                  !ref.read(obsecurePassword.notifier).state,
               child: Icon(
-                controller.isPasswordHide.value
+                ref.watch(obsecurePassword)
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
                 size: 22.h,
               ),
             ),
           ),
-          controller.strengthPassword.value == ''
-              ? 16.0.height
-              : Padding(
-                  padding: EdgeInsets.only(bottom: 8.h, top: 6.h, left: 8.w),
-                  child: Text(
-                    controller.strengthPassword.value,
-                    style: AppFont.medium12
-                        .copyWith(color: controller.color.value),
-                  ),
-                ),
           InputText(
             title: "Confirm Password",
             hintText: 'Confirm your password',
             textInputAction: TextInputAction.done,
-            obscureText: controller.isConfirmHide.value,
-            controller: controller.confirmPassword,
-            onChange: controller.onChangeConfirmPassword,
             icon: GestureDetector(
-              onTap: () => controller.changeHideConfirm(),
+              onTap: () => ref.read(obsecureConfirmPassword.notifier).state =
+                  !ref.read(obsecureConfirmPassword.notifier).state,
               child: Icon(
-                controller.isConfirmHide.value
+                ref.watch(obsecureConfirmPassword)
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
                 size: 22.h,
@@ -80,9 +75,9 @@ class CreatePassword extends StatelessWidget {
                   height: 16.h,
                   child: Checkbox(
                     activeColor: AppColor.primaryColor,
-                    value: controller.isAggree.value,
+                    value: ref.watch(tosProvider),
                     onChanged: (value) {
-                      controller.changeAggrement(value ?? false);
+                      ref.read(tosProvider.notifier).state = value ?? false;
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4.r)),
@@ -106,10 +101,9 @@ class CreatePassword extends StatelessWidget {
           ),
           PrimaryButton(
             title: 'Continue',
-            disable: controller.buttonPassword.value,
             loading: false,
             onPressed: () {
-              controller.changeStep(1);
+              ref.read(stepProvider.notifier).state = 1;
             },
             margin: EdgeInsets.only(top: 36.h, bottom: 36.w),
           ),
