@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../config/config.dart';
 import '../../data/data.dart';
 import '../../utils/utils.dart';
-import '../../view/pages/page.dart';
 import '../repository/repository.dart';
 import 'db_controller.dart';
 
@@ -64,7 +63,7 @@ class ImportWalletController extends GetxController {
 
       await db.addAddress(address!);
 
-      Get.offAll(() => MainPage(address: address));
+      // Get.offAll(() => MainPage(address: address));
     } else {
       isLoading.value = false;
       Get.snackbar('Error', "Invalid seed pharse",

@@ -5,7 +5,6 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/succes_create_wallet.dart';
 
 import '../../config/config.dart';
 import '../../data/data.dart';
@@ -73,6 +72,29 @@ class CreateWalletController extends GetxController {
 
   void changeStep(int index) => stepIndex.value = index;
 
+  void setRandom() {
+    randomMnemonic.value = mnemonic.toList()..shuffle();
+    randomValue.value = randomMnemonic[Random().nextInt(12)]['id'];
+  }
+
+  validatePharse() {
+    confirmPharse.sort((a, b) => a['id'].compareTo(b['id']));
+    dev.log("confirm => $confirmPharse");
+    dev.log("origin ==> $mnemonic");
+    var listOrigin = jsonEncode(mnemonic);
+    var listConfirm = jsonEncode(confirmPharse);
+    dev.log((listOrigin == listConfirm).toString());
+
+    if (listOrigin == listConfirm) {
+      Get.snackbar("Succes", "Pharse Match",
+          backgroundColor: AppColor.primaryColor, colorText: AppColor.textDark);
+    } else {
+      Get.snackbar("Fail", "Pharse Didn't Match",
+          backgroundColor: AppColor.redColor, colorText: AppColor.textDark);
+      confirmPharse.clear();
+      setRandom();
+    }
+  }
 
   void onAccept(String value, {int? id}) {
     setConfrimPharse(id: id ?? 0, text: value);
@@ -85,6 +107,7 @@ class CreateWalletController extends GetxController {
       randomMnemonic.removeWhere((element) => element['data'] == text);
     }
   }
+
 
   List<Map<String, dynamic>> generateMnemonic() {
     String mnemonic = WalletRepository().generateMnemonic();
@@ -102,12 +125,11 @@ class CreateWalletController extends GetxController {
     isLoading.value = true;
     var address = await compute(saveAddressCompute, mnemonicText.value);
 
-    await db.setPassword(Password(password: password.text));
+    // await db.setPassword(Password(password: password.text));
     await db.addAddress(address);
 
     createdAddress.value = address;
     isLoading.value = false;
-
     return address;
   }
 
@@ -158,26 +180,6 @@ class CreateWalletController extends GetxController {
       buttonPassword.value = false;
     } else {
       buttonPassword.value = true;
-    }
-  }
-
-  void setRandom() {
-    randomMnemonic.value = mnemonic.toList()..shuffle();
-    randomValue.value = randomMnemonic[Random().nextInt(12)]['id'];
-  }
-
-  Future<void> validatePharse() async {
-    confirmPharse.sort((a, b) => a['id'].compareTo(b['id']));
-    var listOrigin = jsonEncode(mnemonic);
-    var listConfirm = jsonEncode(confirmPharse);
-    if (listOrigin == listConfirm) {
-      await saveNewWallet();
-      Get.offAll(()=>SuccesCreateWallet(address: createdAddress.value));
-    } else {
-      Get.snackbar("Fail", "Pharse Didn't Match",
-          backgroundColor: AppColor.redColor, colorText: AppColor.textDark);
-      confirmPharse.clear();
-      setRandom();
     }
   }
 }

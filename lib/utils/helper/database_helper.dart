@@ -25,4 +25,20 @@ class DatabaseHelper {
       directory: '',
     );
   }
+
+  Future<void> setPassword(Password password) async {
+    await isar.writeTxn(() async {
+      await isar.passwords.put(password);
+    });
+  }
+
+  Future<Password> getPassword() async {
+    var password = Password();
+    await isar.txn(() async {
+      final pass = await isar.passwords.where().findAll();
+      password = pass.first;
+    });
+
+    return password;
+  }
 }

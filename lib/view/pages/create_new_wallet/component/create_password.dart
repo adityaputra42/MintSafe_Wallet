@@ -2,16 +2,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:mintsafe_wallet/config/config.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/view/pages/page.dart';
 
 import '../../../widget/widget.dart';
 
-final obsecurePassword = StateProvider<bool>((ref) => false);
+final obsecurePassword = StateProvider<bool>((ref) => true);
 
-final obsecureConfirmPassword = StateProvider<bool>((ref) => false);
+final obsecureConfirmPassword = StateProvider<bool>((ref) => true);
 
 final tosProvider = StateProvider<bool>((ref) => false);
 
@@ -22,7 +21,7 @@ class CreatePassword extends ConsumerWidget {
   // final CreateWalletController controller;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Obx(() {
+   
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -40,6 +39,7 @@ class CreatePassword extends ConsumerWidget {
             title: "Password",
             hintText: 'Enter your password',
             textInputAction: TextInputAction.next,
+            obscureText: ref.watch(obsecurePassword),
             icon: GestureDetector(
               onTap: () => ref.read(obsecurePassword.notifier).state =
                   !ref.read(obsecurePassword.notifier).state,
@@ -51,10 +51,12 @@ class CreatePassword extends ConsumerWidget {
               ),
             ),
           ),
+          16.0.height,
           InputText(
             title: "Confirm Password",
             hintText: 'Confirm your password',
             textInputAction: TextInputAction.done,
+            obscureText: ref.watch(obsecureConfirmPassword),
             icon: GestureDetector(
               onTap: () => ref.read(obsecureConfirmPassword.notifier).state =
                   !ref.read(obsecureConfirmPassword.notifier).state,
@@ -109,6 +111,6 @@ class CreatePassword extends ConsumerWidget {
           ),
         ],
       );
-    });
+   
   }
 }

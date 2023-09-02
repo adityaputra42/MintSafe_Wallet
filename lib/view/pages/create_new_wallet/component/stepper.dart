@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../../../../config/config.dart';
 import '../create_new_wallet_page.dart';
@@ -12,7 +11,7 @@ class StepperCustom extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var index = ref.watch(stepProvider);
-    return Obx(() {
+  
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -108,6 +107,6 @@ class StepperCustom extends ConsumerWidget {
          
         ],
       );
-    });
+  
   }
 }

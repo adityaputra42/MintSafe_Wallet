@@ -10,16 +10,9 @@ import 'package:mintsafe_wallet/view/pages/setting/setting_page.dart';
 import '../../config/config.dart';
 import 'Home_page/home_page.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key, required this.address});
-  final Address address;
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
+class MainPage extends StatelessWidget {
+  MainPage({super.key});
   final BottomNavBarController controller = Get.put(BottomNavBarController());
-
   @override
   Widget build(BuildContext context) {
     body() {

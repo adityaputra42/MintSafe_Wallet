@@ -7,7 +7,6 @@ import 'package:mintsafe_wallet/config/config.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/view/pages/page.dart';
 
-import '../../../Provider/splash_provider.dart';
 import '../../../data/data.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -21,7 +20,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   void initState() {
-     ref.read(isNewUseProvider.notifier).checkFirstInstall();
+    //  ref.read(isNewUseProvider.notifier).checkFirstInstall();
     Timer(const Duration(seconds: 5), () {
        Navigator.pushAndRemoveUntil(
             context,

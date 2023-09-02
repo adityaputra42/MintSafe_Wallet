@@ -8,8 +8,8 @@ import 'package:mintsafe_wallet/view/pages/page.dart';
 import 'package:mintsafe_wallet/view/widget/primary_button.dart';
 
 class SuccesCreateWallet extends StatelessWidget {
-  const SuccesCreateWallet({super.key, required this.address});
-final Address address;
+  const SuccesCreateWallet({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +35,7 @@ final Address address;
             PrimaryButton(
               title: "Start Now",
               onPressed: () {
-                Get.offAll(() => MainPage(address: address,));
+                Get.to(() => MainPage());
               },
               margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 48.h),
             )

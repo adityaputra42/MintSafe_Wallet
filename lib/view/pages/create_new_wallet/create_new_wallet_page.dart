@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/confirm_sheed_pharse.dart';
 import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/create_password.dart';
 import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/sheed_pharse.dart';
@@ -18,8 +17,7 @@ class CreateNewWalletPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var indexStep = ref.watch(stepProvider);
-    Widget body() {
-      return Obx(() {
+    Widget body() { 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,7 +31,7 @@ class CreateNewWalletPage extends ConsumerWidget {
                     : ConfirmSheedPharse()
           ],
         );
-      });
+      
     }
 
     return Scaffold(
