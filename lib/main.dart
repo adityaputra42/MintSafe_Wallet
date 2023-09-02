@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mintsafe_wallet/utils/helper/database_helper.dart';
+import 'package:get/get.dart';
 import 'package:mintsafe_wallet/config/theme/style.dart';
-import 'package:mintsafe_wallet/utils/helper/pref_helper.dart';
+import 'package:mintsafe_wallet/domain/binding/db_binding.dart';
 import 'package:mintsafe_wallet/view/pages/spalsh/splash_screen.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await PrefHelper.instance.init();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  DatabaseHelper.instance.onInit();
-  runApp(const ProviderScope(child: MyApp()));
+  DbBindings().dependencies();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -27,10 +25,10 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return MaterialApp(
+          return GetMaterialApp(
               title: 'MintSafe Wallet',
               debugShowCheckedModeBanner: false,
-              theme: Styles.themeData(true, context),
+               theme: Styles.themeData(true, context),
               home: SplashScreen());
         });
   }

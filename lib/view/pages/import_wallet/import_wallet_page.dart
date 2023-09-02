@@ -99,7 +99,7 @@ class ImportWalletPage extends StatelessWidget {
             disable: false,
             loading: false,
             onPressed: () {
-              Get.to(() => MainPage());
+            
             },
             margin: EdgeInsets.only(top: 24.h, bottom: 36.w),
           ),

@@ -1,27 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:mintsafe_wallet/config/config.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
-import 'package:mintsafe_wallet/view/pages/page.dart';
 
+import '../../../../domain/controller/create_wallet_controller.dart';
 import '../../../widget/widget.dart';
 
-final obsecurePassword = StateProvider<bool>((ref) => true);
-
-final obsecureConfirmPassword = StateProvider<bool>((ref) => true);
-
-final tosProvider = StateProvider<bool>((ref) => false);
-
-class CreatePassword extends ConsumerWidget {
-  const CreatePassword({
-    super.key,
-  });
-  // final CreateWalletController controller;
+class CreatePassword extends StatelessWidget {
+  const CreatePassword({super.key, required this.controller});
+  final CreateWalletController controller;
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-   
+  Widget build(BuildContext context) {
+    return Obx(() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,30 +30,41 @@ class CreatePassword extends ConsumerWidget {
           InputText(
             title: "Password",
             hintText: 'Enter your password',
+            controller: controller.password,
+            onChange: controller.onChangePassword,
+            obscureText: controller.isPasswordHide.value,
             textInputAction: TextInputAction.next,
-            obscureText: ref.watch(obsecurePassword),
             icon: GestureDetector(
-              onTap: () => ref.read(obsecurePassword.notifier).state =
-                  !ref.read(obsecurePassword.notifier).state,
+              onTap: () => controller.changeHidePassword(),
               child: Icon(
-                ref.watch(obsecurePassword)
+                controller.isPasswordHide.value
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
                 size: 22.h,
               ),
             ),
           ),
-          16.0.height,
+          controller.strengthPassword.value == ''
+              ? 16.0.height
+              : Padding(
+                  padding: EdgeInsets.only(bottom: 8.h, top: 6.h, left: 8.w),
+                  child: Text(
+                    controller.strengthPassword.value,
+                    style: AppFont.medium12
+                        .copyWith(color: controller.color.value),
+                  ),
+                ),
           InputText(
             title: "Confirm Password",
             hintText: 'Confirm your password',
             textInputAction: TextInputAction.done,
-            obscureText: ref.watch(obsecureConfirmPassword),
+            obscureText: controller.isConfirmHide.value,
+            controller: controller.confirmPassword,
+            onChange: controller.onChangeConfirmPassword,
             icon: GestureDetector(
-              onTap: () => ref.read(obsecureConfirmPassword.notifier).state =
-                  !ref.read(obsecureConfirmPassword.notifier).state,
+              onTap: () => controller.changeHideConfirm(),
               child: Icon(
-                ref.watch(obsecureConfirmPassword)
+                controller.isConfirmHide.value
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
                 size: 22.h,
@@ -77,9 +80,9 @@ class CreatePassword extends ConsumerWidget {
                   height: 16.h,
                   child: Checkbox(
                     activeColor: AppColor.primaryColor,
-                    value: ref.watch(tosProvider),
+                    value: controller.isAggree.value,
                     onChanged: (value) {
-                      ref.read(tosProvider.notifier).state = value ?? false;
+                      controller.changeAggrement(value ?? false);
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4.r)),
@@ -103,14 +106,15 @@ class CreatePassword extends ConsumerWidget {
           ),
           PrimaryButton(
             title: 'Continue',
+            disable: controller.buttonPassword.value,
             loading: false,
             onPressed: () {
-              ref.read(stepProvider.notifier).state = 1;
+              controller.changeStep(1);
             },
             margin: EdgeInsets.only(top: 36.h, bottom: 36.w),
           ),
         ],
       );
-   
+    });
   }
 }
