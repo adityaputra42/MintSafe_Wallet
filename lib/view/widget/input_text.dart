@@ -46,7 +46,8 @@ class InputText extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(title, style: AppFont.medium16.copyWith(color: AppColor.textDark)),
+            Text(title,
+                style: AppFont.medium14.copyWith(color: AppColor.textDark)),
             crossTitle ?? const SizedBox()
           ],
         ),
@@ -65,32 +66,29 @@ class InputText extends StatelessWidget {
             maxLines: maxLine,
             style: AppFont.medium14.copyWith(color: AppColor.textDark),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 12.h),
+              filled: true,
+              fillColor: AppColor.cardDark,
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
               suffixIcon: icon,
-             
               hintText: hintText,
               hintStyle: AppFont.reguler14.copyWith(
                   fontWeight: FontWeight.w300, color: AppColor.grayColor),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.r),
-                borderSide: const BorderSide(
-                  color: AppColor.grayColor,width: 0.5
-                ),
+                borderSide:
+                    const BorderSide(color: Colors.transparent, width: 0.5),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.r),
-                borderSide: const BorderSide(
-                   color: AppColor.grayColor,width: 0.5
-                ),
+                borderSide:
+                    const BorderSide(color: Colors.transparent, width: 0.5),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.r),
                 borderSide: const BorderSide(color: AppColor.primaryColor),
               ),
-            )
-            // contentPadding:
-            //     EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h)),
-            ),
+            )),
       ],
     );
   }

@@ -23,5 +23,6 @@ class AppImage {
   static const String walletIlustration = 'asset/image/wallet_ilustration.png';
   static const String secureIlustration = 'asset/image/secure_ilustration.png';
 
-  static const String maskGs = 'asset/image/mask_gs.png';
+  static const String maskHome = 'asset/image/mask_home.png';
+  static const String maskGs = 'asset/image/mask_getstarted.png';
 }

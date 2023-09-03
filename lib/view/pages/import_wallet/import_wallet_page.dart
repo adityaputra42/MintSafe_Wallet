@@ -8,6 +8,7 @@ import 'package:mintsafe_wallet/view/widget/input_text.dart';
 import 'package:mintsafe_wallet/view/widget/primary_button.dart';
 
 import '../../../config/config.dart';
+import '../../../data/data.dart';
 
 class ImportWalletPage extends StatelessWidget {
   const ImportWalletPage({super.key});
@@ -19,10 +20,8 @@ class ImportWalletPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           16.0.height,
-          Text(
-            'Import via Seed Phrase',
-            style: AppFont.medium16.copyWith(color: AppColor.textDark)
-          ),
+          Text('Import via Seed Phrase',
+              style: AppFont.medium16.copyWith(color: AppColor.textDark)),
           4.0.height,
           Text(
             'To import an existing wallet, please enter the recovery seed phrase here:',
@@ -47,6 +46,7 @@ class ImportWalletPage extends StatelessWidget {
               ],
             ),
           ),
+          16.0.height,
           InputText(
             title: "Password",
             hintText: 'Enter your password',
@@ -57,6 +57,7 @@ class ImportWalletPage extends StatelessWidget {
               size: 22.h,
             ),
           ),
+          16.0.height,
           InputText(
             title: "Confirm Password",
             hintText: 'Confirm your password',
@@ -67,48 +68,53 @@ class ImportWalletPage extends StatelessWidget {
               size: 22.h,
             ),
           ),
-          ListTileTheme(
-            horizontalTitleGap: 0,
-            contentPadding: EdgeInsets.zero,
-            child: CheckboxListTile(
-                title: Text.rich(
-                  TextSpan(
-                    text: 'I read and agreed to the',
-                    style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
-                    children: [
-                      TextSpan(
-                          text: ' Term of Service',
-                          style: AppFont.medium14.copyWith(
-                            color: AppColor.primaryColor,
-                          ),
-                          recognizer: TapGestureRecognizer()..onTap = () {}),
-                    ],
-                  ),
+           24.0.height,
+          Row(
+            children: [
+              8.0.width,
+              SizedBox(
+                  width: 16.w,
+                  height: 16.h,
+                  child: Checkbox(
+                    activeColor: AppColor.primaryColor,
+                    value: false,
+                    // controller.isAggree.value,
+                    onChanged: (value) {
+                      // controller.changeAggrement(value ?? false);
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.r)),
+                  )),
+              16.0.width,
+              Text.rich(
+                TextSpan(
+                  text: 'I read and agreed to the',
+                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
+                  children: [
+                    TextSpan(
+                        text: ' Term of Service',
+                        style: AppFont.medium14.copyWith(
+                          color: AppColor.primaryColor,
+                        ),
+                        recognizer: TapGestureRecognizer()..onTap = () {}),
+                  ],
                 ),
-                dense: true,
-                contentPadding: EdgeInsets.zero,
-                controlAffinity: ListTileControlAffinity.leading,
-                value: false,
-                activeColor: AppColor.primaryColor,
-                onChanged: (newValue) async {},
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.r))),
+              ),
+            ],
           ),
           PrimaryButton(
             title: 'Import Wallet',
             disable: false,
             loading: false,
-            onPressed: () {
-            
-            },
-            margin: EdgeInsets.only(top: 24.h, bottom: 36.w),
+            onPressed: () {},
+            margin: EdgeInsets.only(top: 32.h, bottom: 36.w),
           ),
         ],
       );
     }
 
     return Scaffold(
-    backgroundColor: AppColor.bgDark,
+      backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -129,13 +135,23 @@ class ImportWalletPage extends StatelessWidget {
           ),
         ],
       )),
-      body: LayoutBuilder(
-        builder: (context, constraints) => SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraints.maxHeight),
-              child: body()),
-        ),
+      body: Stack(
+        children: [ SizedBox(
+              width: double.infinity,
+              height: ScreenUtil().screenHeight,
+              child: Image.asset(
+                AppImage.maskHome,
+                fit: BoxFit.cover,
+              )),
+          LayoutBuilder(
+            builder: (context, constraints) => SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: body()),
+            ),
+          ),
+        ],
       ),
     );
   }

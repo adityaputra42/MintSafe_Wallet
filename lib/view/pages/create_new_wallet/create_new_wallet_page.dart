@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/domain/controller/create_wallet_controller.dart';
 import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/confirm_sheed_pharse.dart';
 import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/create_password.dart';
@@ -64,14 +65,25 @@ class CreateNewWalletPage extends StatelessWidget {
           ),
         ],
       )),
-      body: LayoutBuilder(
-        builder: (context, constraints) => SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: constraints.maxHeight),
-            child: body(),
+      body: Stack(
+        children: [
+          SizedBox(
+              width: double.infinity,
+              height: ScreenUtil().screenHeight,
+              child: Image.asset(
+                AppImage.maskHome,
+                fit: BoxFit.cover,
+              )),
+          LayoutBuilder(
+            builder: (context, constraints) => SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: body(),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

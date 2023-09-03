@@ -5,12 +5,12 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/succes_create_wallet.dart';
 
 import '../../config/config.dart';
 import '../../data/data.dart';
 import '../../utils/utils.dart';
 import '../repository/repository.dart';
-import 'db_controller.dart';
 import 'dart:developer' as dev;
 
 Future<Address> saveAddressCompute(String mnemonic) async {
@@ -30,7 +30,6 @@ Future<Address> saveAddressCompute(String mnemonic) async {
 }
 
 class CreateWalletController extends GetxController {
-  DBController db = Get.find();
   var isPasswordHide = true.obs;
   var isConfirmHide = true.obs;
   var isAggree = false.obs;
@@ -86,8 +85,8 @@ class CreateWalletController extends GetxController {
     dev.log((listOrigin == listConfirm).toString());
 
     if (listOrigin == listConfirm) {
-      Get.snackbar("Succes", "Pharse Match",
-          backgroundColor: AppColor.primaryColor, colorText: AppColor.textDark);
+      saveNewWallet();
+      Get.to(() => SuccesCreateWallet(address: createdAddress.value));
     } else {
       Get.snackbar("Fail", "Pharse Didn't Match",
           backgroundColor: AppColor.redColor, colorText: AppColor.textDark);
@@ -108,7 +107,6 @@ class CreateWalletController extends GetxController {
     }
   }
 
-
   List<Map<String, dynamic>> generateMnemonic() {
     String mnemonic = WalletRepository().generateMnemonic();
     mnemonicText.value = mnemonic;
@@ -125,8 +123,8 @@ class CreateWalletController extends GetxController {
     isLoading.value = true;
     var address = await compute(saveAddressCompute, mnemonicText.value);
 
-    // await db.setPassword(Password(password: password.text));
-    await db.addAddress(address);
+    await DbHelper.instance.setPassword(Password(password: password.text));
+    await DbHelper.instance.addAddress(address);
 
     createdAddress.value = address;
     isLoading.value = false;

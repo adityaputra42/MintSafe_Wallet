@@ -17,13 +17,13 @@ class SheedPharse extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.425,padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 10.h),
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
-              blurRadius: 0.5,
-              spreadRadius: 0.7,
-              color: AppColor.primaryColor.withOpacity(0.15))
+              blurRadius: 0.1,
+              spreadRadius: 0.1,
+              color: AppColor.grayColor.withOpacity(0.25))
         ], borderRadius: BorderRadius.circular(8.r), color: AppColor.cardDark),
         child: Text("$number. $text",
-            style: AppFont.medium16.copyWith(
-              color: AppColor.primaryColor,
+            style: AppFont.medium14.copyWith(
+              color: AppColor.textDark,
             )),
       );
     }

@@ -37,14 +37,14 @@ ConfirmSheedPharse({
                   BoxShadow(
                       blurRadius: 0.5.h,
                       spreadRadius: 0.5.h,
-                      color: AppColor.primaryColor.withOpacity(0.15))
+                      color: AppColor.grayColor.withOpacity(0.25))
                 ],
                 borderRadius: BorderRadius.circular(8.r),
                 color: AppColor.cardDark),
             child: Text(
                 "$number. ${(controller.confirmPharse.singleWhere((element) => element['id'] == number, orElse: () => <String, dynamic>{})['data']) ?? ''}",
                 style: AppFont.medium16.copyWith(
-                  color: AppColor.primaryColor,
+                  color: AppColor.textDark,
                 )),
           );
         },
@@ -61,9 +61,9 @@ ConfirmSheedPharse({
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                    blurRadius: 0.7.h,
-                    spreadRadius: 0.7.h,
-                    color: AppColor.primaryColor.withOpacity(0.15))
+                    blurRadius: 0.3.h,
+                    spreadRadius: 0.5.h,
+                    color: AppColor.grayColor.withOpacity(0.25))
               ],
               borderRadius: BorderRadius.circular(8.r),
               color: AppColor.primaryColor),
@@ -82,7 +82,7 @@ ConfirmSheedPharse({
                 BoxShadow(
                     blurRadius: 0.7.h,
                     spreadRadius: 0.7.h,
-                    color: AppColor.primaryColor.withOpacity(0.15))
+                    color: AppColor.grayColor.withOpacity(0.15))
               ],
               borderRadius: BorderRadius.circular(8.r),
               color: AppColor.bgDark),
@@ -102,13 +102,13 @@ ConfirmSheedPharse({
                 BoxShadow(
                     blurRadius: 0.7.h,
                     spreadRadius: 0.7.h,
-                    color: AppColor.primaryColor.withOpacity(0.15))
+                    color: AppColor.grayColor.withOpacity(0.25))
               ],
               borderRadius: BorderRadius.circular(8.r),
               color: AppColor.primaryColor),
           child: Center(
             child: Text(text,
-                style: AppFont.medium16.copyWith(
+                style: AppFont.medium14.copyWith(
                   color: AppColor.textDark,
                 )),
           ),
@@ -184,9 +184,9 @@ ConfirmSheedPharse({
                   decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                            blurRadius: 1,
-                            spreadRadius: 1,
-                            color: AppColor.primaryColor.withOpacity(0.15))
+                            blurRadius: 0.5,
+                            spreadRadius: 0.5,
+                            color: AppColor.grayColor.withOpacity(0.25))
                       ],
                       borderRadius: BorderRadius.circular(12.r),
                       color: AppColor.cardDark),

@@ -71,7 +71,7 @@ class CreatePassword extends StatelessWidget {
               ),
             ),
           ),
-          8.0.height,
+          24.0.height,
           Row(
             children: [
               8.0.width,

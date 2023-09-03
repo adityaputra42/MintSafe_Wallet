@@ -25,45 +25,57 @@ class GetStartedPage extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  AppImage.logo,
-                  width: 160.w,
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      80.0.height,
+                      Image.asset(
+                        AppImage.logo,
+                        width: 160.w,
+                      ),
+                      24.0.height,
+                      Text(
+                        'MintSafe',
+                        style: AppFont.semibold24
+                            .copyWith(color: AppColor.textDark),
+                      ),
+                      Text(
+                        'Unlock the Future of Digital Assets',
+                        style: AppFont.reguler16
+                            .copyWith(color: AppColor.grayColor),
+                      ),
+                    ],
+                  ),
                 ),
-                24.0.height,
-                Text(
-                  'MintSafe',
-                  style: AppFont.semibold24.copyWith(color: AppColor.textDark),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    PrimaryButton(
+                      title: "Create a New Wallet",
+                      onPressed: () {
+                        Get.to(() => CreateNewWalletPage());
+                      },
+                    ),
+                    24.0.height,
+                    Text.rich(TextSpan(children: [
+                      TextSpan(
+                          text: 'Have an existing wallet? ',
+                          style: AppFont.reguler16
+                              .copyWith(color: AppColor.grayColor)),
+                      TextSpan(
+                        text: 'Import Wallet',
+                        style: AppFont.medium16
+                            .copyWith(color: AppColor.primaryColor),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap =
+                              () => Get.to(() => const ImportWalletPage()),
+                      )
+                    ])),
+                    48.0.height,
+                  ],
                 ),
-                Text(
-                  'Unlock the Future of Digital Assets',
-                  style: AppFont.reguler16.copyWith(color: AppColor.grayColor),
-                ),
-                80.0.height,
-                PrimaryButton(
-                  title: "Create a New Wallet",
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>  CreateNewWalletPage(),
-                        ));
-                  },
-                ),
-                24.0.height,
-                Text.rich(TextSpan(children: [
-                  TextSpan(
-                      text: 'Have an existing wallet? ',
-                      style: AppFont.reguler16
-                          .copyWith(color: AppColor.grayColor)),
-                  TextSpan(
-                      text: 'Import Wallet',
-                      style: AppFont.medium16
-                          .copyWith(color: AppColor.primaryColor),recognizer:TapGestureRecognizer()
-                            ..onTap = () => Get.to(()=>const ImportWalletPage()),
-                         )
-                ]))
               ],
             ),
           ),

@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/config/theme/style.dart';
-import 'package:mintsafe_wallet/domain/binding/db_binding.dart';
+import 'package:mintsafe_wallet/utils/helper/helper.dart';
 import 'package:mintsafe_wallet/view/pages/spalsh/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  DbBindings().dependencies();
+  DbHelper.instance.onInit();
   runApp(const MyApp());
 }
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           return GetMaterialApp(
               title: 'MintSafe Wallet',
               debugShowCheckedModeBanner: false,
-               theme: Styles.themeData(true, context),
+              theme: Styles.themeData(true, context),
               home: SplashScreen());
         });
   }

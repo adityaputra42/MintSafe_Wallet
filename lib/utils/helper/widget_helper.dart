@@ -7,8 +7,8 @@ class WidgetHelper {
     required Widget title,
   }) {
     return AppBar(
-      elevation: 2,
-      shadowColor: AppColor.primaryColor.withOpacity(0.25),
+      elevation: 1,
+      shadowColor: AppColor.grayColor.withOpacity(0.2),
       title: title,
       automaticallyImplyLeading: false,
       centerTitle: false,
