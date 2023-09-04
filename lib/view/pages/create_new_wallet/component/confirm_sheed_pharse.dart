@@ -203,8 +203,8 @@ ConfirmSheedPharse({
                 ),
           PrimaryButton(
             title: 'Confirm',
-            disable: false,
-            loading: false,
+            disable: controller.buttonConfirmPharse.value,
+            loading: controller.isLoading.value,
             onPressed: () {
               controller.validatePharse();
             },

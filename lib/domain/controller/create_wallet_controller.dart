@@ -34,20 +34,20 @@ class CreateWalletController extends GetxController {
   var isConfirmHide = true.obs;
   var isAggree = false.obs;
 
-  var strengthPassword = ''.obs;
+  var strengthPassword = 0.0.obs;
+  var strength = "".obs;
   var color = AppColor.redColor.obs;
   RegExp numReg = RegExp(r".*[0-9].*");
   RegExp letterReg = RegExp(r".*[A-Za-z].*");
-  var validatePassword = false.obs;
-  var confirmValidate = ''.obs;
   var buttonPassword = true.obs;
 
+  var buttonConfirmPharse = true.obs;
+  var formKey = GlobalKey<FormState>();
   var createdAddress = Address().obs;
   var stepIndex = 0.obs;
   var randomMnemonic = [].obs;
   var mnemonicText = ''.obs;
 
-  var confirmValue = ''.obs;
   var randomValue = 1.obs;
   var isLoading = false.obs;
   RxList<Map<String, dynamic>> mnemonic = <Map<String, dynamic>>[].obs;
@@ -60,6 +60,25 @@ class CreateWalletController extends GetxController {
   void onInit() {
     mnemonic.value = generateMnemonic();
     super.onInit();
+  }
+
+  String? onValidatePassword(String? value) {
+    if (value == '') {
+      return "Password can't be empty";
+    } else {
+      return null;
+    }
+  }
+
+  String? onValidateConfirm(String? value) {
+    if (value != password.text) {
+      return "Password didn't match";
+    }
+    if (value == '') {
+      return "Confrim password can't be empty";
+    }
+
+    return null;
   }
 
   changeHidePassword() => isPasswordHide.value = !isPasswordHide.value;
@@ -77,12 +96,11 @@ class CreateWalletController extends GetxController {
   }
 
   validatePharse() {
+    isLoading.value = true;
     confirmPharse.sort((a, b) => a['id'].compareTo(b['id']));
-    dev.log("confirm => $confirmPharse");
-    dev.log("origin ==> $mnemonic");
+
     var listOrigin = jsonEncode(mnemonic);
     var listConfirm = jsonEncode(confirmPharse);
-    dev.log((listOrigin == listConfirm).toString());
 
     if (listOrigin == listConfirm) {
       saveNewWallet();
@@ -93,6 +111,7 @@ class CreateWalletController extends GetxController {
       confirmPharse.clear();
       setRandom();
     }
+    isLoading.value = false;
   }
 
   void onAccept(String value, {int? id}) {
@@ -105,6 +124,7 @@ class CreateWalletController extends GetxController {
       confirmPharse.add({"id": id, "data": text});
       randomMnemonic.removeWhere((element) => element['data'] == text);
     }
+    checkButtonConfirm();
   }
 
   List<Map<String, dynamic>> generateMnemonic() {
@@ -120,29 +140,17 @@ class CreateWalletController extends GetxController {
   }
 
   Future<Address> saveNewWallet() async {
-    isLoading.value = true;
     var address = await compute(saveAddressCompute, mnemonicText.value);
 
     await DbHelper.instance.setPassword(Password(password: password.text));
     await DbHelper.instance.addAddress(address);
 
     createdAddress.value = address;
-    isLoading.value = false;
+
     return address;
   }
 
   void onChangeConfirmPassword(String value) {
-    String data = value.trim();
-    if (data.isEmpty) {
-      confirmValidate.value = 'Please enter your confirm password';
-      validatePassword.value = false;
-    } else if (data != password.text) {
-      confirmValidate.value = "Password didn't match";
-      validatePassword.value = false;
-    } else {
-      confirmValidate.value = '';
-      validatePassword.value = true;
-    }
     checkButton();
   }
 
@@ -150,34 +158,46 @@ class CreateWalletController extends GetxController {
     String password = value.trim();
 
     if (password.isEmpty) {
-      strengthPassword.value = 'Please enter your password';
+      strengthPassword.value = 0;
       color.value = AppColor.redColor;
-    } else if (password.length < 5) {
-      strengthPassword.value = 'Weak';
+    } else if (password.length < 6) {
+      strengthPassword.value = 0.25;
+      strength.value = "Weak";
       color.value = AppColor.redColor;
-    } else if (password.length < 8) {
-      strengthPassword.value = 'Good';
+    } else if (password.length < 10) {
+      strength.value = "Good";
+      strengthPassword.value = 0.5;
       color.value = AppColor.yellowColor;
     } else if (!letterReg.hasMatch(password) || !numReg.hasMatch(password)) {
-      strengthPassword.value = 'Strength';
-      color.value = AppColor.primaryColor;
+      strengthPassword.value = 0.75;
+      strength.value = "Strong";
+      color.value = const Color(0xff63EEBC);
     } else {
-      strengthPassword.value = 'Very Strength';
+      strengthPassword.value = 1;
+      strength.value = "Very Strong";
       color.value = AppColor.primaryColor;
     }
     checkButton();
+    onValidateConfirm(confirmPassword.text);
   }
 
   void checkButton() {
     if (password.text != '' &&
         confirmPassword.text != '' &&
         password.text == confirmPassword.text &&
-        password.text.length > 5 &&
-        validatePassword.value &&
+        strengthPassword.value >= 0.5 &&
         isAggree.value) {
       buttonPassword.value = false;
     } else {
       buttonPassword.value = true;
+    }
+  }
+
+  void checkButtonConfirm() {
+    if (confirmPharse.length == 12) {
+      buttonConfirmPharse.value = false;
+    } else {
+      buttonConfirmPharse.value = true;
     }
   }
 }

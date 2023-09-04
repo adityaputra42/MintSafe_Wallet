@@ -28,12 +28,16 @@ class ImportWalletController extends GetxController {
   var isLoading = false.obs;
   var password = TextEditingController();
   var confirmPassword = TextEditingController();
-  var validatePassword = false.obs;
-  var confirmValidate = ''.obs;
-  var buttonPassword = true.obs;
+  var sheedPharse = TextEditingController();
+
+  var buttonImport = true.obs;
   var strengthPassword = ''.obs;
-  var color = AppColor.redColor.obs;
+  var isPasswordHide = true.obs;
+  var isConfirmHide = true.obs;
   var isAggree = false.obs;
+  var formKey = GlobalKey<FormState>();
+  var strength = 0.0.obs;
+  var color = AppColor.redColor.obs;
   RegExp numReg = RegExp(r".*[0-9].*");
   RegExp letterReg = RegExp(r".*[A-Za-z].*");
 
@@ -51,18 +55,11 @@ class ImportWalletController extends GetxController {
     }
   }
 
-  void onChangeConfirmPassword(String value) {
-    String data = value.trim();
-    if (data.isEmpty) {
-      confirmValidate.value = 'Please enter your confirm password';
-      validatePassword.value = false;
-    } else if (data != password.text) {
-      confirmValidate.value = "Password didn't match";
-      validatePassword.value = false;
-    } else {
-      confirmValidate.value = '';
-      validatePassword.value = true;
-    }
+  void onChangeConfirm(String value) {
+    checkButton();
+  }
+
+  void onChangePharse(String value) {
     checkButton();
   }
 
@@ -70,39 +67,73 @@ class ImportWalletController extends GetxController {
     String password = value.trim();
 
     if (password.isEmpty) {
-      strengthPassword.value = 'Please enter your password';
+      strength.value = 0;
       color.value = AppColor.redColor;
-    } else if (password.length < 5) {
+    } else if (password.length < 6) {
       strengthPassword.value = 'Weak';
+      strength.value = 0.25;
       color.value = AppColor.redColor;
-    } else if (password.length < 8) {
+    } else if (password.length < 10) {
       strengthPassword.value = 'Good';
+      strength.value = 0.5;
       color.value = AppColor.yellowColor;
     } else if (!letterReg.hasMatch(password) || !numReg.hasMatch(password)) {
       strengthPassword.value = 'Strength';
       color.value = AppColor.primaryColor;
+      strength.value = 0.75;
     } else {
       strengthPassword.value = 'Very Strength';
       color.value = AppColor.primaryColor;
+      strength.value = 1;
     }
     checkButton();
+    onValidatePassword(confirmPassword.text);
   }
 
+  changeHidePassword() => isPasswordHide.value = !isPasswordHide.value;
+  changeHideConfirm() => isConfirmHide.value = !isConfirmHide.value;
   changeAggrement(bool value) {
     isAggree.value = value;
     checkButton();
   }
 
+  String? onValidatePassword(String? value) {
+    if (value == '') {
+      return "Password can't be empty";
+    } else {
+      return null;
+    }
+  }
+
+  String? onValidatePharse(String? value) {
+    if (value == '') {
+      return "Secret pharse can't be empty";
+    } else {
+      return null;
+    }
+  }
+
+  String? onValidateConfirm(String? value) {
+    if (value != password.text) {
+      return "Password didn't match";
+    }
+    if (value == '') {
+      return "Confrim password can't be empty";
+    }
+
+    return null;
+  }
+
   void checkButton() {
-    if (password.text != '' &&
+    if (sheedPharse.text != '' &&
+        password.text != '' &&
         confirmPassword.text != '' &&
         password.text == confirmPassword.text &&
-        password.text.length > 5 &&
-        validatePassword.value &&
+        strength.value >= 0.5 &&
         isAggree.value) {
-      buttonPassword.value = false;
+      buttonImport.value = false;
     } else {
-      buttonPassword.value = true;
+      buttonImport.value = true;
     }
   }
 }

@@ -8,7 +8,7 @@ class SecondaryButton extends StatelessWidget {
   const SecondaryButton({
     super.key,
     required this.title,
-    this.height = 52,
+    this.height = 54,
     this.width = double.infinity,
     this.margin = EdgeInsets.zero,
     this.icon,

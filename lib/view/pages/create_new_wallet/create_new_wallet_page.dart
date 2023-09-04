@@ -50,6 +50,8 @@ class CreateNewWalletPage extends StatelessWidget {
           GestureDetector(
             onTap: () {
               controller.changeStep(0);
+              controller.password.clear();
+              controller.confirmPassword.clear();
               Get.back();
             },
             child: Icon(

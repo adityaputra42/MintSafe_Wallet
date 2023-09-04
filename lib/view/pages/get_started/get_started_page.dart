@@ -70,7 +70,7 @@ class GetStartedPage extends StatelessWidget {
                             .copyWith(color: AppColor.primaryColor),
                         recognizer: TapGestureRecognizer()
                           ..onTap =
-                              () => Get.to(() => const ImportWalletPage()),
+                              () => Get.to(() =>ImportWalletPage()),
                       )
                     ])),
                     48.0.height,
