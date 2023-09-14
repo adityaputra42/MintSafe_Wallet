@@ -11,7 +11,7 @@ class AdvanceSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        24.0.height,
+        16.0.height,
         InputText(
           title: "Gas Price",
           hintText: 'Enter gas price',
@@ -23,6 +23,7 @@ class AdvanceSetting extends StatelessWidget {
             ),
           ),
         ),
+        16.0.height,
         const InputText(title: 'Gas Limit', hintText: 'Enter gas limit')
       ],
     );

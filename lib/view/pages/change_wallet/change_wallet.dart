@@ -84,48 +84,65 @@ class ChangeWallet extends StatelessWidget {
           ),
         ],
       )),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          children: [
-            16.0.height,
-            cardAccount(
-              color: AppColor.primaryColor,
-              active: true,
-            ),
-            12.0.height,
-            cardAccount(
-              color: AppColor.yellowColor,
-            ),
-            12.0.height,
-            cardAccount(
-              color: AppColor.grayColor,
-            ),
-            12.0.height,
-          ],
-        ),
-      ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
+      body: Stack(
         children: [
-          Text(
-            "want a new address?\nTap the below button to add.",
-            style: AppFont.reguler12.copyWith(
-              color: AppColor.grayColor,
+          SizedBox(
+            width: ScreenUtil().screenWidth,
+            child: Image.asset(
+              AppImage.maskHome,
+              fit: BoxFit.cover,
             ),
-            textAlign: TextAlign.center,
           ),
-          SecondaryButton(
-            title: "Add Network",
-            icon: Icon(
-              Icons.add_circle_outline_rounded,
-              size: 24.h,
-              color: AppColor.primaryColor,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [
+                      16.0.height,
+                      cardAccount(
+                        color: AppColor.primaryColor,
+                        active: true,
+                      ),
+                      12.0.height,
+                      cardAccount(
+                        color: AppColor.yellowColor,
+                      ),
+                      12.0.height,
+                      cardAccount(
+                        color: AppColor.grayColor,
+                      ),
+                      12.0.height,
+                    ],
+                  ),
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "want a new address?\nTap the below button to add.",
+                      style: AppFont.reguler12.copyWith(
+                        color: AppColor.grayColor,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SecondaryButton(
+                      title: "Add Network",
+                      icon: Icon(
+                        Icons.add_circle_outline_rounded,
+                        size: 24.h,
+                        color: AppColor.primaryColor,
+                      ),
+                      onPressed: () {
+                        Get.to(() => const AddWallet());
+                      },
+                      margin: EdgeInsets.symmetric(vertical: 24.h),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            onPressed: () {
-              Get.to(()=>const AddWallet());
-            },
-            margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
           ),
         ],
       ),

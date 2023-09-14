@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mintsafe_wallet/utils/helper/method_helper.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 
 import '../../../../config/config.dart';
@@ -14,7 +15,8 @@ class SheedPharse extends StatelessWidget {
     Widget cardPniomoni({required int number, required String text}) {
       return Container(
         height: 42.h,
-        width: MediaQuery.of(context).size.width * 0.425,padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 10.h),
+        width: MediaQuery.of(context).size.width * 0.425,
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
               blurRadius: 0.1,
@@ -49,13 +51,15 @@ class SheedPharse extends StatelessWidget {
             runSpacing: 8.h,
             direction: Axis.horizontal,
             children: controller.mnemonic
-                        .map(
-                          (e) => cardPniomoni(number: e['id'], text: e['data']),
-                        )
-                        .toList()),
+                .map(
+                  (e) => cardPniomoni(number: e['id'], text: e['data']),
+                )
+                .toList()),
         SecondaryButton(
           title: "Backup Pharse",
-          onPressed: () {},
+          onPressed: () {
+            MethodHelper().handleCopy(data: controller.mnemonicText.value);
+          },
           margin: EdgeInsets.only(top: 36.h),
         ),
         PrimaryButton(

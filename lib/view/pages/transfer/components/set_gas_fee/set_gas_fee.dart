@@ -6,6 +6,7 @@ import 'package:mintsafe_wallet/domain/controller/transfer_controller.dart';
 import 'package:mintsafe_wallet/view/pages/transfer/components/set_gas_fee/components/advance_setting.dart';
 import 'package:mintsafe_wallet/view/pages/transfer/components/set_gas_fee/components/select_gas_fee.dart';
 
+import '../../../../../data/data.dart';
 import '../../../../../utils/utils.dart';
 import '../../../../widget/widget.dart';
 
@@ -20,6 +21,7 @@ class SetGasFee extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: DefaultTabController(
             length: 2,
+            initialIndex: controller.selectedTab.value,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -27,21 +29,21 @@ class SetGasFee extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   height: 60.h,
-                  padding: EdgeInsets.all(5.h),
+                  padding: EdgeInsets.all(4.h),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
                       color: AppColor.cardDark,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                             spreadRadius: 1,
                             blurRadius: 1,
-                            color: AppColor.primaryColor.withOpacity(0.15))
+                            color: Colors.black12)
                       ]),
                   child: TabBar(
                     // automaticIndicatorColorAdjustment: false,
                     indicator: BoxDecoration(
                         color: AppColor.primaryColor,
-                        borderRadius: BorderRadius.circular(10.r)),
+                        borderRadius: BorderRadius.circular(8.r)),
                     isScrollable: false,
                     indicatorColor: AppColor.cardDark,
                     dividerColor: AppColor.cardDark,
@@ -69,7 +71,7 @@ class SetGasFee extends StatelessWidget {
                     ],
                   ),
                 ),
-                16.0.height,
+                8.0.height,
                 controller.selectedTab.value == 0
                     ? const SelectGasFee()
                     : const AdvanceSetting()
@@ -103,7 +105,17 @@ class SetGasFee extends StatelessWidget {
           ),
         ],
       )),
-      body: body(),
+      body: Stack(
+        children: [
+          SizedBox(
+              width: ScreenUtil().screenWidth,
+              child: Image.asset(
+                AppImage.maskHome,
+                fit: BoxFit.cover,
+              )),
+          body(),
+        ],
+      ),
       bottomNavigationBar: PrimaryButton(
         title: "Continue",
         activeColor: AppColor.primaryColor,

@@ -33,7 +33,6 @@ class SecondaryButton extends StatelessWidget {
             elevation: 0,
             side: BorderSide(width: 1.h, color: AppColor.primaryColor),
             backgroundColor: Colors.transparent,
-          
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.r))),
         onPressed: onPressed,
@@ -44,7 +43,7 @@ class SecondaryButton extends StatelessWidget {
             icon != null ? 8.0.width : 0.0.width,
             Text(
               title,
-              style: AppFont.semibold16.copyWith(color: AppColor.primaryColor),
+              style: AppFont.medium14.copyWith(color: AppColor.primaryColor),
               textAlign: TextAlign.center,
             ),
           ],

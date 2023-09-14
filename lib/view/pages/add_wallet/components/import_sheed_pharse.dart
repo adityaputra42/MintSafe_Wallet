@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../config/config.dart';
+import '../../../../data/data.dart';
 import '../../../../utils/utils.dart';
 import '../../../widget/widget.dart';
 
@@ -25,19 +26,19 @@ class ImportSheedPharse extends StatelessWidget {
                   style: AppFont.medium14.copyWith(color: AppColor.textDark),
                 ),
               ),
-              contentPadding: EdgeInsets.fromLTRB(0, 12.h, 16.w, 12.h),
+              contentPadding: EdgeInsets.fromLTRB(-16, 12.h, 16.w, 12.h),
               fillColor: AppColor.cardDark,
               filled: true,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.r),
+                borderRadius: BorderRadius.circular(8.r),
                 borderSide: const BorderSide(color: Colors.transparent),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.r),
+                borderRadius: BorderRadius.circular(8.r),
                 borderSide: const BorderSide(color: Colors.transparent),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.r),
+                borderRadius: BorderRadius.circular(8.r),
                 borderSide: const BorderSide(color: Colors.transparent),
               ),
             )),
@@ -66,78 +67,94 @@ class ImportSheedPharse extends StatelessWidget {
           ),
         ],
       )),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              16.0.height,
-              Text(
-                'Enter Your Secret Recovery Phrase',
-                style: AppFont.medium16.copyWith(color: AppColor.textDark),
+      body: Stack(
+        children: [
+          SizedBox(
+              width: ScreenUtil().screenWidth,
+              child: Image.asset(
+                AppImage.maskHome,
+                fit: BoxFit.cover,
+              )),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  16.0.height,
+                  Text(
+                    'Enter Your Secret Recovery Phrase',
+                    style: AppFont.medium16.copyWith(color: AppColor.textDark),
+                  ),
+                  8.0.height,
+                  Text(
+                    "This 12-word phrase allows you to recover your wallet and access to the coins inside.",
+                    style:
+                        AppFont.reguler14.copyWith(color: AppColor.grayColor),
+                  ),
+                  24.0.height,
+                  Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      runAlignment: WrapAlignment.center,
+                      alignment: WrapAlignment.center,
+                      spacing: 16.h,
+                      runSpacing: 8.h,
+                      direction: Axis.horizontal,
+                      children: [
+                        cardPniomoni(
+                          number: 1,
+                        ),
+                        cardPniomoni(
+                          number: 2,
+                        ),
+                        cardPniomoni(
+                          number: 3,
+                        ),
+                        cardPniomoni(
+                          number: 4,
+                        ),
+                        cardPniomoni(
+                          number: 5,
+                        ),
+                        cardPniomoni(
+                          number: 6,
+                        ),
+                        cardPniomoni(
+                          number: 7,
+                        ),
+                        cardPniomoni(
+                          number: 8,
+                        ),
+                        cardPniomoni(
+                          number: 9,
+                        ),
+                        cardPniomoni(
+                          number: 10,
+                        ),
+                        cardPniomoni(
+                          number: 11,
+                        ),
+                        cardPniomoni(
+                          number: 12,
+                        ),
+                      ]),
+                  SecondaryButton(
+                    title: 'Paste Sheed Pharse',
+                    onPressed: () {},
+                    margin: EdgeInsets.only(top: 36.h, bottom: 16.h),
+                  ),
+                  PrimaryButton(
+                    title: 'Continue',
+                    disable: true,
+                    loading: false,
+                    onPressed: () {},
+                    margin: EdgeInsets.only(bottom: 36.h),
+                  ),
+                ],
               ),
-              8.0.height,
-              Text(
-                "This 12-word phrase allows you to recover your wallet and access to the coins inside.",
-                style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
-              ),
-              24.0.height,
-              Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  runAlignment: WrapAlignment.center,
-                  alignment: WrapAlignment.center,
-                  spacing: 16.h,
-                  runSpacing: 8.h,
-                  direction: Axis.horizontal,
-                  children: [
-                    cardPniomoni(
-                      number: 1,
-                    ),
-                    cardPniomoni(
-                      number: 2,
-                    ),
-                    cardPniomoni(
-                      number: 3,
-                    ),
-                    cardPniomoni(
-                      number: 4,
-                    ),
-                    cardPniomoni(
-                      number: 5,
-                    ),
-                    cardPniomoni(
-                      number: 6,
-                    ),
-                    cardPniomoni(
-                      number: 7,
-                    ),
-                    cardPniomoni(
-                      number: 8,
-                    ),
-                    cardPniomoni(
-                      number: 9,
-                    ),
-                    cardPniomoni(
-                      number: 10,
-                    ),
-                    cardPniomoni(
-                      number: 11,
-                    ),
-                    cardPniomoni(
-                      number: 12,
-                    ),
-                  ]),
-              PrimaryButton(
-                title: 'Continue',
-                disable: true,
-                loading: false,
-                onPressed: () {},
-                margin: EdgeInsets.symmetric(vertical: 36.h),
-              ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

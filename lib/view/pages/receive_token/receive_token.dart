@@ -36,7 +36,8 @@ class ReceiveTokenPage extends StatelessWidget {
             16.0.height,
             Text(
               "ETH (ERC-20)",
-              style: AppFont.medium14.copyWith(fontSize: 20,color: AppColor.textDark),
+              style: AppFont.medium14
+                  .copyWith(fontSize: 20, color: AppColor.textDark),
             ),
             24.0.height,
             const Warning(
@@ -48,11 +49,9 @@ class ReceiveTokenPage extends StatelessWidget {
               height: 382.h,
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        color: AppColor.primaryColor.withOpacity(0.25))
+                        spreadRadius: 1, blurRadius: 1, color: Colors.black12)
                   ],
                   borderRadius: BorderRadius.circular(12.r),
                   color: AppColor.cardDark),
@@ -78,15 +77,14 @@ class ReceiveTokenPage extends StatelessWidget {
                         version: QrVersions.auto,
                         size: 240.h,
                         gapless: false,
-                        
                       ),
                     ),
                   ),
                   32.0.height,
                   Text(
                     "0xffjs67HKuydy32sdsjkajsd8712124jd343d",
-                    style: AppFont.medium16
-                        .copyWith(color: AppColor.primaryColor),
+                    style:
+                        AppFont.medium16.copyWith(color: AppColor.primaryColor),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
@@ -119,16 +117,23 @@ class ReceiveTokenPage extends StatelessWidget {
           ),
         ],
       )),
-      body: body(),
+      body: Stack(
+        children: [
+          SizedBox(
+              width: ScreenUtil().screenWidth,
+              child: Image.asset(
+                AppImage.maskHome,
+                fit: BoxFit.cover,
+              )),
+          body(),
+        ],
+      ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         decoration: BoxDecoration(
             color: AppColor.cardDark,
-            boxShadow: [
-              BoxShadow(
-                  spreadRadius: 1,
-                  blurRadius: 1,
-                  color: AppColor.primaryColor.withOpacity(0.25))
+            boxShadow: const [
+              BoxShadow(spreadRadius: 1, blurRadius: 1, color: Colors.black12)
             ],
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(24.r),

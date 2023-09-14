@@ -15,7 +15,7 @@ class AlertPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget header() {
       return Container(
-        width: 900.w,
+        width: ScreenUtil().screenWidth,
         height: 60.h,
         decoration: BoxDecoration(
             color: AppColor.primaryColor,
@@ -55,8 +55,9 @@ class AlertPassword extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(
-            AppImage.secureIlustration,
-            width: 240.w,
+            AppImage.ilustrasi6,
+            width: 180.w,
+            fit: BoxFit.cover,
           ),
           24.0.height,
           Text(
@@ -65,7 +66,7 @@ class AlertPassword extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           24.0.height,
-         const InputText(title: 'Password', hintText: "Enter your password"),
+          const InputText(title: 'Password', hintText: "Enter your password"),
           24.0.height,
           PrimaryButton(
             title: "Confirm",

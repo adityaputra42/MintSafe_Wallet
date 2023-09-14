@@ -18,10 +18,13 @@ class AppImage {
   static const String chainlink = 'asset/image/chainlink.png';
   static const String bnbnews = 'asset/image/bnb.png';
   static const String maskSplash = 'asset/image/mask_splash.png';
-  static const String coinIlustration = 'asset/image/coin_ilustration.png';
-  static const String cardIlustration = 'asset/image/card_ilustration.png';
-  static const String walletIlustration = 'asset/image/wallet_ilustration.png';
-  static const String secureIlustration = 'asset/image/secure_ilustration.png';
+  static const String ilustrasi1 = 'asset/image/ilustrasi1.png';
+  static const String ilustrasi2 = 'asset/image/ilustrasi2.png';
+  static const String ilustrasi3 = 'asset/image/ilustrasi3.png';
+  static const String ilustrasi4 = 'asset/image/ilustrasi4.png';
+  static const String ilustrasi5 = 'asset/image/ilustrasi5.png';
+  static const String ilustrasi6 = 'asset/image/ilustrasi6.png';
+  static const String maskOnboarding = 'asset/image/mask_onboarding.png';
 
   static const String maskHome = 'asset/image/mask_home.png';
   static const String maskGs = 'asset/image/mask_getstarted.png';

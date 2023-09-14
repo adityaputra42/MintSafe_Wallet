@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/utils/helper/helper.dart';
+import 'package:mintsafe_wallet/view/pages/onboarding/onboarding_screen.dart';
 import 'package:mintsafe_wallet/view/pages/page.dart';
 
 class SplashController extends GetxController {
@@ -22,7 +23,7 @@ class SplashController extends GetxController {
             address: selectedAddress,
           ));
     } else {
-      Get.to(() => const GetStartedPage());
+      Get.to(() => OnboardingScreen());
     }
   }
 }

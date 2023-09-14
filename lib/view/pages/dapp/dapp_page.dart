@@ -3,9 +3,9 @@ import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
-import 'package:mintsafe_wallet/utils/helper/helper.dart';
 
 import '../../../config/config.dart';
+import '../../widget/widget.dart';
 
 class DAppPage extends StatelessWidget {
   const DAppPage({super.key});
@@ -67,143 +67,133 @@ class DAppPage extends StatelessWidget {
     }
 
     Widget body() {
-      return ListView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
+      return Column(
         children: [
-          16.0.height,
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "History",
-                style: AppFont.medium16.copyWith(color: AppColor.textDark),
-              ), Text(
-                "View all",
-                style: AppFont.medium14.copyWith(color: AppColor.primaryColor),
-              ),
-            ],
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+            child: const SearchField(),
           ),
-          16.0.height,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              cardDefi(AppImage.pancakeSwap, "PancakeSwap",
-                  "Trade, earn and win crypto in decentralize app and more oportunity",
-                  isHistory: true),
-              16.0.height,
-              cardDefi(AppImage.uniswap, "UniSwap",
-                  "Trade, earn and win crypto in decentralize app and more oportunity",
-                  isHistory: true),
-              16.0.height,
-              cardDefi(AppImage.opensea, "OpenSea",
-                  "Trade, earn and win crypto in decentralize app and more oportunity",
-                  isHistory: true),
-              16.0.height,
-              cardDefi(AppImage.chainlink, "ChainLink",
-                  "Trade, earn and win crypto in decentralize app and more oportunity",
-                  isHistory: true),
-              16.0.height,
-            ],
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              children: [
+                // 16.0.height,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "History",
+                      style:
+                          AppFont.medium16.copyWith(color: AppColor.textDark),
+                    ),
+                    Text(
+                      "View all",
+                      style: AppFont.medium14
+                          .copyWith(color: AppColor.primaryColor),
+                    ),
+                  ],
+                ),
+                16.0.height,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    cardDefi(AppImage.pancakeSwap, "PancakeSwap",
+                        "Trade, earn and win crypto in decentralize app and more oportunity",
+                        isHistory: true),
+                    16.0.height,
+                    cardDefi(AppImage.uniswap, "UniSwap",
+                        "Trade, earn and win crypto in decentralize app and more oportunity",
+                        isHistory: true),
+                    16.0.height,
+                    cardDefi(AppImage.opensea, "OpenSea",
+                        "Trade, earn and win crypto in decentralize app and more oportunity",
+                        isHistory: true),
+                    16.0.height,
+                    cardDefi(AppImage.chainlink, "ChainLink",
+                        "Trade, earn and win crypto in decentralize app and more oportunity",
+                        isHistory: true),
+                    16.0.height,
+                  ],
+                ),
+                Text(
+                  "Recomendation",
+                  style: AppFont.medium16.copyWith(color: AppColor.textDark),
+                ),
+                16.0.height,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    cardDefi(AppImage.pancakeSwap, "PancakeSwap",
+                        "Trade, earn and win crypto in decentralize app and more oportunity"),
+                    16.0.height,
+                    cardDefi(AppImage.uniswap, "UniSwap",
+                        "Trade, earn and win crypto in decentralize app and more oportunity"),
+                    16.0.height,
+                    cardDefi(AppImage.opensea, "OpenSea",
+                        "Trade, earn and win crypto in decentralize app and more oportunity"),
+                    16.0.height,
+                    cardDefi(AppImage.quickswap, "QuickSwap",
+                        "Trade, earn and win crypto in decentralize app and more oportunity"),
+                    16.0.height,
+                    cardDefi(AppImage.ens, "Ens ETH",
+                        "Trade, earn and win crypto in decentralize app and more oportunity"),
+                    16.0.height,
+                    cardDefi(AppImage.chainlink, "ChainLink",
+                        "Trade, earn and win crypto in decentralize app and more oportunity")
+                  ],
+                ),
+                24.0.height,
+                Text(
+                  "Top",
+                  style: AppFont.medium16.copyWith(color: AppColor.textDark),
+                ),
+                16.0.height,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    cardDefi(AppImage.pancakeSwap, "PancakeSwap",
+                        "Trade, earn and win crypto in decentralize app and more oportunity"),
+                    16.0.height,
+                    cardDefi(AppImage.uniswap, "UniSwap",
+                        "Trade, earn and win crypto in decentralize app and more oportunity"),
+                    16.0.height,
+                    cardDefi(AppImage.opensea, "OpenSea",
+                        "Trade, earn and win crypto in decentralize app and more oportunity"),
+                    16.0.height,
+                    cardDefi(AppImage.quickswap, "QuickSwap",
+                        "Trade, earn and win crypto in decentralize app and more oportunity"),
+                    16.0.height,
+                    cardDefi(AppImage.ens, "Ens ETH",
+                        "Trade, earn and win crypto in decentralize app and more oportunity"),
+                    16.0.height,
+                    cardDefi(AppImage.chainlink, "ChainLink",
+                        "Trade, earn and win crypto in decentralize app and more oportunity"),
+                    16.0.height,
+                  ],
+                )
+              ],
+            ),
           ),
-         
-          Text(
-            "Recomendation",
-            style: AppFont.medium16.copyWith(color: AppColor.textDark),
-          ),
-          16.0.height,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              cardDefi(AppImage.pancakeSwap, "PancakeSwap",
-                  "Trade, earn and win crypto in decentralize app and more oportunity"),
-              16.0.height,
-              cardDefi(AppImage.uniswap, "UniSwap",
-                  "Trade, earn and win crypto in decentralize app and more oportunity"),
-              16.0.height,
-              cardDefi(AppImage.opensea, "OpenSea",
-                  "Trade, earn and win crypto in decentralize app and more oportunity"),
-              16.0.height,
-              cardDefi(AppImage.quickswap, "QuickSwap",
-                  "Trade, earn and win crypto in decentralize app and more oportunity"),
-              16.0.height,
-              cardDefi(AppImage.ens, "Ens ETH",
-                  "Trade, earn and win crypto in decentralize app and more oportunity"),
-              16.0.height,
-              cardDefi(AppImage.chainlink, "ChainLink",
-                  "Trade, earn and win crypto in decentralize app and more oportunity")
-            ],
-          ),
-          24.0.height,
-          Text(
-            "Top",
-            style: AppFont.medium16.copyWith(color: AppColor.textDark),
-          ),
-          16.0.height,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              cardDefi(AppImage.pancakeSwap, "PancakeSwap",
-                  "Trade, earn and win crypto in decentralize app and more oportunity"),
-              16.0.height,
-              cardDefi(AppImage.uniswap, "UniSwap",
-                  "Trade, earn and win crypto in decentralize app and more oportunity"),
-              16.0.height,
-              cardDefi(AppImage.opensea, "OpenSea",
-                  "Trade, earn and win crypto in decentralize app and more oportunity"),
-              16.0.height,
-              cardDefi(AppImage.quickswap, "QuickSwap",
-                  "Trade, earn and win crypto in decentralize app and more oportunity"),
-              16.0.height,
-              cardDefi(AppImage.ens, "Ens ETH",
-                  "Trade, earn and win crypto in decentralize app and more oportunity"),
-              16.0.height,
-              cardDefi(AppImage.chainlink, "ChainLink",
-                  "Trade, earn and win crypto in decentralize app and more oportunity"),
-              16.0.height,
-            ],
-          )
         ],
       );
     }
 
     return Scaffold(
       backgroundColor: AppColor.bgDark,
-      appBar: WidgetHelper.appBar(
-        title: SizedBox(
-          height: 54.h,
-          child: TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            style: AppFont.medium14.copyWith(color: AppColor.textDark),
-            decoration: InputDecoration(
-                suffixIcon: Icon(
-                  Icons.search,
-                  size: 20.w,
-                ),
-               
-                hintText: "Search",
-                hintStyle: AppFont.reguler14.copyWith(
-                    fontWeight: FontWeight.w300, color: AppColor.grayColor),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                  borderSide: const BorderSide(
-                    color: AppColor.grayColor, width: 0.5
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                  borderSide: const BorderSide(
-                    color: AppColor.grayColor, width: 0.5
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                  borderSide: const BorderSide(color: AppColor.primaryColor),
-                ),
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w)),
-          ),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SizedBox(
+              width: ScreenUtil().screenWidth,
+              child: Image.asset(
+                AppImage.maskHome,
+                fit: BoxFit.cover,
+              ),
+            ),
+            body(),
+          ],
         ),
       ),
-      body: body(),
     );
   }
 }
