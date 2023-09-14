@@ -48,15 +48,15 @@ class SearchField extends StatelessWidget {
             hintStyle: AppFont.reguler14.copyWith(
                 fontWeight: FontWeight.w300, color: AppColor.grayColor),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: BorderRadius.circular(8.r),
               borderSide: const BorderSide(color: Colors.transparent),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: BorderRadius.circular(8.r),
               borderSide: const BorderSide(color: Colors.transparent),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: BorderRadius.circular(8.r),
               borderSide: const BorderSide(color: AppColor.primaryColor),
             ),
             contentPadding:

@@ -45,17 +45,16 @@ class _MainPageState extends State<MainPage> {
         body: body(),
         bottomNavigationBar: Container(
           width: double.infinity,
+          // height: 72.h,
           decoration: BoxDecoration(
               color: AppColor.cardDark,
               boxShadow: [
                 BoxShadow(
-                    spreadRadius: 1.h,
-                    blurRadius: 1.h,
-                    color: AppColor.primaryColor.withOpacity(0.25))
+                    spreadRadius: 1.h, blurRadius: 1.h, color: Colors.black12)
               ],
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24.w),
-                topRight: Radius.circular(24.w),
+                topLeft: Radius.circular(12.w),
+                topRight: Radius.circular(12.w),
               )),
           child: Obx(() {
             return Stack(

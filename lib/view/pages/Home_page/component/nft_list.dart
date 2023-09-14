@@ -19,7 +19,7 @@ class NftList extends StatelessWidget {
               BoxShadow(
                   blurRadius: 0.3.h, spreadRadius: 0.3.h, color: Colors.black12)
             ],
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(12.r),
             image: const DecorationImage(
                 image: AssetImage(AppImage.nft), fit: BoxFit.cover)),
         child: Align(
@@ -30,7 +30,7 @@ class NftList extends StatelessWidget {
             height: 54.h,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(8.r), bottom: Radius.circular(16.r)),
+                    top: Radius.circular(4.r), bottom: Radius.circular(12.r)),
                 gradient: LinearGradient(colors: [
                   AppColor.textLight.withOpacity(0.2),
                   AppColor.textLight.withOpacity(0.6),
@@ -41,7 +41,8 @@ class NftList extends StatelessWidget {
               children: [
                 Text(
                   "OpenPad AI Launchpad",
-                  style: AppFont.medium14.copyWith(color: AppColor.textDark),overflow: TextOverflow.ellipsis,
+                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   "2 Items",

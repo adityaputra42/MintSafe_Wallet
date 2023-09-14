@@ -152,7 +152,7 @@ class DetailToken extends StatelessWidget {
                               // automaticIndicatorColorAdjustment: false,
                               indicator: BoxDecoration(
                                   color: AppColor.primaryColor,
-                                  borderRadius: BorderRadius.circular(10.r)),
+                                  borderRadius: BorderRadius.circular(8.r)),
                               isScrollable: false,
                               dividerColor: AppColor.cardDark,
                               indicatorColor: AppColor.cardDark,
@@ -195,18 +195,16 @@ class DetailToken extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
         decoration: BoxDecoration(
             color: AppColor.cardDark,
             boxShadow: [
               BoxShadow(
-                  spreadRadius: 1,
-                  blurRadius: 1,
-                  color: AppColor.primaryColor.withOpacity(0.25))
+                  spreadRadius: 1.h, blurRadius: 1.h, color: Colors.black12)
             ],
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24.r),
-                topRight: Radius.circular(24.r))),
+                topLeft: Radius.circular(12.r),
+                topRight: Radius.circular(12.r))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

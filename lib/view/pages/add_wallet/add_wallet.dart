@@ -25,11 +25,9 @@ class AddWallet extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.r),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
-                    spreadRadius: 0.3,
-                    blurRadius: 0.5,
-                    color: AppColor.primaryColor.withOpacity(0.15))
+                    spreadRadius: 0.3, blurRadius: 0.5, color: Colors.black12)
               ],
               color: AppColor.cardDark),
           child: Row(
@@ -91,56 +89,67 @@ class AddWallet extends StatelessWidget {
           ),
         ],
       )),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            16.0.height,
-            Text(
-              "Create a new wallet",
-              style: AppFont.medium14.copyWith(color: AppColor.textDark),
+      body: Stack(
+        children: [
+          SizedBox(
+              width: ScreenUtil().screenWidth,
+              child: Image.asset(
+                AppImage.maskHome,
+                fit: BoxFit.cover,
+              )),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                16.0.height,
+                Text(
+                  "Create a new wallet",
+                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                ),
+                12.0.height,
+                cardMenu(
+                  image: AppIcon.createWalletIcon,
+                  title: 'Sheed Pharse',
+                  subTitle: 'Create a wallet with 12 word mnemonic pharse',
+                  ontap: () {
+                    showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (context) => const AlertPassword(
+                              title: 'Create new wallet',
+                              subTitle:
+                                  'Enter your password to generate a mnemonic phrase to create a new wallet',
+                            ));
+                  },
+                ),
+                16.0.height,
+                Text(
+                  "Import an existing wallet",
+                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                ),
+                12.0.height,
+                cardMenu(
+                  image: AppIcon.importPharseIcon,
+                  title: 'Seed Pharse',
+                  subTitle: 'Import by 12 word mnemonic pharse',
+                  ontap: () {
+                    Get.to(() => const ImportSheedPharse());
+                  },
+                ),
+                12.0.height,
+                cardMenu(
+                  image: AppIcon.importKeyIcon,
+                  title: 'Private Key',
+                  subTitle: 'Import by private key',
+                  ontap: () {
+                    Get.to(() => const ImportPrivateKey());
+                  },
+                ),
+              ],
             ),
-            12.0.height,
-            cardMenu(
-              image: AppIcon.createWalletIcon,
-              title: 'Sheed Pharse',
-              subTitle: 'Create a wallet with 12 word mnemonic pharse',
-              ontap: () {
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertPassword(
-                          title: 'Create new wallet',
-                          subTitle:
-                              'Enter your password to generate a mnemonic phrase to create a new wallet',
-                        ));
-              },
-            ),
-            16.0.height,
-            Text(
-              "Import an existing wallet",
-              style: AppFont.medium14.copyWith(color: AppColor.textDark),
-            ),
-            12.0.height,
-            cardMenu(
-              image: AppIcon.importPharseIcon,
-              title: 'Seed Pharse',
-              subTitle: 'Import by 12 word mnemonic pharse',
-              ontap: () {
-                Get.to(() => const ImportSheedPharse());
-              },
-            ),
-            12.0.height,
-            cardMenu(
-              image: AppIcon.importKeyIcon,
-              title: 'Private Key',
-              subTitle: 'Import by private key',
-              ontap: () {
-                Get.to(() => const ImportPrivateKey());
-              },
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

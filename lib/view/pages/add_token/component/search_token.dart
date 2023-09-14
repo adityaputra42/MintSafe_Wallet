@@ -49,7 +49,7 @@ class SearchToken extends StatelessWidget {
           Expanded(
               child: ListView.builder(
             itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.only(bottom: 8.h),
+              padding: EdgeInsets.only(bottom: 12.h),
               child: cardCoin(),
             ),
             itemCount: 3,

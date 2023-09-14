@@ -131,7 +131,17 @@ class SelectTokenPage extends StatelessWidget {
               style: AppFont.medium16.copyWith(color: AppColor.textDark)),
         ],
       )),
-      body: body(),
+      body: Stack(
+        children: [
+          SizedBox(
+              width: ScreenUtil().screenWidth,
+              child: Image.asset(
+                AppImage.maskHome,
+                fit: BoxFit.cover,
+              )),
+          body(),
+        ],
+      ),
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

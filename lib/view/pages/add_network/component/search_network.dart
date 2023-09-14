@@ -50,7 +50,7 @@ class SearchNetwork extends StatelessWidget {
         Expanded(
             child: ListView.builder(
           itemBuilder: (context, index) => Padding(
-            padding: EdgeInsets.only(bottom: 16.h),
+            padding: EdgeInsets.only(bottom: 12.h),
             child: cardCoin(),
           ),
           itemCount: 6,

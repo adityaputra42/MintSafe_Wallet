@@ -13,8 +13,8 @@ import '../../widget/widget.dart';
 import 'components/set_gas_fee/set_gas_fee.dart';
 
 class TransferPage extends StatelessWidget {
-   TransferPage({super.key});
-final Transfercontroller controller = Get.put(Transfercontroller());
+  TransferPage({super.key});
+  final Transfercontroller controller = Get.put(Transfercontroller());
   @override
   Widget build(BuildContext context) {
     Widget body() {
@@ -31,8 +31,8 @@ final Transfercontroller controller = Get.put(Transfercontroller());
                 height: 54.h,
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 7.h),
                 decoration: BoxDecoration(
-                 border: Border.all(width: 0.5,color: AppColor.grayColor),
-                  borderRadius: BorderRadius.circular(12.r),
+                  color: AppColor.cardDark,
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Row(
                   children: [
@@ -52,14 +52,15 @@ final Transfercontroller controller = Get.put(Transfercontroller());
                     Expanded(
                       child: Text(
                         "Ethereum",
-                        style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                        style:
+                            AppFont.medium14.copyWith(color: AppColor.textDark),
                       ),
                     ),
                     8.0.width,
                     Text(
                       "ERC-20",
-                      style: AppFont.reguler12
-                          .copyWith(color: AppColor.grayColor),
+                      style:
+                          AppFont.reguler12.copyWith(color: AppColor.grayColor),
                     ),
                     8.0.width,
                     Icon(
@@ -88,6 +89,7 @@ final Transfercontroller controller = Get.put(Transfercontroller());
                 ],
               ),
             ),
+            16.0.height,
             InputText(
               title: "Amount",
               hintText: "Receive amount",
@@ -96,18 +98,21 @@ final Transfercontroller controller = Get.put(Transfercontroller());
                 style: AppFont.reguler12.copyWith(color: AppColor.textDark),
               ),
             ),
-            Text("Gas fee", style: AppFont.medium16.copyWith(color: AppColor.textDark)),
+            16.0.height,
+            Text("Gas fee",
+                style: AppFont.medium16.copyWith(color: AppColor.textDark)),
             8.0.height,
-            GestureDetector(onTap: () => Get.to(()=>SetGasFee()),
+            GestureDetector(
+              onTap: () => Get.to(() => SetGasFee()),
               child: Container(
                 width: double.infinity,
-               
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 7.h),
                 decoration: BoxDecoration(
-              border: Border.all(width: 0.5,color: AppColor.grayColor),
-                  borderRadius: BorderRadius.circular(12.r),
+                  color: AppColor.cardDark,
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
-                child: Row(crossAxisAlignment: CrossAxisAlignment.center,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
                       child: Column(
@@ -115,7 +120,8 @@ final Transfercontroller controller = Get.put(Transfercontroller());
                         children: [
                           Text(
                             "${NumberFormat.currency(symbol: '', decimalDigits: 6, locale: "en_US").format(0.000193)} ETH",
-                            style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                            style: AppFont.medium14
+                                .copyWith(color: AppColor.textDark),
                           ),
                           Text(
                             "\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(0.092)}",
@@ -148,7 +154,7 @@ final Transfercontroller controller = Get.put(Transfercontroller());
     }
 
     return Scaffold(
-    backgroundColor: AppColor.bgDark,
+      backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
           title: Row(
         children: [
@@ -169,7 +175,17 @@ final Transfercontroller controller = Get.put(Transfercontroller());
           ),
         ],
       )),
-      body: body(),
+      body: Stack(
+        children: [
+          SizedBox(
+              width: ScreenUtil().screenWidth,
+              child: Image.asset(
+                AppImage.maskHome,
+                fit: BoxFit.cover,
+              )),
+          body(),
+        ],
+      ),
       bottomNavigationBar: PrimaryButton(
         title: "Continue",
         onPressed: () {},

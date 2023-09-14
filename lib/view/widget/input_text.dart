@@ -75,17 +75,17 @@ class InputText extends StatelessWidget {
               hintStyle: AppFont.reguler14.copyWith(
                   fontWeight: FontWeight.w300, color: AppColor.grayColor),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(8.r),
                 borderSide:
                     const BorderSide(color: Colors.transparent, width: 0.5),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(8.r),
                 borderSide:
                     const BorderSide(color: Colors.transparent, width: 0.5),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(8.r),
                 borderSide: const BorderSide(color: AppColor.primaryColor),
               ),
             )),
