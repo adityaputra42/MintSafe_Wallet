@@ -55,7 +55,7 @@ class AlertPassword extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(
-            AppImage.secureIlustration,
+            AppImage.ilustrasi6,
             width: 240.w,
           ),
           24.0.height,
@@ -65,7 +65,7 @@ class AlertPassword extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           24.0.height,
-         const InputText(title: 'Password', hintText: "Enter your password"),
+          const InputText(title: 'Password', hintText: "Enter your password"),
           24.0.height,
           PrimaryButton(
             title: "Confirm",
