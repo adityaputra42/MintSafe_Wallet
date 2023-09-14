@@ -28,7 +28,7 @@ class DetailToken extends StatelessWidget {
               BoxShadow(
                   spreadRadius: 1,
                   blurRadius: 1,
-                  color: AppColor.primaryColor.withOpacity(0.15))
+                  color: AppColor.grayColor.withOpacity(0.25))
             ],
             color: AppColor.primaryColor,
             image: const DecorationImage(
@@ -111,77 +111,88 @@ class DetailToken extends StatelessWidget {
           ),
         ],
       )),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          children: [
-            16.0.height,
-            cardWallet(),
-            16.0.height,
-            Expanded(
-              child: Obx(() {
-                return DefaultTabController(
-                  length: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 60.h,
-                        padding: EdgeInsets.all(5.h),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.r),
-                            color: AppColor.cardDark,
-                            boxShadow: [
-                              BoxShadow(
-                                  spreadRadius: 1,
-                                  blurRadius: 1,
-                                  color:
-                                      AppColor.primaryColor.withOpacity(0.15))
-                            ]),
-                        child: TabBar(
-                          // automaticIndicatorColorAdjustment: false,
-                          indicator: BoxDecoration(
-                              color: AppColor.primaryColor,
-                              borderRadius: BorderRadius.circular(10.r)),
-                          isScrollable: false,
-                          dividerColor: AppColor.cardDark,
-                          indicatorColor: AppColor.cardDark,
-                          labelColor: AppColor.textDark,
-                          labelPadding: EdgeInsets.zero,
-                          labelStyle: AppFont.semibold16,
-                          unselectedLabelColor: AppColor.grayColor,
-                          unselectedLabelStyle: AppFont.medium16,
-                          indicatorSize: TabBarIndicatorSize.tab,
-                          onTap: (index) {
-                            controller.onChangeTabIndex(index);
-                          },
-                          tabs: const [
-                            Tab(
-                              child: Text(
-                                "Activity",
-                              ),
-                            ),
-                            Tab(
-                              child: Text(
-                                "Info",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      16.0.height,
-                      controller.tabIndex.value == 0
-                          ? const Activity()
-                          : const InfoToken()
-                      // TabBarView(children: [Wall()])
-                    ],
-                  ),
-                );
-              }),
+      body: Stack(
+        children: [
+          SizedBox(
+            width: ScreenUtil().screenWidth,
+            child: Image.asset(
+              AppImage.maskHome,
+              fit: BoxFit.cover,
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              children: [
+                16.0.height,
+                cardWallet(),
+                16.0.height,
+                Expanded(
+                  child: Obx(() {
+                    return DefaultTabController(
+                      length: 2,
+                      initialIndex: controller.tabIndex.value,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: 60.h,
+                            padding: EdgeInsets.all(4.h),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.r),
+                                color: AppColor.cardDark,
+                                boxShadow: const [
+                                  BoxShadow(
+                                      spreadRadius: 1,
+                                      blurRadius: 1,
+                                      color: Colors.black12)
+                                ]),
+                            child: TabBar(
+                              // automaticIndicatorColorAdjustment: false,
+                              indicator: BoxDecoration(
+                                  color: AppColor.primaryColor,
+                                  borderRadius: BorderRadius.circular(10.r)),
+                              isScrollable: false,
+                              dividerColor: AppColor.cardDark,
+                              indicatorColor: AppColor.cardDark,
+                              labelColor: AppColor.textDark,
+                              labelPadding: EdgeInsets.zero,
+                              labelStyle: AppFont.semibold16,
+                              unselectedLabelColor: AppColor.grayColor,
+                              unselectedLabelStyle: AppFont.medium16,
+                              indicatorSize: TabBarIndicatorSize.tab,
+                              onTap: (index) {
+                                controller.onChangeTabIndex(index);
+                              },
+                              tabs: const [
+                                Tab(
+                                  child: Text(
+                                    "Activity",
+                                  ),
+                                ),
+                                Tab(
+                                  child: Text(
+                                    "Info",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          16.0.height,
+                          controller.tabIndex.value == 0
+                              ? const Activity()
+                              : const InfoToken()
+                          // TabBarView(children: [Wall()])
+                        ],
+                      ),
+                    );
+                  }),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),

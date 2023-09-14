@@ -91,45 +91,62 @@ class DiscoverPage extends StatelessWidget {
     }
 
     return Scaffold(
-     backgroundColor: AppColor.bgDark,
-      appBar: WidgetHelper.appBar(
-          title: Padding(
-        padding: EdgeInsets.only(left: 8.w),
-        child: Text(
-          "Discover",
-          style: AppFont.semibold20.copyWith(color: AppColor.textDark),
-        ),
-      )),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: ListView(
+      backgroundColor: AppColor.bgDark,
+      body: SafeArea(
+        child: Stack(
           children: [
-            16.0.height,
-            newsFirst(),
-            16.0.height,
-            Column(
-              children: [
-                cardNews(),
-                8.0.height,
-                cardNews(),
-                8.0.height,
-                cardNews(),
-                8.0.height,
-                cardNews(),
-                8.0.height,
-                cardNews(),
-                8.0.height,
-                cardNews(),
-                8.0.height,
-              ],
-            )
-            // ListView.builder(
-            //   itemBuilder: (context, index) => Padding(
-            //     padding: EdgeInsets.only(bottom: 8.h),
-            //     child: cardNews(),
-            //   ),
-            //   itemCount: 5,
-            // ),
+            SizedBox(
+                width: ScreenUtil().screenWidth,
+                child: Image.asset(
+                  AppImage.maskHome,
+                  fit: BoxFit.cover,
+                )),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  16.0.height,
+                  Text(
+                    "Discover",
+                    style:
+                        AppFont.semibold20.copyWith(color: AppColor.textDark),
+                  ),
+                  24.0.height,
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        newsFirst(),
+                        16.0.height,
+                        Column(
+                          children: [
+                            cardNews(),
+                            8.0.height,
+                            cardNews(),
+                            8.0.height,
+                            cardNews(),
+                            8.0.height,
+                            cardNews(),
+                            8.0.height,
+                            cardNews(),
+                            8.0.height,
+                            cardNews(),
+                            8.0.height,
+                          ],
+                        )
+                        // ListView.builder(
+                        //   itemBuilder: (context, index) => Padding(
+                        //     padding: EdgeInsets.only(bottom: 8.h),
+                        //     child: cardNews(),
+                        //   ),
+                        //   itemCount: 5,
+                        // ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

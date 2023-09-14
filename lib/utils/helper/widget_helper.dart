@@ -13,6 +13,7 @@ class WidgetHelper {
       automaticallyImplyLeading: false,
       centerTitle: false,
       backgroundColor: AppColor.bgDark,
+      // toolbarHeight: height,
     );
   }
 }

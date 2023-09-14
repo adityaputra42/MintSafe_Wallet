@@ -38,8 +38,7 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             elevation: 0,
-            backgroundColor:
-                disable ? disableColor : activeColor,
+            backgroundColor: disable ? disableColor : activeColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.r))),
         onPressed: disable || loading ? () {} : onPressed,
@@ -59,7 +58,7 @@ class PrimaryButton extends StatelessWidget {
                   icon != null ? 8.0.width : 0.0.width,
                   Text(
                     title,
-                    style: AppFont.semibold16.copyWith(color: AppColor.textDark),
+                    style: AppFont.medium14.copyWith(color: AppColor.textDark),
                     textAlign: TextAlign.center,
                   ),
                 ],

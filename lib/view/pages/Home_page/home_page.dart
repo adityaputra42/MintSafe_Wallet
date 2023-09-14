@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
               BoxShadow(
                   blurRadius: 1,
                   spreadRadius: 1,
-                  color: AppColor.primaryColor.withOpacity(0.15))
+                  color: AppColor.grayColor.withOpacity(0.25))
             ],
             image: const DecorationImage(
                 image: AssetImage(AppImage.masking), fit: BoxFit.cover)),
@@ -85,167 +85,183 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.bgDark,
       body: SafeArea(
-          child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
+        child: Stack(
           children: [
-            24.0.height,
-            GestureDetector(onTap: () {
-              Get.to(()=>ChangeWallet());
-            },
-              child: Row(
+            SizedBox(
+                width: ScreenUtil().screenWidth,
+                child: Image.asset(
+                  AppImage.maskHome,
+                  fit: BoxFit.cover,
+                )),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Column(
                 children: [
-                  SizedBox(
-                    width: 48.w,
-                    height: 48.w,
-                    child: Stack(
-                      children: [
-                        Container(
-                          width: 48.w,
-                          height: 48.w,
-                          padding: EdgeInsets.all(2.h),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                  width: 2.h, color: AppColor.primaryColor)),
-                          child: Container(
-                            padding: EdgeInsets.all(6.w),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColor.primaryColor,
-                            ),
-                            child: Image.asset(
-                              AppImage.avatar,
-                            ),
-                          ),
-                        ),
-                        Align(alignment: Alignment.bottomRight,
-                          child: Container(
-                            width: 16.w,
-                            height: 16.w,
-                            padding: EdgeInsets.all(2.h),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4.r),
-                                color: AppColor.secondaryColor),child: Image.asset(AppIcon.chnageIcon),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  12.0.width,
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Hi, Welcome Back",
-                          style: AppFont.reguler12
-                              .copyWith(color: AppColor.grayColor),
-                        ),
-                        Text(
-                          "Dompet Saya",
-                          style:
-                              AppFont.medium14.copyWith(color: AppColor.textDark),
-                        )
-                      ],
-                    ),
-                  ),
+                  24.0.height,
                   GestureDetector(
                     onTap: () {
-                      Get.to(() => const ChangeNetwork());
+                      Get.to(() => const ChangeWallet());
                     },
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.r),
-                          color: AppColor.primaryColor.withOpacity(0.15)),
-                      child: Row(
-                        children: [
-                          Text("Ethereum Mainet",
-                              style: AppFont.medium14
-                                  .copyWith(color: AppColor.primaryColor)),
-                          4.0.width,
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: AppColor.primaryColor,
-                            size: 14.w,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 48.w,
+                          height: 48.w,
+                          child: Stack(
+                            children: [
+                              Container(
+                                width: 48.w,
+                                height: 48.w,
+                                padding: EdgeInsets.all(2.h),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        width: 2.h,
+                                        color: AppColor.primaryColor)),
+                                child: Container(
+                                  padding: EdgeInsets.all(6.w),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColor.primaryColor,
+                                  ),
+                                  child: Image.asset(
+                                    AppImage.avatar,
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: Container(
+                                  width: 16.w,
+                                  height: 16.w,
+                                  padding: EdgeInsets.all(2.h),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: AppColor.secondaryColor),
+                                  child: Image.asset(AppIcon.chnageIcon),
+                                ),
+                              )
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        12.0.width,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Hi, Welcome Back",
+                                style: AppFont.reguler12
+                                    .copyWith(color: AppColor.grayColor),
+                              ),
+                              Text(
+                                "Dompet Saya",
+                                style: AppFont.medium14
+                                    .copyWith(color: AppColor.textDark),
+                              )
+                            ],
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(() => const ChangeNetwork());
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12.w, vertical: 6.h),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.r),
+                                color: AppColor.cardDark),
+                            child: Row(
+                              children: [
+                                Text("Ethereum Mainet",
+                                    style: AppFont.medium14.copyWith(
+                                        color: AppColor.primaryColor)),
+                                4.0.width,
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  color: AppColor.primaryColor,
+                                  size: 14.w,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  )
+                  ),
+                  24.0.height,
+                  cardWallet(),
+                  16.0.height,
+                  Expanded(
+                    child: Obx(() {
+                      return DefaultTabController(
+                        length: 2,
+                        initialIndex: controller.tabIndex.value,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: 60.h,
+                              padding: EdgeInsets.all(4.h),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.r),
+                                color: AppColor.cardDark,
+                                boxShadow: const [
+                                  BoxShadow(
+                                      blurRadius: 0.5,
+                                      spreadRadius: 0.5,
+                                      color: Colors.black12)
+                                ],
+                              ),
+                              child: TabBar(
+                                // automaticIndicatorColorAdjustment: false,
+                                indicator: BoxDecoration(
+                                    color: AppColor.primaryColor,
+                                    borderRadius: BorderRadius.circular(8.r)),
+                                isScrollable: false,
+                                dividerColor: AppColor.cardDark,
+                                indicatorColor: AppColor.cardDark,
+                                labelColor: AppColor.textDark,
+                                labelPadding: EdgeInsets.zero,
+                                labelStyle: AppFont.semibold16,
+                                unselectedLabelColor: AppColor.grayColor,
+                                unselectedLabelStyle: AppFont.medium16,
+                                indicatorSize: TabBarIndicatorSize.tab,
+                                onTap: (index) {
+                                  controller.onChangeTabIndex(index);
+                                },
+                                tabs: const [
+                                  Tab(
+                                    child: Text(
+                                      "Token",
+                                    ),
+                                  ),
+                                  Tab(
+                                    child: Text(
+                                      "NFT",
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            16.0.height,
+                            controller.tabIndex.value == 0
+                                ? const TokenList()
+                                : const NftList()
+                            // TabBarView(children: [Wall()])
+                          ],
+                        ),
+                      );
+                    }),
+                  ),
                 ],
               ),
             ),
-            24.0.height,
-            cardWallet(),
-            16.0.height,
-            Expanded(
-              child: Obx(() {
-                return DefaultTabController(
-                  length: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 60.h,
-                        padding: EdgeInsets.all(5.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.r),
-                          color: AppColor.cardDark,
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 0.5,
-                                spreadRadius: 0.5,
-                                color: AppColor.primaryColor.withOpacity(0.15))
-                          ],
-                        ),
-                        child: TabBar(
-                          // automaticIndicatorColorAdjustment: false,
-                          indicator: BoxDecoration(
-                              color: AppColor.primaryColor,
-                              borderRadius: BorderRadius.circular(10.r)),
-                          isScrollable: false,
-                          dividerColor: AppColor.cardDark,
-                          indicatorColor: AppColor.cardDark,
-                          labelColor: AppColor.textDark,
-                          labelPadding: EdgeInsets.zero,
-                          labelStyle: AppFont.semibold16,
-                          unselectedLabelColor: AppColor.grayColor,
-                          unselectedLabelStyle: AppFont.medium16,
-                          indicatorSize: TabBarIndicatorSize.tab,
-                          onTap: (index) {
-                            controller.onChangeTabIndex(index);
-                          },
-                          tabs: const [
-                            Tab(
-                              child: Text(
-                                "Token",
-                              ),
-                            ),
-                            Tab(
-                              child: Text(
-                                "NFT",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      16.0.height,
-                      controller.tabIndex.value == 0
-                          ? const TokenList()
-                          : const NftList()
-                      // TabBarView(children: [Wall()])
-                    ],
-                  ),
-                );
-              }),
-            ),
           ],
         ),
-      )),
+      ),
     );
   }
 }

@@ -86,87 +86,109 @@ class DetailActivity extends StatelessWidget {
           ),
         ],
       )),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          children: [
-            16.0.height,
-            cardWallet(),
-            24.0.height,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Stack(
+        children: [
+          SizedBox(
+            width: ScreenUtil().screenWidth,
+            child: Image.asset(
+              AppImage.maskHome,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
               children: [
-                Text(
-                  "Date",
-                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
+                16.0.height,
+                cardWallet(),
+                24.0.height,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Date",
+                      style:
+                          AppFont.reguler14.copyWith(color: AppColor.grayColor),
+                    ),
+                    Text(
+                      DateFormat("MMM dd, yyyy HH:mm:ss")
+                          .format(DateTime.now()),
+                      style:
+                          AppFont.medium14.copyWith(color: AppColor.textDark),
+                    ),
+                  ],
                 ),
-                Text(
-                  DateFormat("MMM dd, yyyy HH:mm:ss").format(DateTime.now()),
-                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                16.0.height,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "State",
+                      style:
+                          AppFont.reguler14.copyWith(color: AppColor.grayColor),
+                    ),
+                    Text(
+                      "Succes",
+                      style: AppFont.medium14
+                          .copyWith(color: AppColor.textDark)
+                          .copyWith(color: AppColor.primaryColor),
+                    ),
+                  ],
                 ),
+                16.0.height,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "To",
+                      style:
+                          AppFont.reguler14.copyWith(color: AppColor.grayColor),
+                    ),
+                    Text(
+                      "0xff2342......sdhe72kjsjksdj",
+                      style:
+                          AppFont.medium14.copyWith(color: AppColor.textDark),
+                    ),
+                  ],
+                ),
+                16.0.height,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "TxID",
+                      style:
+                          AppFont.reguler14.copyWith(color: AppColor.grayColor),
+                    ),
+                    Text(
+                      "0xds7hfjwq87.....aas89has7",
+                      style:
+                          AppFont.medium14.copyWith(color: AppColor.textDark),
+                    ),
+                  ],
+                ),
+                16.0.height,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Network Fee",
+                      style:
+                          AppFont.reguler14.copyWith(color: AppColor.grayColor),
+                    ),
+                    Text(
+                      "${NumberFormat.currency(symbol: '', decimalDigits: 4, locale: "en_US").format(0)} ETH",
+                      style:
+                          AppFont.medium14.copyWith(color: AppColor.textDark),
+                    ),
+                  ],
+                ),
+                36.0.height,
+                PrimaryButton(title: "See on Explorer", onPressed: () {})
               ],
             ),
-            16.0.height,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "State",
-                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
-                ),
-                Text(
-                  "Succes",
-                  style:
-                      AppFont.medium14.copyWith(color: AppColor.textDark).copyWith(color: AppColor.primaryColor),
-                ),
-              ],
-            ),
-            16.0.height,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "To",
-                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
-                ),
-                Text(
-                  "0xff2342......sdhe72kjsjksdj",
-                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
-                ),
-              ],
-            ),
-            16.0.height,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "TxID",
-                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
-                ),
-                Text(
-                  "0xds7hfjwq87.....aas89has7",
-                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
-                ),
-              ],
-            ),
-            16.0.height,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Network Fee",
-                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
-                ),
-                Text(
-                  "${NumberFormat.currency(symbol: '', decimalDigits: 4, locale: "en_US").format(0)} ETH",
-                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
-                ),
-              ],
-            ),
-            36.0.height,
-            PrimaryButton(title: "See on Explorer", onPressed: () {})
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

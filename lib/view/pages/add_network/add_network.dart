@@ -7,6 +7,7 @@ import 'package:mintsafe_wallet/view/pages/add_network/component/search_network.
 import 'package:mintsafe_wallet/view/widget/primary_button.dart';
 
 import '../../../config/config.dart';
+import '../../../data/data.dart';
 import '../../../utils/utils.dart';
 
 class AddNetworkPage extends StatelessWidget {
@@ -21,6 +22,7 @@ class AddNetworkPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: DefaultTabController(
             length: 2,
+            initialIndex: controller.selectedTab.value,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -28,27 +30,28 @@ class AddNetworkPage extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   height: 60.h,
-                  padding: EdgeInsets.all(5.h),
+                  padding: EdgeInsets.all(4.h),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
                       color: AppColor.cardDark,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                             spreadRadius: 1,
                             blurRadius: 1,
-                            color: AppColor.primaryColor.withOpacity(0.15))
+                            color: Colors.black12)
                       ]),
                   child: TabBar(
                     // automaticIndicatorColorAdjustment: false,
                     indicator: BoxDecoration(
                         color: AppColor.primaryColor,
-                        borderRadius: BorderRadius.circular(10.r)),
+                        borderRadius: BorderRadius.circular(8.r)),
                     isScrollable: false,
                     indicatorColor: AppColor.cardDark,
                     dividerColor: AppColor.cardDark,
                     labelColor: AppColor.textDark,
                     labelPadding: EdgeInsets.zero,
-                    labelStyle: AppFont.semibold16.copyWith(color: AppColor.textDark),
+                    labelStyle:
+                        AppFont.semibold16.copyWith(color: AppColor.textDark),
                     unselectedLabelColor: AppColor.grayColor,
                     unselectedLabelStyle: AppFont.medium16,
                     indicatorSize: TabBarIndicatorSize.tab,
@@ -107,11 +110,22 @@ class AddNetworkPage extends StatelessWidget {
           ),
         ],
       )),
-      body: body(),
+      body: Stack(
+        children: [
+          SizedBox(
+            width: ScreenUtil().screenWidth,
+            child: Image.asset(
+              AppImage.maskHome,
+              fit: BoxFit.cover,
+            ),
+          ),
+          body(),
+        ],
+      ),
       bottomNavigationBar: PrimaryButton(
         title: "Confirm",
         onPressed: () {},
-        margin: EdgeInsets.symmetric(horizontal: 24.w,vertical: 16.h),
+        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       ),
     );
   }
