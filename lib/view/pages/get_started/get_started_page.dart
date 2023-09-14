@@ -33,7 +33,7 @@ class GetStartedPage extends StatelessWidget {
                       80.0.height,
                       Image.asset(
                         AppImage.logo,
-                        width: 160.w,
+                        width: 116.w,
                       ),
                       24.0.height,
                       Text(
