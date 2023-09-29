@@ -1,22 +1,75 @@
 [
-  {
-      "name" : "Specta Mainnet",
-      "symbol" : "SPC",
-      "RPC" : "https://rpc.spectachains.org",
-      "chainId" : "503",
-      "explorer" : "https://explorer.spectachains.org",
-      "isTestnet" : false
-      
-  },
-  {
-      "name" : "Specta Testnet",
-      "symbol" : "T-SPC",
-      "RPC" : "https://rpctestnet.spectachains.org",
-      "chainId" : "1503",
-      "explorer" : "https://testnet.spectachains.org",
-      "isTestnet" : true
-  }
- 
-
- 
+      {
+          "name" : "Ethereum Mainnet",
+          "symbol" : "ETH",
+          "RPC" : "https://api.mycryptoapi.com/eth",
+          "chainId" : "1",
+          "explorer" : "https://etherscan.io",
+          "isTestnet" : false
+          
+      },
+      {
+          "name" : "BNB Smart Chain Mainnet",
+          "symbol" : "BSC",
+          "RPC" : "https://bsc-dataseed1.bnbchain.org",
+          "chainId" : "56",
+          "explorer" : "https://bscscan.com",
+          "isTestnet" : false
+      },
+      {
+        "name" : "Polygon Mainnet",
+        "symbol" : "MATIC",
+        "RPC" : "https://polygon-rpc.com/",
+        "chainId" : "137",
+        "explorer" : "https://polygonscan.com",
+        "isTestnet" : false
+      },
+      {
+        "name" : "Arbitrum One",
+        "symbol" : "ETH",
+        "RPC" : "https://arb1.arbitrum.io/rpc",
+        "chainId" : "42161",
+        "explorer" : "https://arbiscan.io",
+        "isTestnet" : false
+      },
+      {
+        "name" : "OP Mainnet",
+        "symbol" : "ETH",
+        "RPC" : "https://mainnet.optimism.io",
+        "chainId" : "10",
+        "explorer" : "https://optimistic.etherscan.io",
+        "isTestnet" : false
+      },
+      {
+        "name" : "Manta Pacific Mainnet",
+        "symbol" : "ETH",
+        "RPC" : "https://pacific-rpc.manta.network/http",
+        "chainId" : "169",
+        "explorer" : "https://pacific-explorer.manta.network",
+        "isTestnet" : false
+      },
+      {
+        "name" : "Base",
+        "symbol" : "ETH",
+        "RPC" : "https://mainnet.base.org/",
+        "chainId" : "8453",
+        "explorer" : "https://basescan.org",
+        "isTestnet" : false
+      },
+      {
+        "name" : "Avalanche C-Chain",
+        "symbol" : "AVAX",
+        "RPC" : "https://api.avax.network/ext/bc/C/rpc",
+        "chainId" : "43114",
+        "explorer" : "https://snowtrace.io",
+        "isTestnet" : false
+      },
+      {
+        "name" : "Linea",
+        "symbol" : "ETH",
+        "RPC" : "https://rpc.linea.build",
+        "chainId" : "59144",
+        "explorer" : "https://bridge.linea.build",
+        "isTestnet" : false
+      }
 ]

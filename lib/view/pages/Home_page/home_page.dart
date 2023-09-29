@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/data.dart';
-import 'package:mintsafe_wallet/domain/controller/home_controller.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/nft_list.dart';
 import 'package:mintsafe_wallet/view/pages/Home_page/component/token_list.dart';
@@ -14,9 +13,11 @@ import 'package:mintsafe_wallet/view/pages/select_token/select_token.dart';
 import 'package:mintsafe_wallet/view/widget/card_action.dart';
 
 import '../../../config/config.dart';
+import '../../../domain/controller/controller.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
+  final EvmController evm;
+  HomePage({super.key, required this.evm});
   final HomeController controller = Get.put(HomeController());
 
   @override

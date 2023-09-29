@@ -17,14 +17,13 @@ import 'package:web3dart/web3dart.dart';
 import '../../data/data.dart';
 import '../../utils/utils.dart';
 import '../repository/repository.dart';
-import 'db_controller.dart';
 
 class EvmController extends GetxController {
   final Address address;
   var privateKeySelected = ''.obs;
   var mnemonicSelected = ''.obs;
   EvmController({required this.address});
-  DBController db = Get.find();
+// db = Get.find();
   var isLoading = false.obs;
   var isLoadingCreateAccount = false.obs;
   var isLoadingImportAccount = false.obs;
@@ -81,7 +80,7 @@ class EvmController extends GetxController {
     // print("SELECTED ADDRESS PK : ${selectedAddress.value.privateKey}");
     // print("SELECTED MNEMONIC  : ${selectedAddress.value.mnemonic}");
 
-    final privateKey =  encrypter.decrypt64(pk, iv: iv);
+    final privateKey = encrypter.decrypt64(pk, iv: iv);
     print("PRIVATE KEY : $privateKey");
     // final mnmemonic = encrypter.decrypt64(seed, iv: iv);
 
@@ -91,13 +90,23 @@ class EvmController extends GetxController {
 
   Future<void> initialize() async {
     /// GET CONTRACT ABI
-    final erc20AbiString = await rootBundle.loadString('asset/abi/ERC-2O.json');
-    erc20Abi = ContractAbi.fromJson(erc20AbiString, 'ERC20');
-    abi = ContractABI.fromJson(jsonDecode(erc20AbiString));
+    ///
+    try {
+      final jsonString = await rootBundle.loadString('asset/abi/ERC-2O.json');
+      erc20Abi = ContractAbi.fromJson(jsonString, 'ERC20');
+      abi = ContractABI.fromJson(jsonDecode(jsonString));
 
-    await initialzedNetwork();
+      await initialzedNetwork();
+    } catch (error) {
+      print("Error loading asset: $error");
+    }
+    // final erc20AbiString = await rootBundle.loadString('asset/abi/ERC-2O.json');
+    // erc20Abi = ContractAbi.fromJson(erc20AbiString, 'ERC20');
+    // abi = ContractABI.fromJson(jsonDecode(erc20AbiString));
 
-    // final addresses = await db.readAddressList();
+    // await initialzedNetwork();
+
+    // final addresses = await DbHelper.instance.readAddressList();
 
     // addressList.clear();
     // addressList.assignAll(addresses!);
@@ -110,7 +119,7 @@ class EvmController extends GetxController {
   initialzedNetwork() async {
     /// GET LIST NETWORK
     listChain.clear();
-    final networkList = await db.getAllChainNetwork();
+    final networkList = await DbHelper.instance.getAllChainNetwork();
 
     if (networkList.isEmpty) {
       print("NETWORK FROM JSON");
@@ -118,9 +127,9 @@ class EvmController extends GetxController {
 
       listChain.value = chainNetworkFromJson(chainlist);
       listChain[0].selected = true;
-      await db.setChainNetwork(listChain);
+      await DbHelper.instance.setChainNetwork(listChain);
 
-      final selectedNetwork = await db.getSelectedChainNetwork();
+      final selectedNetwork = await DbHelper.instance.getSelectedChainNetwork();
       if (selectedNetwork == null) {
         selectedChain.value = listChain[0];
       } else {
@@ -130,7 +139,7 @@ class EvmController extends GetxController {
       print("SET JSON TO DB");
     } else {
       print(" NETWORK FROM DB");
-      var chain = await db.getSelectedChainNetwork();
+      var chain = await DbHelper.instance.getSelectedChainNetwork();
       selectedChain.value = chain!;
       listChain.value = networkList;
     }
@@ -144,7 +153,7 @@ class EvmController extends GetxController {
   }
 
   initializeTokens() async {
-    final tokens = await db.getAllToken();
+    final tokens = await DbHelper.instance.getAllToken();
     tokenList.clear();
 
     tokenList.addAll(tokens);
@@ -152,19 +161,19 @@ class EvmController extends GetxController {
     refresh();
   }
 
-  initializedTxHistory() async {
-    final list = await db.getAllTxHistory();
-    transactionHistory.clear();
-    transactionHistory.addAll(list);
-    transactionHistory.refresh();
-    dev.log('TX HISTORY : ${transactionHistory.length}');
-    // transactionHistory.sort(
-    //   (a, b) => b.date!.compareTo(a.date!),
-    // );
-  }
+  // initializedTxHistory() async {
+  //   final list = await DbHelper.instance.getAllTxHistory();
+  //   transactionHistory.clear();
+  //   transactionHistory.addAll(list);
+  //   transactionHistory.refresh();
+  //   dev.log('TX HISTORY : ${transactionHistory.length}');
+  //   // transactionHistory.sort(
+  //   //   (a, b) => b.date!.compareTo(a.date!),
+  //   // );
+  // }
 
   initializedRecentAddress() async {
-    final list = await db.getRecentAddress();
+    final list = await DbHelper.instance.getRecentAddress();
     recentAddress.clear();
     recentAddress.addAll(list);
     recentAddress.refresh();
@@ -175,7 +184,7 @@ class EvmController extends GetxController {
     isLoadingNetwork.value = true;
     await initialize();
     await initializeTokens();
-    await initializedTxHistory();
+    // await initializedTxHistory();
     // getDappsHistory();
 
     // workerCheckTx();
@@ -183,7 +192,7 @@ class EvmController extends GetxController {
 
     initializedRecentAddress();
     decrypted(
-      selectedAddress.value.privateKey!,
+      selectedAddress.value.privateKey ?? "",
     );
     var httpClient = Client();
 
@@ -264,12 +273,12 @@ class EvmController extends GetxController {
   //         if (transactionHistory[i].txHash == listTx[j].txHash &&
   //             listTx[j].status == 'pending') {
   //           transactionHistory[i] = data;
-  //           // await db.updateTx(transactionHistory[i]);
+  //           // await DbHelper.instance.updateTx(transactionHistory[i]);
   //           break;
   //         }
   //       }
 
-  //       await db.saveAllTxHistory(transactionHistory);
+  //       await DbHelper.instance.saveAllTxHistory(transactionHistory);
 
   //       transactionHistory.refresh();
   //     }
@@ -289,44 +298,44 @@ class EvmController extends GetxController {
   // //     // Print updated listTx
   //   });
 
-    // var pendingData = transactionHistory
-    //     .where((element) => element.status == "pending")
-    //     .toList();
+  // var pendingData = transactionHistory
+  //     .where((element) => element.status == "pending")
+  //     .toList();
 
-    // if (pendingData.isNotEmpty) {
-    //   _timerCheckTx =
-    //       Timer.periodic(const Duration(seconds: 10), (timer) async {
-    //     dev.log("WORKER CHECK TX RUNNING....");
-    //     List<TransactionHistory> updatedData = [];
-    //     var pendingData = transactionHistory
-    //         .where((element) => element.status == "pending")
-    //         .toList();
-    //     for (var p in pendingData) {
-    //       var pendingTx = await getHistory(p.txHash!);
-    //       pendingTx.id = p.id;
-    //       updatedData.add(pendingTx);
+  // if (pendingData.isNotEmpty) {
+  //   _timerCheckTx =
+  //       Timer.periodic(const Duration(seconds: 10), (timer) async {
+  //     dev.log("WORKER CHECK TX RUNNING....");
+  //     List<TransactionHistory> updatedData = [];
+  //     var pendingData = transactionHistory
+  //         .where((element) => element.status == "pending")
+  //         .toList();
+  //     for (var p in pendingData) {
+  //       var pendingTx = await getHistory(p.txHash!);
+  //       pendingTx.id = p.id;
+  //       updatedData.add(pendingTx);
 
-    //       updatedData.forEach((element) {
-    //         dev.log("UPDATED DATA ID : ${element.id}");
-    //       });
-    //     }
+  //       updatedData.forEach((element) {
+  //         dev.log("UPDATED DATA ID : ${element.id}");
+  //       });
+  //     }
 
-    //     db.changeTxStatus(updatedData);
-    //     initializedTxHistory();
+  //     DbHelper.instance.changeTxStatus(updatedData);
+  //     initializedTxHistory();
 
-    //     var a = await db.getAllTxHistory();
-    //     var isKosong =
-    //         a.where((element) => element.status == "pending").toList();
-    //     if (isKosong.isEmpty) {
-    //       timer.cancel();
-    //     }
-    //     // timer.cancel();
-    //   });
-    // } else {
-    //   // if (_timerCheckTx.isActive) {
-    //   //   _timerCheckTx.cancel();
-    //   // }
-    // }
+  //     var a = await DbHelper.instance.getAllTxHistory();
+  //     var isKosong =
+  //         a.where((element) => element.status == "pending").toList();
+  //     if (isKosong.isEmpty) {
+  //       timer.cancel();
+  //     }
+  //     // timer.cancel();
+  //   });
+  // } else {
+  //   // if (_timerCheckTx.isActive) {
+  //   //   _timerCheckTx.cancel();
+  //   // }
+  // }
   // }
 
   @override
@@ -359,13 +368,13 @@ class EvmController extends GetxController {
   //   var httpClient = Client();
   //   Get.back();
 
-  //   await db.unSelectNetwork(selectedChain.value.id!);
+  //   await DbHelper.instance.unSelectNetwork(selectedChain.value.id!);
   //   selectedChain.value = network;
   //   selectedChain.refresh();
 
   //   isLoadingNetwork.value = true;
 
-  //   await db.changeNetwork(network.id!);
+  //   await DbHelper.instance.changeNetwork(network.id!);
 
   //   web3client = Web3Client(
   //     selectedChain.value.rpc ?? "",
@@ -408,7 +417,7 @@ class EvmController extends GetxController {
           double balanceParsed = double.parse(
               balance.getValueInUnit(EtherUnit.ether).toStringAsPrecision(8));
           add.balance = balanceParsed;
-          await db.updateWallet(add.id!, balanceParsed);
+          await DbHelper.instance.updateWallet(add.id!, balanceParsed);
           if (add.address == selectedAddress.value.address) {
             selectedAddress.value.balance = balanceParsed;
             selectedAddress.refresh();
@@ -453,6 +462,7 @@ class EvmController extends GetxController {
 
         final balance = await token
             .balanceOf(EthereumAddress.fromHex(selectedAddress.value.address!));
+        // ignore: deprecated_member_use
         final tokenBalance = EtherAmount.fromUnitAndValue(
           EtherUnit.wei,
           balance,
@@ -762,7 +772,7 @@ class EvmController extends GetxController {
     isLoadingCreateAccount.value = true;
     final mnemonic = WalletRepository().generateMnemonic();
     var account = WalletRepository().getAccountInfo(mnemonic);
-    await db.unSelectWallet(selectedAddress.value.id!);
+    await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
     final mnemonicEncrypt = encrypter.encrypt(account['mnemonic']!, iv: iv);
     final privateKeyEncrypt =
         encrypter.encrypt(account['private_key']!, iv: iv);
@@ -778,15 +788,15 @@ class EvmController extends GetxController {
     addressList.add(addressNew);
     Get.back();
 
-    await db.addAddress(addressNew);
-    await db.changeWallet(addressNew.id!);
+    await DbHelper.instance.addAddress(addressNew);
+    await DbHelper.instance.changeWallet(addressNew.id!);
     decrypted(
       selectedAddress.value.privateKey!,
     );
     isLoadingCreateAccount.value = false;
     await getBalance();
 
-    final listAddress = await db.readAddressList();
+    final listAddress = await DbHelper.instance.readAddressList();
     listAddress!.forEach((element) {
       print(element.name);
       print(element.address);
@@ -795,13 +805,13 @@ class EvmController extends GetxController {
 
   void changeAddress(Address address) async {
     print("SELECTED WALLET ADDRESS : ${selectedAddress.value.id}");
-    await db.unSelectWallet(selectedAddress.value.id!);
+    await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
     dev.log("INIT ADDRESS : ${selectedAddress.value.id!}");
 
     selectedAddress.value = address;
     selectedAddress.refresh();
 
-    await db.changeWallet(address.id!);
+    await DbHelper.instance.changeWallet(address.id!);
     dev.log("NEW ADDRESS : ${address.id!}");
 
     decrypted(
@@ -816,7 +826,7 @@ class EvmController extends GetxController {
     }
     decrypted(selectedAddress.value.privateKey!);
 
-    final listAddress = await db.readAddressList();
+    final listAddress = await DbHelper.instance.readAddressList();
     listAddress!.forEach((element) {
       print(element.name);
       print(element.address);
@@ -838,7 +848,7 @@ class EvmController extends GetxController {
             .isNotEmpty) {
           // alert("Address already exist");
         } else {
-          await db.unSelectWallet(selectedAddress.value.id!);
+          await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
 
           print("Private Key : $privateKey");
           print("privateKey encrypted : $privateKeySelected");
@@ -855,8 +865,8 @@ class EvmController extends GetxController {
           importPrivateKeyController.clear();
           Get.back();
 
-          await db.addAddress(addressNew);
-          await db.changeWallet(addressNew.id!);
+          await DbHelper.instance.addAddress(addressNew);
+          await DbHelper.instance.changeWallet(addressNew.id!);
           decrypted(
             selectedAddress.value.privateKey!,
           );
@@ -924,7 +934,7 @@ class EvmController extends GetxController {
   //     // transactionHistory.refresh();
   //     // if (checkOnly == null || false) {
   //     dev.log("Tx saved");
-  //     await db.saveTxHistory(data);
+  //     await DbHelper.instance.saveTxHistory(data);
   //     // }
 
   //     return data;
@@ -944,7 +954,7 @@ class EvmController extends GetxController {
   //         networkFee: 0,
   //         nonce: 0);
   //     // if (checkOnly == null || false) {
-  //     await db.saveTxHistory(data);
+  //     await DbHelper.instance.saveTxHistory(data);
   //     // }
   //     return data;
   //   }
@@ -978,7 +988,7 @@ class EvmController extends GetxController {
   // void setActivity(int value) => selectedTabActivity.value = value;
 
   // Future<void> resetWallet() async {
-  //   await db.resetWallet();
+  //   await DbHelper.instance.resetWallet();
   //   Get.offAll(() => const OnBoardingPage());
   // }
 
@@ -994,23 +1004,23 @@ class EvmController extends GetxController {
   // }
 
   // Future<void> addNetwork(ChainNetwork network) async {
-  //   await db.addChainNetwork(network);
-  //   final networkList = await db.getAllChainNetwork();
+  //   await DbHelper.instance.addChainNetwork(network);
+  //   final networkList = await DbHelper.instance.getAllChainNetwork();
 
   //   listChain.assignAll(networkList);
   //   listChain.refresh();
   // }
 
   // Future<void> editNetwork(ChainNetwork network) async {
-  //   await db.ediChainNetwork(network);
-  //   final networkList = await db.getAllChainNetwork();
+  //   await DbHelper.instance.ediChainNetwork(network);
+  //   final networkList = await DbHelper.instance.getAllChainNetwork();
   //   listChain.assignAll(networkList);
   //   listChain.refresh();
   // }
 
   // Future<void> deleteNetwork(ChainNetwork network) async {
-  //   await db.deleteChainNetwork(network.id!);
-  //   final networkList = await db.getAllChainNetwork();
+  //   await DbHelper.instance.deleteChainNetwork(network.id!);
+  //   final networkList = await DbHelper.instance.getAllChainNetwork();
   //   listChain.assignAll(networkList);
   //   listChain.refresh();
   // }
@@ -1048,18 +1058,18 @@ class EvmController extends GetxController {
   }
 
   // Future<void> getDappsHistory() async {
-  //   final list = await db.getDappsHistory();
+  //   final list = await DbHelper.instance.getDappsHistory();
   //   dappsHistory.assignAll(list);
   //   dappsHistory.refresh();
   // }
 
   // Future<void> addDappsHistory(DappsHistory history) async {
-  //   await db.addHistoryDapps(history);
+  //   await DbHelper.instance.addHistoryDapps(history);
   //   await getDappsHistory();
   // }
 
   // Future<void> deleteDappsHistory(int id) async {
-  //   await db.deleteDappsHistory(id);
+  //   await DbHelper.instance.deleteDappsHistory(id);
   //   await getDappsHistory();
   // }
 

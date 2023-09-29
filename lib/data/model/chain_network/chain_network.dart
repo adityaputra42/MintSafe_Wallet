@@ -1,4 +1,3 @@
-
 import 'package:isar/isar.dart';
 import 'dart:convert';
 part 'chain_network.g.dart';

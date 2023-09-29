@@ -19,13 +19,22 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final BottomNavBarController controller = Get.put(BottomNavBarController());
+  late EvmController evm;
+
+  @override
+  void initState() {
+    evm = Get.put(EvmController(address: widget.address));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     body() {
       switch (controller.indexBar.value) {
         case 0:
-          return HomePage();
+          return HomePage(
+            evm: evm,
+          );
         case 1:
           return const DiscoverPage();
         case 2:
@@ -35,7 +44,9 @@ class _MainPageState extends State<MainPage> {
           return const SettingPage();
 
         default:
-          HomePage();
+          HomePage(
+            evm: evm,
+          );
       }
     }
 
