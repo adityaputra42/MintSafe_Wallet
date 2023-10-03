@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mintsafe_wallet/domain/controller/change_network_controller.dart';
 import 'package:mintsafe_wallet/view/pages/add_network/add_network.dart';
 
 import '../../../config/config.dart';
@@ -10,85 +11,96 @@ import '../../../utils/utils.dart';
 import '../../widget/widget.dart';
 
 class ChangeNetwork extends StatelessWidget {
-  const ChangeNetwork({super.key});
-
+  ChangeNetwork({super.key});
+  final ChangeNetworkController controller = Get.put(ChangeNetworkController());
   @override
   Widget build(BuildContext context) {
-    Widget cardNetwork({bool isActive = false}) {
-      return Row(
-        children: [
-          SizedBox(
-            width: 36.h,
-            height: 36.h,
-            child: ClipPolygon(
-              sides: 6,
-              rotate: 0,
-              child: Container(
-                  padding: EdgeInsets.all(1.h),
-                  color: Colors.transparent,
-                  child: Image.asset(AppImage.eth)),
+    Widget cardNetwork({required ChainNetwork chain, bool isSelected = false}) {
+      return GestureDetector(
+        onTap: () {
+          controller.changeNetwork(chain, context);
+        },
+        child: Row(
+          children: [
+            SizedBox(
+              width: 36.h,
+              height: 36.h,
+              child: ClipPolygon(
+                sides: 6,
+                rotate: 0,
+                child: Container(
+                    padding: EdgeInsets.all(1.h),
+                    color: Colors.transparent,
+                    child: Image.asset(AppImage.eth)),
+              ),
             ),
-          ),
-          16.0.width,
-          Expanded(
-              child: Text(
-            "Ethereum Mainet",
-            style: AppFont.medium16.copyWith(color: AppColor.textDark),
-          )),
-          16.0.width,
-          isActive
-              ? Icon(
-                  Icons.check_circle_outline_rounded,
-                  size: 24.w,
-                  color: AppColor.primaryColor,
-                )
-              : const SizedBox()
-        ],
+            16.0.width,
+            Expanded(
+                child: Text(
+              chain.name ?? '',
+              style: AppFont.medium16.copyWith(color: AppColor.textDark),
+            )),
+            16.0.width,
+            isSelected
+                ? Icon(
+                    Icons.check_circle_outline_rounded,
+                    size: 24.w,
+                    color: AppColor.primaryColor,
+                  )
+                : const SizedBox()
+          ],
+        ),
       );
     }
 
     Widget body() {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          children: [
-            16.0.height,
-            const SearchField(),
-            16.0.height,
-            Expanded(
-                child: ListView.builder(
-              itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.only(bottom: 12.h),
-                child: cardNetwork(isActive: index == 1 ? true : false),
-              ),
-              itemCount: 5,
-            )),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Couldn't find your network?\nTap the below button to add.",
-                  style: AppFont.reguler12.copyWith(
-                    color: AppColor.grayColor,
+        child: Obx(() {
+          return Column(
+            children: [
+              16.0.height,
+              const SearchField(),
+              16.0.height,
+              Expanded(
+                  child: ListView.builder(
+                itemBuilder: (context, index) => Padding(
+                  padding: EdgeInsets.only(bottom: 12.h),
+                  child: cardNetwork(
+                    chain: controller.listChain[index],
+                    isSelected: controller.listChain[index].chainId ==
+                        controller.evm.selectedChain.value.chainId,
                   ),
-                  textAlign: TextAlign.center,
                 ),
-                SecondaryButton(
-                  title: "Add Network",
-                  icon: Icon(
-                    Icons.add_circle_outline_rounded,
-                    size: 24.h,
-                    color: AppColor.primaryColor,
+                itemCount: controller.listChain.length,
+              )),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Couldn't find your network?\nTap the below button to add.",
+                    style: AppFont.reguler12.copyWith(
+                      color: AppColor.grayColor,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  onPressed: () {
-                    Get.to(() => AddNetworkPage());
-                  },
-                  margin: EdgeInsets.symmetric(vertical: 24.h),
-                ),
-              ],
-            )
-          ],
-        ),
+                  SecondaryButton(
+                    title: "Add Network",
+                    icon: Icon(
+                      Icons.add_circle_outline_rounded,
+                      size: 24.h,
+                      color: AppColor.primaryColor,
+                    ),
+                    onPressed: () {
+                      Get.to(() => AddNetworkPage());
+                    },
+                    margin: EdgeInsets.symmetric(vertical: 24.h),
+                  ),
+                ],
+              )
+            ],
+          );
+        }),
       );
     }
 

@@ -100,20 +100,15 @@ class EvmController extends GetxController {
     } catch (error) {
       print("Error loading asset: $error");
     }
-    // final erc20AbiString = await rootBundle.loadString('asset/abi/ERC-2O.json');
-    // erc20Abi = ContractAbi.fromJson(erc20AbiString, 'ERC20');
-    // abi = ContractABI.fromJson(jsonDecode(erc20AbiString));
 
-    // await initialzedNetwork();
+    final addresses = await DbHelper.instance.readAddressList();
 
-    // final addresses = await DbHelper.instance.readAddressList();
+    addressList.clear();
+    addressList.assignAll(addresses!);
 
-    // addressList.clear();
-    // addressList.assignAll(addresses!);
-
-    // if (selectedAddress.value.address == null) {
-    //   selectedAddress.value = address;
-    // }
+    if (selectedAddress.value.address == null) {
+      selectedAddress.value = address;
+    }
   }
 
   initialzedNetwork() async {
@@ -184,6 +179,8 @@ class EvmController extends GetxController {
     isLoadingNetwork.value = true;
     await initialize();
     await initializeTokens();
+    await Future.delayed(const Duration(seconds: 5));
+
     // await initializedTxHistory();
     // getDappsHistory();
 
@@ -196,7 +193,7 @@ class EvmController extends GetxController {
     );
     var httpClient = Client();
 
-    // channel = IOWebSocketChannel.connect("ws://128.199.211.112:8546");
+    // // channel = IOWebSocketChannel.connect("ws://128.199.211.112:8546");
 
     web3client = Web3Client(
       selectedChain.value.rpc ?? "",
@@ -209,14 +206,15 @@ class EvmController extends GetxController {
     //   isLoadingNetwork.value = false;
     //   await getMultipleTokenBalances();
 
-    //   }
+    //   //   }
     //   // getTokenHistory("0xEBbc3452Cc911591e4F18f3b36727Df45d6bd1f9");
 
     //   // getEthBalancePeriodic();
     // } else {
     //   scrollController = ScrollController();
-    //   isLoadingNetwork.value = false;
     // }
+
+    isLoadingNetwork.value = false;
     // checkForUpdate();
     super.onInit();
   }

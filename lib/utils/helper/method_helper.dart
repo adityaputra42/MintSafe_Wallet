@@ -11,4 +11,12 @@ class MethodHelper {
         "Success", "copy successfully",
         backgroundColor: AppColor.primaryColor, colorText: AppColor.textDark));
   }
+
+  shortAddress({required String address, int length = 5}) {
+    if (address != '') {
+      return "${address.substring(0, length)}...${address.substring(address.length - length)}";
+    } else {
+      return '';
+    }
+  }
 }

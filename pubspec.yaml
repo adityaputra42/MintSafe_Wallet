@@ -43,6 +43,7 @@ dependencies:
   percent_indicator: ^4.2.3
   qr_flutter: ^4.1.0
   shared_preferences: ^2.2.1
+  skeletonizer: ^0.8.0
   url_launcher: ^6.1.11
   wallet_connect: ^1.0.4
   web3_provider: ^1.1.4
@@ -58,8 +59,8 @@ flutter:
   assets:
     - asset/image/
     - asset/icon/
-    - asset/abi/ERC-20.json
-    - asset/abi/chain.json
+    - asset/abi/
+  
 
   fonts:
     - family: Poppins

@@ -3,9 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/domain/controller/controller.dart';
+import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/view/pages/dapp/dapp_page.dart';
 import 'package:mintsafe_wallet/view/pages/discover/discover_page.dart';
 import 'package:mintsafe_wallet/view/pages/setting/setting_page.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../config/config.dart';
 import 'Home_page/home_page.dart';
@@ -19,11 +21,11 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final BottomNavBarController controller = Get.put(BottomNavBarController());
-  late EvmController evm;
+  late EvmNewController evm;
 
   @override
   void initState() {
-    evm = Get.put(EvmController(address: widget.address));
+    evm = Get.put(EvmNewController(address: widget.address));
     super.initState();
   }
 
@@ -49,6 +51,7 @@ class _MainPageState extends State<MainPage> {
           );
       }
     }
+    // isLoadingNetwork.value,
 
     return Obx(() {
       return Scaffold(
