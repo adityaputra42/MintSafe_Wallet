@@ -31,12 +31,13 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
-            color: AppColor.primaryColor,
-            boxShadow: [
+            gradient: LinearGradient(colors: [
+              Color(int.parse(evm.selectedChain.value.color ?? "0xff1AA9A4")),
+              AppColor.cardDark
+            ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+            boxShadow: const [
               BoxShadow(
-                  blurRadius: 1,
-                  spreadRadius: 1,
-                  color: AppColor.grayColor.withOpacity(0.25))
+                  blurRadius: 0.5, spreadRadius: 0.5, color: Colors.black12)
             ],
             image: const DecorationImage(
                 image: AssetImage(AppImage.masking), fit: BoxFit.cover)),
@@ -73,6 +74,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             CardAction(
+              // color: Colors.white.withOpacity(0.8),
               scan: () {
                 Get.to(() => const ScannPage());
               },
@@ -268,7 +270,7 @@ class HomePage extends StatelessWidget {
                                 ),
                                 16.0.height,
                                 controller.tabIndex.value == 0
-                                    ? const TokenList()
+                                    ? TokenList()
                                     : const NftList()
                                 // TabBarView(children: [Wall()])
                               ],

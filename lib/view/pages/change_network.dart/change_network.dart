@@ -31,7 +31,7 @@ class ChangeNetwork extends StatelessWidget {
                 child: Container(
                     padding: EdgeInsets.all(1.h),
                     color: Colors.transparent,
-                    child: Image.asset(AppImage.eth)),
+                    child: Image.asset(chain.logo ?? AppImage.eth)),
               ),
             ),
             16.0.width,

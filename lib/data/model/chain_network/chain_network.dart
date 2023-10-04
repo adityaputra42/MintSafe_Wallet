@@ -17,7 +17,8 @@ class ChainNetwork {
     this.rpc,
     this.chainId,
     this.explorer,
-    this.isTestnet,
+    this.logo,
+    this.color,
     this.selected = false,
   });
   Id? id = Isar.autoIncrement;
@@ -26,7 +27,8 @@ class ChainNetwork {
   String? rpc;
   String? chainId;
   String? explorer;
-  bool? isTestnet;
+  String? logo;
+  String? color;
   bool selected;
 
   ChainNetwork copyWith({
@@ -35,16 +37,17 @@ class ChainNetwork {
     String? rpc,
     String? chainId,
     String? explorer,
-    bool? isTestnet,
+    String? logo,
+    String? color,
   }) =>
       ChainNetwork(
-        name: name ?? this.name,
-        symbol: symbol ?? this.symbol,
-        rpc: rpc ?? this.rpc,
-        chainId: chainId ?? this.chainId,
-        explorer: explorer ?? this.explorer,
-        isTestnet: isTestnet ?? this.isTestnet,
-      );
+          name: name ?? this.name,
+          symbol: symbol ?? this.symbol,
+          rpc: rpc ?? this.rpc,
+          chainId: chainId ?? this.chainId,
+          explorer: explorer ?? this.explorer,
+          logo: logo ?? this.logo,
+          color: color ?? this.color);
 
   factory ChainNetwork.fromJson(Map<String, dynamic> json) => ChainNetwork(
         name: json["name"],
@@ -52,7 +55,8 @@ class ChainNetwork {
         rpc: json["RPC"],
         chainId: json["chainId"],
         explorer: json["explorer"],
-        isTestnet: json["isTestnet"],
+        logo: json["logo"],
+        color: json["color"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -61,6 +65,7 @@ class ChainNetwork {
         "RPC": rpc,
         "chainId": chainId,
         "explorer": explorer,
-        "isTestnet": isTestnet,
+        "color": color,
+        "logo": logo,
       };
 }

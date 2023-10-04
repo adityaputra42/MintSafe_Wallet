@@ -17,39 +17,39 @@ const TokenSchema = CollectionSchema(
   name: r'Token',
   id: 1141055021699684464,
   properties: {
-    r'addressWallet': PropertySchema(
-      id: 0,
-      name: r'addressWallet',
-      type: IsarType.string,
-    ),
     r'balance': PropertySchema(
-      id: 1,
+      id: 0,
       name: r'balance',
       type: IsarType.double,
     ),
     r'chainId': PropertySchema(
-      id: 2,
+      id: 1,
       name: r'chainId',
       type: IsarType.string,
     ),
     r'contractAddress': PropertySchema(
-      id: 3,
+      id: 2,
       name: r'contractAddress',
       type: IsarType.string,
     ),
     r'decimal': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'decimal',
       type: IsarType.long,
+    ),
+    r'logo': PropertySchema(
+      id: 4,
+      name: r'logo',
+      type: IsarType.string,
     ),
     r'name': PropertySchema(
       id: 5,
       name: r'name',
       type: IsarType.string,
     ),
-    r'tokenSymbol': PropertySchema(
+    r'symbol': PropertySchema(
       id: 6,
-      name: r'tokenSymbol',
+      name: r'symbol',
       type: IsarType.string,
     )
   },
@@ -74,12 +74,6 @@ int _tokenEstimateSize(
 ) {
   var bytesCount = offsets.last;
   {
-    final value = object.addressWallet;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
     final value = object.chainId;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -92,13 +86,19 @@ int _tokenEstimateSize(
     }
   }
   {
+    final value = object.logo;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.name;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   {
-    final value = object.tokenSymbol;
+    final value = object.symbol;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -112,13 +112,13 @@ void _tokenSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.addressWallet);
-  writer.writeDouble(offsets[1], object.balance);
-  writer.writeString(offsets[2], object.chainId);
-  writer.writeString(offsets[3], object.contractAddress);
-  writer.writeLong(offsets[4], object.decimal);
+  writer.writeDouble(offsets[0], object.balance);
+  writer.writeString(offsets[1], object.chainId);
+  writer.writeString(offsets[2], object.contractAddress);
+  writer.writeLong(offsets[3], object.decimal);
+  writer.writeString(offsets[4], object.logo);
   writer.writeString(offsets[5], object.name);
-  writer.writeString(offsets[6], object.tokenSymbol);
+  writer.writeString(offsets[6], object.symbol);
 }
 
 Token _tokenDeserialize(
@@ -128,14 +128,14 @@ Token _tokenDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Token(
-    addressWallet: reader.readStringOrNull(offsets[0]),
-    balance: reader.readDoubleOrNull(offsets[1]),
-    chainId: reader.readStringOrNull(offsets[2]),
-    contractAddress: reader.readStringOrNull(offsets[3]),
-    decimal: reader.readLongOrNull(offsets[4]),
+    balance: reader.readDoubleOrNull(offsets[0]),
+    chainId: reader.readStringOrNull(offsets[1]),
+    contractAddress: reader.readStringOrNull(offsets[2]),
+    decimal: reader.readLongOrNull(offsets[3]),
     id: id,
+    logo: reader.readStringOrNull(offsets[4]),
     name: reader.readStringOrNull(offsets[5]),
-    tokenSymbol: reader.readStringOrNull(offsets[6]),
+    symbol: reader.readStringOrNull(offsets[6]),
   );
   return object;
 }
@@ -148,15 +148,15 @@ P _tokenDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readStringOrNull(offset)) as P;
-    case 1:
       return (reader.readDoubleOrNull(offset)) as P;
+    case 1:
+      return (reader.readStringOrNull(offset)) as P;
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
-    case 4:
       return (reader.readLongOrNull(offset)) as P;
+    case 4:
+      return (reader.readStringOrNull(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
@@ -254,152 +254,6 @@ extension TokenQueryWhere on QueryBuilder<Token, Token, QWhereClause> {
 }
 
 extension TokenQueryFilter on QueryBuilder<Token, Token, QFilterCondition> {
-  QueryBuilder<Token, Token, QAfterFilterCondition> addressWalletIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'addressWallet',
-      ));
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterFilterCondition> addressWalletIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'addressWallet',
-      ));
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterFilterCondition> addressWalletEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'addressWallet',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterFilterCondition> addressWalletGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'addressWallet',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterFilterCondition> addressWalletLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'addressWallet',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterFilterCondition> addressWalletBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'addressWallet',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterFilterCondition> addressWalletStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'addressWallet',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterFilterCondition> addressWalletEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'addressWallet',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterFilterCondition> addressWalletContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'addressWallet',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterFilterCondition> addressWalletMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'addressWallet',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterFilterCondition> addressWalletIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'addressWallet',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterFilterCondition> addressWalletIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'addressWallet',
-        value: '',
-      ));
-    });
-  }
-
   QueryBuilder<Token, Token, QAfterFilterCondition> balanceIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -907,6 +761,150 @@ extension TokenQueryFilter on QueryBuilder<Token, Token, QFilterCondition> {
     });
   }
 
+  QueryBuilder<Token, Token, QAfterFilterCondition> logoIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'logo',
+      ));
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterFilterCondition> logoIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'logo',
+      ));
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterFilterCondition> logoEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'logo',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterFilterCondition> logoGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'logo',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterFilterCondition> logoLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'logo',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterFilterCondition> logoBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'logo',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterFilterCondition> logoStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'logo',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterFilterCondition> logoEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'logo',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterFilterCondition> logoContains(String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'logo',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterFilterCondition> logoMatches(String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'logo',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterFilterCondition> logoIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'logo',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterFilterCondition> logoIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'logo',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<Token, Token, QAfterFilterCondition> nameIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1051,36 +1049,36 @@ extension TokenQueryFilter on QueryBuilder<Token, Token, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> tokenSymbolIsNull() {
+  QueryBuilder<Token, Token, QAfterFilterCondition> symbolIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'tokenSymbol',
+        property: r'symbol',
       ));
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> tokenSymbolIsNotNull() {
+  QueryBuilder<Token, Token, QAfterFilterCondition> symbolIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'tokenSymbol',
+        property: r'symbol',
       ));
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> tokenSymbolEqualTo(
+  QueryBuilder<Token, Token, QAfterFilterCondition> symbolEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'tokenSymbol',
+        property: r'symbol',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> tokenSymbolGreaterThan(
+  QueryBuilder<Token, Token, QAfterFilterCondition> symbolGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1088,14 +1086,14 @@ extension TokenQueryFilter on QueryBuilder<Token, Token, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'tokenSymbol',
+        property: r'symbol',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> tokenSymbolLessThan(
+  QueryBuilder<Token, Token, QAfterFilterCondition> symbolLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1103,14 +1101,14 @@ extension TokenQueryFilter on QueryBuilder<Token, Token, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'tokenSymbol',
+        property: r'symbol',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> tokenSymbolBetween(
+  QueryBuilder<Token, Token, QAfterFilterCondition> symbolBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -1119,7 +1117,7 @@ extension TokenQueryFilter on QueryBuilder<Token, Token, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'tokenSymbol',
+        property: r'symbol',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1129,69 +1127,68 @@ extension TokenQueryFilter on QueryBuilder<Token, Token, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> tokenSymbolStartsWith(
+  QueryBuilder<Token, Token, QAfterFilterCondition> symbolStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'tokenSymbol',
+        property: r'symbol',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> tokenSymbolEndsWith(
+  QueryBuilder<Token, Token, QAfterFilterCondition> symbolEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'tokenSymbol',
+        property: r'symbol',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> tokenSymbolContains(
-      String value,
+  QueryBuilder<Token, Token, QAfterFilterCondition> symbolContains(String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'tokenSymbol',
+        property: r'symbol',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> tokenSymbolMatches(
+  QueryBuilder<Token, Token, QAfterFilterCondition> symbolMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'tokenSymbol',
+        property: r'symbol',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> tokenSymbolIsEmpty() {
+  QueryBuilder<Token, Token, QAfterFilterCondition> symbolIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'tokenSymbol',
+        property: r'symbol',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> tokenSymbolIsNotEmpty() {
+  QueryBuilder<Token, Token, QAfterFilterCondition> symbolIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'tokenSymbol',
+        property: r'symbol',
         value: '',
       ));
     });
@@ -1203,18 +1200,6 @@ extension TokenQueryObject on QueryBuilder<Token, Token, QFilterCondition> {}
 extension TokenQueryLinks on QueryBuilder<Token, Token, QFilterCondition> {}
 
 extension TokenQuerySortBy on QueryBuilder<Token, Token, QSortBy> {
-  QueryBuilder<Token, Token, QAfterSortBy> sortByAddressWallet() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'addressWallet', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterSortBy> sortByAddressWalletDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'addressWallet', Sort.desc);
-    });
-  }
-
   QueryBuilder<Token, Token, QAfterSortBy> sortByBalance() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'balance', Sort.asc);
@@ -1263,6 +1248,18 @@ extension TokenQuerySortBy on QueryBuilder<Token, Token, QSortBy> {
     });
   }
 
+  QueryBuilder<Token, Token, QAfterSortBy> sortByLogo() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'logo', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterSortBy> sortByLogoDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'logo', Sort.desc);
+    });
+  }
+
   QueryBuilder<Token, Token, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -1275,32 +1272,20 @@ extension TokenQuerySortBy on QueryBuilder<Token, Token, QSortBy> {
     });
   }
 
-  QueryBuilder<Token, Token, QAfterSortBy> sortByTokenSymbol() {
+  QueryBuilder<Token, Token, QAfterSortBy> sortBySymbol() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tokenSymbol', Sort.asc);
+      return query.addSortBy(r'symbol', Sort.asc);
     });
   }
 
-  QueryBuilder<Token, Token, QAfterSortBy> sortByTokenSymbolDesc() {
+  QueryBuilder<Token, Token, QAfterSortBy> sortBySymbolDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tokenSymbol', Sort.desc);
+      return query.addSortBy(r'symbol', Sort.desc);
     });
   }
 }
 
 extension TokenQuerySortThenBy on QueryBuilder<Token, Token, QSortThenBy> {
-  QueryBuilder<Token, Token, QAfterSortBy> thenByAddressWallet() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'addressWallet', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterSortBy> thenByAddressWalletDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'addressWallet', Sort.desc);
-    });
-  }
-
   QueryBuilder<Token, Token, QAfterSortBy> thenByBalance() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'balance', Sort.asc);
@@ -1361,6 +1346,18 @@ extension TokenQuerySortThenBy on QueryBuilder<Token, Token, QSortThenBy> {
     });
   }
 
+  QueryBuilder<Token, Token, QAfterSortBy> thenByLogo() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'logo', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Token, Token, QAfterSortBy> thenByLogoDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'logo', Sort.desc);
+    });
+  }
+
   QueryBuilder<Token, Token, QAfterSortBy> thenByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -1373,28 +1370,20 @@ extension TokenQuerySortThenBy on QueryBuilder<Token, Token, QSortThenBy> {
     });
   }
 
-  QueryBuilder<Token, Token, QAfterSortBy> thenByTokenSymbol() {
+  QueryBuilder<Token, Token, QAfterSortBy> thenBySymbol() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tokenSymbol', Sort.asc);
+      return query.addSortBy(r'symbol', Sort.asc);
     });
   }
 
-  QueryBuilder<Token, Token, QAfterSortBy> thenByTokenSymbolDesc() {
+  QueryBuilder<Token, Token, QAfterSortBy> thenBySymbolDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tokenSymbol', Sort.desc);
+      return query.addSortBy(r'symbol', Sort.desc);
     });
   }
 }
 
 extension TokenQueryWhereDistinct on QueryBuilder<Token, Token, QDistinct> {
-  QueryBuilder<Token, Token, QDistinct> distinctByAddressWallet(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'addressWallet',
-          caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<Token, Token, QDistinct> distinctByBalance() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'balance');
@@ -1422,6 +1411,13 @@ extension TokenQueryWhereDistinct on QueryBuilder<Token, Token, QDistinct> {
     });
   }
 
+  QueryBuilder<Token, Token, QDistinct> distinctByLogo(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'logo', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<Token, Token, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1429,10 +1425,10 @@ extension TokenQueryWhereDistinct on QueryBuilder<Token, Token, QDistinct> {
     });
   }
 
-  QueryBuilder<Token, Token, QDistinct> distinctByTokenSymbol(
+  QueryBuilder<Token, Token, QDistinct> distinctBySymbol(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'tokenSymbol', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'symbol', caseSensitive: caseSensitive);
     });
   }
 }
@@ -1441,12 +1437,6 @@ extension TokenQueryProperty on QueryBuilder<Token, Token, QQueryProperty> {
   QueryBuilder<Token, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
-    });
-  }
-
-  QueryBuilder<Token, String?, QQueryOperations> addressWalletProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'addressWallet');
     });
   }
 
@@ -1474,15 +1464,21 @@ extension TokenQueryProperty on QueryBuilder<Token, Token, QQueryProperty> {
     });
   }
 
+  QueryBuilder<Token, String?, QQueryOperations> logoProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'logo');
+    });
+  }
+
   QueryBuilder<Token, String?, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
     });
   }
 
-  QueryBuilder<Token, String?, QQueryOperations> tokenSymbolProperty() {
+  QueryBuilder<Token, String?, QQueryOperations> symbolProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'tokenSymbol');
+      return query.addPropertyName(r'symbol');
     });
   }
 }

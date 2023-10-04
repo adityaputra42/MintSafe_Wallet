@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:eth_abi_codec/eth_abi_codec.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -19,6 +18,8 @@ class EvmNewController extends GetxController {
   var isLoadingNetwork = false.obs;
   var selectedChain = ChainNetwork().obs;
   var listChain = <ChainNetwork>[].obs;
+  var listToken = <Token>[].obs;
+  var listSelectedToken = <Token>[].obs;
   var dappsHistory = <DappsHistory>[].obs;
 
   Web3Client? web3client;
@@ -34,7 +35,7 @@ class EvmNewController extends GetxController {
   void onInit() async {
     isLoadingNetwork.value = true;
     await initialize();
-    await initializeTokens();
+    await getTokens();
 
     initializedRecentAddress();
     decrypted(
@@ -45,7 +46,7 @@ class EvmNewController extends GetxController {
       selectedChain.value.rpc ?? "",
       httpClient,
     );
-    log(selectedChain.value.symbol ?? '');
+
     isLoadingNetwork.value = false;
     super.onInit();
   }
@@ -105,9 +106,37 @@ class EvmNewController extends GetxController {
     selectedChain.refresh();
     log(selectedChain.value.symbol ?? '');
     listChain.refresh();
+    initialzedToken();
   }
 
-  initializeTokens() async {
+  initialzedToken() async {
+    /// GET LIST Token
+    listToken.clear();
+    final listTokens = await DbHelper.instance.getAllTokens();
+
+    if (listTokens.isEmpty) {
+      final tokens = await rootBundle.loadString('asset/abi/token.json');
+      listToken.value = tokenFromJson(tokens);
+      await DbHelper.instance.setToken(listToken);
+      final selectedToken = await DbHelper.instance
+          .getSelectedListToken(selectedChain.value.chainId ?? "");
+      if (selectedToken.isEmpty) {
+        listSelectedToken.value = [];
+      } else {
+        listSelectedToken.value = selectedToken;
+      }
+    } else {
+      final token = await DbHelper.instance
+          .getSelectedListToken(selectedChain.value.chainId ?? "");
+      listSelectedToken.value = token;
+      listToken.value = listTokens;
+    }
+
+    listSelectedToken.refresh();
+    listToken.refresh();
+  }
+
+  getTokens() async {
     final tokens = await DbHelper.instance.getAllToken();
     tokenList.clear();
     tokenList.addAll(tokens);
@@ -120,28 +149,5 @@ class EvmNewController extends GetxController {
     recentAddress.clear();
     recentAddress.addAll(list);
     recentAddress.refresh();
-  }
-
-  void changeNetwork(ChainNetwork network, BuildContext context) async {
-    var httpClient = http.Client();
-    Get.back();
-
-    await DbHelper.instance.unSelectNetwork(selectedChain.value.id!);
-    selectedChain.value = network;
-    selectedChain.refresh();
-
-    isLoadingNetwork.value = true;
-
-    await DbHelper.instance.changeNetwork(network.id!);
-
-    web3client = Web3Client(
-      selectedChain.value.rpc ?? "",
-      httpClient,
-    );
-
-    // await getBalance();
-    // // await findAllActivity();
-    isLoadingNetwork.value = false;
-    // await getMultipleTokenBalances();
   }
 }

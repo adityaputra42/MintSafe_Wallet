@@ -29,6 +29,10 @@ class ChangeNetworkController extends GetxController {
       evm.selectedChain.value.rpc ?? "",
       httpClient,
     );
+    evm.listSelectedToken.clear();
+    final tokens =
+        await DbHelper.instance.getSelectedListToken(network.chainId ?? "");
+    evm.listSelectedToken.value = tokens;
     // await getBalance();
     // // await findAllActivity();
     evm.isLoadingNetwork.value = false;

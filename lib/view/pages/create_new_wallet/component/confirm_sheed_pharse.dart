@@ -8,7 +8,7 @@ import '../../../../domain/controller/create_wallet_controller.dart';
 import '../../../widget/widget.dart';
 
 class ConfirmSheedPharse extends StatelessWidget {
-ConfirmSheedPharse({
+  ConfirmSheedPharse({
     super.key,
   });
 
@@ -57,13 +57,13 @@ ConfirmSheedPharse({
         feedback: Container(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
           height: 42.h,
-          width: MediaQuery.of(context).size.width * 0.258,
+          width: MediaQuery.of(context).size.width * 0.264,
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
                     blurRadius: 0.3.h,
                     spreadRadius: 0.5.h,
-                    color: AppColor.grayColor.withOpacity(0.25))
+                    color: Colors.black12)
               ],
               borderRadius: BorderRadius.circular(8.r),
               color: AppColor.primaryColor),
@@ -73,19 +73,15 @@ ConfirmSheedPharse({
                   color: AppColor.textDark,
                 )),
           ),
-        ),childWhenDragging: Container(
+        ),
+        childWhenDragging: Container(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
           height: 42.h,
-          width: MediaQuery.of(context).size.width * 0.258,
-          decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 0.7.h,
-                    spreadRadius: 0.7.h,
-                    color: AppColor.grayColor.withOpacity(0.15))
-              ],
-              borderRadius: BorderRadius.circular(8.r),
-              color: AppColor.bgDark),
+          width: MediaQuery.of(context).size.width * 0.264,
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+                blurRadius: 0.7.h, spreadRadius: 0.7.h, color: Colors.black12)
+          ], borderRadius: BorderRadius.circular(8.r), color: AppColor.bgDark),
           child: Center(
             child: Text(text,
                 style: AppFont.medium16.copyWith(
@@ -96,7 +92,7 @@ ConfirmSheedPharse({
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
           height: 42.h,
-          width: MediaQuery.of(context).size.width * 0.258,
+          width: MediaQuery.of(context).size.width * 0.264,
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(

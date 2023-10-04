@@ -5,7 +5,8 @@
           "RPC" : "https://api.mycryptoapi.com/eth",
           "chainId" : "1",
           "explorer" : "https://etherscan.io",
-          "isTestnet" : false
+          "logo":"asset/logo/eth.png",
+          "color":"0xff343434"
           
       },
       {
@@ -14,62 +15,70 @@
           "RPC" : "https://bsc-dataseed1.bnbchain.org",
           "chainId" : "56",
           "explorer" : "https://bscscan.com",
-          "isTestnet" : false
+          "logo":  "asset/logo/bnb.png",  
+          "color":"0xffF3BA2F"
       },
       {
-        "name" : "Polygon Mainnet",
-        "symbol" : "MATIC",
-        "RPC" : "https://polygon-rpc.com/",
-        "chainId" : "137",
-        "explorer" : "https://polygonscan.com",
-        "isTestnet" : false
+          "name" : "Polygon Mainnet",
+          "symbol" : "MATIC",
+          "RPC" : "https://polygon-rpc.com/",
+          "chainId" : "137",
+          "explorer" : "https://polygonscan.com",
+          "logo":"asset/logo/matic.png",
+          "color":"0xff8247E5"
       },
       {
-        "name" : "Arbitrum One",
-        "symbol" : "ETH",
-        "RPC" : "https://arb1.arbitrum.io/rpc",
-        "chainId" : "42161",
-        "explorer" : "https://arbiscan.io",
-        "isTestnet" : false
+          "name" : "Arbitrum One",
+          "symbol" : "ETH",
+          "RPC" : "https://arb1.arbitrum.io/rpc",
+          "chainId" : "42161",
+          "explorer" : "https://arbiscan.io",
+          "logo":"asset/logo/arb.png",
+          "color":"0xff2D374B"
       },
       {
-        "name" : "OP Mainnet",
-        "symbol" : "ETH",
-        "RPC" : "https://mainnet.optimism.io",
-        "chainId" : "10",
-        "explorer" : "https://optimistic.etherscan.io",
-        "isTestnet" : false
+          "name" : "OP Mainnet",
+          "symbol" : "ETH",
+          "RPC" : "https://mainnet.optimism.io",
+          "chainId" : "10",
+          "explorer" : "https://optimistic.etherscan.io",
+          "logo":"asset/logo/optimism.png",
+          "color":"0xff"
       },
       {
-        "name" : "Manta Pacific Mainnet",
-        "symbol" : "ETH",
-        "RPC" : "https://pacific-rpc.manta.network/http",
-        "chainId" : "169",
-        "explorer" : "https://pacific-explorer.manta.network",
-        "isTestnet" : false
+          "name" : "Manta Pacific Mainnet",
+          "symbol" : "ETH",
+          "RPC" : "https://pacific-rpc.manta.network/http",
+          "chainId" : "169",
+          "explorer" : "https://pacific-explorer.manta.network",
+          "logo":"asset/logo/eth.png",
+          "color":"0xffE1147B"
       },
       {
-        "name" : "Base",
-        "symbol" : "ETH",
-        "RPC" : "https://mainnet.base.org/",
-        "chainId" : "8453",
-        "explorer" : "https://basescan.org",
-        "isTestnet" : false
+          "name" : "Base",
+          "symbol" : "ETH",
+          "RPC" : "https://mainnet.base.org/",
+          "chainId" : "8453",
+          "explorer" : "https://basescan.org",
+          "logo":"asset/logo/eth.png",
+          "color":"0xff0033AD"
       },
       {
-        "name" : "Avalanche C-Chain",
-        "symbol" : "AVAX",
-        "RPC" : "https://api.avax.network/ext/bc/C/rpc",
-        "chainId" : "43114",
-        "explorer" : "https://snowtrace.io",
-        "isTestnet" : false
+          "name" : "Avalanche C-Chain",
+          "symbol" : "AVAX",
+          "RPC" : "https://api.avax.network/ext/bc/C/rpc",
+          "chainId" : "43114",
+          "explorer" : "https://snowtrace.io",
+          "logo":"asset/logo/avax.png",
+          "color":"0xffE84142"
       },
       {
-        "name" : "Linea",
-        "symbol" : "ETH",
-        "RPC" : "https://rpc.linea.build",
-        "chainId" : "59144",
-        "explorer" : "https://bridge.linea.build",
-        "isTestnet" : false
+          "name" : "Linea",
+          "symbol" : "ETH",
+          "RPC" : "https://rpc.linea.build",
+          "chainId" : "59144",
+          "explorer" : "https://bridge.linea.build",
+          "logo":"asset/logo/eth.png",
+          "color":"0xff171717"
       }
 ]

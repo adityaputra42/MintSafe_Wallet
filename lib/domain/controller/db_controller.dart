@@ -21,7 +21,8 @@ class DBController extends GetxController {
         RecentAddressSchema,
         DappsHistorySchema
       ],
-      inspector: true, directory: '',
+      inspector: true,
+      directory: '',
     );
     // readAddress();
     final address = await getSelectedWallet();
@@ -162,7 +163,7 @@ class DBController extends GetxController {
       item.rpc = network.rpc;
       item.symbol = network.symbol;
       item.explorer = network.explorer;
-      item.isTestnet = network.isTestnet;
+      item.logo = network.logo;
 
       await isar.chainNetworks.put(item);
     });
@@ -204,7 +205,6 @@ class DBController extends GetxController {
 
   Future<void> deleteToken(int id) async {
     await isar.writeTxn(() async {
-    
       await isar.results.delete(id);
     });
   }

@@ -60,6 +60,7 @@ flutter:
     - asset/image/
     - asset/icon/
     - asset/abi/
+    - asset/logo/
   
 
   fonts:

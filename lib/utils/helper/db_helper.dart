@@ -21,7 +21,8 @@ class DbHelper {
         ResultSchema,
         TransactionHistorySchema,
         RecentAddressSchema,
-        DappsHistorySchema
+        DappsHistorySchema,
+        TokenSchema,
       ],
       inspector: true,
       directory: dir.path,
@@ -131,7 +132,7 @@ class DbHelper {
     });
   }
 
-  Future<void> ediChainNetwork(ChainNetwork network) async {
+  Future<void> editChainNetwork(ChainNetwork network) async {
     await isar.writeTxn(() async {
       final item = await isar.chainNetworks.get(network.id!);
       item!.chainId = network.chainId;
@@ -139,8 +140,8 @@ class DbHelper {
       item.rpc = network.rpc;
       item.symbol = network.symbol;
       item.explorer = network.explorer;
-      item.isTestnet = network.isTestnet;
-
+      item.logo = network.logo;
+      item.color = network.color;
       await isar.chainNetworks.put(item);
     });
   }
@@ -218,5 +219,24 @@ class DbHelper {
     });
 
     return list;
+  }
+
+  Future<void> setToken(List<Token> tokens) async {
+    await isar.writeTxn(() async {
+      await isar.tokens.putAll(tokens);
+    });
+  }
+
+  Future<List<Token>> getAllTokens() async {
+    List<Token> token = [];
+    await isar.txn(() async {
+      token = await isar.tokens.where().findAll();
+    });
+    return token;
+  }
+
+  Future<List<Token>> getSelectedListToken(String chainId) async {
+    final tokens = await isar.tokens.filter().chainIdEqualTo(chainId).findAll();
+    return tokens;
   }
 }

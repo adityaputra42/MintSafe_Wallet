@@ -5,17 +5,18 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mintsafe_wallet/config/config.dart';
 import 'package:mintsafe_wallet/data/data.dart';
+import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/utils/extension/extension.dart';
 import 'package:mintsafe_wallet/view/pages/add_token/add_token.dart';
 import 'package:mintsafe_wallet/view/pages/detail_token/detail_token.dart';
 import 'package:mintsafe_wallet/view/widget/widget.dart';
 
 class TokenList extends StatelessWidget {
-  const TokenList({super.key});
-
+  TokenList({super.key});
+  final EvmNewController controller = Get.find();
   @override
   Widget build(BuildContext context) {
-    Widget cardToken() {
+    Widget cardToken(Token token) {
       return GestureDetector(
         onTap: () {
           Get.to(() => DetailToken());
@@ -41,7 +42,7 @@ class TokenList extends StatelessWidget {
                   child: Container(
                       padding: EdgeInsets.all(1.h),
                       color: AppColor.cardDark,
-                      child: Image.asset(AppImage.eth)),
+                      child: Image.asset(token.logo ?? AppImage.eth)),
                 ),
               ),
               8.0.width,
@@ -53,7 +54,7 @@ class TokenList extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Ethereum",
+                          token.name ?? "",
                           style: AppFont.medium16
                               .copyWith(color: AppColor.textDark),
                         ),
@@ -110,16 +111,21 @@ class TokenList extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-       
-          Expanded(
-              child: ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 0.5.h),
-            itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.only(bottom: 8.h),
-              child: cardToken(),
-            ),
-            itemCount: 3,
-          )),
+          Obx(() {
+            return Expanded(
+                child: controller.listSelectedToken.isEmpty
+                    ? const Center(
+                        child: Empty(title: "No Token List"),
+                      )
+                    : ListView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 0.5.h),
+                        itemBuilder: (context, index) => Padding(
+                          padding: EdgeInsets.only(bottom: 8.h),
+                          child: cardToken(controller.listSelectedToken[index]),
+                        ),
+                        itemCount: controller.listSelectedToken.length,
+                      ));
+          }),
           SecondaryButton(
             title: "Add Token",
             icon: Icon(
