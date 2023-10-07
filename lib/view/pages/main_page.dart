@@ -7,7 +7,6 @@ import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/view/pages/dapp/dapp_page.dart';
 import 'package:mintsafe_wallet/view/pages/discover/discover_page.dart';
 import 'package:mintsafe_wallet/view/pages/setting/setting_page.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../config/config.dart';
 import 'Home_page/home_page.dart';
@@ -25,7 +24,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    evm = Get.put(EvmNewController(address: widget.address));
+    evm = Get.put(EvmNewController( widget.address));
     super.initState();
   }
 

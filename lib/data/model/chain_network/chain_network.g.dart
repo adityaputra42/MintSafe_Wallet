@@ -32,29 +32,39 @@ const ChainNetworkSchema = CollectionSchema(
       name: r'explorer',
       type: IsarType.string,
     ),
-    r'logo': PropertySchema(
+    r'isTestnet': PropertySchema(
       id: 3,
+      name: r'isTestnet',
+      type: IsarType.bool,
+    ),
+    r'logo': PropertySchema(
+      id: 4,
       name: r'logo',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'name',
       type: IsarType.string,
     ),
     r'rpc': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'rpc',
       type: IsarType.string,
     ),
     r'selected': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'selected',
       type: IsarType.bool,
     ),
     r'symbol': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'symbol',
+      type: IsarType.string,
+    ),
+    r'tokenRegistry': PropertySchema(
+      id: 9,
+      name: r'tokenRegistry',
       type: IsarType.string,
     )
   },
@@ -120,6 +130,12 @@ int _chainNetworkEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  {
+    final value = object.tokenRegistry;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -132,11 +148,13 @@ void _chainNetworkSerialize(
   writer.writeString(offsets[0], object.chainId);
   writer.writeString(offsets[1], object.color);
   writer.writeString(offsets[2], object.explorer);
-  writer.writeString(offsets[3], object.logo);
-  writer.writeString(offsets[4], object.name);
-  writer.writeString(offsets[5], object.rpc);
-  writer.writeBool(offsets[6], object.selected);
-  writer.writeString(offsets[7], object.symbol);
+  writer.writeBool(offsets[3], object.isTestnet);
+  writer.writeString(offsets[4], object.logo);
+  writer.writeString(offsets[5], object.name);
+  writer.writeString(offsets[6], object.rpc);
+  writer.writeBool(offsets[7], object.selected);
+  writer.writeString(offsets[8], object.symbol);
+  writer.writeString(offsets[9], object.tokenRegistry);
 }
 
 ChainNetwork _chainNetworkDeserialize(
@@ -150,11 +168,13 @@ ChainNetwork _chainNetworkDeserialize(
     color: reader.readStringOrNull(offsets[1]),
     explorer: reader.readStringOrNull(offsets[2]),
     id: id,
-    logo: reader.readStringOrNull(offsets[3]),
-    name: reader.readStringOrNull(offsets[4]),
-    rpc: reader.readStringOrNull(offsets[5]),
-    selected: reader.readBoolOrNull(offsets[6]) ?? false,
-    symbol: reader.readStringOrNull(offsets[7]),
+    isTestnet: reader.readBoolOrNull(offsets[3]),
+    logo: reader.readStringOrNull(offsets[4]),
+    name: reader.readStringOrNull(offsets[5]),
+    rpc: reader.readStringOrNull(offsets[6]),
+    selected: reader.readBoolOrNull(offsets[7]) ?? false,
+    symbol: reader.readStringOrNull(offsets[8]),
+    tokenRegistry: reader.readStringOrNull(offsets[9]),
   );
   return object;
 }
@@ -173,14 +193,18 @@ P _chainNetworkDeserializeProp<P>(
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 4:
       return (reader.readStringOrNull(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
-      return (reader.readBoolOrNull(offset) ?? false) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 7:
+      return (reader.readBoolOrNull(offset) ?? false) as P;
+    case 8:
+      return (reader.readStringOrNull(offset)) as P;
+    case 9:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -811,6 +835,34 @@ extension ChainNetworkQueryFilter
     });
   }
 
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      isTestnetIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'isTestnet',
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      isTestnetIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'isTestnet',
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      isTestnetEqualTo(bool? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isTestnet',
+        value: value,
+      ));
+    });
+  }
+
   QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> logoIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1424,6 +1476,160 @@ extension ChainNetworkQueryFilter
       ));
     });
   }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      tokenRegistryIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'tokenRegistry',
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      tokenRegistryIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'tokenRegistry',
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      tokenRegistryEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'tokenRegistry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      tokenRegistryGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'tokenRegistry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      tokenRegistryLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'tokenRegistry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      tokenRegistryBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'tokenRegistry',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      tokenRegistryStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'tokenRegistry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      tokenRegistryEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'tokenRegistry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      tokenRegistryContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'tokenRegistry',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      tokenRegistryMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'tokenRegistry',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      tokenRegistryIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'tokenRegistry',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      tokenRegistryIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'tokenRegistry',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension ChainNetworkQueryObject
@@ -1467,6 +1673,18 @@ extension ChainNetworkQuerySortBy
   QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByExplorerDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'explorer', Sort.desc);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByIsTestnet() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isTestnet', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByIsTestnetDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isTestnet', Sort.desc);
     });
   }
 
@@ -1529,6 +1747,19 @@ extension ChainNetworkQuerySortBy
       return query.addSortBy(r'symbol', Sort.desc);
     });
   }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByTokenRegistry() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'tokenRegistry', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy>
+      sortByTokenRegistryDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'tokenRegistry', Sort.desc);
+    });
+  }
 }
 
 extension ChainNetworkQuerySortThenBy
@@ -1578,6 +1809,18 @@ extension ChainNetworkQuerySortThenBy
   QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByIsTestnet() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isTestnet', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByIsTestnetDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isTestnet', Sort.desc);
     });
   }
 
@@ -1640,6 +1883,19 @@ extension ChainNetworkQuerySortThenBy
       return query.addSortBy(r'symbol', Sort.desc);
     });
   }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByTokenRegistry() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'tokenRegistry', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy>
+      thenByTokenRegistryDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'tokenRegistry', Sort.desc);
+    });
+  }
 }
 
 extension ChainNetworkQueryWhereDistinct
@@ -1662,6 +1918,12 @@ extension ChainNetworkQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'explorer', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByIsTestnet() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isTestnet');
     });
   }
 
@@ -1698,6 +1960,14 @@ extension ChainNetworkQueryWhereDistinct
       return query.addDistinctBy(r'symbol', caseSensitive: caseSensitive);
     });
   }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByTokenRegistry(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'tokenRegistry',
+          caseSensitive: caseSensitive);
+    });
+  }
 }
 
 extension ChainNetworkQueryProperty
@@ -1723,6 +1993,12 @@ extension ChainNetworkQueryProperty
   QueryBuilder<ChainNetwork, String?, QQueryOperations> explorerProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'explorer');
+    });
+  }
+
+  QueryBuilder<ChainNetwork, bool?, QQueryOperations> isTestnetProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isTestnet');
     });
   }
 
@@ -1753,6 +2029,13 @@ extension ChainNetworkQueryProperty
   QueryBuilder<ChainNetwork, String?, QQueryOperations> symbolProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'symbol');
+    });
+  }
+
+  QueryBuilder<ChainNetwork, String?, QQueryOperations>
+      tokenRegistryProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'tokenRegistry');
     });
   }
 }

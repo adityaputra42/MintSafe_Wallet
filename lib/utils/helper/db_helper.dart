@@ -152,45 +152,6 @@ class DbHelper {
     });
   }
 
-  Future<List<Result>> getAllToken() async {
-    List<Result> tokens = [];
-    await isar.txn(() async {
-      tokens = await isar.results.where().findAll();
-    });
-    return tokens;
-  }
-
-  Future<void> addAllToken(List<Result> tokens) async {
-    await isar.writeTxn(() async {
-      await isar.results.putAll(tokens);
-    });
-  }
-
-  Future<void> addToken(Result token) async {
-    await isar.writeTxn(() async {
-      await isar.results.put(token);
-    });
-  }
-
-  Future<void> selectToken(Result token) async {
-    await isar.writeTxn(() async {
-      final result = await isar.results.get(token.id!);
-      result!.selected = token.selected;
-      await isar.results.put(result);
-    });
-  }
-
-  Future<void> deleteToken(int id) async {
-    await isar.writeTxn(() async {
-      await isar.results.delete(id);
-    });
-  }
-
-  Future<void> deleteAll() async {
-    await isar.writeTxn(() async {
-      await isar.results.clear();
-    });
-  }
 
   Future<void> updateWallet(int id, double balance) async {
     await isar.writeTxn(() async {
@@ -239,4 +200,51 @@ class DbHelper {
     final tokens = await isar.tokens.filter().chainIdEqualTo(chainId).findAll();
     return tokens;
   }
+
+
+
+
+  /// ######################### TOKEN #######################
+  Future<List<Result>> getAllToken() async {
+    List<Result> tokens = [];
+    await isar.txn(() async {
+      tokens = await isar.results.where().findAll();
+    });
+    return tokens;
+  }
+
+  Future<void> addAllToken(List<Result> tokens) async {
+    await isar.writeTxn(() async {
+      await isar.results.putAll(tokens);
+    });
+  }
+
+  Future<void> addToken(Result token) async {
+    await isar.writeTxn(() async {
+      await isar.results.put(token);
+    });
+  }
+
+  Future<void> selectToken(Result token) async {
+    await isar.writeTxn(() async {
+      final result = await isar.results.get(token.id!);
+      result!.selected = token.selected;
+      await isar.results.put(result);
+    });
+  }
+
+  Future<void> deleteToken(int id) async {
+    await isar.writeTxn(() async {
+      print("=================>");
+      print(id);
+      await isar.results.delete(id);
+    });
+  }
+
+  Future<void> deleteAll() async {
+    await isar.writeTxn(() async {
+      await isar.results.clear();
+    });
+  }
+
 }

@@ -6,3 +6,4 @@ export 'recent_address/recent_address.dart';
 export 'result_token/result_token.dart';
 export 'token/token.dart';
 export 'transaction_history/transaction_history.dart';
+export 'activity.dart';

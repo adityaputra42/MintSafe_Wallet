@@ -58,7 +58,8 @@ class Result {
       this.name,
       this.symbol,
       this.type,
-      this.chainId, this.selected});
+      this.chainId,
+      this.selected, this.image});
 
   Id? id = Isar.autoIncrement;
   double? balance;
@@ -70,18 +71,18 @@ class Result {
   String? type;
   String? chainId;
   bool? selected;
+  String? image;
 
-  Result copyWith({
-    double? balance,
-    String? contractAddress,
-    String? addressWallet,
-    int? decimals,
-    String? name,
-    String? symbol,
-    String? type,
-    String? chainId,
-    bool? selected
-  }) =>
+  Result copyWith(
+          {double? balance,
+          String? contractAddress,
+          String? addressWallet,
+          int? decimals,
+          String? name,
+          String? symbol,
+          String? type,
+          String? chainId,
+          bool? selected}) =>
       Result(
           balance: balance ?? this.balance,
           contractAddress: contractAddress ?? this.contractAddress,
@@ -91,13 +92,12 @@ class Result {
           symbol: symbol ?? this.symbol,
           type: type ?? this.type,
           chainId: chainId ?? this.chainId,
-          selected: selected ?? this.selected
-          );
+          selected: selected ?? this.selected);
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         balance: double.parse(json["balance"].toString()),
         contractAddress: json["contractAddress"],
-        decimals: int.parse(json["decimals"].toString()),
+        decimals: json["decimals"].toString() == "" ? 18 : int.parse(json["decimals"].toString()),
         name: json["name"],
         symbol: json["symbol"],
         type: json["type"],

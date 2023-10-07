@@ -6,7 +6,9 @@
           "chainId" : "1",
           "explorer" : "https://etherscan.io",
           "logo":"asset/logo/eth.png",
-          "color":"0xff343434"
+          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7",
+          "color":"0xff5631FA",
+          "isTestnet": false
           
       },
       {
@@ -15,8 +17,10 @@
           "RPC" : "https://bsc-dataseed1.bnbchain.org",
           "chainId" : "56",
           "explorer" : "https://bscscan.com",
-          "logo":  "asset/logo/bnb.png",  
-          "color":"0xffF3BA2F"
+          "logo":  "asset/logo/bnb.png", 
+          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
+          "color":"0xffF3BA2F",
+          "isTestnet": false
       },
       {
           "name" : "Polygon Mainnet",
@@ -24,8 +28,10 @@
           "RPC" : "https://polygon-rpc.com/",
           "chainId" : "137",
           "explorer" : "https://polygonscan.com",
-          "logo":"asset/logo/matic.png",
-          "color":"0xff8247E5"
+          "logo":"asset/logo/matic.png", 
+          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
+          "color":"0xff8247E5",
+          "isTestnet": false
       },
       {
           "name" : "Arbitrum One",
@@ -33,8 +39,10 @@
           "RPC" : "https://arb1.arbitrum.io/rpc",
           "chainId" : "42161",
           "explorer" : "https://arbiscan.io",
-          "logo":"asset/logo/arb.png",
-          "color":"0xff2D374B"
+          "logo":"asset/logo/arb.png", 
+          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
+          "color":"0xff2D374B",
+          "isTestnet": false
       },
       {
           "name" : "OP Mainnet",
@@ -42,8 +50,10 @@
           "RPC" : "https://mainnet.optimism.io",
           "chainId" : "10",
           "explorer" : "https://optimistic.etherscan.io",
-          "logo":"asset/logo/optimism.png",
-          "color":"0xff"
+          "logo":"asset/logo/optimism.png", 
+          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
+          "color":"0xff",
+          "isTestnet": false
       },
       {
           "name" : "Manta Pacific Mainnet",
@@ -51,8 +61,10 @@
           "RPC" : "https://pacific-rpc.manta.network/http",
           "chainId" : "169",
           "explorer" : "https://pacific-explorer.manta.network",
-          "logo":"asset/logo/eth.png",
-          "color":"0xffE1147B"
+          "logo":"asset/logo/eth.png", 
+          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
+          "color":"0xffE1147B",
+          "isTestnet": false
       },
       {
           "name" : "Base",
@@ -60,8 +72,10 @@
           "RPC" : "https://mainnet.base.org/",
           "chainId" : "8453",
           "explorer" : "https://basescan.org",
-          "logo":"asset/logo/eth.png",
-          "color":"0xff0033AD"
+          "logo":"asset/logo/eth.png", 
+          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
+          "color":"0xff0033AD",
+          "isTestnet": false
       },
       {
           "name" : "Avalanche C-Chain",
@@ -70,7 +84,9 @@
           "chainId" : "43114",
           "explorer" : "https://snowtrace.io",
           "logo":"asset/logo/avax.png",
-          "color":"0xffE84142"
+          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
+          "color":"0xffE84142",
+          "isTestnet": false
       },
       {
           "name" : "Linea",
@@ -78,7 +94,9 @@
           "RPC" : "https://rpc.linea.build",
           "chainId" : "59144",
           "explorer" : "https://bridge.linea.build",
-          "logo":"asset/logo/eth.png",
-          "color":"0xff171717"
+          "logo":"asset/logo/eth.png", 
+          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
+          "color":"0xff171717",
+          "isTestnet": false
       }
 ]

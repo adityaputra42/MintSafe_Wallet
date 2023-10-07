@@ -25,6 +25,7 @@ dependencies:
       ref: 2.0.0
   eth_sig_util: ^0.0.9
   ethereum_addresses: ^1.0.2
+  ffcache: ^1.1.0
   flutter:
     sdk: flutter
   flutter_inappwebview: ^5.7.2+3
@@ -61,7 +62,6 @@ flutter:
     - asset/icon/
     - asset/abi/
     - asset/logo/
-  
 
   fonts:
     - family: Poppins

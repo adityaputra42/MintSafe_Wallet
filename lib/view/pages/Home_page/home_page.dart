@@ -1,4 +1,6 @@
+import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/data.dart';
@@ -27,11 +29,13 @@ class HomePage extends StatelessWidget {
     Widget cardWallet() {
       return Container(
         width: double.infinity,
-        height: 200.h,
+        height: 210.h,
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
+           
             gradient: LinearGradient(colors: [
+             
               Color(int.parse(evm.selectedChain.value.color ?? "0xff1AA9A4")),
               AppColor.cardDark
             ], begin: Alignment.topLeft, end: Alignment.bottomRight),
@@ -45,14 +49,28 @@ class HomePage extends StatelessWidget {
           children: [
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  SizedBox(
+                    width: 48.h,
+                    height: 48.h,
+                    child: ClipPolygon(
+                      sides: 6,
+                      rotate: 0,
+                      child: Container(
+                          padding: EdgeInsets.all(1.h),
+                          color: Colors.transparent,
+                          child: Image.asset(
+                              evm.selectedChain.value.logo ?? AppImage.eth)),
+                    ),
+                  ),
+                  8.0.height,
                   Text(
                       "~\$ ${evm.selectedAddress.value.balance ?? 0} ${evm.selectedChain.value.symbol ?? ''}",
                       style: AppFont.semibold24.copyWith(
                         color: AppColor.textDark,
                       )),
-                  8.0.height,
+                  4.0.height,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -134,20 +152,10 @@ class HomePage extends StatelessWidget {
                                         border: Border.all(
                                             width: 2.h,
                                             color: AppColor.primaryColor)),
-                                    child: Container(
-                                      padding: EdgeInsets.all(6.w),
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: AppColor.primaryColor,
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(4.r),
-                                        child: Image.asset(
-                                          AppImage.avatar,
-                                        ),
-                                      ),
-                                    ),
+                                    child:  Blockies(
+                                        size: 0.55,
+                                        data: evm.selectedAddress.value.address ?? "-",
+                                        shape: BlockiesShape.circle),
                                   ),
                                   Align(
                                     alignment: Alignment.bottomRight,

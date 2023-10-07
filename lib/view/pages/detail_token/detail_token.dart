@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mintsafe_wallet/domain/controller/detail_token_controller.dart';
-import 'package:mintsafe_wallet/view/pages/detail_token/component/activity.dart';
+import 'package:mintsafe_wallet/view/pages/detail_token/component/activity_detail.dart';
 import 'package:mintsafe_wallet/view/pages/detail_token/component/info_token.dart';
 import 'package:mintsafe_wallet/view/widget/widget.dart';
 
@@ -181,7 +181,7 @@ class DetailToken extends StatelessWidget {
                           ),
                           16.0.height,
                           controller.tabIndex.value == 0
-                              ? const Activity()
+                              ? const ActivityDetail()
                               : const InfoToken()
                           // TabBarView(children: [Wall()])
                         ],

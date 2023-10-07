@@ -7,8 +7,8 @@ import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/utils/extension/extension.dart';
 import 'package:mintsafe_wallet/view/pages/detail_token/component/detail_activity.dart';
 
-class Activity extends StatelessWidget {
-  const Activity({super.key});
+class ActivityDetail extends StatelessWidget {
+  const ActivityDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
