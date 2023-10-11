@@ -95,7 +95,7 @@ class CreateWalletController extends GetxController {
     randomValue.value = randomMnemonic[Random().nextInt(12)]['id'];
   }
 
-  validatePharse() {
+  validatePharse() async{
     isLoading.value = true;
     confirmPharse.sort((a, b) => a['id'].compareTo(b['id']));
 
@@ -103,7 +103,7 @@ class CreateWalletController extends GetxController {
     var listConfirm = jsonEncode(confirmPharse);
 
     if (listOrigin == listConfirm) {
-      saveNewWallet();
+      await saveNewWallet();
       Get.to(() => SuccesCreateWallet(address: createdAddress.value));
     } else {
       Get.snackbar("Fail", "Pharse Didn't Match",
@@ -146,7 +146,7 @@ class CreateWalletController extends GetxController {
     await DbHelper.instance.addAddress(address);
 
     createdAddress.value = address;
-
+dev.log("created Address => $address");
     return address;
   }
 

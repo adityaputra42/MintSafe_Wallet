@@ -29,7 +29,6 @@
           "chainId" : "137",
           "explorer" : "https://polygonscan.com",
           "logo":"asset/logo/matic.png", 
-          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
           "color":"0xff8247E5",
           "isTestnet": false
       },
@@ -40,7 +39,6 @@
           "chainId" : "42161",
           "explorer" : "https://arbiscan.io",
           "logo":"asset/logo/arb.png", 
-          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
           "color":"0xff2D374B",
           "isTestnet": false
       },
@@ -51,8 +49,7 @@
           "chainId" : "10",
           "explorer" : "https://optimistic.etherscan.io",
           "logo":"asset/logo/optimism.png", 
-          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
-          "color":"0xff",
+          "color":"0xff2D374B",
           "isTestnet": false
       },
       {
@@ -62,7 +59,6 @@
           "chainId" : "169",
           "explorer" : "https://pacific-explorer.manta.network",
           "logo":"asset/logo/eth.png", 
-          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
           "color":"0xffE1147B",
           "isTestnet": false
       },
@@ -73,7 +69,6 @@
           "chainId" : "8453",
           "explorer" : "https://basescan.org",
           "logo":"asset/logo/eth.png", 
-          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
           "color":"0xff0033AD",
           "isTestnet": false
       },
@@ -84,7 +79,6 @@
           "chainId" : "43114",
           "explorer" : "https://snowtrace.io",
           "logo":"asset/logo/avax.png",
-          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
           "color":"0xffE84142",
           "isTestnet": false
       },
@@ -95,8 +89,27 @@
           "chainId" : "59144",
           "explorer" : "https://bridge.linea.build",
           "logo":"asset/logo/eth.png", 
-          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
           "color":"0xff171717",
           "isTestnet": false
+      },
+      {
+          "name" : "Goerli",
+          "symbol" : "ETH",
+          "RPC" : "https://ethereum-goerli.publicnode.com",
+          "chainId" : "5",
+          "explorer" : "https://goerli.etherscan.io/",
+          "logo":"asset/logo/eth.png", 
+          "color":"0xff171717",
+          "isTestnet": true
+      },
+      {
+          "name" : "Base Goerli Testnet",
+          "symbol" : "ETH",
+          "RPC" : "https://1rpc.io/base-goerli",
+          "chainId" : "84531",
+          "explorer" : "https://goerli.basescan.org/",
+          "logo":"asset/logo/eth.png", 
+          "color":"0xff171717",
+          "isTestnet": true
       }
 ]

@@ -112,24 +112,22 @@ class TokenList extends StatelessWidget {
       child: Column(
         children: [
           Obx(() {
-            return const Expanded(
-                child:   const Center(
-                        child: Empty(title: "No Token List"),
-                ));
+            return  Expanded(
+                child:  controller.tokenSelected.isEmpty
                 
-                // controller.listSelectedToken.isEmpty
-                //     ?   const Center(
-                //         child: Empty(title: "No Token List"),
-                //       )
+                
+                    ?   const Center(
+                        child: Empty(title: "No Token List"),
+                      )
                   
-                //     : ListView.builder(
-                //         padding: EdgeInsets.symmetric(horizontal: 0.5.h),
-                //         itemBuilder: (context, index) => Padding(
-                //           padding: EdgeInsets.only(bottom: 8.h),
-                //           child: cardToken(controller.listSelectedToken[index]),
-                //         ),
-                //         itemCount: controller.listSelectedToken.length,
-                //       ));
+                    : ListView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 0.5.h),
+                        itemBuilder: (context, index) => Padding(
+                          padding: EdgeInsets.only(bottom: 8.h),
+                          child: cardToken(controller.tokenSelected[index]),
+                        ),
+                        itemCount: controller.tokenSelected.length,
+                      ));
           }),
           SecondaryButton(
             title: "Add Token",

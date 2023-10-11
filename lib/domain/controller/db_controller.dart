@@ -115,23 +115,23 @@ class DBController extends GetxController {
     });
   }
 
-  Future<void> changeNetwork(int id) async {
-    await isar.writeTxn(() async {
-      final add = await isar.chainNetworks.get(id);
+  // Future<void> changeNetwork(int id) async {
+  //   await isar.writeTxn(() async {
+  //     final add = await isar.chainNetworks.get(id);
 
-      add!.selected = true;
-      await isar.chainNetworks.put(add);
-    });
-  }
+  //     add!.selected = true;
+  //     await isar.chainNetworks.put(add);
+  //   });
+  // }
 
-  Future<void> unSelectNetwork(int id) async {
-    await isar.writeTxn(() async {
-      final add = await isar.chainNetworks.get(id);
+  // Future<void> unSelectNetwork(int id) async {
+  //   await isar.writeTxn(() async {
+  //     final add = await isar.chainNetworks.get(id);
 
-      add!.selected = false;
-      await isar.chainNetworks.put(add);
-    });
-  }
+  //     add!.selected = false;
+  //     await isar.chainNetworks.put(add);
+  //   });
+  // }
 
   Future<List<ChainNetwork>> getAllChainNetwork() async {
     List<ChainNetwork> networks = [];
@@ -142,12 +142,12 @@ class DBController extends GetxController {
     return networks;
   }
 
-  Future<ChainNetwork?> getSelectedChainNetwork() async {
-    final chain =
-        await isar.chainNetworks.filter().selectedEqualTo(true).findFirst();
+  // Future<ChainNetwork?> getSelectedChainNetwork() async {
+  //   final chain =
+  //       await isar.chainNetworks.filter().selectedEqualTo(true).findFirst();
 
-    return chain;
-  }
+  //   return chain;
+  // }
 
   Future<void> addChainNetwork(ChainNetwork network) async {
     await isar.writeTxn(() async {

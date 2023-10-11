@@ -1,4 +1,5 @@
 import 'package:isar/isar.dart';
+import 'package:mintsafe_wallet/data/model/chain_network/selected_chain.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../data/data.dart';
@@ -23,6 +24,7 @@ class DbHelper {
         RecentAddressSchema,
         DappsHistorySchema,
         TokenSchema,
+        SelectedChainSchema,
       ],
       inspector: true,
       directory: dir.path,
@@ -86,29 +88,47 @@ class DbHelper {
     return address;
   }
 
+// ############           Network       ####################//
+  Future<void> setSelectedChain(SelectedChain chain) async {
+    await isar.writeTxn(() async {
+      await isar.selectedChains.put(chain);
+    });
+  }
+
+  Future<SelectedChain> getSelectedChain() async {
+    List<SelectedChain> listChain = [];
+    await isar.txn(() async {
+      listChain = await isar.selectedChains.where().findAll();
+    });
+    if (listChain.isNotEmpty) {
+      return listChain.first;
+    } else {
+      return SelectedChain();
+    }
+  }
+
   Future<void> setChainNetwork(List<ChainNetwork> networks) async {
     await isar.writeTxn(() async {
       await isar.chainNetworks.putAll(networks);
     });
   }
 
-  Future<void> changeNetwork(int id) async {
+  Future<void> changeNetwork(ChainNetwork chain) async {
+    final selectedChain = await isar.selectedChains.where().findAll();
     await isar.writeTxn(() async {
-      final add = await isar.chainNetworks.get(id);
-
-      add!.selected = true;
-      await isar.chainNetworks.put(add);
+      selectedChain.first.chainId = chain.chainId;
+      await isar.selectedChains.put(selectedChain.first);
     });
   }
 
-  Future<void> unSelectNetwork(int id) async {
-    await isar.writeTxn(() async {
-      final add = await isar.chainNetworks.get(id);
+  // Future<void> unSelectNetwork(int id) async {
+  //   await isar.writeTxn(() async {
+  //     final add = await isar.chainNetworks.get(id);
 
-      add!.selected = false;
-      await isar.chainNetworks.put(add);
-    });
-  }
+  //     add!.selected = false;
+  //     await isar.chainNetworks.put(add);
+  //   });
+  // }
 
   Future<List<ChainNetwork>> getAllChainNetwork() async {
     List<ChainNetwork> networks = [];
@@ -120,9 +140,11 @@ class DbHelper {
   }
 
   Future<ChainNetwork?> getSelectedChainNetwork() async {
-    final chain =
-        await isar.chainNetworks.filter().selectedEqualTo(true).findFirst();
-
+    final selectedChain = await isar.selectedChains.where().findAll();
+    final chain = await isar.chainNetworks
+        .filter()
+        .chainIdEqualTo(selectedChain.first.chainId)
+        .findFirst();
     return chain;
   }
 
@@ -152,6 +174,11 @@ class DbHelper {
     });
   }
 
+  Future<void> deleteAllChainNetwork(List<int> id) async {
+    await isar.writeTxn(() async {
+      await isar.chainNetworks.deleteAll(id);
+    });
+  }
 
   Future<void> updateWallet(int id, double balance) async {
     await isar.writeTxn(() async {
@@ -201,9 +228,6 @@ class DbHelper {
     return tokens;
   }
 
-
-
-
   /// ######################### TOKEN #######################
   Future<List<Result>> getAllToken() async {
     List<Result> tokens = [];
@@ -246,5 +270,4 @@ class DbHelper {
       await isar.results.clear();
     });
   }
-
 }

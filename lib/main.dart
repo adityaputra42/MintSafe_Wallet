@@ -1,3 +1,4 @@
+import 'package:ffcache/ffcache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,10 +7,13 @@ import 'package:mintsafe_wallet/config/theme/style.dart';
 import 'package:mintsafe_wallet/utils/helper/helper.dart';
 import 'package:mintsafe_wallet/view/pages/spalsh/splash_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  await FFCache(
+    name: 'activity',
+  ).init();
   DbHelper.instance.onInit();
   runApp(const MyApp());
 }

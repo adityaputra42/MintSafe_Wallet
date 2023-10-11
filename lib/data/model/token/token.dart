@@ -27,7 +27,7 @@ class Token {
   int? decimal;
   double? balance;
   String? logo;
-  String? chainId;
+  String? chainId;bool? selected;
 
   Token copyWith({
     String? name,

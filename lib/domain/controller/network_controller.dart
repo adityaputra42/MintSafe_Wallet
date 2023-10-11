@@ -1,6 +1,7 @@
-import 'dart:developer';
+import 'dart:developer' as dev;
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:mintsafe_wallet/data/model/chain_network/selected_chain.dart';
 
 import '../../data/data.dart';
 import '../../utils/utils.dart';
@@ -15,36 +16,29 @@ class NetworkController extends GetxController {
     /// GET LIST NETWORK
     listChain.clear();
     final networkList = await DbHelper.instance.getAllChainNetwork();
-
-    if (networkList.isEmpty) {
-      print("NETWORK FROM JSON");
-      final chainlist = await rootBundle.loadString('asset/abi/chain.json');
-
-      listChain.value = chainNetworkFromJson(chainlist);
-      listChain[0].selected = true;
-      await DbHelper.instance.setChainNetwork(listChain);
-
-      final selectedNetwork = await DbHelper.instance.getSelectedChainNetwork();
-      if (selectedNetwork == null) {
-        selectedChain.value = listChain[0];
-      } else {
-        selectedChain.value = selectedNetwork;
-      }
-
-      print("SET JSON TO DB");
+    List<int> id = [];
+    for (final value in networkList) {
+      id.add(value.id!);
+    }
+    await DbHelper.instance.deleteAllChainNetwork(id);
+    final chainlist = await rootBundle.loadString('asset/abi/chain.json');
+    listChain.value = chainNetworkFromJson(chainlist);
+    await DbHelper.instance.setChainNetwork(listChain);
+   final chainSelected= await DbHelper.instance.getSelectedChain();
+    if (chainSelected.chainId == null) {
+      final selected = SelectedChain(chainId: listChain.first.chainId);
+      await DbHelper.instance.setSelectedChain(selected);
+      selectedChain.value = listChain.first;
     } else {
-      print(" NETWORK FROM DB");
       var chain = await DbHelper.instance.getSelectedChainNetwork();
       selectedChain.value = chain!;
-      listChain.value = networkList;
     }
-
     selectedChain.refresh();
     listChain.refresh();
-
-    listChain.forEach((element) {
-      log(element.name!);
-    });
+    dev.log("Selected chain ==> ${selectedChain.value.chainId}");
+    for (var value in listChain) {
+      dev.log("List Chain ==> ${value.chainId}");
+    }
   }
 
 
@@ -52,13 +46,13 @@ class NetworkController extends GetxController {
     // var httpClient = Client();
     // Get.back();
 
-    await DbHelper.instance.unSelectNetwork(selectedChain.value.id!);
+   
     selectedChain.value = network;
     selectedChain.refresh();
 
     // isLoadingNetwork.value = true;
 
-    await DbHelper.instance.changeNetwork(network.id!);
+    await DbHelper.instance.changeNetwork(network);
 
     // web3client = Web3Client(
     //   selectedChain.value.rpc ?? "",

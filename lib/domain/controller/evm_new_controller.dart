@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:connectivity_checker/connectivity_checker.dart';
 import 'package:erc20/erc20.dart';
+import 'package:eth_abi_codec/eth_abi_codec.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,46 +33,41 @@ class EvmNewController extends GetxController {
   final Address initAddress;
   Web3Client? web3client;
   ContractAbi? erc20Abi;
-  ContractAbi? tokenRegistryAbi;
+  late ContractABI abi;
   var gasLimit = 0.0.obs;
   var gasPrice = 0.0.obs;
 
   var selectedChain = ChainNetwork().obs;
-
   EvmNewController(this.initAddress);
 
   void initialize() async {
     // INIT NETWORK
+    isLoadingNetwork.value = true;
     await networkController.initialzedNetwork();
+    await initialzedToken();
 
     /// INIT RPC
     initWeb3RPC();
 
     /// INIT CONTRACT
-    final erc20AbiString = await rootBundle.loadString('asset/abi/ERC-2O.json');
-    final tokenRegistryAbiString =
-        await rootBundle.loadString('asset/abi/token_registry.json');
-    erc20Abi = ContractAbi.fromJson(erc20AbiString, 'ERC20');
-
-    tokenRegistryAbi =
-        ContractAbi.fromJson(tokenRegistryAbiString, "TokenRegistry");
+    final jsonString = await rootBundle.loadString('asset/abi/erc_20.json');
+    erc20Abi = ContractAbi.fromJson(jsonString, 'ERC20');
+    abi = ContractABI.fromJson(jsonDecode(jsonString));
 
     /// INIT ACCOUNT
     await initAccount();
-    decrypted(
-      selectedAddress.value.privateKey!,
-    );
 
     // INIT TOKEN
-    await initializeTokens();
-    await getTokenFromContract();
-    await fetchTokenByAddress();
+    //
+    // await getTokenFromContract();
+    // await fetchTokenByAddress();
+    isLoadingNetwork.value = false;
 
     /// GET BALANCE
     if (await ConnectivityWrapper.instance.isConnected) {
-      await getBalance();
-      await getMultipleTokenBalances();
-      getEthBalancePeriodic();
+      // await getBalance();
+      // await getMultipleTokenBalances();
+      // getEthBalancePeriodic();
     }
   }
 
@@ -127,7 +124,7 @@ class EvmNewController extends GetxController {
     );
 
     await getBalance();
-    await getTokenFromContract();
+    await initialzedToken();
     if (Get.isRegistered<ActivityTxController>()) {
       Get.delete<ActivityTxController>();
     }
@@ -164,21 +161,16 @@ class EvmNewController extends GetxController {
     anotherAddressList.assignAll(addressList
         .where((e) => e.address != selectedAddress.value.address)
         .toList());
+
+    dev.log("Selected Address init ==> ${selectedAddress.value.address}");
+     decrypted(
+      selectedAddress.value.privateKey ?? "",
+    );
   }
 
-  decrypted(
-    String pk,
-  ) {
-    print("SELECTED ADDRESS : ${selectedAddress.value.address}");
-    print("SELECTED ADDRESS PK : ${selectedAddress.value.privateKey}");
-    // print("SELECTED MNEMONIC  : ${selectedAddress.value.mnemonic}");
-
+  decrypted(String pk) {
     final privateKey = encrypter.decrypt64(pk, iv: iv);
-    print("PRIVATE KEY : $privateKey");
-    // final mnmemonic = encrypter.decrypt64(seed, iv: iv);
-
     selectedPrivateKey.value = privateKey;
-    // selectedMnemonic.value = mnmemonic;
   }
 
   Future<void> getBalance() async {
@@ -207,7 +199,6 @@ class EvmNewController extends GetxController {
         dev.log("KANJUD : ${balanceEth.value}");
       } catch (e) {
         print(e.toString());
-       
       }
 
       // selectedAddress.value.balance = balanceEth.value;
@@ -247,7 +238,7 @@ class EvmNewController extends GetxController {
     selectedAddress.refresh();
 
     await DbHelper.instance.changeWallet(address.id!);
-    await getTokenFromContract();
+    // await getTokenFromContract();
     dev.log("NEW ADDRESS : ${address.id!}");
 
     decrypted(
@@ -300,7 +291,7 @@ class EvmNewController extends GetxController {
     decrypted(
       selectedAddress.value.privateKey!,
     );
-    await getTokenFromContract();
+    // await getTokenFromContract();
     isLoadingCreateAccount.value = false;
     await getBalance();
 
@@ -321,7 +312,6 @@ class EvmNewController extends GetxController {
           .where((v) =>
               v.address!.toLowerCase() == address!.address!.toLowerCase())
           .isNotEmpty) {
-       
       } else {
         await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
         selectedAddress.value = address!;
@@ -336,9 +326,9 @@ class EvmNewController extends GetxController {
           selectedAddress.value.privateKey!,
         );
 
-        await fetchTokenByAddress();
+        // await fetchTokenByAddress();
         await getMultipleTokenBalances();
-        await getTokenFromContract();
+        // await getTokenFromContract();
         await getBalance();
       }
     } else {
@@ -351,7 +341,6 @@ class EvmNewController extends GetxController {
           if (addressList
               .where((v) => v.address == credentials.address.hex)
               .isNotEmpty) {
-           
           } else {
             await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
 
@@ -377,14 +366,14 @@ class EvmNewController extends GetxController {
               selectedAddress.value.privateKey!,
             );
 
-            await fetchTokenByAddress();
+            // await fetchTokenByAddress();
             await getMultipleTokenBalances();
-            await getTokenFromContract();
+            // await getTokenFromContract();
             await getBalance();
           }
-        } else {
-        }
-      } catch (e) {throw Exception(e.toString());
+        } else {}
+      } catch (e) {
+        throw Exception(e.toString());
       }
     }
     isLoadingImportAccount.value = false;
@@ -393,69 +382,99 @@ class EvmNewController extends GetxController {
   /// #######################################
   /// ############### TOKEN ###############
   /// #######################################
-  RxList<Result> tokenList = <Result>[].obs;
-  RxList<Result> tokenRegistryAll = <Result>[].obs;
+  RxList<Token> tokenList = <Token>[].obs;
+  RxList<Token> tokenSelected = <Token>[].obs;
 
-  initializeTokens() async {
-    final tokens = await DbHelper.instance.getAllToken();
+  // initializeTokens() async {
+  //   final tokens = await DbHelper.instance.getAllToken();
+  //   tokenList.clear();
+
+  //   tokenList.addAll(tokens);
+
+  //   refresh();
+//   // }
+// var listToken = <Token>[].obs;
+
+  Future<void> initialzedToken() async {
+    /// GET LIST Token
     tokenList.clear();
+    final listTokens = await DbHelper.instance.getAllTokens();
 
-    tokenList.addAll(tokens);
+    if (listTokens.isEmpty) {
+      final tokens = await rootBundle.loadString('asset/abi/token.json');
+      dev.log(tokens);
 
-    refresh();
-  }
-
-  Future<void> fetchTokenByAddress() async {
-    try {
-      TokenRepository tokenRepository = TokenRepository();
-      // await getTokenFromContract();
-      dev.log("TOKENBYADDRESS");
-      final response =
-          await tokenRepository.getToken(selectedAddress.value.address!);
-
-      dev.log("TOKENBYADDRESS : ${response.result!.length}");
-
-      final List<Result> tokensByAddress = response.result ?? [];
-
-      for (var element in tokensByAddress) {
-        element.addressWallet = selectedAddress.value.address;
-        element.chainId = networkController.selectedChain.value.chainId;
-        element.selected = true;
-        if (tokenRegistryAll
-            .any((x) => x.contractAddress == element.contractAddress)) {
-          element.image = tokenRegistryAll
-              .singleWhere((y) => y.contractAddress == element.contractAddress)
-              .image;
-        }
+      tokenList.value = tokenFromJson(tokens);
+      await DbHelper.instance.setToken(tokenList);
+      final selectedToken = await DbHelper.instance.getSelectedListToken(
+          networkController.selectedChain.value.chainId ?? "");
+      if (selectedToken.isEmpty) {
+        tokenSelected.value = [];
+      } else {
+        tokenSelected.value = selectedToken;
       }
+    } else {
+      final token = await DbHelper.instance.getSelectedListToken(
+          networkController.selectedChain.value.chainId ?? "");
+      tokenSelected.value = token;
+      tokenList.value = listTokens;
+    }
 
-      tokensByAddress.removeWhere(
-          (element) => element.type == "ERC-721" || element.type == "ERC-1155");
-
-      dev.log("TOKENBYADDRESS TOKENLIST : ${tokenList.length}");
-      tokensByAddress.forEach((element) async {
-        dev.log("TOKENBYADDRESS SC  : ${element.contractAddress}");
-        dev.log("TOKENBYADDRESS ADD WALL  : ${element.addressWallet}");
-        dev.log("TOKENBYADDRESS SELECTED  : ${element.selected}");
-
-        dev.log(
-            "MASUK MASRBOOOO ${element.type != "ERC-1155" || element.type != "ERC-721"}");
-
-        if (!tokenList.any((x) =>
-            x.contractAddress == element.contractAddress &&
-            x.addressWallet == selectedAddress.value.address)) {
-          dev.log("TOKENBYADDRESS MASUK YGY");
-
-          await DbHelper.instance.addToken(element.copyWith(
-            selected: true,
-            addressWallet: selectedAddress.value.address,
-          ));
-        }
-      });
-
-      dev.log("TOKENBYADDRESS : ${tokensByAddress.length}");
-    } catch (e) {}
+    tokenSelected.refresh();
+    tokenList.refresh();
   }
+
+  // Future<void> fetchTokenByAddress() async {
+  //   try {
+  //     TokenRepository tokenRepository = TokenRepository();
+  //     // await getTokenFromContract();
+  //     dev.log("TOKENBYADDRESS");
+  //     final response =
+  //         await tokenRepository.getToken(selectedAddress.value.address!);
+
+  //     dev.log("TOKENBYADDRESS : ${response.result!.length}");
+
+  //     final List<Result> tokensByAddress = response.result ?? [];
+
+  //     for (var element in tokensByAddress) {
+  //       element.addressWallet = selectedAddress.value.address;
+  //       element.chainId = networkController.selectedChain.value.chainId;
+  //       element.selected = true;
+  //       if (tokenRegistryAll
+  //           .any((x) => x.contractAddress == element.contractAddress)) {
+  //         element.image = tokenRegistryAll
+  //             .singleWhere((y) => y.contractAddress == element.contractAddress)
+  //             .image;
+  //       }
+  //     }
+
+  //     tokensByAddress.removeWhere(
+  //         (element) => element.type == "ERC-721" || element.type == "ERC-1155");
+
+  //     dev.log("TOKENBYADDRESS TOKENLIST : ${tokenList.length}");
+  //     tokensByAddress.forEach((element) async {
+  //       dev.log("TOKENBYADDRESS SC  : ${element.contractAddress}");
+  //       dev.log("TOKENBYADDRESS ADD WALL  : ${element.addressWallet}");
+  //       dev.log("TOKENBYADDRESS SELECTED  : ${element.selected}");
+
+  //       dev.log(
+  //           "MASUK MASRBOOOO ${element.type != "ERC-1155" || element.type != "ERC-721"}");
+
+  //       if (!tokenList.any((x) =>
+  //           x.contractAddress == element.contractAddress &&
+  //           x.addressWallet == selectedAddress.value.address)) {
+  //         dev.log("TOKENBYADDRESS MASUK YGY");
+
+  //         await DbHelper.instance.addToken(element.copyWith(
+  //           selected: true,
+  //           addressWallet: selectedAddress.value.address,
+  //         ));
+  //       }
+  //     });
+
+  //     dev.log("TOKENBYADDRESS : ${tokensByAddress.length}");
+  //   } catch (e) {}
+  // }
 
   Future<void> getMultipleTokenBalances() async {
     for (final tokenAddress in tokenList) {
@@ -468,13 +487,13 @@ class EvmNewController extends GetxController {
 
         final balance = await token
             .balanceOf(EthereumAddress.fromHex(selectedAddress.value.address!));
-        final tokenBalance = EtherAmount.fromUnitAndValue(
+        final tokenBalance = EtherAmount.fromBigInt(
           EtherUnit.wei,
           balance,
         );
 
         tokenAddress.balance = (tokenBalance.getInWei /
-            BigInt.from(pow(10, tokenAddress.decimals!)));
+            BigInt.from(pow(10, tokenAddress.decimal!)));
 
         print(
             "TOKEN ${tokenAddress.name} BALANCE : $balance Address : ${selectedAddress.value.address!}");
@@ -484,74 +503,71 @@ class EvmNewController extends GetxController {
     }
   }
 
-  Future<void> getTokenFromContract() async {
-    // BETH
+  // Future<void> getTokenFromContract() async {
+  //   // BETH
 
-    final contract = DeployedContract(
-        tokenRegistryAbi!,
-        EthereumAddress.fromHex(networkController.selectedChain.value.tokenRegistry!));
-    // final contract = DeployedContract(
-    //     tokenRegistryAbi!,
-    //     networkController.selectedChain.value.id == 1
-    //         ? EthereumAddress.fromHex(
-    //             "0xD432387df174a54489Ad6204A1400C97fF5545ef")
-    //         : EthereumAddress.fromHex(
-    //             "0x75AA2613E4102104682b8cC7C221692083131C72"));
+  //   final contract = DeployedContract(
+  //       tokenRegistryAbi!,
+  //       EthereumAddress.fromHex(networkController.selectedChain.value.tokenRegistry!));
+  //   // final contract = DeployedContract(
+  //   //     tokenRegistryAbi!,
+  //   //     networkController.selectedChain.value.id == 1
+  //   //         ? EthereumAddress.fromHex(
+  //   //             "0xD432387df174a54489Ad6204A1400C97fF5545ef")
+  //   //         : EthereumAddress.fromHex(
+  //   //             "0x75AA2613E4102104682b8cC7C221692083131C72"));
 
-    // BASE
-    // final contract = DeployedContract(tokenRegistryAbi!,
-    //     EthereumAddress.fromHex("0xdc198d1f11f5B5b7e7B10A657d44497236FEe9E8"));
+  //   // BASE
+  //   // final contract = DeployedContract(tokenRegistryAbi!,
+  //   //     EthereumAddress.fromHex("0xdc198d1f11f5B5b7e7B10A657d44497236FEe9E8"));
 
-    final query = contract.function('getTokenList');
+  //   final query = contract.function('getTokenList');
 
-    final List<dynamic> result = await web3client!.call(
-      contract: contract,
-      function: query,
-      params: [],
-    );
+  //   final List<dynamic> result = await web3client!.call(
+  //     contract: contract,
+  //     function: query,
+  //     params: [],
+  //   );
 
-    dev.log("KANJUD : ${result}");
+  //   var tokek = <Result>[];
 
-    var tokek = <Result>[];
+  //   for (var element in result) {
+  //     if (element is List) {
+  //       for (var item in element) {
 
-    result.forEach((element) {
-      if (element is List) {
-        element.forEach((item) {
-          dev.log("KONT : ${item}");
+  //         final token = Result(
+  //             addressWallet: selectedAddress.value.address,
+  //             chainId: networkController.selectedChain.value.chainId,
+  //             balance: 0,
+  //             selected: false,
+  //             contractAddress: item[0].toString(),
+  //             name: item[1],
+  //             symbol: item[2],
+  //             decimals: item[3].toInt(),
+  //             image: item[4]);
+  //         tokek.add(token);
+  //       }
+  //     }
+  //   }
 
-          final token = Result(
-              addressWallet: selectedAddress.value.address,
-              chainId: networkController.selectedChain.value.chainId,
-              balance: 0,
-              selected: false,
-              contractAddress: item[0].toString(),
-              name: item[1],
-              symbol: item[2],
-              decimals: item[3].toInt(),
-              image: item[4]);
-          tokek.add(token);
-        });
-      }
-    });
+  //   tokenRegistryAll.assignAll(tokek);
 
-    tokenRegistryAll.assignAll(tokek);
+  //   tokenList.forEach((element) {
+  //     final a = tokenRegistryAll.singleWhere(
+  //       (tokek) =>
+  //           element.contractAddress!.toLowerCase() ==
+  //           tokek.contractAddress!.toLowerCase(),
+  //       orElse: () => Result(),
+  //     );
+  //     if (a.contractAddress == null) {
+  //       tokenRegistryAll.add(element);
+  //     }
+  //   });
 
-    tokenList.forEach((element) {
-      final a = tokenRegistryAll.singleWhere(
-        (tokek) =>
-            element.contractAddress!.toLowerCase() ==
-            tokek.contractAddress!.toLowerCase(),
-        orElse: () => Result(),
-      );
-      if (a.contractAddress == null) {
-        tokenRegistryAll.add(element);
-      }
-    });
+  //   tokenRegistryAll.refresh();
 
-    tokenRegistryAll.refresh();
-
-    dev.log("Result tokek : ${tokenRegistryAll.length}");
-  }
+  //   dev.log("Result tokek : ${tokenRegistryAll.length}");
+  // }
 
   // Future<void> resetWallet() async {
   //   await DbHelper.instance.resetWallet();
@@ -601,7 +617,6 @@ class EvmNewController extends GetxController {
 
       return response;
     } catch (e) {
-     
       return null;
     }
   }
@@ -631,7 +646,6 @@ class EvmNewController extends GetxController {
 
       return txFee / BigInt.from(10).pow(18);
     } catch (e) {
-    
       return 0.0;
     }
   }
@@ -721,7 +735,7 @@ class EvmNewController extends GetxController {
       return response;
     } catch (e) {
       dev.log("Send error => $e");
-     
+
       return null;
     }
   }

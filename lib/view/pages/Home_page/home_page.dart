@@ -33,10 +33,8 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
-           
             gradient: LinearGradient(colors: [
-             
-              Color(int.parse(evm.selectedChain.value.color ?? "0xff1AA9A4")),
+              Color(int.parse(evm.networkController.selectedChain.value.color ?? "")),
               AppColor.cardDark
             ], begin: Alignment.topLeft, end: Alignment.bottomRight),
             boxShadow: const [
@@ -61,33 +59,21 @@ class HomePage extends StatelessWidget {
                           padding: EdgeInsets.all(1.h),
                           color: Colors.transparent,
                           child: Image.asset(
-                              evm.selectedChain.value.logo ?? AppImage.eth)),
+                              evm.networkController.selectedChain.value.logo ??
+                                  AppImage.eth)),
                     ),
                   ),
                   8.0.height,
                   Text(
-                      "~\$ ${evm.selectedAddress.value.balance ?? 0} ${evm.selectedChain.value.symbol ?? ''}",
+                      "${evm.selectedAddress.value.balance ?? 0} ${evm.networkController.selectedChain.value.symbol ?? ''}",
                       style: AppFont.semibold24.copyWith(
                         color: AppColor.textDark,
                       )),
-                  4.0.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                          MethodHelper().shortAddress(
-                              address: evm.selectedAddress.value.address ?? ''),
-                          style: AppFont.medium14.copyWith(
-                            color: AppColor.textDark,
-                          )),
-                      8.0.width,
-                      Icon(
-                        Icons.copy,
-                        size: 18.h,
+                  2.0.height,
+                  Text("~\$ 0.0",
+                      style: AppFont.medium16.copyWith(
                         color: AppColor.textDark,
-                      )
-                    ],
-                  ),
+                      )),
                 ],
               ),
             ),
@@ -123,7 +109,7 @@ class HomePage extends StatelessWidget {
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Skeletonizer(
-                  enabled: evm.isLoadingNetwork.value,
+                  enabled:  evm.isLoadingNetwork.value,
                   effect: const ShimmerEffect(
                       baseColor: AppColor.grayColor,
                       // highlightColor: AppColor.grayColor,
@@ -152,9 +138,11 @@ class HomePage extends StatelessWidget {
                                         border: Border.all(
                                             width: 2.h,
                                             color: AppColor.primaryColor)),
-                                    child:  Blockies(
+                                    child: Blockies(
                                         size: 0.55,
-                                        data: evm.selectedAddress.value.address ?? "-",
+                                        data:
+                                            evm.selectedAddress.value.address ??
+                                                "-",
                                         shape: BlockiesShape.circle),
                                   ),
                                   Align(
@@ -184,7 +172,10 @@ class HomePage extends StatelessWidget {
                                         .copyWith(color: AppColor.grayColor),
                                   ),
                                   Text(
-                                    "Dompet Saya",
+                                    MethodHelper().shortAddress(
+                                        address:
+                                            evm.selectedAddress.value.address ??
+                                                ''),
                                     style: AppFont.medium14
                                         .copyWith(color: AppColor.textDark),
                                   )
@@ -203,7 +194,8 @@ class HomePage extends StatelessWidget {
                                     color: AppColor.cardDark),
                                 child: Row(
                                   children: [
-                                    Text("${evm.selectedChain.value.name}",
+                                    Text(
+                                        "${evm.networkController.selectedChain.value.name}",
                                         style: AppFont.medium14.copyWith(
                                             color: AppColor.primaryColor)),
                                     4.0.width,

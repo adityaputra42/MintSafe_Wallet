@@ -22,11 +22,10 @@ class ChangeNetworkController extends GetxController {
   void changeNetwork(ChainNetwork network, BuildContext context) async {
     var httpClient = http.Client();
     Get.back();
-    await DbHelper.instance.unSelectNetwork(networkController.selectedChain.value.id!);
     networkController.selectedChain.value = network;
     networkController.selectedChain.refresh();
     // networkController.isLoadingNetwork.value = true;
-    await DbHelper.instance.changeNetwork(network.id!);
+    await DbHelper.instance.changeNetwork(network);
     evm.web3client = Web3Client(
       networkController.selectedChain.value.rpc ?? "",
       httpClient,

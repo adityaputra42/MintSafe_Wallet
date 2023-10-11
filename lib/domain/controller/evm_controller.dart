@@ -96,7 +96,7 @@ class EvmController extends GetxController {
       erc20Abi = ContractAbi.fromJson(jsonString, 'ERC20');
       abi = ContractABI.fromJson(jsonDecode(jsonString));
 
-      await initialzedNetwork();
+      // await initialzedNetwork();
     } catch (error) {
       print("Error loading asset: $error");
     }
@@ -111,41 +111,34 @@ class EvmController extends GetxController {
     }
   }
 
-  initialzedNetwork() async {
-    /// GET LIST NETWORK
-    listChain.clear();
-    final networkList = await DbHelper.instance.getAllChainNetwork();
-
-    if (networkList.isEmpty) {
-      print("NETWORK FROM JSON");
-      final chainlist = await rootBundle.loadString('asset/abi/chain.json');
-
-      listChain.value = chainNetworkFromJson(chainlist);
-      listChain[0].selected = true;
-      await DbHelper.instance.setChainNetwork(listChain);
-
-      final selectedNetwork = await DbHelper.instance.getSelectedChainNetwork();
-      if (selectedNetwork == null) {
-        selectedChain.value = listChain[0];
-      } else {
-        selectedChain.value = selectedNetwork;
-      }
-
-      print("SET JSON TO DB");
-    } else {
-      print(" NETWORK FROM DB");
-      var chain = await DbHelper.instance.getSelectedChainNetwork();
-      selectedChain.value = chain!;
-      listChain.value = networkList;
-    }
-
-    selectedChain.refresh();
-    listChain.refresh();
-
-    listChain.forEach((element) {
-      dev.log(element.name!);
-    });
-  }
+  // initialzedNetwork() async {
+  //  /// GET LIST NETWORK
+  //   listChain.clear();
+  //   final networkList = await db.getAllChainNetwork();
+  //   List<int> id = [];
+  //   for (final value in networkList) {
+  //     id.add(value.id!);
+  //   }
+  //   await db.deleteAllChainNetwork(id);
+  //   final chainlist = await rootBundle.loadString('asset/abi/chain.json');
+  //   listChain.value = chainNetworkFromJson(chainlist);
+  //   await db.setChainNetwork(listChain);
+  //   await db.getSelectedChain();
+  //   if (db.selectedChain.value.chainId == null) {
+  //     final selected = SelectedChain(chainId: listChain.first.chainId);
+  //     await db.setSelectedChain(selected);
+  //     selectedChain.value = listChain.first;
+  //   } else {
+  //     var chain = await db.getSelectedChainNetwork();
+  //     selectedChain.value = chain!;
+  //   }
+  //   selectedChain.refresh();
+  //   listChain.refresh();
+  //   dev.log("Selected chain ==> ${selectedChain.value.chainId}");
+  //   for (var value in listChain) {
+  //     dev.log("List Chain ==> ${value.chainId}");
+  //   }
+  // }
 
   initializeTokens() async {
     final tokens = await DbHelper.instance.getAllToken();
