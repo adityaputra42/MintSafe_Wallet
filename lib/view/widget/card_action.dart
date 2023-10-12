@@ -29,7 +29,7 @@ class CardAction extends StatelessWidget {
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                    blurRadius: 1.h, spreadRadius: 1.h, color: Colors.black12)
+                    blurRadius: 1.h, spreadRadius: 1.h, color: Colors.white12)
               ],
               borderRadius: BorderRadius.circular(8.r),
               color: color ?? AppColor.secondaryColor),

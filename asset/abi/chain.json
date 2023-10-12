@@ -6,7 +6,6 @@
           "chainId" : "1",
           "explorer" : "https://etherscan.io",
           "logo":"asset/logo/eth.png",
-          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7",
           "color":"0xff5631FA",
           "isTestnet": false
           
@@ -18,7 +17,6 @@
           "chainId" : "56",
           "explorer" : "https://bscscan.com",
           "logo":  "asset/logo/bnb.png", 
-          "token_registry" : "0xdac17f958d2ee523a2206206994597c13d831ec7", 
           "color":"0xffF3BA2F",
           "isTestnet": false
       },

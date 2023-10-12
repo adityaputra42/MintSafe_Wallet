@@ -141,9 +141,9 @@ Token _tokenDeserialize(
     id: id,
     logo: reader.readStringOrNull(offsets[4]),
     name: reader.readStringOrNull(offsets[5]),
+    selected: reader.readBoolOrNull(offsets[6]) ?? false,
     symbol: reader.readStringOrNull(offsets[7]),
   );
-  object.selected = reader.readBoolOrNull(offsets[6]);
   return object;
 }
 
@@ -167,7 +167,7 @@ P _tokenDeserializeProp<P>(
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 7:
       return (reader.readStringOrNull(offset)) as P;
     default:
@@ -1058,24 +1058,8 @@ extension TokenQueryFilter on QueryBuilder<Token, Token, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> selectedIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'selected',
-      ));
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterFilterCondition> selectedIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'selected',
-      ));
-    });
-  }
-
   QueryBuilder<Token, Token, QAfterFilterCondition> selectedEqualTo(
-      bool? value) {
+      bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'selected',
@@ -1541,7 +1525,7 @@ extension TokenQueryProperty on QueryBuilder<Token, Token, QQueryProperty> {
     });
   }
 
-  QueryBuilder<Token, bool?, QQueryOperations> selectedProperty() {
+  QueryBuilder<Token, bool, QQueryOperations> selectedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'selected');
     });

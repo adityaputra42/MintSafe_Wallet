@@ -223,7 +223,19 @@ class DbHelper {
     return token;
   }
 
-  Future<List<Token>> getSelectedListToken(String chainId) async {
+  Future<List<Token>> getSelectedListToken(
+      {required String chainId,}) async {
+    final tokens = await isar.tokens
+        .filter()
+        .chainIdEqualTo(chainId)
+        .selectedEqualTo(true)
+        .findAll();
+    return tokens;
+  }
+
+  Future<List<Token>> getListTokenByChainId({
+    required String chainId,
+  }) async {
     final tokens = await isar.tokens.filter().chainIdEqualTo(chainId).findAll();
     return tokens;
   }

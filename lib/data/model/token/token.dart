@@ -19,30 +19,33 @@ class Token {
     this.balance,
     this.logo,
     this.chainId,
+    this.selected = false,
   });
   Id? id = Isar.autoIncrement;
   String? name;
   String? contractAddress;
   String? symbol;
+
   int? decimal;
   double? balance;
   String? logo;
-  String? chainId;bool? selected;
+  String? chainId;
+  bool selected;
 
-  Token copyWith({
-    String? name,
-    String? contractAddress,
-    String? symbol,
-    int? decimal,
-    double? balance,
-  }) =>
+  Token copyWith(
+          {String? name,
+          String? contractAddress,
+          String? symbol,
+          int? decimal,
+          double? balance,
+          bool? selected}) =>
       Token(
-        name: name ?? this.name,
-        contractAddress: contractAddress ?? this.contractAddress,
-        symbol: symbol ?? this.symbol,
-        decimal: decimal ?? this.decimal,
-        balance: balance ?? this.balance,
-      );
+          name: name ?? this.name,
+          contractAddress: contractAddress ?? this.contractAddress,
+          symbol: symbol ?? this.symbol,
+          decimal: decimal ?? this.decimal,
+          balance: balance ?? this.balance,
+          selected: selected ?? this.selected);
 
   factory Token.fromJson(Map<String, dynamic> json) => Token(
         name: json["name"],

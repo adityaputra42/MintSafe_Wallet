@@ -59,6 +59,7 @@ class EvmNewController extends GetxController {
 
     // INIT TOKEN
     //
+
     // await getTokenFromContract();
     // await fetchTokenByAddress();
     isLoadingNetwork.value = false;
@@ -163,7 +164,7 @@ class EvmNewController extends GetxController {
         .toList());
 
     dev.log("Selected Address init ==> ${selectedAddress.value.address}");
-     decrypted(
+    decrypted(
       selectedAddress.value.privateKey ?? "",
     );
   }
@@ -385,6 +386,12 @@ class EvmNewController extends GetxController {
   RxList<Token> tokenList = <Token>[].obs;
   RxList<Token> tokenSelected = <Token>[].obs;
 
+  getTokens() async {
+    final tokens = await DbHelper.instance.getAllTokens();
+    tokenList.clear();
+    tokenList.addAll(tokens);
+    refresh();
+  }
   // initializeTokens() async {
   //   final tokens = await DbHelper.instance.getAllToken();
   //   tokenList.clear();
@@ -398,26 +405,30 @@ class EvmNewController extends GetxController {
   Future<void> initialzedToken() async {
     /// GET LIST Token
     tokenList.clear();
+    tokenSelected.clear();
     final listTokens = await DbHelper.instance.getAllTokens();
 
     if (listTokens.isEmpty) {
       final tokens = await rootBundle.loadString('asset/abi/token.json');
       dev.log(tokens);
+      final listToken = tokenFromJson(tokens);
 
-      tokenList.value = tokenFromJson(tokens);
-      await DbHelper.instance.setToken(tokenList);
+      await DbHelper.instance.setToken(listToken);
+      final tokenByChain = await DbHelper.instance.getListTokenByChainId(
+          chainId: networkController.selectedChain.value.chainId ?? "");
+      tokenList.assignAll(tokenByChain);
       final selectedToken = await DbHelper.instance.getSelectedListToken(
-          networkController.selectedChain.value.chainId ?? "");
-      if (selectedToken.isEmpty) {
-        tokenSelected.value = [];
-      } else {
-        tokenSelected.value = selectedToken;
-      }
+        chainId: networkController.selectedChain.value.chainId ?? "",
+      );
+      tokenSelected.assignAll(selectedToken);
     } else {
+      final tokenByChain = await DbHelper.instance.getListTokenByChainId(
+          chainId: networkController.selectedChain.value.chainId ?? "");
+      tokenList.assignAll(tokenByChain);
       final token = await DbHelper.instance.getSelectedListToken(
-          networkController.selectedChain.value.chainId ?? "");
-      tokenSelected.value = token;
-      tokenList.value = listTokens;
+        chainId: networkController.selectedChain.value.chainId ?? "",
+      );
+      tokenSelected.assignAll(token);
     }
 
     tokenSelected.refresh();

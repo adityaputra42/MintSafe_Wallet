@@ -33,7 +33,7 @@ class GetStartedPage extends StatelessWidget {
                       80.0.height,
                       Image.asset(
                         AppImage.logo,
-                        width: 116.w,
+                        width: 136.w,
                       ),
                       24.0.height,
                       Text(
@@ -69,8 +69,7 @@ class GetStartedPage extends StatelessWidget {
                         style: AppFont.medium16
                             .copyWith(color: AppColor.primaryColor),
                         recognizer: TapGestureRecognizer()
-                          ..onTap =
-                              () => Get.to(() =>ImportWalletPage()),
+                          ..onTap = () => Get.to(() => ImportWalletPage()),
                       )
                     ])),
                     48.0.height,

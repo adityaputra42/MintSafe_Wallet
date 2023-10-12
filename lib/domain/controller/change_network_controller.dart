@@ -9,28 +9,34 @@ import 'evm_new_controller.dart';
 import 'network_controller.dart';
 
 class ChangeNetworkController extends GetxController {
-  NetworkController networkController = Get.find();
-  EvmNewController evm =Get.find();
+  EvmNewController evm = Get.find();
   var listChain = <ChainNetwork>[].obs;
 
   @override
   void onInit() {
-    listChain = networkController.listChain;
+    listChain = evm.networkController.listChain;
     super.onInit();
   }
 
   void changeNetwork(ChainNetwork network, BuildContext context) async {
     var httpClient = http.Client();
     Get.back();
-    networkController.selectedChain.value = network;
-    networkController.selectedChain.refresh();
-    // networkController.isLoadingNetwork.value = true;
+    evm.networkController.selectedChain.value = network;
+    evm.networkController.selectedChain.refresh();
+    evm.isLoadingNetwork.value = true;
     await DbHelper.instance.changeNetwork(network);
     evm.web3client = Web3Client(
-      networkController.selectedChain.value.rpc ?? "",
+      evm.networkController.selectedChain.value.rpc ?? "",
       httpClient,
     );
-   
+    evm.tokenSelected.clear();
+    final tokens = await DbHelper.instance.getSelectedListToken(
+      chainId: network.chainId ?? "",
+    );
+    evm.tokenSelected.value = tokens;
+    final tokenByChain = await DbHelper.instance
+        .getListTokenByChainId(chainId: network.chainId ?? "");
+    evm.tokenList.value = tokenByChain;
     evm.isLoadingNetwork.value = false;
     // await getMultipleTokenBalances();
     Get.back();

@@ -34,7 +34,8 @@ class HomePage extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             gradient: LinearGradient(colors: [
-              Color(int.parse(evm.networkController.selectedChain.value.color ?? "")),
+              Color(int.parse(evm.networkController.selectedChain.value.color ??
+                  "0xff1AA9A4")),
               AppColor.cardDark
             ], begin: Alignment.topLeft, end: Alignment.bottomRight),
             boxShadow: const [
@@ -69,7 +70,6 @@ class HomePage extends StatelessWidget {
                       style: AppFont.semibold24.copyWith(
                         color: AppColor.textDark,
                       )),
-                  2.0.height,
                   Text("~\$ 0.0",
                       style: AppFont.medium16.copyWith(
                         color: AppColor.textDark,
@@ -78,7 +78,10 @@ class HomePage extends StatelessWidget {
               ),
             ),
             CardAction(
-              // color: Colors.white.withOpacity(0.8),
+              // color: Color(int.parse(
+              //         evm.networkController.selectedChain.value.color ??
+              //             "0xff1AA9A4"))
+              //     .withOpacity(0.4),
               scan: () {
                 Get.to(() => const ScannPage());
               },
@@ -109,7 +112,7 @@ class HomePage extends StatelessWidget {
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Skeletonizer(
-                  enabled:  evm.isLoadingNetwork.value,
+                  enabled: evm.isLoadingNetwork.value,
                   effect: const ShimmerEffect(
                       baseColor: AppColor.grayColor,
                       // highlightColor: AppColor.grayColor,
@@ -120,7 +123,7 @@ class HomePage extends StatelessWidget {
                       24.0.height,
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => const ChangeWallet());
+                          Get.to(() => ChangeWallet());
                         },
                         child: Row(
                           children: [

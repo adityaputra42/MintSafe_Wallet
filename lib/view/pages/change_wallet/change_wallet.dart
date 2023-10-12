@@ -1,6 +1,9 @@
+import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
+import 'package:mintsafe_wallet/utils/helper/method_helper.dart';
 import 'package:mintsafe_wallet/view/pages/add_wallet/add_wallet.dart';
 
 import '../../../config/config.dart';
@@ -9,11 +12,11 @@ import '../../../utils/utils.dart';
 import '../../widget/widget.dart';
 
 class ChangeWallet extends StatelessWidget {
-  const ChangeWallet({super.key});
-
+  ChangeWallet({super.key});
+  final EvmNewController evm = Get.find();
   @override
   Widget build(BuildContext context) {
-    Widget cardAccount({required Color color, bool active = false}) {
+    Widget cardAccount({required Address address}) {
       return Row(
         children: [
           Container(
@@ -22,17 +25,11 @@ class ChangeWallet extends StatelessWidget {
             padding: EdgeInsets.all(2.h),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(width: 2.h, color: color)),
-            child: Container(
-              padding: EdgeInsets.all(6.w),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: color,
-              ),
-              child: Image.asset(
-                AppImage.avatar,
-              ),
-            ),
+                border: Border.all(width: 2.h, color: AppColor.primaryColor)),
+            child: Blockies(
+                size: 0.55,
+                data: address.address ?? "-",
+                shape: BlockiesShape.circle),
           ),
           8.0.width,
           Expanded(
@@ -40,18 +37,18 @@ class ChangeWallet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Wallet Saya",
+                "${address.name} ${address.id}",
                 style: AppFont.medium14.copyWith(color: AppColor.textDark),
               ),
               8.0.height,
               Text(
-                "0xf378gGkd9GKt39798djRJKJHSKiydku730g",
+                MethodHelper().shortAddress(address: address.address ?? ""),
                 style: AppFont.reguler12.copyWith(color: AppColor.textDark),
               )
             ],
           )),
           8.0.height,
-          active
+          address.address == evm.selectedAddress.value.address
               ? Icon(
                   Icons.check_circle_outline_rounded,
                   size: 24.w,
@@ -62,90 +59,81 @@ class ChangeWallet extends StatelessWidget {
       );
     }
 
-    return Scaffold(
-      backgroundColor: AppColor.bgDark,
-      appBar: WidgetHelper.appBar(
-          title: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textDark,
-              size: 24.h,
+    return Obx(() {
+      return Scaffold(
+        backgroundColor: AppColor.bgDark,
+        appBar: WidgetHelper.appBar(
+            title: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: AppColor.textDark,
+                size: 24.h,
+              ),
             ),
-          ),
-          16.0.width,
-          Text(
-            "Change Wallet",
-            style: AppFont.medium16.copyWith(color: AppColor.textDark),
-          ),
-        ],
-      )),
-      body: Stack(
-        children: [
-          SizedBox(
-            width: ScreenUtil().screenWidth,
-            child: Image.asset(
-              AppImage.maskHome,
-              fit: BoxFit.cover,
+            16.0.width,
+            Text(
+              "Change Wallet",
+              style: AppFont.medium16.copyWith(color: AppColor.textDark),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView(
+          ],
+        )),
+        body: Stack(
+          children: [
+            SizedBox(
+              width: ScreenUtil().screenWidth,
+              child: Image.asset(
+                AppImage.maskHome,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (context, index) => Padding(
+                        padding: EdgeInsets.only(bottom: 12.h),
+                        child: cardAccount(address: evm.addressList[index]),
+                      ),
+                      itemCount: evm.addressList.length,
+                    ),
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      16.0.height,
-                      cardAccount(
-                        color: AppColor.primaryColor,
-                        active: true,
+                      Text(
+                        "want a new address?\nTap the below button to add.",
+                        style: AppFont.reguler12.copyWith(
+                          color: AppColor.grayColor,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      12.0.height,
-                      cardAccount(
-                        color: AppColor.yellowColor,
+                      SecondaryButton(
+                        title: "Add Network",
+                        icon: Icon(
+                          Icons.add_circle_outline_rounded,
+                          size: 24.h,
+                          color: AppColor.primaryColor,
+                        ),
+                        onPressed: () {
+                          Get.to(() => const AddWallet());
+                        },
+                        margin: EdgeInsets.symmetric(vertical: 24.h),
                       ),
-                      12.0.height,
-                      cardAccount(
-                        color: AppColor.grayColor,
-                      ),
-                      12.0.height,
                     ],
                   ),
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "want a new address?\nTap the below button to add.",
-                      style: AppFont.reguler12.copyWith(
-                        color: AppColor.grayColor,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SecondaryButton(
-                      title: "Add Network",
-                      icon: Icon(
-                        Icons.add_circle_outline_rounded,
-                        size: 24.h,
-                        color: AppColor.primaryColor,
-                      ),
-                      onPressed: () {
-                        Get.to(() => const AddWallet());
-                      },
-                      margin: EdgeInsets.symmetric(vertical: 24.h),
-                    ),
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }

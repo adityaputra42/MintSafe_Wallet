@@ -100,7 +100,7 @@ class AddTokenPage extends StatelessWidget {
                     ),
                     16.0.height,
                     controller.selectedTab.value == 0
-                        ? const SearchToken()
+                        ? SearchToken()
                         : const CustomToken()
                     // TabBarView(children: [Wall()])
                   ],
@@ -113,7 +113,7 @@ class AddTokenPage extends StatelessWidget {
       bottomNavigationBar: PrimaryButton(
         title: "Confirm",
         onPressed: () {},
-        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        margin: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 24.h),
       ),
     );
   }
