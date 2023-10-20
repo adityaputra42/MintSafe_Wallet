@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'result_token.dart';
+part of 'selected_token.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator
@@ -9,91 +9,80 @@ part of 'result_token.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetResultCollection on Isar {
-  IsarCollection<Result> get results => this.collection();
+extension GetSelectedTokenCollection on Isar {
+  IsarCollection<SelectedToken> get selectedTokens => this.collection();
 }
 
-const ResultSchema = CollectionSchema(
-  name: r'Result',
-  id: 2710412425235774975,
+const SelectedTokenSchema = CollectionSchema(
+  name: r'SelectedToken',
+  id: 9210778102059433936,
   properties: {
-    r'addressWallet': PropertySchema(
-      id: 0,
-      name: r'addressWallet',
-      type: IsarType.string,
-    ),
     r'balance': PropertySchema(
-      id: 1,
+      id: 0,
       name: r'balance',
       type: IsarType.double,
     ),
     r'chainId': PropertySchema(
-      id: 2,
+      id: 1,
       name: r'chainId',
       type: IsarType.string,
     ),
     r'contractAddress': PropertySchema(
-      id: 3,
+      id: 2,
       name: r'contractAddress',
       type: IsarType.string,
     ),
-    r'decimals': PropertySchema(
-      id: 4,
-      name: r'decimals',
+    r'decimal': PropertySchema(
+      id: 3,
+      name: r'decimal',
       type: IsarType.long,
     ),
-    r'image': PropertySchema(
-      id: 5,
-      name: r'image',
+    r'logo': PropertySchema(
+      id: 4,
+      name: r'logo',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 6,
+      id: 5,
       name: r'name',
       type: IsarType.string,
     ),
     r'selected': PropertySchema(
-      id: 7,
+      id: 6,
       name: r'selected',
       type: IsarType.bool,
     ),
     r'symbol': PropertySchema(
-      id: 8,
+      id: 7,
       name: r'symbol',
       type: IsarType.string,
     ),
-    r'type': PropertySchema(
-      id: 9,
-      name: r'type',
+    r'walletAddress': PropertySchema(
+      id: 8,
+      name: r'walletAddress',
       type: IsarType.string,
     )
   },
-  estimateSize: _resultEstimateSize,
-  serialize: _resultSerialize,
-  deserialize: _resultDeserialize,
-  deserializeProp: _resultDeserializeProp,
+  estimateSize: _selectedTokenEstimateSize,
+  serialize: _selectedTokenSerialize,
+  deserialize: _selectedTokenDeserialize,
+  deserializeProp: _selectedTokenDeserializeProp,
   idName: r'id',
   indexes: {},
   links: {},
   embeddedSchemas: {},
-  getId: _resultGetId,
-  getLinks: _resultGetLinks,
-  attach: _resultAttach,
+  getId: _selectedTokenGetId,
+  getLinks: _selectedTokenGetLinks,
+  attach: _selectedTokenAttach,
   version: '3.1.0+1',
 );
 
-int _resultEstimateSize(
-  Result object,
+int _selectedTokenEstimateSize(
+  SelectedToken object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  {
-    final value = object.addressWallet;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
   {
     final value = object.chainId;
     if (value != null) {
@@ -107,7 +96,7 @@ int _resultEstimateSize(
     }
   }
   {
-    final value = object.image;
+    final value = object.logo;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -125,7 +114,7 @@ int _resultEstimateSize(
     }
   }
   {
-    final value = object.type;
+    final value = object.walletAddress;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -133,47 +122,45 @@ int _resultEstimateSize(
   return bytesCount;
 }
 
-void _resultSerialize(
-  Result object,
+void _selectedTokenSerialize(
+  SelectedToken object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.addressWallet);
-  writer.writeDouble(offsets[1], object.balance);
-  writer.writeString(offsets[2], object.chainId);
-  writer.writeString(offsets[3], object.contractAddress);
-  writer.writeLong(offsets[4], object.decimals);
-  writer.writeString(offsets[5], object.image);
-  writer.writeString(offsets[6], object.name);
-  writer.writeBool(offsets[7], object.selected);
-  writer.writeString(offsets[8], object.symbol);
-  writer.writeString(offsets[9], object.type);
+  writer.writeDouble(offsets[0], object.balance);
+  writer.writeString(offsets[1], object.chainId);
+  writer.writeString(offsets[2], object.contractAddress);
+  writer.writeLong(offsets[3], object.decimal);
+  writer.writeString(offsets[4], object.logo);
+  writer.writeString(offsets[5], object.name);
+  writer.writeBool(offsets[6], object.selected);
+  writer.writeString(offsets[7], object.symbol);
+  writer.writeString(offsets[8], object.walletAddress);
 }
 
-Result _resultDeserialize(
+SelectedToken _selectedTokenDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = Result(
-    addressWallet: reader.readStringOrNull(offsets[0]),
-    balance: reader.readDoubleOrNull(offsets[1]),
-    chainId: reader.readStringOrNull(offsets[2]),
-    contractAddress: reader.readStringOrNull(offsets[3]),
-    decimals: reader.readLongOrNull(offsets[4]),
+  final object = SelectedToken(
+    balance: reader.readDoubleOrNull(offsets[0]),
+    chainId: reader.readStringOrNull(offsets[1]),
+    contractAddress: reader.readStringOrNull(offsets[2]),
+    decimal: reader.readLongOrNull(offsets[3]),
     id: id,
-    image: reader.readStringOrNull(offsets[5]),
-    name: reader.readStringOrNull(offsets[6]),
-    selected: reader.readBoolOrNull(offsets[7]),
-    symbol: reader.readStringOrNull(offsets[8]),
-    type: reader.readStringOrNull(offsets[9]),
+    logo: reader.readStringOrNull(offsets[4]),
+    name: reader.readStringOrNull(offsets[5]),
+    selected: reader.readBoolOrNull(offsets[6]),
+    symbol: reader.readStringOrNull(offsets[7]),
+    walletAddress: reader.readStringOrNull(offsets[8]),
   );
   return object;
 }
 
-P _resultDeserializeProp<P>(
+P _selectedTokenDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -181,52 +168,54 @@ P _resultDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readStringOrNull(offset)) as P;
-    case 1:
       return (reader.readDoubleOrNull(offset)) as P;
+    case 1:
+      return (reader.readStringOrNull(offset)) as P;
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
-    case 4:
       return (reader.readLongOrNull(offset)) as P;
+    case 4:
+      return (reader.readStringOrNull(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
-      return (reader.readStringOrNull(offset)) as P;
-    case 7:
       return (reader.readBoolOrNull(offset)) as P;
-    case 8:
+    case 7:
       return (reader.readStringOrNull(offset)) as P;
-    case 9:
+    case 8:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
-Id _resultGetId(Result object) {
+Id _selectedTokenGetId(SelectedToken object) {
   return object.id ?? Isar.autoIncrement;
 }
 
-List<IsarLinkBase<dynamic>> _resultGetLinks(Result object) {
+List<IsarLinkBase<dynamic>> _selectedTokenGetLinks(SelectedToken object) {
   return [];
 }
 
-void _resultAttach(IsarCollection<dynamic> col, Id id, Result object) {
+void _selectedTokenAttach(
+    IsarCollection<dynamic> col, Id id, SelectedToken object) {
   object.id = id;
 }
 
-extension ResultQueryWhereSort on QueryBuilder<Result, Result, QWhere> {
-  QueryBuilder<Result, Result, QAfterWhere> anyId() {
+extension SelectedTokenQueryWhereSort
+    on QueryBuilder<SelectedToken, SelectedToken, QWhere> {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 }
 
-extension ResultQueryWhere on QueryBuilder<Result, Result, QWhereClause> {
-  QueryBuilder<Result, Result, QAfterWhereClause> idEqualTo(Id id) {
+extension SelectedTokenQueryWhere
+    on QueryBuilder<SelectedToken, SelectedToken, QWhereClause> {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterWhereClause> idEqualTo(
+      Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -235,7 +224,8 @@ extension ResultQueryWhere on QueryBuilder<Result, Result, QWhereClause> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterWhereClause> idNotEqualTo(Id id) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterWhereClause> idNotEqualTo(
+      Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -257,7 +247,8 @@ extension ResultQueryWhere on QueryBuilder<Result, Result, QWhereClause> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterWhereClause> idGreaterThan(Id id,
+  QueryBuilder<SelectedToken, SelectedToken, QAfterWhereClause> idGreaterThan(
+      Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -266,7 +257,8 @@ extension ResultQueryWhere on QueryBuilder<Result, Result, QWhereClause> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterWhereClause> idLessThan(Id id,
+  QueryBuilder<SelectedToken, SelectedToken, QAfterWhereClause> idLessThan(
+      Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -275,7 +267,7 @@ extension ResultQueryWhere on QueryBuilder<Result, Result, QWhereClause> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterWhereClause> idBetween(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterWhereClause> idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
@@ -292,155 +284,10 @@ extension ResultQueryWhere on QueryBuilder<Result, Result, QWhereClause> {
   }
 }
 
-extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
-  QueryBuilder<Result, Result, QAfterFilterCondition> addressWalletIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'addressWallet',
-      ));
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterFilterCondition> addressWalletIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'addressWallet',
-      ));
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterFilterCondition> addressWalletEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'addressWallet',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterFilterCondition> addressWalletGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'addressWallet',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterFilterCondition> addressWalletLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'addressWallet',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterFilterCondition> addressWalletBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'addressWallet',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterFilterCondition> addressWalletStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'addressWallet',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterFilterCondition> addressWalletEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'addressWallet',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterFilterCondition> addressWalletContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'addressWallet',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterFilterCondition> addressWalletMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'addressWallet',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterFilterCondition> addressWalletIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'addressWallet',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterFilterCondition>
-      addressWalletIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'addressWallet',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterFilterCondition> balanceIsNull() {
+extension SelectedTokenQueryFilter
+    on QueryBuilder<SelectedToken, SelectedToken, QFilterCondition> {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      balanceIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'balance',
@@ -448,7 +295,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> balanceIsNotNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      balanceIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'balance',
@@ -456,7 +304,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> balanceEqualTo(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      balanceEqualTo(
     double? value, {
     double epsilon = Query.epsilon,
   }) {
@@ -469,7 +318,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> balanceGreaterThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      balanceGreaterThan(
     double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -484,7 +334,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> balanceLessThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      balanceLessThan(
     double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -499,7 +350,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> balanceBetween(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      balanceBetween(
     double? lower,
     double? upper, {
     bool includeLower = true,
@@ -518,7 +370,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> chainIdIsNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      chainIdIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'chainId',
@@ -526,7 +379,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> chainIdIsNotNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      chainIdIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'chainId',
@@ -534,7 +388,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> chainIdEqualTo(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      chainIdEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -547,7 +402,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> chainIdGreaterThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      chainIdGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -562,7 +418,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> chainIdLessThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      chainIdLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -577,7 +434,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> chainIdBetween(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      chainIdBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -596,7 +454,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> chainIdStartsWith(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      chainIdStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -609,7 +468,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> chainIdEndsWith(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      chainIdEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -622,9 +482,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> chainIdContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      chainIdContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'chainId',
@@ -634,9 +493,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> chainIdMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      chainIdMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
         property: r'chainId',
@@ -646,7 +504,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> chainIdIsEmpty() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      chainIdIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'chainId',
@@ -655,7 +514,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> chainIdIsNotEmpty() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      chainIdIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'chainId',
@@ -664,7 +524,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> contractAddressIsNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      contractAddressIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'contractAddress',
@@ -672,7 +533,7 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition>
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
       contractAddressIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -681,7 +542,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> contractAddressEqualTo(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      contractAddressEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -694,7 +556,7 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition>
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
       contractAddressGreaterThan(
     String? value, {
     bool include = false,
@@ -710,7 +572,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> contractAddressLessThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      contractAddressLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -725,7 +588,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> contractAddressBetween(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      contractAddressBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -744,7 +608,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> contractAddressStartsWith(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      contractAddressStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -757,7 +622,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> contractAddressEndsWith(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      contractAddressEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -770,9 +636,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> contractAddressContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      contractAddressContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'contractAddress',
@@ -782,9 +647,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> contractAddressMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      contractAddressMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
         property: r'contractAddress',
@@ -794,7 +658,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> contractAddressIsEmpty() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      contractAddressIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'contractAddress',
@@ -803,7 +668,7 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition>
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
       contractAddressIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -813,59 +678,64 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> decimalsIsNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      decimalIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'decimals',
+        property: r'decimal',
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> decimalsIsNotNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      decimalIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'decimals',
+        property: r'decimal',
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> decimalsEqualTo(
-      int? value) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      decimalEqualTo(int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'decimals',
+        property: r'decimal',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> decimalsGreaterThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      decimalGreaterThan(
     int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'decimals',
+        property: r'decimal',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> decimalsLessThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      decimalLessThan(
     int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'decimals',
+        property: r'decimal',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> decimalsBetween(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      decimalBetween(
     int? lower,
     int? upper, {
     bool includeLower = true,
@@ -873,7 +743,7 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'decimals',
+        property: r'decimal',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -882,7 +752,7 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> idIsNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition> idIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'id',
@@ -890,7 +760,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> idIsNotNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      idIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'id',
@@ -898,7 +769,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> idEqualTo(Id? value) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition> idEqualTo(
+      Id? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -907,7 +779,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> idGreaterThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      idGreaterThan(
     Id? value, {
     bool include = false,
   }) {
@@ -920,7 +793,7 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> idLessThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition> idLessThan(
     Id? value, {
     bool include = false,
   }) {
@@ -933,7 +806,7 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> idBetween(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition> idBetween(
     Id? lower,
     Id? upper, {
     bool includeLower = true,
@@ -950,36 +823,39 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> imageIsNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      logoIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'image',
+        property: r'logo',
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> imageIsNotNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      logoIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'image',
+        property: r'logo',
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> imageEqualTo(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition> logoEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'image',
+        property: r'logo',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> imageGreaterThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      logoGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -987,14 +863,15 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'image',
+        property: r'logo',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> imageLessThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      logoLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1002,14 +879,14 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'image',
+        property: r'logo',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> imageBetween(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition> logoBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -1018,7 +895,7 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'image',
+        property: r'logo',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1028,75 +905,79 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> imageStartsWith(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      logoStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'image',
+        property: r'logo',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> imageEndsWith(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      logoEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'image',
+        property: r'logo',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> imageContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      logoContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'image',
+        property: r'logo',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> imageMatches(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition> logoMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'image',
+        property: r'logo',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> imageIsEmpty() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      logoIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'image',
+        property: r'logo',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> imageIsNotEmpty() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      logoIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'image',
+        property: r'logo',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> nameIsNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      nameIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'name',
@@ -1104,7 +985,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> nameIsNotNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      nameIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'name',
@@ -1112,7 +994,7 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> nameEqualTo(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition> nameEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1125,7 +1007,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> nameGreaterThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      nameGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1140,7 +1023,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> nameLessThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      nameLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1155,7 +1039,7 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> nameBetween(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition> nameBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -1174,7 +1058,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> nameStartsWith(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      nameStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1187,7 +1072,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> nameEndsWith(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      nameEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1200,8 +1086,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> nameContains(String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      nameContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'name',
@@ -1211,7 +1097,7 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> nameMatches(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition> nameMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1223,7 +1109,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> nameIsEmpty() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      nameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'name',
@@ -1232,7 +1119,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> nameIsNotEmpty() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      nameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'name',
@@ -1241,7 +1129,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> selectedIsNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      selectedIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'selected',
@@ -1249,7 +1138,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> selectedIsNotNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      selectedIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'selected',
@@ -1257,8 +1147,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> selectedEqualTo(
-      bool? value) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      selectedEqualTo(bool? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'selected',
@@ -1267,7 +1157,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> symbolIsNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      symbolIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'symbol',
@@ -1275,7 +1166,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> symbolIsNotNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      symbolIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'symbol',
@@ -1283,7 +1175,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> symbolEqualTo(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      symbolEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1296,7 +1189,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> symbolGreaterThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      symbolGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1311,7 +1205,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> symbolLessThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      symbolLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1326,7 +1221,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> symbolBetween(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      symbolBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -1345,7 +1241,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> symbolStartsWith(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      symbolStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1358,7 +1255,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> symbolEndsWith(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      symbolEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1371,9 +1269,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> symbolContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      symbolContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'symbol',
@@ -1383,9 +1280,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> symbolMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      symbolMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
         property: r'symbol',
@@ -1395,7 +1291,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> symbolIsEmpty() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      symbolIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'symbol',
@@ -1404,7 +1301,8 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> symbolIsNotEmpty() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      symbolIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'symbol',
@@ -1413,36 +1311,40 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> typeIsNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      walletAddressIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'type',
+        property: r'walletAddress',
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> typeIsNotNull() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      walletAddressIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'type',
+        property: r'walletAddress',
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> typeEqualTo(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      walletAddressEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'type',
+        property: r'walletAddress',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> typeGreaterThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      walletAddressGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1450,14 +1352,15 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'type',
+        property: r'walletAddress',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> typeLessThan(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      walletAddressLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1465,14 +1368,15 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'type',
+        property: r'walletAddress',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> typeBetween(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      walletAddressBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -1481,7 +1385,7 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'type',
+        property: r'walletAddress',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1491,469 +1395,453 @@ extension ResultQueryFilter on QueryBuilder<Result, Result, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> typeStartsWith(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      walletAddressStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'type',
+        property: r'walletAddress',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> typeEndsWith(
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      walletAddressEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'type',
+        property: r'walletAddress',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> typeContains(String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      walletAddressContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'type',
+        property: r'walletAddress',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> typeMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      walletAddressMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'type',
+        property: r'walletAddress',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> typeIsEmpty() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      walletAddressIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'type',
+        property: r'walletAddress',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<Result, Result, QAfterFilterCondition> typeIsNotEmpty() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterFilterCondition>
+      walletAddressIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'type',
+        property: r'walletAddress',
         value: '',
       ));
     });
   }
 }
 
-extension ResultQueryObject on QueryBuilder<Result, Result, QFilterCondition> {}
+extension SelectedTokenQueryObject
+    on QueryBuilder<SelectedToken, SelectedToken, QFilterCondition> {}
 
-extension ResultQueryLinks on QueryBuilder<Result, Result, QFilterCondition> {}
+extension SelectedTokenQueryLinks
+    on QueryBuilder<SelectedToken, SelectedToken, QFilterCondition> {}
 
-extension ResultQuerySortBy on QueryBuilder<Result, Result, QSortBy> {
-  QueryBuilder<Result, Result, QAfterSortBy> sortByAddressWallet() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'addressWallet', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterSortBy> sortByAddressWalletDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'addressWallet', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterSortBy> sortByBalance() {
+extension SelectedTokenQuerySortBy
+    on QueryBuilder<SelectedToken, SelectedToken, QSortBy> {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortByBalance() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'balance', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByBalanceDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortByBalanceDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'balance', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByChainId() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortByChainId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'chainId', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByChainIdDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortByChainIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'chainId', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByContractAddress() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy>
+      sortByContractAddress() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'contractAddress', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByContractAddressDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy>
+      sortByContractAddressDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'contractAddress', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByDecimals() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortByDecimal() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'decimals', Sort.asc);
+      return query.addSortBy(r'decimal', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByDecimalsDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortByDecimalDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'decimals', Sort.desc);
+      return query.addSortBy(r'decimal', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByImage() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortByLogo() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'image', Sort.asc);
+      return query.addSortBy(r'logo', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByImageDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortByLogoDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'image', Sort.desc);
+      return query.addSortBy(r'logo', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByName() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByNameDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortBySelected() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortBySelected() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'selected', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortBySelectedDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy>
+      sortBySelectedDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'selected', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortBySymbol() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortBySymbol() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'symbol', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortBySymbolDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> sortBySymbolDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'symbol', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByType() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy>
+      sortByWalletAddress() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'type', Sort.asc);
+      return query.addSortBy(r'walletAddress', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> sortByTypeDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy>
+      sortByWalletAddressDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'type', Sort.desc);
+      return query.addSortBy(r'walletAddress', Sort.desc);
     });
   }
 }
 
-extension ResultQuerySortThenBy on QueryBuilder<Result, Result, QSortThenBy> {
-  QueryBuilder<Result, Result, QAfterSortBy> thenByAddressWallet() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'addressWallet', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterSortBy> thenByAddressWalletDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'addressWallet', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Result, Result, QAfterSortBy> thenByBalance() {
+extension SelectedTokenQuerySortThenBy
+    on QueryBuilder<SelectedToken, SelectedToken, QSortThenBy> {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenByBalance() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'balance', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByBalanceDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenByBalanceDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'balance', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByChainId() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenByChainId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'chainId', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByChainIdDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenByChainIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'chainId', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByContractAddress() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy>
+      thenByContractAddress() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'contractAddress', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByContractAddressDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy>
+      thenByContractAddressDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'contractAddress', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByDecimals() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenByDecimal() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'decimals', Sort.asc);
+      return query.addSortBy(r'decimal', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByDecimalsDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenByDecimalDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'decimals', Sort.desc);
+      return query.addSortBy(r'decimal', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenById() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByImage() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenByLogo() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'image', Sort.asc);
+      return query.addSortBy(r'logo', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByImageDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenByLogoDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'image', Sort.desc);
+      return query.addSortBy(r'logo', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByName() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByNameDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenBySelected() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenBySelected() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'selected', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenBySelectedDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy>
+      thenBySelectedDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'selected', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenBySymbol() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenBySymbol() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'symbol', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenBySymbolDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy> thenBySymbolDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'symbol', Sort.desc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByType() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy>
+      thenByWalletAddress() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'type', Sort.asc);
+      return query.addSortBy(r'walletAddress', Sort.asc);
     });
   }
 
-  QueryBuilder<Result, Result, QAfterSortBy> thenByTypeDesc() {
+  QueryBuilder<SelectedToken, SelectedToken, QAfterSortBy>
+      thenByWalletAddressDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'type', Sort.desc);
+      return query.addSortBy(r'walletAddress', Sort.desc);
     });
   }
 }
 
-extension ResultQueryWhereDistinct on QueryBuilder<Result, Result, QDistinct> {
-  QueryBuilder<Result, Result, QDistinct> distinctByAddressWallet(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'addressWallet',
-          caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<Result, Result, QDistinct> distinctByBalance() {
+extension SelectedTokenQueryWhereDistinct
+    on QueryBuilder<SelectedToken, SelectedToken, QDistinct> {
+  QueryBuilder<SelectedToken, SelectedToken, QDistinct> distinctByBalance() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'balance');
     });
   }
 
-  QueryBuilder<Result, Result, QDistinct> distinctByChainId(
+  QueryBuilder<SelectedToken, SelectedToken, QDistinct> distinctByChainId(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'chainId', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<Result, Result, QDistinct> distinctByContractAddress(
-      {bool caseSensitive = true}) {
+  QueryBuilder<SelectedToken, SelectedToken, QDistinct>
+      distinctByContractAddress({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'contractAddress',
           caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<Result, Result, QDistinct> distinctByDecimals() {
+  QueryBuilder<SelectedToken, SelectedToken, QDistinct> distinctByDecimal() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'decimals');
+      return query.addDistinctBy(r'decimal');
     });
   }
 
-  QueryBuilder<Result, Result, QDistinct> distinctByImage(
+  QueryBuilder<SelectedToken, SelectedToken, QDistinct> distinctByLogo(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'image', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'logo', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<Result, Result, QDistinct> distinctByName(
+  QueryBuilder<SelectedToken, SelectedToken, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<Result, Result, QDistinct> distinctBySelected() {
+  QueryBuilder<SelectedToken, SelectedToken, QDistinct> distinctBySelected() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'selected');
     });
   }
 
-  QueryBuilder<Result, Result, QDistinct> distinctBySymbol(
+  QueryBuilder<SelectedToken, SelectedToken, QDistinct> distinctBySymbol(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'symbol', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<Result, Result, QDistinct> distinctByType(
+  QueryBuilder<SelectedToken, SelectedToken, QDistinct> distinctByWalletAddress(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'type', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'walletAddress',
+          caseSensitive: caseSensitive);
     });
   }
 }
 
-extension ResultQueryProperty on QueryBuilder<Result, Result, QQueryProperty> {
-  QueryBuilder<Result, int, QQueryOperations> idProperty() {
+extension SelectedTokenQueryProperty
+    on QueryBuilder<SelectedToken, SelectedToken, QQueryProperty> {
+  QueryBuilder<SelectedToken, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<Result, String?, QQueryOperations> addressWalletProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'addressWallet');
-    });
-  }
-
-  QueryBuilder<Result, double?, QQueryOperations> balanceProperty() {
+  QueryBuilder<SelectedToken, double?, QQueryOperations> balanceProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'balance');
     });
   }
 
-  QueryBuilder<Result, String?, QQueryOperations> chainIdProperty() {
+  QueryBuilder<SelectedToken, String?, QQueryOperations> chainIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'chainId');
     });
   }
 
-  QueryBuilder<Result, String?, QQueryOperations> contractAddressProperty() {
+  QueryBuilder<SelectedToken, String?, QQueryOperations>
+      contractAddressProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'contractAddress');
     });
   }
 
-  QueryBuilder<Result, int?, QQueryOperations> decimalsProperty() {
+  QueryBuilder<SelectedToken, int?, QQueryOperations> decimalProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'decimals');
+      return query.addPropertyName(r'decimal');
     });
   }
 
-  QueryBuilder<Result, String?, QQueryOperations> imageProperty() {
+  QueryBuilder<SelectedToken, String?, QQueryOperations> logoProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'image');
+      return query.addPropertyName(r'logo');
     });
   }
 
-  QueryBuilder<Result, String?, QQueryOperations> nameProperty() {
+  QueryBuilder<SelectedToken, String?, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
     });
   }
 
-  QueryBuilder<Result, bool?, QQueryOperations> selectedProperty() {
+  QueryBuilder<SelectedToken, bool?, QQueryOperations> selectedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'selected');
     });
   }
 
-  QueryBuilder<Result, String?, QQueryOperations> symbolProperty() {
+  QueryBuilder<SelectedToken, String?, QQueryOperations> symbolProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'symbol');
     });
   }
 
-  QueryBuilder<Result, String?, QQueryOperations> typeProperty() {
+  QueryBuilder<SelectedToken, String?, QQueryOperations>
+      walletAddressProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'type');
+      return query.addPropertyName(r'walletAddress');
     });
   }
 }

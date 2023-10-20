@@ -1,50 +1,58 @@
 import 'dart:convert';
 import 'package:isar/isar.dart';
-part 'token.g.dart';
 
-List<Token> tokenFromJson(String str) =>
-    List<Token>.from(json.decode(str).map((x) => Token.fromJson(x)));
+part 'selected_token.g.dart';
 
-String tokenToJson(List<Token> data) =>
+List<SelectedToken> selectedTokenFromJson(String str) =>
+    List<SelectedToken>.from(
+        json.decode(str).map((x) => SelectedToken.fromJson(x)));
+
+String selectedTokenToJson(List<SelectedToken> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 @Collection()
-class Token {
-  Token({
+class SelectedToken {
+  SelectedToken({
     this.id,
     this.name,
     this.contractAddress,
     this.symbol,
+    this.walletAddress,
     this.decimal,
     this.balance,
     this.logo,
     this.chainId,
+    this.selected,
   });
   Id? id = Isar.autoIncrement;
   String? name;
   String? contractAddress;
+  String? walletAddress;
   String? symbol;
   int? decimal;
   double? balance;
   String? logo;
   String? chainId;
+  bool? selected;
 
-  Token copyWith(
+  SelectedToken copyWith(
           {String? name,
           String? contractAddress,
+          String? walletAddress,
           String? symbol,
           int? decimal,
           double? balance,
           bool? selected}) =>
-      Token(
-        name: name ?? this.name,
-        contractAddress: contractAddress ?? this.contractAddress,
-        symbol: symbol ?? this.symbol,
-        decimal: decimal ?? this.decimal,
-        balance: balance ?? this.balance,
-      );
+      SelectedToken(
+          name: name ?? this.name,
+          contractAddress: contractAddress ?? this.contractAddress,
+          walletAddress: walletAddress ?? this.walletAddress,
+          symbol: symbol ?? this.symbol,
+          decimal: decimal ?? this.decimal,
+          balance: balance ?? this.balance,
+          selected: selected ?? this.selected);
 
-  factory Token.fromJson(Map<String, dynamic> json) => Token(
+  factory SelectedToken.fromJson(Map<String, dynamic> json) => SelectedToken(
         name: json["name"],
         contractAddress: json["contract"],
         symbol: json["symbol"],

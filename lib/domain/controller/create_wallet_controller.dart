@@ -15,16 +15,16 @@ import 'dart:developer' as dev;
 
 Future<Address> saveAddressCompute(String mnemonic) async {
   var account = WalletRepository().getAccountInfo(mnemonic);
-  final mnemonicEncryted = encrypter.encrypt(mnemonic, iv: iv);
-  final privateKeyEncryted = encrypter.encrypt(account['private_key']!, iv: iv);
+  final mnemonicEncryted = Ecryption().encrypt(mnemonic);
+  final privateKeyEncryted = Ecryption().encrypt(account['private_key']!);
 
   Address address = Address(
       name: "Account",
       address: account['address'],
-      mnemonic: mnemonicEncryted.base64.toString(),
+      mnemonic: mnemonicEncryted,
       balance: 0,
       selectedAddress: true,
-      privateKey: privateKeyEncryted.base64.toString());
+      privateKey: privateKeyEncryted);
 
   return address;
 }
@@ -95,7 +95,7 @@ class CreateWalletController extends GetxController {
     randomValue.value = randomMnemonic[Random().nextInt(12)]['id'];
   }
 
-  validatePharse() async{
+  validatePharse() async {
     isLoading.value = true;
     confirmPharse.sort((a, b) => a['id'].compareTo(b['id']));
 
@@ -146,7 +146,7 @@ class CreateWalletController extends GetxController {
     await DbHelper.instance.addAddress(address);
 
     createdAddress.value = address;
-dev.log("created Address => $address");
+    dev.log("created Address => $address");
     return address;
   }
 

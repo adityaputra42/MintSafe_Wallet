@@ -6,7 +6,6 @@ import 'package:web3dart/web3dart.dart';
 import '../../data/data.dart';
 import '../../utils/utils.dart';
 import 'evm_new_controller.dart';
-import 'network_controller.dart';
 
 class ChangeNetworkController extends GetxController {
   EvmNewController evm = Get.find();
@@ -30,8 +29,9 @@ class ChangeNetworkController extends GetxController {
       httpClient,
     );
     evm.tokenSelected.clear();
-    final tokens = await DbHelper.instance.getSelectedListToken(
-      chainId: network.chainId ?? "",
+    final tokens = await DbHelper.instance.getSelectedToken(
+      walletAddress: evm.selectedAddress.value.address ?? "",
+      chainID: network.chainId ?? "",
     );
     evm.tokenSelected.value = tokens;
     final tokenByChain = await DbHelper.instance

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer' as dev;
@@ -11,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:web3dart/web3dart.dart';
 
 import '../../data/data.dart';
@@ -44,7 +47,6 @@ class EvmNewController extends GetxController {
     // INIT NETWORK
     isLoadingNetwork.value = true;
     await networkController.initialzedNetwork();
-    await initialzedToken();
 
     /// INIT RPC
     initWeb3RPC();
@@ -59,7 +61,7 @@ class EvmNewController extends GetxController {
 
     // INIT TOKEN
     //
-
+    await initialzedToken();
     // await getTokenFromContract();
     // await fetchTokenByAddress();
     isLoadingNetwork.value = false;
@@ -97,22 +99,8 @@ class EvmNewController extends GetxController {
   NetworkController networkController = Get.put(NetworkController());
   var isLoadingNetwork = false.obs;
   void changeNetwork(ChainNetwork network) async {
-    // Get.back();
-    // isLoadingNetwork.value = true;
-    // networkController.changeNetwork(network);
-    // initWeb3RPC();
-
-    // if (Get.isRegistered<ActivityTxController>()) {
-    //   Get.delete<ActivityTxController>();
-    // }
-    // await getBalance();
-    // isLoadingNetwork.value = false;
-
-    // await getMultipleTokenBalances();
     var httpClient = Client();
     Get.back();
-
-    // await DbHelper.instance.unSelectNetwork(selectedChain.value.id!);
     networkController.changeNetwork(network);
     selectedChain.value = network;
     selectedChain.refresh();
@@ -143,7 +131,7 @@ class EvmNewController extends GetxController {
   var selectedPrivateKey = ''.obs;
   var prefBalance = 0.0.obs;
   var balanceEth = 0.0.obs;
-  late Timer _timer;
+  late Timer timer;
   var isLoadingImportAccount = false.obs;
   var isLoadingCreateAccount = false.obs;
 
@@ -170,7 +158,7 @@ class EvmNewController extends GetxController {
   }
 
   decrypted(String pk) {
-    final privateKey = encrypter.decrypt64(pk, iv: iv);
+    final privateKey = Ecryption().decrypt(pk);
     selectedPrivateKey.value = privateKey;
   }
 
@@ -223,7 +211,7 @@ class EvmNewController extends GetxController {
   }
 
   void getEthBalancePeriodic() {
-    _timer = Timer.periodic(const Duration(seconds: 15), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 15), (timer) {
       getBalance();
 
       // getMultipleTokenBalances();
@@ -271,16 +259,15 @@ class EvmNewController extends GetxController {
     final mnemonic = WalletRepository().generateMnemonic();
     var account = WalletRepository().getAccountInfo(mnemonic);
     await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
-    final mnemonicEncrypt = encrypter.encrypt(account['mnemonic']!, iv: iv);
-    final privateKeyEncrypt =
-        encrypter.encrypt(account['private_key']!, iv: iv);
+    final mnemonicEncrypt = Ecryption().encrypt(account['mnemonic']!);
+    final privateKeyEncrypt = Ecryption().encrypt(account['private_key']!);
     Address addressNew = Address(
         name: "Account",
         address: account['address'],
-        mnemonic: mnemonicEncrypt.base64.toString(),
+        mnemonic: mnemonicEncrypt,
         balance: 0,
         selectedAddress: true,
-        privateKey: privateKeyEncrypt.base64.toString());
+        privateKey: privateKeyEncrypt);
 
     selectedAddress.value = addressNew;
     addressList.add(addressNew);
@@ -297,10 +284,10 @@ class EvmNewController extends GetxController {
     await getBalance();
 
     final listAddress = await DbHelper.instance.readAddressList();
-    listAddress!.forEach((element) {
-      print(element.name);
-      print(element.address);
-    });
+    for (var element in listAddress!) {
+      dev.log("${element.name}");
+      dev.log("${element.address}");
+    }
   }
 
   /// IMPORT ADDRESS FROM MNEMONIC OR PRIVATE KEY
@@ -316,7 +303,7 @@ class EvmNewController extends GetxController {
       } else {
         await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
         selectedAddress.value = address!;
-        addressList.add(address!);
+        addressList.add(address);
         importAddressInputController.clear();
         Get.back();
 
@@ -338,7 +325,7 @@ class EvmNewController extends GetxController {
 
         if (isValid) {
           final credentials = EthPrivateKey.fromHex(key);
-          final privatekeyEncrypted = encrypter.encrypt(key, iv: iv);
+          final privatekeyEncrypted = Ecryption().encrypt(key);
           if (addressList
               .where((v) => v.address == credentials.address.hex)
               .isNotEmpty) {
@@ -353,7 +340,7 @@ class EvmNewController extends GetxController {
                 mnemonic: null,
                 balance: 0,
                 selectedAddress: true,
-                privateKey: privatekeyEncrypted.base64.toString());
+                privateKey: privatekeyEncrypted);
 
             selectedAddress.value = addressNew;
             addressList.add(addressNew);
@@ -384,7 +371,7 @@ class EvmNewController extends GetxController {
   /// ############### TOKEN ###############
   /// #######################################
   RxList<Token> tokenList = <Token>[].obs;
-  RxList<Token> tokenSelected = <Token>[].obs;
+  RxList<SelectedToken> tokenSelected = <SelectedToken>[].obs;
 
   getTokens() async {
     final tokens = await DbHelper.instance.getAllTokens();
@@ -403,7 +390,6 @@ class EvmNewController extends GetxController {
 // var listToken = <Token>[].obs;
 
   Future<void> initialzedToken() async {
-    /// GET LIST Token
     tokenList.clear();
     tokenSelected.clear();
     final listTokens = await DbHelper.instance.getAllTokens();
@@ -417,16 +403,18 @@ class EvmNewController extends GetxController {
       final tokenByChain = await DbHelper.instance.getListTokenByChainId(
           chainId: networkController.selectedChain.value.chainId ?? "");
       tokenList.assignAll(tokenByChain);
-      final selectedToken = await DbHelper.instance.getSelectedListToken(
-        chainId: networkController.selectedChain.value.chainId ?? "",
+      final selectedToken = await DbHelper.instance.getSelectedToken(
+        walletAddress: selectedAddress.value.address ?? "",
+        chainID: networkController.selectedChain.value.chainId ?? "",
       );
       tokenSelected.assignAll(selectedToken);
     } else {
       final tokenByChain = await DbHelper.instance.getListTokenByChainId(
           chainId: networkController.selectedChain.value.chainId ?? "");
       tokenList.assignAll(tokenByChain);
-      final token = await DbHelper.instance.getSelectedListToken(
-        chainId: networkController.selectedChain.value.chainId ?? "",
+      final token = await DbHelper.instance.getSelectedToken(
+        walletAddress: selectedAddress.value.address ?? "",
+        chainID: networkController.selectedChain.value.chainId ?? "",
       );
       tokenSelected.assignAll(token);
     }
@@ -514,82 +502,11 @@ class EvmNewController extends GetxController {
     }
   }
 
-  // Future<void> getTokenFromContract() async {
-  //   // BETH
-
-  //   final contract = DeployedContract(
-  //       tokenRegistryAbi!,
-  //       EthereumAddress.fromHex(networkController.selectedChain.value.tokenRegistry!));
-  //   // final contract = DeployedContract(
-  //   //     tokenRegistryAbi!,
-  //   //     networkController.selectedChain.value.id == 1
-  //   //         ? EthereumAddress.fromHex(
-  //   //             "0xD432387df174a54489Ad6204A1400C97fF5545ef")
-  //   //         : EthereumAddress.fromHex(
-  //   //             "0x75AA2613E4102104682b8cC7C221692083131C72"));
-
-  //   // BASE
-  //   // final contract = DeployedContract(tokenRegistryAbi!,
-  //   //     EthereumAddress.fromHex("0xdc198d1f11f5B5b7e7B10A657d44497236FEe9E8"));
-
-  //   final query = contract.function('getTokenList');
-
-  //   final List<dynamic> result = await web3client!.call(
-  //     contract: contract,
-  //     function: query,
-  //     params: [],
-  //   );
-
-  //   var tokek = <Result>[];
-
-  //   for (var element in result) {
-  //     if (element is List) {
-  //       for (var item in element) {
-
-  //         final token = Result(
-  //             addressWallet: selectedAddress.value.address,
-  //             chainId: networkController.selectedChain.value.chainId,
-  //             balance: 0,
-  //             selected: false,
-  //             contractAddress: item[0].toString(),
-  //             name: item[1],
-  //             symbol: item[2],
-  //             decimals: item[3].toInt(),
-  //             image: item[4]);
-  //         tokek.add(token);
-  //       }
-  //     }
-  //   }
-
-  //   tokenRegistryAll.assignAll(tokek);
-
-  //   tokenList.forEach((element) {
-  //     final a = tokenRegistryAll.singleWhere(
-  //       (tokek) =>
-  //           element.contractAddress!.toLowerCase() ==
-  //           tokek.contractAddress!.toLowerCase(),
-  //       orElse: () => Result(),
-  //     );
-  //     if (a.contractAddress == null) {
-  //       tokenRegistryAll.add(element);
-  //     }
-  //   });
-
-  //   tokenRegistryAll.refresh();
-
-  //   dev.log("Result tokek : ${tokenRegistryAll.length}");
-  // }
-
-  // Future<void> resetWallet() async {
-  //   await DbHelper.instance.resetWallet();
-  //   Get.offAll(() => const OnBoardingPage());
-  // }
-
   Future<String?> transferToken(
       {required String contractAddress,
       required String to,
       required double amount,
-      required Result token}) async {
+      required SelectedToken token}) async {
     final contract =
         DeployedContract(erc20Abi!, EthereumAddress.fromHex(contractAddress));
     var credentials = EthPrivateKey.fromHex(selectedPrivateKey.value);
@@ -599,11 +516,8 @@ class EvmNewController extends GetxController {
       'to': to,
       'amount': amount,
     };
-
     dev.log(map.toString());
-
-    final value = BigInt.from(amount * pow(10, token.decimals!));
-
+    final value = BigInt.from(amount * pow(10, token.decimal!));
     try {
       final transaction = Transaction.callContract(
         contract: contract,
@@ -614,18 +528,9 @@ class EvmNewController extends GetxController {
           value,
         ],
       );
-
       final response = await web3client!.sendTransaction(
           credentials, transaction,
           chainId: int.parse(selectedChain.value.chainId!));
-      print("CONTRACT ADDRESS : $contractAddress");
-      // await getHistory(response,
-      //     contractAddress: token.contractAddress,
-      //     value: amount,
-      //     to: to,
-      //     isContractInteraction: false);
-      print("Transfer Token Result : $response");
-
       return response;
     } catch (e) {
       return null;
@@ -689,7 +594,6 @@ class EvmNewController extends GetxController {
 
     final txFee = gasPrice.getInWei * gasLimit;
     final fee = txFee / BigInt.from(10).pow(18);
-    print('Gas fee estimate: $fee wei');
     return fee;
   }
 
@@ -762,17 +666,16 @@ Future<Address?> importMnemonic(String mnemonic) async {
   // await DbHelper.instance.setPassword(Password(password: password));
 
   var account = WalletRepository().getAccountInfo(mnemonic);
-  final mnemonicEncrypted = encrypter.encrypt(mnemonic, iv: iv);
-  final privateKeyEncrypted =
-      encrypter.encrypt(account['private_key']!, iv: iv);
+  final mnemonicEncrypted = Ecryption().encrypt(mnemonic);
+  final privateKeyEncrypted = Ecryption().encrypt(account['private_key']!);
 
   Address address = Address(
       name: "Account",
       address: account['address'],
-      mnemonic: mnemonicEncrypted.base64.toString(),
+      mnemonic: mnemonicEncrypted,
       balance: 0,
       selectedAddress: true,
-      privateKey: privateKeyEncrypted.base64.toString());
+      privateKey: privateKeyEncrypted);
   print(address.address);
   print(address.mnemonic);
   print(address.privateKey);

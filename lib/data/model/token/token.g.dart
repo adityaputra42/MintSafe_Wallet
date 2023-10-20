@@ -47,13 +47,8 @@ const TokenSchema = CollectionSchema(
       name: r'name',
       type: IsarType.string,
     ),
-    r'selected': PropertySchema(
-      id: 6,
-      name: r'selected',
-      type: IsarType.bool,
-    ),
     r'symbol': PropertySchema(
-      id: 7,
+      id: 6,
       name: r'symbol',
       type: IsarType.string,
     )
@@ -123,8 +118,7 @@ void _tokenSerialize(
   writer.writeLong(offsets[3], object.decimal);
   writer.writeString(offsets[4], object.logo);
   writer.writeString(offsets[5], object.name);
-  writer.writeBool(offsets[6], object.selected);
-  writer.writeString(offsets[7], object.symbol);
+  writer.writeString(offsets[6], object.symbol);
 }
 
 Token _tokenDeserialize(
@@ -141,8 +135,7 @@ Token _tokenDeserialize(
     id: id,
     logo: reader.readStringOrNull(offsets[4]),
     name: reader.readStringOrNull(offsets[5]),
-    selected: reader.readBoolOrNull(offsets[6]) ?? false,
-    symbol: reader.readStringOrNull(offsets[7]),
+    symbol: reader.readStringOrNull(offsets[6]),
   );
   return object;
 }
@@ -167,8 +160,6 @@ P _tokenDeserializeProp<P>(
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
-      return (reader.readBoolOrNull(offset) ?? false) as P;
-    case 7:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1058,16 +1049,6 @@ extension TokenQueryFilter on QueryBuilder<Token, Token, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Token, Token, QAfterFilterCondition> selectedEqualTo(
-      bool value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'selected',
-        value: value,
-      ));
-    });
-  }
-
   QueryBuilder<Token, Token, QAfterFilterCondition> symbolIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1291,18 +1272,6 @@ extension TokenQuerySortBy on QueryBuilder<Token, Token, QSortBy> {
     });
   }
 
-  QueryBuilder<Token, Token, QAfterSortBy> sortBySelected() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'selected', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterSortBy> sortBySelectedDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'selected', Sort.desc);
-    });
-  }
-
   QueryBuilder<Token, Token, QAfterSortBy> sortBySymbol() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'symbol', Sort.asc);
@@ -1401,18 +1370,6 @@ extension TokenQuerySortThenBy on QueryBuilder<Token, Token, QSortThenBy> {
     });
   }
 
-  QueryBuilder<Token, Token, QAfterSortBy> thenBySelected() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'selected', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Token, Token, QAfterSortBy> thenBySelectedDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'selected', Sort.desc);
-    });
-  }
-
   QueryBuilder<Token, Token, QAfterSortBy> thenBySymbol() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'symbol', Sort.asc);
@@ -1468,12 +1425,6 @@ extension TokenQueryWhereDistinct on QueryBuilder<Token, Token, QDistinct> {
     });
   }
 
-  QueryBuilder<Token, Token, QDistinct> distinctBySelected() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'selected');
-    });
-  }
-
   QueryBuilder<Token, Token, QDistinct> distinctBySymbol(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1522,12 +1473,6 @@ extension TokenQueryProperty on QueryBuilder<Token, Token, QQueryProperty> {
   QueryBuilder<Token, String?, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
-    });
-  }
-
-  QueryBuilder<Token, bool, QQueryOperations> selectedProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'selected');
     });
   }
 

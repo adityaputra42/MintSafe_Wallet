@@ -8,18 +8,54 @@ import 'package:mintsafe_wallet/view/widget/widget.dart';
 
 import '../../../../config/config.dart';
 import '../../../../data/data.dart';
+import '../../../../data/model/token/selected_token.dart';
 
 class SearchToken extends StatelessWidget {
   SearchToken({super.key});
   final AddTokenController controller = Get.find();
   @override
   Widget build(BuildContext context) {
-    Widget cardCoin({
-      required Token token,
-    }) {
+    return Expanded(
+      child: Obx(() {
+        return Column(
+          children: [
+            const SearchField(),
+            16.0.height,
+            Expanded(
+                child: controller.evm.tokenList.isEmpty
+                    ? const Center(
+                        child: Empty(title: "No data token"),
+                      )
+                    : ListView.builder(
+                        itemBuilder: (context, index) => Padding(
+                          padding: EdgeInsets.only(bottom: 16.h),
+                          child:
+                              cardCoin(token: controller.evm.tokenList[index]),
+                        ),
+                        itemCount: controller.evm.tokenList.length,
+                      ))
+          ],
+        );
+      }),
+    );
+  }
+
+  Widget cardCoin({
+    required Token token,
+  }) {
+    return Obx(() {
       return GestureDetector(
         onTap: () {
-          token.selected = !token.selected;
+          controller.setToken(SelectedToken(
+              name: token.name,
+              contractAddress: token.contractAddress,
+              symbol: token.symbol,
+              walletAddress: controller.evm.selectedAddress.value.address,
+              selected: true,
+              decimal: token.decimal,
+              balance: token.balance,
+              logo: token.logo,
+              chainId: token.chainId));
         },
         child: SizedBox(
           child: Row(
@@ -42,7 +78,9 @@ class SearchToken extends StatelessWidget {
                       style:
                           AppFont.medium16.copyWith(color: AppColor.textDark))),
               16.0.width,
-              token.selected == true
+              controller.evm.tokenSelected.any((element) =>
+                      element.contractAddress!.toLowerCase() ==
+                      token.contractAddress!.toLowerCase())
                   ? Icon(
                       Icons.check_circle_outline_rounded,
                       size: 24.w,
@@ -53,29 +91,6 @@ class SearchToken extends StatelessWidget {
           ),
         ),
       );
-    }
-
-    return Expanded(
-      child: Obx(() {
-        return Column(
-          children: [
-            const SearchField(),
-            16.0.height,
-            Expanded(
-                child: controller.tokenList.isEmpty
-                    ? const Center(
-                        child: Empty(title: "No data token"),
-                      )
-                    : ListView.builder(
-                        itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.only(bottom: 16.h),
-                          child: cardCoin(token: controller.tokenList[index]),
-                        ),
-                        itemCount: controller.tokenList.length,
-                      ))
-          ],
-        );
-      }),
-    );
+    });
   }
 }

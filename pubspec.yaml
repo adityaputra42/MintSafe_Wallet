@@ -28,6 +28,7 @@ dependencies:
   ffcache: ^1.1.0
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.1.0
   flutter_inappwebview: ^5.7.2+3
   flutter_polygon: ^0.3.0+2
   flutter_screenutil: ^5.8.1
@@ -62,6 +63,7 @@ flutter:
     - asset/icon/
     - asset/abi/
     - asset/logo/
+    - .env
 
   fonts:
     - family: Poppins

@@ -10,17 +10,18 @@ import '../repository/repository.dart';
 
 Future<Address?> importMnemonic(String mnemonic) async {
   var account = WalletRepository().getAccountInfo(mnemonic);
-  final mnemonicEncrypted = encrypter.encrypt(mnemonic, iv: iv);
-  final privateKeyEncrypted =
-      encrypter.encrypt(account['private_key']!, iv: iv);
+  final mnemonicEncrypted = Ecryption().encrypt(mnemonic);
+  final privateKeyEncrypted = Ecryption().encrypt(
+    account['private_key']!,
+  );
 
   Address address = Address(
       name: "Account",
       address: account['address'],
-      mnemonic: mnemonicEncrypted.base64.toString(),
+      mnemonic: mnemonicEncrypted,
       balance: 0,
       selectedAddress: true,
-      privateKey: privateKeyEncrypted.base64.toString());
+      privateKey: privateKeyEncrypted);
   return address;
 }
 
