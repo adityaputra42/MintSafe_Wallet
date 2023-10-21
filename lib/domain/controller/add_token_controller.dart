@@ -8,9 +8,20 @@ class AddTokenController extends GetxController {
   var selectedTab = 0.obs;
   void changeTab(int index) => selectedTab.value = index;
   var tokenList = <Token>[].obs;
+
+  changeTokenState(Token token) {
+
+    token.selected = !token.selected;
+    tokenList.refresh();
+  }
+
   @override
   void onInit() {
-    tokenList.value = evm.tokenList;
+    for(var value in evm.tokenList){
+      if (value.selected == true){
+        tokenList.add(value);
+      }
+    }
     super.onInit();
   }
 }

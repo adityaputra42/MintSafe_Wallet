@@ -19,7 +19,7 @@ class SearchToken extends StatelessWidget {
     }) {
       return GestureDetector(
         onTap: () {
-          token.selected = !token.selected;
+          controller.changeTokenState(token);
         },
         child: SizedBox(
           child: Row(
@@ -62,17 +62,20 @@ class SearchToken extends StatelessWidget {
             const SearchField(),
             16.0.height,
             Expanded(
-                child: controller.tokenList.isEmpty
+                child: controller.evm.tokenList.isEmpty
                     ? const Center(
                         child: Empty(title: "No data token"),
                       )
-                    : ListView.builder(
-                        itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.only(bottom: 16.h),
-                          child: cardCoin(token: controller.tokenList[index]),
-                        ),
-                        itemCount: controller.tokenList.length,
-                      ))
+                    : Obx(() {
+                        return ListView.builder(
+                          itemBuilder: (context, index) => Padding(
+                            padding: EdgeInsets.only(bottom: 16.h),
+                            child: cardCoin(
+                                token: controller.evm.tokenList[index]),
+                          ),
+                          itemCount: controller.evm.tokenList.length,
+                        );
+                      }))
           ],
         );
       }),
