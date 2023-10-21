@@ -1,5 +1,6 @@
 import 'package:isar/isar.dart';
 import 'package:mintsafe_wallet/data/model/chain_network/selected_chain.dart';
+import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../data/data.dart';
@@ -19,11 +20,11 @@ class DbHelper {
         PasswordSchema,
         AddressSchema,
         ChainNetworkSchema,
-        ResultSchema,
         TransactionHistorySchema,
         RecentAddressSchema,
         DappsHistorySchema,
         TokenSchema,
+        SelectedTokenSchema,
         SelectedChainSchema,
       ],
       inspector: true,
@@ -223,16 +224,6 @@ class DbHelper {
     return token;
   }
 
-  Future<List<Token>> getSelectedListToken(
-      {required String chainId,}) async {
-    final tokens = await isar.tokens
-        .filter()
-        .chainIdEqualTo(chainId)
-        .selectedEqualTo(true)
-        .findAll();
-    return tokens;
-  }
-
   Future<List<Token>> getListTokenByChainId({
     required String chainId,
   }) async {
@@ -241,45 +232,40 @@ class DbHelper {
   }
 
   /// ######################### TOKEN #######################
-  Future<List<Result>> getAllToken() async {
-    List<Result> tokens = [];
+  Future<List<SelectedToken>> getSelectedToken(
+      {required String walletAddress, required String chainID}) async {
+    List<SelectedToken> tokens = [];
     await isar.txn(() async {
-      tokens = await isar.results.where().findAll();
+      tokens = await isar.selectedTokens
+          .filter()
+          .walletAddressEqualTo(walletAddress)
+          .chainIdEqualTo(chainID)
+          .findAll();
     });
     return tokens;
   }
 
-  Future<void> addAllToken(List<Result> tokens) async {
+  Future<void> selectToken(SelectedToken token) async {
     await isar.writeTxn(() async {
-      await isar.results.putAll(tokens);
-    });
-  }
-
-  Future<void> addToken(Result token) async {
-    await isar.writeTxn(() async {
-      await isar.results.put(token);
-    });
-  }
-
-  Future<void> selectToken(Result token) async {
-    await isar.writeTxn(() async {
-      final result = await isar.results.get(token.id!);
+      final result = await isar.selectedTokens.get(token.id!);
       result!.selected = token.selected;
-      await isar.results.put(result);
+      await isar.selectedTokens.put(result);
     });
   }
 
-  Future<void> deleteToken(int id) async {
+  Future<void> changeSelectedToken(SelectedToken token) async {
     await isar.writeTxn(() async {
-      print("=================>");
-      print(id);
-      await isar.results.delete(id);
+      await isar.selectedTokens.put(token);
     });
   }
 
-  Future<void> deleteAll() async {
+  Future<void> deleteSelectedToken(String contract) async {
+    final token = await isar.selectedTokens
+        .filter()
+        .contractAddressEqualTo(contract)
+        .findFirst();
     await isar.writeTxn(() async {
-      await isar.results.clear();
+      await isar.selectedTokens.delete(token?.id ?? 0);
     });
   }
 }

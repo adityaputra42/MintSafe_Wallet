@@ -8,7 +8,6 @@ import 'package:mintsafe_wallet/view/pages/add_token/component/search_token.dart
 import '../../../config/config.dart';
 import '../../../data/data.dart';
 import '../../../utils/utils.dart';
-import '../../widget/widget.dart';
 
 class AddTokenPage extends StatelessWidget {
   AddTokenPage({super.key});
@@ -109,11 +108,6 @@ class AddTokenPage extends StatelessWidget {
             );
           }),
         ],
-      ),
-      bottomNavigationBar: PrimaryButton(
-        title: "Confirm",
-        onPressed: () {},
-        margin: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 24.h),
       ),
     );
   }

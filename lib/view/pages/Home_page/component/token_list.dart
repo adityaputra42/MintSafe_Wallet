@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mintsafe_wallet/config/config.dart';
 import 'package:mintsafe_wallet/data/data.dart';
+import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/utils/extension/extension.dart';
 import 'package:mintsafe_wallet/view/pages/add_token/add_token.dart';
@@ -16,7 +17,7 @@ class TokenList extends StatelessWidget {
   final EvmNewController controller = Get.find();
   @override
   Widget build(BuildContext context) {
-    Widget cardToken(Token token) {
+    Widget cardToken(SelectedToken token) {
       return GestureDetector(
         onTap: () {
           Get.to(() => DetailToken());

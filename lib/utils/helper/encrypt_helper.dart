@@ -1,19 +1,12 @@
 import 'package:encrypt/encrypt.dart' as en;
 
-final key = en.Key.fromUtf8('12678675490987575346789788765328');
-// final key = en.Key.fromSecureRandom(32);
-final iv = en.IV.fromUtf8("e16ce888a20dadb8");
-final encrypter = en.Encrypter(
-  en.AES(key),
-);
-
-// import '../data/environment/environment.dart';
+import '../../data/data.dart';
 
 class Ecryption {
-  // String privateKey = Environment.getKey();
-  // String privateIv = Environment.getIV();
-  String privateKey = "12678675490987575346789788765328";
-  String privateIv = "e16ce888a20dadb8";
+  String privateKey = Environment.getKey();
+  String privateIv = Environment.getIV();
+  // String privateKey = "12678675490987575346789788765328";
+  // String privateIv = "e16ce888a20dadb8";
 
   String decrypt(String encrypted) {
     final key =

@@ -1,27 +1,45 @@
 import 'package:get/get.dart';
+import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
+import 'package:mintsafe_wallet/utils/utils.dart';
 
-import '../../data/data.dart';
 import 'evm_new_controller.dart';
 
 class AddTokenController extends GetxController {
   EvmNewController evm = Get.find();
   var selectedTab = 0.obs;
   void changeTab(int index) => selectedTab.value = index;
-  var tokenList = <Token>[].obs;
-
-  changeTokenState(Token token) {
-
-    token.selected = !token.selected;
-    tokenList.refresh();
-  }
-
   @override
   void onInit() {
-    for(var value in evm.tokenList){
-      if (value.selected == true){
-        tokenList.add(value);
-      }
-    }
     super.onInit();
+  }
+
+  void setToken(SelectedToken token) async {
+    if (evm.tokenSelected.any((element) =>
+        element.contractAddress!.toLowerCase() ==
+            token.contractAddress!.toLowerCase() &&
+        element.walletAddress == evm.selectedAddress.value.address)) {
+      // final tokenRes = evm.tokenSelected.singleWhere((element) =>
+      //     element.contractAddress == token.contractAddress &&
+      //     element.walletAddress == evm.selectedAddress.value.address);
+
+      // if (tokenRes.selected == false) {
+      //   tokenRes.selected = true;
+      // } else {
+      //   evm.tokenSelected.remove(token);
+      //   tokenRes.selected = false;
+      // }
+
+      // await DbHelper.instance.selectToken(tokenRes);
+
+      await DbHelper.instance.deleteSelectedToken(token.contractAddress ?? "");
+      await evm.initialzedToken();
+      evm.tokenList.refresh();
+      evm.tokenSelected.refresh();
+    } else {
+      await DbHelper.instance.changeSelectedToken(token);
+      await evm.initialzedToken();
+      evm.tokenList.refresh();
+      evm.tokenSelected.refresh();
+    }
   }
 }
