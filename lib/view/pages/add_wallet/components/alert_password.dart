@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/data.dart';
+import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 
 import '../../../../config/config.dart';
 import '../../../widget/widget.dart';
 
 class AlertPassword extends StatelessWidget {
-  const AlertPassword({super.key, required this.title, this.subTitle});
+  AlertPassword({super.key, required this.title, this.subTitle});
   final String title;
   final String? subTitle;
+  final EvmNewController evm = Get.find();
   @override
   Widget build(BuildContext context) {
     Widget header() {
@@ -51,29 +53,43 @@ class AlertPassword extends StatelessWidget {
     }
 
     Widget content() {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            AppImage.ilustrasi6,
-            width: 180.w,
-            fit: BoxFit.cover,
-          ),
-          24.0.height,
-          Text(
-            subTitle ?? '',
-            style: AppFont.reguler14.copyWith(color: AppColor.textDark),
-            textAlign: TextAlign.center,
-          ),
-          24.0.height,
-          const InputText(title: 'Password', hintText: "Enter your password"),
-          24.0.height,
-          PrimaryButton(
-            title: "Confirm",
-            onPressed: () {},
-          )
-        ],
-      );
+      return Obx(() {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              AppImage.ilustrasi6,
+              width: 120.w,
+              fit: BoxFit.cover,
+            ),
+            24.0.height,
+            Text(
+              subTitle ?? '',
+              style: AppFont.reguler14.copyWith(color: AppColor.textDark),
+              textAlign: TextAlign.center,
+            ),
+            24.0.height,
+            InputText(
+              title: 'Password',
+              hintText: "Enter your password",
+              controller: evm.passwordCreateAccountController,
+              obscureText: true,
+              icon: Icon(
+                Icons.visibility_outlined,
+                size: 20.w,
+              ),
+            ),
+            24.0.height,
+            PrimaryButton(
+              loading: evm.isLoadingCreateAccount.value,
+              title: "Confirm",
+              onPressed: () {
+                evm.createNewAddress();
+              },
+            )
+          ],
+        );
+      });
     }
 
     return AlertDialog(

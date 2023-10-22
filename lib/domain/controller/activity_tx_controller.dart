@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 
 import '../../data/data.dart';
@@ -35,11 +37,9 @@ class ActivityTxController extends GetxController {
         page: page.value,
         isTestnet: evm.networkController.selectedChain.value.isTestnet!);
 
-    print("TOKEN RESPONSE LENGTH : $tokenResponse");
-
-    tokenResponse.forEach((element) {
-      print("Token name  : ${element.name}");
-    });
+    for (var element in tokenResponse) {
+     log("Token name  : ${element.name}");
+    }
 
     for (int i = 0; i < response.length; i++) {
       if (response[i].contractAddress == "") {

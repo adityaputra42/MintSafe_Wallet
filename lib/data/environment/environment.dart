@@ -9,7 +9,6 @@ class Environment {
 
   static String getIV() {
     String? iv = dotenv.env["IV_ENCRYPT"];
-
     return iv!;
   }
 }

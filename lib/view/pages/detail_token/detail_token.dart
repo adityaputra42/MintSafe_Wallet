@@ -3,88 +3,87 @@ import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:mintsafe_wallet/domain/controller/detail_token_controller.dart';
-import 'package:mintsafe_wallet/view/pages/detail_token/component/activity_detail.dart';
-import 'package:mintsafe_wallet/view/pages/detail_token/component/info_token.dart';
 import 'package:mintsafe_wallet/view/widget/widget.dart';
 
 import '../../../config/config.dart';
 import '../../../data/data.dart';
 import '../../../utils/utils.dart';
+import '../receive_token/receive_token.dart';
+import '../scan/scann_page.dart';
+import '../select_token/select_token.dart';
+import 'component/detail_activity.dart';
 
 class DetailToken extends StatelessWidget {
-  DetailToken({super.key});
+  DetailToken({super.key, required this.token});
+  final SelectedToken token;
   final DetailTokenController controller = Get.put(DetailTokenController());
   @override
   Widget build(BuildContext context) {
     Widget cardWallet() {
       return Container(
         width: double.infinity,
-        height: 200.h,
+        height: 210.h,
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
-            boxShadow: [
+            gradient: const LinearGradient(
+                colors: [AppColor.primaryColor, AppColor.cardDark],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight),
+            boxShadow: const [
               BoxShadow(
-                  spreadRadius: 1,
-                  blurRadius: 1,
-                  color: AppColor.grayColor.withOpacity(0.25))
+                  blurRadius: 0.5, spreadRadius: 0.5, color: Colors.black12)
             ],
-            color: AppColor.primaryColor,
             image: const DecorationImage(
                 image: AssetImage(AppImage.masking), fit: BoxFit.cover)),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 48.h,
-                height: 48.h,
-                child: ClipPolygon(
-                  boxShadows: [
-                    PolygonBoxShadow(
-                        color: AppColor.primaryColor.withOpacity(0.2),
-                        elevation: 1)
-                  ],
-                  sides: 6,
-                  rotate: 0,
-                  child: Container(
-                      padding: EdgeInsets.all(1.h),
-                      color: Colors.transparent,
-                      child: Image.asset(AppImage.eth)),
-                ),
-              ),
-              8.0.height,
-              Text(
-                "${NumberFormat.currency(symbol: '', decimalDigits: 4, locale: "en_US").format(0)} ETH",
-                style: AppFont.semibold24.copyWith(
-                  color: AppColor.textDark,
-                ),
-              ),
-              Text(
-                  "~\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(0)}",
-                  style: AppFont.reguler16.copyWith(
-                    color: AppColor.textDark,
-                  )),
-              4.0.height,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("0xfhas7gjkd....ashajk3q9c",
-                      style: AppFont.medium14.copyWith(
+                  SizedBox(
+                    width: 48.h,
+                    height: 48.h,
+                    child: ClipPolygon(
+                      sides: 6,
+                      rotate: 0,
+                      child: Container(
+                          padding: EdgeInsets.all(1.h),
+                          color: Colors.transparent,
+                          child: Image.asset(token.logo ?? AppImage.eth)),
+                    ),
+                  ),
+                  8.0.height,
+                  Text("${token.balance ?? 0} ${token.symbol ?? ''}",
+                      style: AppFont.semibold24.copyWith(
                         color: AppColor.textDark,
                       )),
-                  8.0.width,
-                  Icon(
-                    Icons.copy,
-                    size: 18.h,
-                    color: AppColor.textDark,
-                  )
+                  Text("~\$ 0.0",
+                      style: AppFont.medium16.copyWith(
+                        color: AppColor.textDark,
+                      )),
                 ],
               ),
-            ],
-          ),
+            ),
+            CardAction(
+              // color: Color(int.parse(
+              //         evm.networkController.selectedChain.value.color ??
+              //             "0xff1AA9A4"))
+              //     .withOpacity(0.4),
+              scan: () {
+                Get.to(() => const ScannPage());
+              },
+              receive: () {
+                Get.to(() => const ReceiveTokenPage());
+              },
+              transfer: () {
+                Get.to(() => const SelectTokenPage());
+              },
+            ),
+          ],
         ),
       );
     }
@@ -106,7 +105,7 @@ class DetailToken extends StatelessWidget {
           ),
           16.0.width,
           Text(
-            "Ethereum Mainet",
+            "${token.name}",
             style: AppFont.medium16.copyWith(color: AppColor.textDark),
           ),
         ],
@@ -126,102 +125,76 @@ class DetailToken extends StatelessWidget {
               children: [
                 16.0.height,
                 cardWallet(),
-                16.0.height,
+                24.0.height,
                 Expanded(
-                  child: Obx(() {
-                    return DefaultTabController(
-                      length: 2,
-                      initialIndex: controller.tabIndex.value,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: 60.h,
-                            padding: EdgeInsets.all(4.h),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.r),
-                                color: AppColor.cardDark,
-                                boxShadow: const [
-                                  BoxShadow(
-                                      spreadRadius: 1,
-                                      blurRadius: 1,
-                                      color: Colors.black12)
-                                ]),
-                            child: TabBar(
-                              // automaticIndicatorColorAdjustment: false,
-                              indicator: BoxDecoration(
-                                  color: AppColor.primaryColor,
-                                  borderRadius: BorderRadius.circular(8.r)),
-                              isScrollable: false,
-                              dividerColor: AppColor.cardDark,
-                              indicatorColor: AppColor.cardDark,
-                              labelColor: AppColor.textDark,
-                              labelPadding: EdgeInsets.zero,
-                              labelStyle: AppFont.semibold16,
-                              unselectedLabelColor: AppColor.grayColor,
-                              unselectedLabelStyle: AppFont.medium16,
-                              indicatorSize: TabBarIndicatorSize.tab,
-                              onTap: (index) {
-                                controller.onChangeTabIndex(index);
-                              },
-                              tabs: const [
-                                Tab(
-                                  child: Text(
-                                    "Activity",
-                                  ),
-                                ),
-                                Tab(
-                                  child: Text(
-                                    "Info",
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          16.0.height,
-                          controller.tabIndex.value == 0
-                              ? const ActivityDetail()
-                              : const InfoToken()
-                          // TabBarView(children: [Wall()])
-                        ],
-                      ),
-                    );
-                  }),
-                ),
+                    child: ListView.builder(
+                  itemBuilder: (context, index) => Padding(
+                    padding: EdgeInsets.only(bottom: 16.h),
+                    child: cardActivity(),
+                  ),
+                  itemCount: 2,
+                ))
               ],
             ),
           ),
         ],
       ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
-        decoration: BoxDecoration(
-            color: AppColor.cardDark,
-            boxShadow: [
-              BoxShadow(
-                  spreadRadius: 1.h, blurRadius: 1.h, color: Colors.black12)
+    );
+  }
+
+  Widget cardActivity() {
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => const DetailActivity());
+      },
+      child: Row(
+        children: [
+          Container(
+            width: 40.w,
+            height: 40.w,
+            padding: EdgeInsets.all(8.h),
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle, color: AppColor.secondaryColor),
+            child: Image.asset(
+              AppIcon.smartContractCall,
+              color: AppColor.primaryColor,
+            ),
+          ),
+          16.0.width,
+          Expanded(
+              child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Smart Contract Call",
+                    style: AppFont.medium16.copyWith(color: AppColor.textDark),
+                  ),
+                  Text(
+                    "0.00 ETH",
+                    style: AppFont.medium16.copyWith(color: AppColor.redColor),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "To : 0xf57229.....8dg82s8",
+                    style:
+                        AppFont.reguler14.copyWith(color: AppColor.grayColor),
+                  ),
+                  Text(
+                    DateFormat("MMM dd, yyyy").format(DateTime.now()),
+                    style:
+                        AppFont.reguler14.copyWith(color: AppColor.grayColor),
+                  )
+                ],
+              )
             ],
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12.r),
-                topRight: Radius.circular(12.r))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            PrimaryButton(
-              title: "Send",
-              activeColor: AppColor.yellowColor,
-              onPressed: () {},
-              width: MediaQuery.of(context).size.width * 0.43,
-            ),
-            PrimaryButton(
-              title: "Receive",
-              activeColor: AppColor.primaryColor,
-              onPressed: () {},
-              width: MediaQuery.of(context).size.width * 0.43,
-            ),
-          ],
-        ),
+          ))
+        ],
       ),
     );
   }

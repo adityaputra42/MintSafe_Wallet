@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,13 @@ class MethodHelper {
       return "${address.substring(0, length)}...${address.substring(address.length - length)}";
     } else {
       return '';
+    }
+  }
+
+  Future<void> pasteFromClipboard(TextEditingController controller) async {
+    final clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
+    if (clipboardData != null && clipboardData.text != null) {
+      controller.text = clipboardData.text!;
     }
   }
 }

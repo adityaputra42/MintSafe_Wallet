@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:mintsafe_wallet/config/config.dart';
 import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -26,12 +27,6 @@ class EvmNewController extends GetxController {
   /// #######################################
   /// ############### HOME STATE ###############
   /// #######################################
-  var isShowImportBottomSheet = false.obs;
-  showImportBottomSheet() => isShowImportBottomSheet.value = true;
-  hideImportBottomSheet() {
-    importAddressInputController.clear();
-    isShowImportBottomSheet.value = false;
-  }
 
   final Address initAddress;
   Web3Client? web3client;
@@ -132,10 +127,13 @@ class EvmNewController extends GetxController {
   var prefBalance = 0.0.obs;
   var balanceEth = 0.0.obs;
   late Timer timer;
-  var isLoadingImportAccount = false.obs;
+  var isLoadingImportMnemonic = false.obs;
+  var isLoadingImportPrivateKey = false.obs;
   var isLoadingCreateAccount = false.obs;
 
-  var importAddressInputController = TextEditingController();
+  var importAddressMnemonicController = TextEditingController();
+  var passwordCreateAccountController = TextEditingController();
+  var importAddressPrivateKeyController = TextEditingController();
 
   Future<void> initAccount() async {
     final addresses = await DbHelper.instance.readAddressList();
@@ -255,44 +253,51 @@ class EvmNewController extends GetxController {
   }
 
   Future<void> createNewAddress() async {
-    isLoadingCreateAccount.value = true;
-    final mnemonic = WalletRepository().generateMnemonic();
-    var account = WalletRepository().getAccountInfo(mnemonic);
-    await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
-    final mnemonicEncrypt = Ecryption().encrypt(account['mnemonic']!);
-    final privateKeyEncrypt = Ecryption().encrypt(account['private_key']!);
-    Address addressNew = Address(
-        name: "Account",
-        address: account['address'],
-        mnemonic: mnemonicEncrypt,
-        balance: 0,
-        selectedAddress: true,
-        privateKey: privateKeyEncrypt);
+    var password = await DbHelper.instance.getPassword();
+    if (passwordCreateAccountController.text == password.password) {
+      isLoadingCreateAccount.value = true;
+      final mnemonic = WalletRepository().generateMnemonic();
+      var account = WalletRepository().getAccountInfo(mnemonic);
+      await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
+      final mnemonicEncrypt = Ecryption().encrypt(account['mnemonic']!);
+      final privateKeyEncrypt = Ecryption().encrypt(account['private_key']!);
+      Address addressNew = Address(
+          name: "Account",
+          address: account['address'],
+          mnemonic: mnemonicEncrypt,
+          balance: 0,
+          selectedAddress: true,
+          privateKey: privateKeyEncrypt);
 
-    selectedAddress.value = addressNew;
-    addressList.add(addressNew);
-    Get.back();
+      selectedAddress.value = addressNew;
+      addressList.add(addressNew);
 
-    await DbHelper.instance.addAddress(addressNew);
-    await DbHelper.instance.changeWallet(addressNew.id!);
-    changeAddress(addressNew);
-    decrypted(
-      selectedAddress.value.privateKey!,
-    );
-    // await getTokenFromContract();
-    isLoadingCreateAccount.value = false;
-    await getBalance();
+      Get.close(3);
+      await DbHelper.instance.addAddress(addressNew);
+      await DbHelper.instance.changeWallet(addressNew.id!);
+      changeAddress(addressNew);
+      decrypted(
+        selectedAddress.value.privateKey!,
+      );
 
-    final listAddress = await DbHelper.instance.readAddressList();
-    for (var element in listAddress!) {
-      dev.log("${element.name}");
-      dev.log("${element.address}");
+      isLoadingCreateAccount.value = false;
+      await getBalance();
+
+      final listAddress = await DbHelper.instance.readAddressList();
+      for (var element in listAddress!) {
+        dev.log("${element.name}");
+        dev.log("${element.address}");
+      }
+    } else {
+      Get.snackbar("Failed", "Password didn't match!",
+          backgroundColor: AppColor.redColor, colorText: Colors.white);
+      passwordCreateAccountController.clear();
     }
   }
 
   /// IMPORT ADDRESS FROM MNEMONIC OR PRIVATE KEY
-  Future<void> importAddress(String key) async {
-    isLoadingImportAccount.value = true;
+  Future<void> importAddressByMnemonic(String key) async {
+    isLoadingImportMnemonic.value = true;
 
     if (WalletRepository().validateMnemonic(key)) {
       var address = await compute(importMnemonic, key);
@@ -304,7 +309,7 @@ class EvmNewController extends GetxController {
         await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
         selectedAddress.value = address!;
         addressList.add(address);
-        importAddressInputController.clear();
+        importAddressMnemonicController.clear();
         Get.back();
 
         await DbHelper.instance.addAddress(address);
@@ -319,52 +324,56 @@ class EvmNewController extends GetxController {
         // await getTokenFromContract();
         await getBalance();
       }
-    } else {
-      try {
-        final isValid = WalletRepository().validatePrivateKey(key);
+    } else {}
+    isLoadingImportMnemonic.value = false;
+  }
 
-        if (isValid) {
-          final credentials = EthPrivateKey.fromHex(key);
-          final privatekeyEncrypted = Ecryption().encrypt(key);
-          if (addressList
-              .where((v) => v.address == credentials.address.hex)
-              .isNotEmpty) {
-          } else {
-            await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
+  Future<void> importAddressByPrivatekey(String key) async {
+    isLoadingImportPrivateKey.value = true;
 
-            print("Private Key : $key");
-            // print("privateKey encrypted : $privateKeySelected");
-            Address addressNew = Address(
-                name: "Account",
-                address: credentials.address.hex,
-                mnemonic: null,
-                balance: 0,
-                selectedAddress: true,
-                privateKey: privatekeyEncrypted);
+    try {
+      final isValid = WalletRepository().validatePrivateKey(key);
 
-            selectedAddress.value = addressNew;
-            addressList.add(addressNew);
-            importAddressInputController.clear();
-            Get.back();
+      if (isValid) {
+        final credentials = EthPrivateKey.fromHex(key);
+        final privatekeyEncrypted = Ecryption().encrypt(key);
+        if (addressList
+            .where((v) => v.address == credentials.address.hex)
+            .isNotEmpty) {
+        } else {
+          await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
 
-            await DbHelper.instance.addAddress(addressNew);
-            await DbHelper.instance.changeWallet(addressNew.id!);
-            changeAddress(addressNew);
-            decrypted(
-              selectedAddress.value.privateKey!,
-            );
+          Address addressNew = Address(
+              name: "Account",
+              address: credentials.address.hex,
+              mnemonic: null,
+              balance: 0,
+              selectedAddress: true,
+              privateKey: privatekeyEncrypted);
 
-            // await fetchTokenByAddress();
-            await getMultipleTokenBalances();
-            // await getTokenFromContract();
-            await getBalance();
-          }
-        } else {}
-      } catch (e) {
-        throw Exception(e.toString());
-      }
+          selectedAddress.value = addressNew;
+          addressList.add(addressNew);
+          importAddressPrivateKeyController.clear();
+          Get.back();
+
+          await DbHelper.instance.addAddress(addressNew);
+          await DbHelper.instance.changeWallet(addressNew.id!);
+          changeAddress(addressNew);
+          decrypted(
+            selectedAddress.value.privateKey!,
+          );
+
+          // await fetchTokenByAddress();
+          await getMultipleTokenBalances();
+          // await getTokenFromContract();
+          await getBalance();
+        }
+      } else {}
+    } catch (e) {
+      throw Exception(e.toString());
     }
-    isLoadingImportAccount.value = false;
+
+    isLoadingImportPrivateKey.value = false;
   }
 
   /// #######################################

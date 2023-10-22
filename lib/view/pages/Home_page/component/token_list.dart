@@ -20,7 +20,7 @@ class TokenList extends StatelessWidget {
     Widget cardToken(SelectedToken token) {
       return GestureDetector(
         onTap: () {
-          Get.to(() => DetailToken());
+          Get.to(() => DetailToken(token: token,));
         },
         child: Container(
           width: double.infinity,

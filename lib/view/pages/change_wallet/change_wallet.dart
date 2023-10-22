@@ -17,45 +17,52 @@ class ChangeWallet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget cardAccount({required Address address}) {
-      return Row(
-        children: [
-          Container(
-            width: 48.w,
-            height: 48.w,
-            padding: EdgeInsets.all(2.h),
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(width: 2.h, color: AppColor.primaryColor)),
-            child: Blockies(
-                size: 0.55,
-                data: address.address ?? "-",
-                shape: BlockiesShape.circle),
-          ),
-          8.0.width,
-          Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${address.name} ${address.id}",
-                style: AppFont.medium14.copyWith(color: AppColor.textDark),
-              ),
-              8.0.height,
-              Text(
-                MethodHelper().shortAddress(address: address.address ?? ""),
-                style: AppFont.reguler12.copyWith(color: AppColor.textDark),
-              )
-            ],
-          )),
-          8.0.height,
-          address.address == evm.selectedAddress.value.address
-              ? Icon(
-                  Icons.check_circle_outline_rounded,
-                  size: 24.w,
-                  color: AppColor.primaryColor,
+      return GestureDetector(
+        onTap: () {
+          if (address.address != evm.selectedAddress.value.address) {
+            evm.changeAddress(address);
+          }
+        },
+        child: Row(
+          children: [
+            Container(
+              width: 48.w,
+              height: 48.w,
+              padding: EdgeInsets.all(2.h),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(width: 2.h, color: AppColor.primaryColor)),
+              child: Blockies(
+                  size: 0.55,
+                  data: address.address ?? "-",
+                  shape: BlockiesShape.circle),
+            ),
+            8.0.width,
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${address.name} ${address.id}",
+                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                ),
+                8.0.height,
+                Text(
+                  MethodHelper().shortAddress(address: address.address ?? ""),
+                  style: AppFont.reguler12.copyWith(color: AppColor.textDark),
                 )
-              : 24.0.width
-        ],
+              ],
+            )),
+            8.0.height,
+            address.address == evm.selectedAddress.value.address
+                ? Icon(
+                    Icons.check_circle_outline_rounded,
+                    size: 24.w,
+                    color: AppColor.primaryColor,
+                  )
+                : 24.0.width
+          ],
+        ),
       );
     }
 

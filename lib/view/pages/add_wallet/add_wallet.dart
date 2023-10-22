@@ -116,7 +116,7 @@ class AddWallet extends StatelessWidget {
                     showDialog(
                         barrierDismissible: false,
                         context: context,
-                        builder: (context) => const AlertPassword(
+                        builder: (context) => AlertPassword(
                               title: 'Create new wallet',
                               subTitle:
                                   'Enter your password to generate a mnemonic phrase to create a new wallet',
@@ -134,7 +134,7 @@ class AddWallet extends StatelessWidget {
                   title: 'Seed Pharse',
                   subTitle: 'Import by 12 word mnemonic pharse',
                   ontap: () {
-                    Get.to(() => const ImportSheedPharse());
+                    Get.to(() => ImportSheedPharse());
                   },
                 ),
                 12.0.height,
@@ -143,7 +143,7 @@ class AddWallet extends StatelessWidget {
                   title: 'Private Key',
                   subTitle: 'Import by private key',
                   ontap: () {
-                    Get.to(() => const ImportPrivateKey());
+                    Get.to(() => ImportPrivateKey());
                   },
                 ),
               ],

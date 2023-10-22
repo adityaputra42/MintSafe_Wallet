@@ -1,17 +1,12 @@
 import 'package:encrypt/encrypt.dart' as en;
 
-import '../../data/data.dart';
-
 class Ecryption {
-  String privateKey = Environment.getKey();
-  String privateIv = Environment.getIV();
-  // String privateKey = "12678675490987575346789788765328";
-  // String privateIv = "e16ce888a20dadb8";
+  String privateKey = "12678675490987575346789788765328";
+  String privateIv = "e16ce888a20dadb8";
 
   String decrypt(String encrypted) {
-    final key =
-        en.Key.fromUtf8(privateKey); //hardcode combination of 16 character
-    final iv = en.IV.fromUtf8(privateIv); //hardcode combination of 16 character
+    final key = en.Key.fromUtf8(privateKey);
+    final iv = en.IV.fromUtf8(privateIv);
 
     final encrypter = en.Encrypter(en.AES(key));
     en.Encrypted enBase64 = en.Encrypted.from64(encrypted);
@@ -20,8 +15,8 @@ class Ecryption {
   }
 
   String encrypt(String value) {
-    final key = en.Key.fromUtf8(privateKey); //hardcode
-    final iv = en.IV.fromUtf8(privateIv); //hardcode
+    final key = en.Key.fromUtf8(privateKey);
+    final iv = en.IV.fromUtf8(privateIv);
 
     final encrypter = en.Encrypter(en.AES(
       key,

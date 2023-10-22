@@ -1,50 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
+import 'package:mintsafe_wallet/utils/helper/method_helper.dart';
 import '../../../../config/config.dart';
 import '../../../../data/data.dart';
 import '../../../../utils/utils.dart';
 import '../../../widget/widget.dart';
 
 class ImportSheedPharse extends StatelessWidget {
-  const ImportSheedPharse({super.key});
-
+  ImportSheedPharse({super.key});
+  final EvmNewController evm = Get.find();
   @override
   Widget build(BuildContext context) {
-    Widget cardPniomoni({required int number}) {
-      return SizedBox(
-        height: 42.h,
-        width: MediaQuery.of(context).size.width * 0.426,
-        child: TextFormField(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            style: AppFont.medium14.copyWith(color: AppColor.textDark),
-            decoration: InputDecoration(
-              prefixIcon: Padding(
-                padding: EdgeInsets.fromLTRB(16.w, 12.h, 0, 12.h),
-                child: Text(
-                  number.toString(),
-                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
-                ),
-              ),
-              contentPadding: EdgeInsets.fromLTRB(-16, 12.h, 16.w, 12.h),
-              fillColor: AppColor.cardDark,
-              filled: true,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
-                borderSide: const BorderSide(color: Colors.transparent),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
-                borderSide: const BorderSide(color: Colors.transparent),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
-                borderSide: const BorderSide(color: Colors.transparent),
-              ),
-            )),
-      );
-    }
-
     return Scaffold(
       backgroundColor: AppColor.bgDark,
       appBar: WidgetHelper.appBar(
@@ -75,9 +43,9 @@ class ImportSheedPharse extends StatelessWidget {
                 AppImage.maskHome,
                 fit: BoxFit.cover,
               )),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: SingleChildScrollView(
+          Obx(() {
+            return SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -93,67 +61,46 @@ class ImportSheedPharse extends StatelessWidget {
                         AppFont.reguler14.copyWith(color: AppColor.grayColor),
                   ),
                   24.0.height,
-                  Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      runAlignment: WrapAlignment.center,
-                      alignment: WrapAlignment.center,
-                      spacing: 16.h,
-                      runSpacing: 8.h,
-                      direction: Axis.horizontal,
+                  InputText(
+                    title: "Sheed Pharse",
+                    hintText: 'Enter your sheed pharse',
+                    textInputAction: TextInputAction.done,
+                    controller: evm.importAddressMnemonicController,
+                    maxLine: 6,
+                    icon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        cardPniomoni(
-                          number: 1,
+                        8.0.width,
+                        Icon(
+                          Icons.qr_code_scanner_rounded,
+                          size: 32.h,
                         ),
-                        cardPniomoni(
-                          number: 2,
-                        ),
-                        cardPniomoni(
-                          number: 3,
-                        ),
-                        cardPniomoni(
-                          number: 4,
-                        ),
-                        cardPniomoni(
-                          number: 5,
-                        ),
-                        cardPniomoni(
-                          number: 6,
-                        ),
-                        cardPniomoni(
-                          number: 7,
-                        ),
-                        cardPniomoni(
-                          number: 8,
-                        ),
-                        cardPniomoni(
-                          number: 9,
-                        ),
-                        cardPniomoni(
-                          number: 10,
-                        ),
-                        cardPniomoni(
-                          number: 11,
-                        ),
-                        cardPniomoni(
-                          number: 12,
-                        ),
-                      ]),
+                        24.0.width
+                      ],
+                    ),
+                  ),
                   SecondaryButton(
                     title: 'Paste Sheed Pharse',
-                    onPressed: () {},
+                    onPressed: () {
+                      MethodHelper().pasteFromClipboard(
+                          evm.importAddressMnemonicController);
+                    },
                     margin: EdgeInsets.only(top: 36.h, bottom: 16.h),
                   ),
                   PrimaryButton(
                     title: 'Continue',
-                    disable: true,
-                    loading: false,
-                    onPressed: () {},
+                    loading: evm.isLoadingImportMnemonic.value,
+                    onPressed: () {
+                      evm.importAddressByMnemonic(
+                          evm.importAddressMnemonicController.text);
+                    },
                     margin: EdgeInsets.only(bottom: 36.h),
                   ),
                 ],
               ),
-            ),
-          ),
+            );
+          }),
         ],
       ),
     );

@@ -2,7 +2,7 @@
       {
           "name" : "Ethereum Mainnet",
           "symbol" : "ETH",
-          "RPC" : "https://api.mycryptoapi.com/eth",
+          "RPC" : "https://mainnet.infura.io/v3/",
           "chainId" : "1",
           "explorer" : "https://etherscan.io",
           "logo":"asset/logo/eth.png",
