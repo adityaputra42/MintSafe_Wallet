@@ -18,19 +18,6 @@ class AddTokenController extends GetxController {
         element.contractAddress!.toLowerCase() ==
             token.contractAddress!.toLowerCase() &&
         element.walletAddress == evm.selectedAddress.value.address)) {
-      // final tokenRes = evm.tokenSelected.singleWhere((element) =>
-      //     element.contractAddress == token.contractAddress &&
-      //     element.walletAddress == evm.selectedAddress.value.address);
-
-      // if (tokenRes.selected == false) {
-      //   tokenRes.selected = true;
-      // } else {
-      //   evm.tokenSelected.remove(token);
-      //   tokenRes.selected = false;
-      // }
-
-      // await DbHelper.instance.selectToken(tokenRes);
-
       await DbHelper.instance.deleteSelectedToken(token.contractAddress ?? "");
       await evm.initialzedToken();
       evm.tokenList.refresh();

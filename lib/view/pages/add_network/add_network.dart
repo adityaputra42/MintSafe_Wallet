@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:mintsafe_wallet/domain/controller/add_network_controller.dart';
 import 'package:mintsafe_wallet/view/pages/add_network/component/custom_network.dart';
 import 'package:mintsafe_wallet/view/pages/add_network/component/search_network.dart';
-import 'package:mintsafe_wallet/view/widget/primary_button.dart';
 
 import '../../../config/config.dart';
 import '../../../data/data.dart';
@@ -13,7 +12,7 @@ import '../../../utils/utils.dart';
 class AddNetworkPage extends StatelessWidget {
   AddNetworkPage({super.key});
   final AddNetworkController controller = Get.put(AddNetworkController());
-
+ 
   @override
   Widget build(BuildContext context) {
     Widget body() {
@@ -121,11 +120,6 @@ class AddNetworkPage extends StatelessWidget {
           ),
           body(),
         ],
-      ),
-      bottomNavigationBar: PrimaryButton(
-        title: "Confirm",
-        onPressed: () {},
-        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       ),
     );
   }

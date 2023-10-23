@@ -2,23 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:mintsafe_wallet/domain/controller/detail_token_controller.dart';
+import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/view/widget/widget.dart';
 
 import '../../../config/config.dart';
 import '../../../data/data.dart';
 import '../../../utils/utils.dart';
+import '../../widget/card_activity.dart';
 import '../receive_token/receive_token.dart';
 import '../scan/scann_page.dart';
-import '../select_token/select_token.dart';
-import 'component/detail_activity.dart';
+import '../transfer/transfer_page.dart';
 
 class DetailToken extends StatelessWidget {
   DetailToken({super.key, required this.token});
   final SelectedToken token;
   final DetailTokenController controller = Get.put(DetailTokenController());
+  final EvmNewController evm = Get.find();
   @override
   Widget build(BuildContext context) {
     Widget cardWallet() {
@@ -28,10 +29,10 @@ class DetailToken extends StatelessWidget {
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
-            gradient: const LinearGradient(
-                colors: [AppColor.primaryColor, AppColor.cardDark],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight),
+            gradient: LinearGradient(colors: [
+              Color(int.parse(evm.selectedChain.value.color ?? "0xff1AA9A4")),
+              AppColor.cardDark
+            ], begin: Alignment.topLeft, end: Alignment.bottomRight),
             boxShadow: const [
               BoxShadow(
                   blurRadius: 0.5, spreadRadius: 0.5, color: Colors.black12)
@@ -69,10 +70,6 @@ class DetailToken extends StatelessWidget {
               ),
             ),
             CardAction(
-              // color: Color(int.parse(
-              //         evm.networkController.selectedChain.value.color ??
-              //             "0xff1AA9A4"))
-              //     .withOpacity(0.4),
               scan: () {
                 Get.to(() => const ScannPage());
               },
@@ -80,7 +77,7 @@ class DetailToken extends StatelessWidget {
                 Get.to(() => const ReceiveTokenPage());
               },
               transfer: () {
-                Get.to(() => const SelectTokenPage());
+                Get.to(() => TransferPage());
               },
             ),
           ],
@@ -130,70 +127,13 @@ class DetailToken extends StatelessWidget {
                     child: ListView.builder(
                   itemBuilder: (context, index) => Padding(
                     padding: EdgeInsets.only(bottom: 16.h),
-                    child: cardActivity(),
+                    child: const CardActivity(),
                   ),
                   itemCount: 2,
                 ))
               ],
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget cardActivity() {
-    return GestureDetector(
-      onTap: () {
-        Get.to(() => const DetailActivity());
-      },
-      child: Row(
-        children: [
-          Container(
-            width: 40.w,
-            height: 40.w,
-            padding: EdgeInsets.all(8.h),
-            decoration: const BoxDecoration(
-                shape: BoxShape.circle, color: AppColor.secondaryColor),
-            child: Image.asset(
-              AppIcon.smartContractCall,
-              color: AppColor.primaryColor,
-            ),
-          ),
-          16.0.width,
-          Expanded(
-              child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Smart Contract Call",
-                    style: AppFont.medium16.copyWith(color: AppColor.textDark),
-                  ),
-                  Text(
-                    "0.00 ETH",
-                    style: AppFont.medium16.copyWith(color: AppColor.redColor),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "To : 0xf57229.....8dg82s8",
-                    style:
-                        AppFont.reguler14.copyWith(color: AppColor.grayColor),
-                  ),
-                  Text(
-                    DateFormat("MMM dd, yyyy").format(DateTime.now()),
-                    style:
-                        AppFont.reguler14.copyWith(color: AppColor.grayColor),
-                  )
-                ],
-              )
-            ],
-          ))
         ],
       ),
     );

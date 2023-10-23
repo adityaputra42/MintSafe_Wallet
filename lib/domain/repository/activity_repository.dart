@@ -13,7 +13,7 @@ class ActivityRepository {
       {required bool isTestnet, required int page}) async {
     EvmNewController evm = Get.find();
 
-    String explorer = evm.networkController.selectedChain.value.explorer ?? "";
+    String explorer = evm.selectedChain.value.explorer ?? "";
     final cache = FFCache(debug: true);
 
     String url =
@@ -47,7 +47,7 @@ class ActivityRepository {
       {required bool isTestnet, required int page}) async {
     EvmNewController evm = Get.find();
 
-    String explorer = evm.networkController.selectedChain.value.explorer ?? "";
+    String explorer = evm.selectedChain.value.explorer ?? "";
     final cache = FFCache(debug: true);
 
     String url =

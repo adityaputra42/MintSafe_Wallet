@@ -14,20 +14,17 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:mintsafe_wallet/config/config.dart';
+import 'package:mintsafe_wallet/data/model/chain_network/list_chain_selected.dart';
 import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:web3dart/web3dart.dart';
 
 import '../../data/data.dart';
+import '../../data/model/chain_network/selected_chain.dart';
 import '../../utils/utils.dart';
 import '../repository/repository.dart';
 import 'activity_tx_controller.dart';
-import 'network_controller.dart';
 
 class EvmNewController extends GetxController {
-  /// #######################################
-  /// ############### HOME STATE ###############
-  /// #######################################
-
   final Address initAddress;
   Web3Client? web3client;
   ContractAbi? erc20Abi;
@@ -35,38 +32,19 @@ class EvmNewController extends GetxController {
   var gasLimit = 0.0.obs;
   var gasPrice = 0.0.obs;
 
-  var selectedChain = ChainNetwork().obs;
   EvmNewController(this.initAddress);
 
   void initialize() async {
-    // INIT NETWORK
     isLoadingNetwork.value = true;
-    await networkController.initialzedNetwork();
-
-    /// INIT RPC
+    await initAccount();
+    await initialzedNetwork();
     initWeb3RPC();
-
-    /// INIT CONTRACT
     final jsonString = await rootBundle.loadString('asset/abi/erc_20.json');
     erc20Abi = ContractAbi.fromJson(jsonString, 'ERC20');
     abi = ContractABI.fromJson(jsonDecode(jsonString));
-
-    /// INIT ACCOUNT
-    await initAccount();
-
-    // INIT TOKEN
-    //
     await initialzedToken();
-    // await getTokenFromContract();
-    // await fetchTokenByAddress();
     isLoadingNetwork.value = false;
-
-    /// GET BALANCE
-    if (await ConnectivityWrapper.instance.isConnected) {
-      // await getBalance();
-      // await getMultipleTokenBalances();
-      // getEthBalancePeriodic();
-    }
+    if (await ConnectivityWrapper.instance.isConnected) {}
   }
 
   @override
@@ -79,10 +57,10 @@ class EvmNewController extends GetxController {
   /// ############### WEB3 RPC ###############
   /// #######################################
   void initWeb3RPC() {
-    dev.log("RPC : ${networkController.selectedChain.value.rpc}");
+    dev.log("RPC : ${selectedChain.value.rpc}");
     var httpClient = Client();
     web3client = Web3Client(
-      networkController.selectedChain.value.rpc ?? "",
+      selectedChain.value.rpc ?? "",
       httpClient,
     );
   }
@@ -91,17 +69,78 @@ class EvmNewController extends GetxController {
   /// ############### NETWORK ###############
   /// #######################################
   ///
-  NetworkController networkController = Get.put(NetworkController());
+
   var isLoadingNetwork = false.obs;
-  void changeNetwork(ChainNetwork network) async {
+  var selectedChain = ListChainSelected().obs;
+  var listChain = <ChainNetwork>[].obs;
+  var listChainSelected = <ListChainSelected>[].obs;
+
+  Future<void> initialzedNetwork() async {
+    /// GET LIST NETWORK
+    listChain.clear();
+    listChainSelected.clear();
+    final networkList = await DbHelper.instance.getAllChainNetwork();
+    List<int> id = [];
+    for (final value in networkList) {
+      id.add(value.id!);
+    }
+    await DbHelper.instance.deleteAllChainNetwork(id);
+    final chainlist = await rootBundle.loadString('asset/abi/chain.json');
+    listChain.value = chainNetworkFromJson(chainlist);
+    await DbHelper.instance.setChainNetwork(listChain);
+    final chainSelected = await DbHelper.instance.getSelectedChain();
+    final listChainWallet = await DbHelper.instance.getSelectedChainWallet(
+      walletAddress: selectedAddress.value.address ?? "",
+    );
+    if (listChainWallet.isEmpty) {
+      var selectChain = ListChainSelected(
+        name: listChain.first.name,
+        symbol: listChain.first.symbol,
+        rpc: listChain.first.rpc,
+        chainId: listChain.first.chainId,
+        explorer: listChain.first.explorer,
+        logo: listChain.first.logo,
+        color: listChain.first.color,
+        isTestnet: listChain.first.isTestnet,
+        walletAddress: selectedAddress.value.address ?? "",
+      );
+      await DbHelper.instance.setSelectedChainWallet(selectChain);
+      final chainWallet = await DbHelper.instance.getSelectedChainWallet(
+        walletAddress: selectedAddress.value.address ?? "",
+      );
+      listChainSelected.assignAll(chainWallet);
+    } else {
+      listChainSelected.assignAll(listChainWallet);
+    }
+
+    if (chainSelected.chainId == null) {
+      final selected = SelectedChain(chainId: listChain.first.chainId);
+      await DbHelper.instance.setSelectedChain(selected);
+      selectedChain.value = listChainSelected.first;
+    }
+    if (listChainSelected.any((element) =>
+        element.chainId!.toLowerCase() !=
+        chainSelected.chainId!.toLowerCase())) {
+      changeNetwork(listChainSelected.first);
+    } else {
+      var chain = await DbHelper.instance.getSelectedChainNetwork();
+      selectedChain.value = chain!;
+    }
+    selectedChain.refresh();
+    listChain.refresh();
+    dev.log("Selected chain ==> ${selectedChain.value.chainId}");
+    for (var value in listChain) {
+      dev.log("List Chain ==> ${value.chainId}");
+    }
+  }
+
+  void changeNetwork(ListChainSelected network) async {
     var httpClient = Client();
     Get.back();
-    networkController.changeNetwork(network);
     selectedChain.value = network;
     selectedChain.refresh();
-
+    await DbHelper.instance.changeNetwork(network);
     isLoadingNetwork.value = true;
-
     web3client = Web3Client(
       selectedChain.value.rpc ?? "",
       httpClient,
@@ -217,17 +256,14 @@ class EvmNewController extends GetxController {
   }
 
   void changeAddress(Address address) async {
-    print("SELECTED WALLET ADDRESS : ${selectedAddress.value.id}");
     await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
-    dev.log("INIT ADDRESS : ${selectedAddress.value.id!}");
 
     selectedAddress.value = address;
     selectedAddress.refresh();
 
     await DbHelper.instance.changeWallet(address.id!);
-    // await getTokenFromContract();
-    dev.log("NEW ADDRESS : ${address.id!}");
-
+    await initialzedNetwork();
+    await initialzedToken();
     decrypted(
       selectedAddress.value.privateKey!,
     );
@@ -409,21 +445,21 @@ class EvmNewController extends GetxController {
       final listToken = tokenFromJson(tokens);
 
       await DbHelper.instance.setToken(listToken);
-      final tokenByChain = await DbHelper.instance.getListTokenByChainId(
-          chainId: networkController.selectedChain.value.chainId ?? "");
+      final tokenByChain = await DbHelper.instance
+          .getListTokenByChainId(chainId: selectedChain.value.chainId ?? "");
       tokenList.assignAll(tokenByChain);
       final selectedToken = await DbHelper.instance.getSelectedToken(
         walletAddress: selectedAddress.value.address ?? "",
-        chainID: networkController.selectedChain.value.chainId ?? "",
+        chainID: selectedChain.value.chainId ?? "",
       );
       tokenSelected.assignAll(selectedToken);
     } else {
-      final tokenByChain = await DbHelper.instance.getListTokenByChainId(
-          chainId: networkController.selectedChain.value.chainId ?? "");
+      final tokenByChain = await DbHelper.instance
+          .getListTokenByChainId(chainId: selectedChain.value.chainId ?? "");
       tokenList.assignAll(tokenByChain);
       final token = await DbHelper.instance.getSelectedToken(
         walletAddress: selectedAddress.value.address ?? "",
-        chainID: networkController.selectedChain.value.chainId ?? "",
+        chainID: selectedChain.value.chainId ?? "",
       );
       tokenSelected.assignAll(token);
     }
@@ -446,7 +482,7 @@ class EvmNewController extends GetxController {
 
   //     for (var element in tokensByAddress) {
   //       element.addressWallet = selectedAddress.value.address;
-  //       element.chainId = networkController.selectedChain.value.chainId;
+  //       element.chainId = selectedChain.value.chainId;
   //       element.selected = true;
   //       if (tokenRegistryAll
   //           .any((x) => x.contractAddress == element.contractAddress)) {
@@ -487,8 +523,7 @@ class EvmNewController extends GetxController {
   Future<void> getMultipleTokenBalances() async {
     for (final tokenAddress in tokenList) {
       if (tokenAddress.contractAddress != null &&
-          tokenAddress.chainId ==
-              networkController.selectedChain.value.chainId) {
+          tokenAddress.chainId == selectedChain.value.chainId) {
         final token = ERC20(
             client: web3client!,
             address: EthereumAddress.fromHex(tokenAddress.contractAddress!));
@@ -629,8 +664,7 @@ class EvmNewController extends GetxController {
       final response = await web3client!.sendTransaction(
         credentials,
         transaction,
-        chainId:
-            int.parse(networkController.selectedChain.value.chainId ?? "1"),
+        chainId: int.parse(selectedChain.value.chainId ?? "1"),
       );
       dev.log("Send response => $response");
       // await Future.delayed(const Duration(seconds: 10));

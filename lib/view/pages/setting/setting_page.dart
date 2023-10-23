@@ -1,14 +1,18 @@
+import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
+import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 
 import '../../../config/config.dart';
 import '../../../data/src/src.dart';
 
 class SettingPage extends StatelessWidget {
-  const SettingPage({super.key});
+  SettingPage({super.key});
 
+  final EvmNewController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     Widget cardMenu(
@@ -54,20 +58,17 @@ class SettingPage extends StatelessWidget {
                     Container(
                       width: 60.w,
                       height: 60.w,
-                      padding: EdgeInsets.all(3.h),
+                      padding: EdgeInsets.all(4.h),
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
                               width: 2.h, color: AppColor.primaryColor)),
-                      child: Container(
-                        padding: EdgeInsets.all(6.w),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColor.primaryColor,
-                        ),
-                        child: Image.asset(
-                          AppImage.avatar,
-                        ),
+                      child: Center(
+                        child: Blockies(
+                            size: 0.7,
+                            data:
+                                controller.selectedAddress.value.address ?? "-",
+                            shape: BlockiesShape.circle),
                       ),
                     ),
                     12.0.width,
@@ -80,7 +81,7 @@ class SettingPage extends StatelessWidget {
                               .copyWith(color: AppColor.grayColor),
                         ),
                         Text(
-                          "Dompet Saya",
+                          "${controller.selectedAddress.value.name ?? ""} ${controller.selectedAddress.value.id ?? ""}",
                           style: AppFont.medium16
                               .copyWith(color: AppColor.textDark),
                         )

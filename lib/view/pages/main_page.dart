@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/domain/controller/controller.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
+import 'package:mintsafe_wallet/view/pages/activity/activity_page.dart';
 import 'package:mintsafe_wallet/view/pages/dapp/dapp_page.dart';
-import 'package:mintsafe_wallet/view/pages/discover/discover_page.dart';
 import 'package:mintsafe_wallet/view/pages/setting/setting_page.dart';
 
 import '../../config/config.dart';
@@ -24,7 +24,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    evm = Get.put(EvmNewController( widget.address));
+    evm = Get.put(EvmNewController(widget.address));
     super.initState();
   }
 
@@ -37,12 +37,12 @@ class _MainPageState extends State<MainPage> {
             evm: evm,
           );
         case 1:
-          return const DiscoverPage();
+          return ActivityPage();
         case 2:
           return const DAppPage();
 
         case 3:
-          return const SettingPage();
+          return SettingPage();
 
         default:
           HomePage(
@@ -107,7 +107,7 @@ class _MainPageState extends State<MainPage> {
                             width: 32.h,
                             color: AppColor.primaryColor,
                           )),
-                      label: 'Discover',
+                      label: 'Activity',
                     ),
                     BottomNavigationBarItem(
                       backgroundColor: Colors.transparent,

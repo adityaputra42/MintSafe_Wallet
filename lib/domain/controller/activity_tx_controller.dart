@@ -29,16 +29,15 @@ class ActivityTxController extends GetxController {
     final response = await activityRepository.findAllActivity(
         page: isRefresh ? 1 : page.value,
         evm.selectedAddress.value.address ?? "",
-        isTestnet:
-            evm.networkController.selectedChain.value.isTestnet ?? false);
+        isTestnet: evm.selectedChain.value.isTestnet ?? false);
 
     final tokenResponse = await activityRepository.findActivityToken(
         evm.selectedAddress.value.address ?? "",
         page: page.value,
-        isTestnet: evm.networkController.selectedChain.value.isTestnet!);
+        isTestnet: evm.selectedChain.value.isTestnet!);
 
     for (var element in tokenResponse) {
-     log("Token name  : ${element.name}");
+      log("Token name  : ${element.name}");
     }
 
     for (int i = 0; i < response.length; i++) {

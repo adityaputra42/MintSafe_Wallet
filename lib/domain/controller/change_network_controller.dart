@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:mintsafe_wallet/data/model/chain_network/list_chain_selected.dart';
 import 'package:web3dart/web3dart.dart';
 
-import '../../data/data.dart';
 import '../../utils/utils.dart';
 import 'evm_new_controller.dart';
 
 class ChangeNetworkController extends GetxController {
   EvmNewController evm = Get.find();
-  var listChain = <ChainNetwork>[].obs;
+  var listChain = <ListChainSelected>[].obs;
 
   @override
   void onInit() {
-    listChain = evm.networkController.listChain;
+    listChain = evm.listChainSelected;
     super.onInit();
   }
 
-  void changeNetwork(ChainNetwork network, BuildContext context) async {
+  void changeNetwork(ListChainSelected network, BuildContext context) async {
     var httpClient = http.Client();
     Get.back();
-    evm.networkController.selectedChain.value = network;
-    evm.networkController.selectedChain.refresh();
+    evm.selectedChain.value = network;
+    evm.selectedChain.refresh();
     evm.isLoadingNetwork.value = true;
     await DbHelper.instance.changeNetwork(network);
     evm.web3client = Web3Client(
-      evm.networkController.selectedChain.value.rpc ?? "",
+      evm.selectedChain.value.rpc ?? "",
       httpClient,
     );
     evm.tokenSelected.clear();

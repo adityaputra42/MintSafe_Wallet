@@ -13,7 +13,7 @@ class MethodHelper {
         backgroundColor: AppColor.primaryColor, colorText: AppColor.textDark));
   }
 
-  shortAddress({required String address, int length = 5}) {
+  shortAddress({required String address, int length = 4}) {
     if (address != '') {
       return "${address.substring(0, length)}...${address.substring(address.length - length)}";
     } else {

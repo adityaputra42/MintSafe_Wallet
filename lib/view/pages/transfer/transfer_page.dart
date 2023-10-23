@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mintsafe_wallet/domain/controller/transfer_controller.dart';
-import 'package:mintsafe_wallet/view/pages/select_token/select_token.dart';
 
 import '../../../config/config.dart';
 import '../../../data/data.dart';
@@ -25,7 +24,6 @@ class TransferPage extends StatelessWidget {
           children: [
             16.0.height,
             GestureDetector(
-              onTap: () => Get.to(() => const SelectTokenPage()),
               child: Container(
                 width: double.infinity,
                 height: 54.h,
@@ -58,16 +56,10 @@ class TransferPage extends StatelessWidget {
                     ),
                     8.0.width,
                     Text(
-                      "ERC-20",
+                      "ETH",
                       style:
                           AppFont.reguler12.copyWith(color: AppColor.grayColor),
                     ),
-                    8.0.width,
-                    Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: AppColor.grayColor,
-                      size: 16.h,
-                    )
                   ],
                 ),
               ),

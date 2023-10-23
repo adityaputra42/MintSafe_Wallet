@@ -12,13 +12,13 @@ import 'package:mintsafe_wallet/view/pages/change_network.dart/change_network.da
 import 'package:mintsafe_wallet/view/pages/change_wallet/change_wallet.dart';
 import 'package:mintsafe_wallet/view/pages/receive_token/receive_token.dart';
 import 'package:mintsafe_wallet/view/pages/scan/scann_page.dart';
-import 'package:mintsafe_wallet/view/pages/select_token/select_token.dart';
 import 'package:mintsafe_wallet/view/widget/card_action.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../config/config.dart';
 import '../../../domain/controller/controller.dart';
 import '../../../domain/controller/evm_new_controller.dart';
+import '../transfer/transfer_page.dart';
 
 class HomePage extends StatelessWidget {
   final EvmNewController evm;
@@ -34,8 +34,7 @@ class HomePage extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             gradient: LinearGradient(colors: [
-              Color(int.parse(evm.networkController.selectedChain.value.color ??
-                  "0xff1AA9A4")),
+              Color(int.parse(evm.selectedChain.value.color ?? "0xff1AA9A4")),
               AppColor.cardDark
             ], begin: Alignment.topLeft, end: Alignment.bottomRight),
             boxShadow: const [
@@ -60,13 +59,12 @@ class HomePage extends StatelessWidget {
                           padding: EdgeInsets.all(1.h),
                           color: Colors.transparent,
                           child: Image.asset(
-                              evm.networkController.selectedChain.value.logo ??
-                                  AppImage.eth)),
+                              evm.selectedChain.value.logo ?? AppImage.eth)),
                     ),
                   ),
                   8.0.height,
                   Text(
-                      "${evm.selectedAddress.value.balance ?? 0} ${evm.networkController.selectedChain.value.symbol ?? ''}",
+                      "${evm.selectedAddress.value.balance ?? 0} ${evm.selectedChain.value.symbol ?? ''}",
                       style: AppFont.semibold24.copyWith(
                         color: AppColor.textDark,
                       )),
@@ -79,7 +77,7 @@ class HomePage extends StatelessWidget {
             ),
             CardAction(
               // color: Color(int.parse(
-              //         evm.networkController.selectedChain.value.color ??
+              //         evm.selectedChain.value.color ??
               //             "0xff1AA9A4"))
               //     .withOpacity(0.4),
               scan: () {
@@ -89,7 +87,7 @@ class HomePage extends StatelessWidget {
                 Get.to(() => const ReceiveTokenPage());
               },
               transfer: () {
-                Get.to(() => const SelectTokenPage());
+                Get.to(() => TransferPage());
               },
             ),
           ],
@@ -190,6 +188,7 @@ class HomePage extends StatelessWidget {
                                 Get.to(() => ChangeNetwork());
                               },
                               child: Container(
+                                width: MediaQuery.sizeOf(context).width * 0.36,
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 12.w, vertical: 6.h),
                                 decoration: BoxDecoration(
@@ -197,10 +196,14 @@ class HomePage extends StatelessWidget {
                                     color: AppColor.cardDark),
                                 child: Row(
                                   children: [
-                                    Text(
-                                        "${evm.networkController.selectedChain.value.name}",
+                                    Expanded(
+                                      child: Text(
+                                        "${evm.selectedChain.value.name}",
                                         style: AppFont.medium14.copyWith(
-                                            color: AppColor.primaryColor)),
+                                            color: AppColor.primaryColor),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
                                     4.0.width,
                                     Icon(
                                       Icons.arrow_forward_ios_rounded,

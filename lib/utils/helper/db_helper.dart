@@ -1,4 +1,5 @@
 import 'package:isar/isar.dart';
+import 'package:mintsafe_wallet/data/model/chain_network/list_chain_selected.dart';
 import 'package:mintsafe_wallet/data/model/chain_network/selected_chain.dart';
 import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:path_provider/path_provider.dart';
@@ -26,6 +27,7 @@ class DbHelper {
         TokenSchema,
         SelectedTokenSchema,
         SelectedChainSchema,
+        ListChainSelectedSchema,
       ],
       inspector: true,
       directory: dir.path,
@@ -114,7 +116,7 @@ class DbHelper {
     });
   }
 
-  Future<void> changeNetwork(ChainNetwork chain) async {
+  Future<void> changeNetwork(ListChainSelected chain) async {
     final selectedChain = await isar.selectedChains.where().findAll();
     await isar.writeTxn(() async {
       selectedChain.first.chainId = chain.chainId;
@@ -140,9 +142,9 @@ class DbHelper {
     return networks;
   }
 
-  Future<ChainNetwork?> getSelectedChainNetwork() async {
+  Future<ListChainSelected?> getSelectedChainNetwork() async {
     final selectedChain = await isar.selectedChains.where().findAll();
-    final chain = await isar.chainNetworks
+    final chain = await isar.listChainSelecteds
         .filter()
         .chainIdEqualTo(selectedChain.first.chainId)
         .findFirst();
@@ -266,6 +268,35 @@ class DbHelper {
         .findFirst();
     await isar.writeTxn(() async {
       await isar.selectedTokens.delete(token?.id ?? 0);
+    });
+  }
+
+  /// ######################### Chain #######################
+  Future<List<ListChainSelected>> getSelectedChainWallet(
+      {required String walletAddress}) async {
+    List<ListChainSelected> chains = [];
+    await isar.txn(() async {
+      chains = await isar.listChainSelecteds
+          .filter()
+          .walletAddressEqualTo(walletAddress)
+          .findAll();
+    });
+    return chains;
+  }
+
+  Future<void> setSelectedChainWallet(ListChainSelected chains) async {
+    await isar.writeTxn(() async {
+      await isar.listChainSelecteds.put(chains);
+    });
+  }
+
+  Future<void> deleteSelectedChainWallet(String chainId) async {
+    final chain = await isar.listChainSelecteds
+        .filter()
+        .chainIdEqualTo(chainId)
+        .findFirst();
+    await isar.writeTxn(() async {
+      await isar.listChainSelecteds.delete(chain?.id ?? 0);
     });
   }
 }

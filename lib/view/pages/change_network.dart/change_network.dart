@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mintsafe_wallet/data/model/chain_network/list_chain_selected.dart';
 import 'package:mintsafe_wallet/domain/controller/change_network_controller.dart';
 import 'package:mintsafe_wallet/view/pages/add_network/add_network.dart';
 
@@ -15,7 +16,8 @@ class ChangeNetwork extends StatelessWidget {
   final ChangeNetworkController controller = Get.put(ChangeNetworkController());
   @override
   Widget build(BuildContext context) {
-    Widget cardNetwork({required ChainNetwork chain, bool isSelected = false}) {
+    Widget cardNetwork(
+        {required ListChainSelected chain, bool isSelected = false}) {
       return GestureDetector(
         onTap: () {
           controller.changeNetwork(chain, context);
