@@ -31,6 +31,6 @@ class AddNetworkController extends GetxController {
       evm.listChainSelected.refresh();
     }
 
-    Get.back();
+    // Get.back();
   }
 }
