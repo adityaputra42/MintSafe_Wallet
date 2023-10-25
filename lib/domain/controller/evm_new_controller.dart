@@ -21,7 +21,6 @@ import 'package:web3dart/web3dart.dart';
 import '../../data/data.dart';
 import '../../data/model/chain_network/selected_chain.dart';
 import '../../utils/utils.dart';
-import '../repository/repository.dart';
 import 'activity_tx_controller.dart';
 
 class EvmNewController extends GetxController {
@@ -146,13 +145,13 @@ class EvmNewController extends GetxController {
       httpClient,
     );
 
-    await getBalance();
+    // await getBalance();
     await initialzedToken();
     if (Get.isRegistered<ActivityTxController>()) {
       Get.delete<ActivityTxController>();
     }
     isLoadingNetwork.value = false;
-    await getMultipleTokenBalances();
+    // await getMultipleTokenBalances();
   }
 
   /// #######################################
@@ -219,12 +218,10 @@ class EvmNewController extends GetxController {
           }
         }
 
-        print("ON");
-
         balanceEth.value = selectedAddress.value.balance!;
-        dev.log("KANJUD : ${balanceEth.value}");
+        dev.log("Balane : ${balanceEth.value}");
       } catch (e) {
-        print(e.toString());
+        dev.log(e.toString());
       }
 
       // selectedAddress.value.balance = balanceEth.value;
@@ -237,13 +234,13 @@ class EvmNewController extends GetxController {
 
     if (selectedAddress.value.balance! > 0 &&
         prefBalance.value != selectedAddress.value.balance) {
-      print("============History Update============>");
+      dev.log("============History Update============>");
       // findAllActivity();
     }
-    print("=========PrevBalance=========>");
-    print(prefBalance.value);
-    print("=========new Balance=========>");
-    print(selectedAddress.value.balance!);
+    dev.log("=========PrevBalance=========>");
+    dev.log(prefBalance.value.toString());
+    dev.log("=========new Balance=========>");
+    dev.log(selectedAddress.value.balance!.toString());
     // print("GET BALANCE : ADDRESS LIST = ${selectedAddress.value.balance!}");
   }
 
@@ -270,8 +267,8 @@ class EvmNewController extends GetxController {
     Get.back();
 
     if (await ConnectivityWrapper.instance.isConnected) {
-      await getBalance();
-      await getMultipleTokenBalances();
+      // await getBalance();
+      // await getMultipleTokenBalances();
       if (Get.isRegistered<ActivityTxController>()) {
         Get.delete<ActivityTxController>();
       }
@@ -292,8 +289,8 @@ class EvmNewController extends GetxController {
     var password = await DbHelper.instance.getPassword();
     if (passwordCreateAccountController.text == password.password) {
       isLoadingCreateAccount.value = true;
-      final mnemonic = WalletRepository().generateMnemonic();
-      var account = WalletRepository().getAccountInfo(mnemonic);
+      final mnemonic = WalletHelper().generateMnemonic();
+      var account = WalletHelper().getAccountInfo(mnemonic);
       await DbHelper.instance.unSelectWallet(selectedAddress.value.id!);
       final mnemonicEncrypt = Ecryption().encrypt(account['mnemonic']!);
       final privateKeyEncrypt = Ecryption().encrypt(account['private_key']!);
@@ -317,7 +314,7 @@ class EvmNewController extends GetxController {
       );
 
       isLoadingCreateAccount.value = false;
-      await getBalance();
+      // await getBalance();
 
       final listAddress = await DbHelper.instance.readAddressList();
       for (var element in listAddress!) {
@@ -335,7 +332,7 @@ class EvmNewController extends GetxController {
   Future<void> importAddressByMnemonic(String key) async {
     isLoadingImportMnemonic.value = true;
 
-    if (WalletRepository().validateMnemonic(key)) {
+    if (WalletHelper().validateMnemonic(key)) {
       var address = await compute(importMnemonic, key);
       if (addressList
           .where((v) =>
@@ -356,9 +353,9 @@ class EvmNewController extends GetxController {
         );
 
         // await fetchTokenByAddress();
-        await getMultipleTokenBalances();
+        // await getMultipleTokenBalances();
         // await getTokenFromContract();
-        await getBalance();
+        // await getBalance();
       }
     } else {}
     isLoadingImportMnemonic.value = false;
@@ -368,7 +365,7 @@ class EvmNewController extends GetxController {
     isLoadingImportPrivateKey.value = true;
 
     try {
-      final isValid = WalletRepository().validatePrivateKey(key);
+      final isValid = WalletHelper().validatePrivateKey(key);
 
       if (isValid) {
         final credentials = EthPrivateKey.fromHex(key);
@@ -424,15 +421,6 @@ class EvmNewController extends GetxController {
     tokenList.addAll(tokens);
     refresh();
   }
-  // initializeTokens() async {
-  //   final tokens = await DbHelper.instance.getAllToken();
-  //   tokenList.clear();
-
-  //   tokenList.addAll(tokens);
-
-  //   refresh();
-//   // }
-// var listToken = <Token>[].obs;
 
   Future<void> initialzedToken() async {
     tokenList.clear();
@@ -468,58 +456,6 @@ class EvmNewController extends GetxController {
     tokenList.refresh();
   }
 
-  // Future<void> fetchTokenByAddress() async {
-  //   try {
-  //     TokenRepository tokenRepository = TokenRepository();
-  //     // await getTokenFromContract();
-  //     dev.log("TOKENBYADDRESS");
-  //     final response =
-  //         await tokenRepository.getToken(selectedAddress.value.address!);
-
-  //     dev.log("TOKENBYADDRESS : ${response.result!.length}");
-
-  //     final List<Result> tokensByAddress = response.result ?? [];
-
-  //     for (var element in tokensByAddress) {
-  //       element.addressWallet = selectedAddress.value.address;
-  //       element.chainId = selectedChain.value.chainId;
-  //       element.selected = true;
-  //       if (tokenRegistryAll
-  //           .any((x) => x.contractAddress == element.contractAddress)) {
-  //         element.image = tokenRegistryAll
-  //             .singleWhere((y) => y.contractAddress == element.contractAddress)
-  //             .image;
-  //       }
-  //     }
-
-  //     tokensByAddress.removeWhere(
-  //         (element) => element.type == "ERC-721" || element.type == "ERC-1155");
-
-  //     dev.log("TOKENBYADDRESS TOKENLIST : ${tokenList.length}");
-  //     tokensByAddress.forEach((element) async {
-  //       dev.log("TOKENBYADDRESS SC  : ${element.contractAddress}");
-  //       dev.log("TOKENBYADDRESS ADD WALL  : ${element.addressWallet}");
-  //       dev.log("TOKENBYADDRESS SELECTED  : ${element.selected}");
-
-  //       dev.log(
-  //           "MASUK MASRBOOOO ${element.type != "ERC-1155" || element.type != "ERC-721"}");
-
-  //       if (!tokenList.any((x) =>
-  //           x.contractAddress == element.contractAddress &&
-  //           x.addressWallet == selectedAddress.value.address)) {
-  //         dev.log("TOKENBYADDRESS MASUK YGY");
-
-  //         await DbHelper.instance.addToken(element.copyWith(
-  //           selected: true,
-  //           addressWallet: selectedAddress.value.address,
-  //         ));
-  //       }
-  //     });
-
-  //     dev.log("TOKENBYADDRESS : ${tokensByAddress.length}");
-  //   } catch (e) {}
-  // }
-
   Future<void> getMultipleTokenBalances() async {
     for (final tokenAddress in tokenList) {
       if (tokenAddress.contractAddress != null &&
@@ -538,7 +474,7 @@ class EvmNewController extends GetxController {
         tokenAddress.balance = (tokenBalance.getInWei /
             BigInt.from(pow(10, tokenAddress.decimal!)));
 
-        print(
+        dev.log(
             "TOKEN ${tokenAddress.name} BALANCE : $balance Address : ${selectedAddress.value.address!}");
       }
 
@@ -700,7 +636,7 @@ class EvmNewController extends GetxController {
 
   BigInt convertToGwei(double amount) {
     BigInt gweiBigInt = (BigInt.from(amount * 1000000000) ~/ BigInt.one);
-    print("$gweiBigInt GWEI EQUAL $amount ETHER");
+    dev.log("$gweiBigInt GWEI EQUAL $amount ETHER");
     return gweiBigInt;
   }
 }
@@ -708,7 +644,7 @@ class EvmNewController extends GetxController {
 Future<Address?> importMnemonic(String mnemonic) async {
   // await DbHelper.instance.setPassword(Password(password: password));
 
-  var account = WalletRepository().getAccountInfo(mnemonic);
+  var account = WalletHelper().getAccountInfo(mnemonic);
   final mnemonicEncrypted = Ecryption().encrypt(mnemonic);
   final privateKeyEncrypted = Ecryption().encrypt(account['private_key']!);
 
@@ -719,9 +655,9 @@ Future<Address?> importMnemonic(String mnemonic) async {
       balance: 0,
       selectedAddress: true,
       privateKey: privateKeyEncrypted);
-  print(address.address);
-  print(address.mnemonic);
-  print(address.privateKey);
+  dev.log(address.address.toString());
+  dev.log(address.mnemonic.toString());
+  dev.log(address.privateKey.toString());
 
   // await DbHelper.instance.addAddress(address);
 

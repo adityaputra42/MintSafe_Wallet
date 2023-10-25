@@ -10,11 +10,10 @@ import 'package:mintsafe_wallet/view/pages/create_new_wallet/component/succes_cr
 import '../../config/config.dart';
 import '../../data/data.dart';
 import '../../utils/utils.dart';
-import '../repository/repository.dart';
 import 'dart:developer' as dev;
 
 Future<Address> saveAddressCompute(String mnemonic) async {
-  var account = WalletRepository().getAccountInfo(mnemonic);
+  var account = WalletHelper().getAccountInfo(mnemonic);
   final mnemonicEncryted = Ecryption().encrypt(mnemonic);
   final privateKeyEncryted = Ecryption().encrypt(account['private_key']!);
 
@@ -128,7 +127,7 @@ class CreateWalletController extends GetxController {
   }
 
   List<Map<String, dynamic>> generateMnemonic() {
-    String mnemonic = WalletRepository().generateMnemonic();
+    String mnemonic = WalletHelper().generateMnemonic();
     mnemonicText.value = mnemonic;
     final words = mnemonic.replaceAll(" ", ",").split(',');
     List<Map<String, dynamic>> wordList = [];

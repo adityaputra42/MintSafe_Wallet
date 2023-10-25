@@ -8,10 +8,7 @@ class AddTokenController extends GetxController {
   EvmNewController evm = Get.find();
   var selectedTab = 0.obs;
   void changeTab(int index) => selectedTab.value = index;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+ 
 
   void setToken(SelectedToken token) async {
     if (evm.tokenSelected.any((element) =>

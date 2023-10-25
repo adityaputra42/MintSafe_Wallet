@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
-import 'package:mintsafe_wallet/utils/helper/method_helper.dart';
 import '../../../../config/config.dart';
 import '../../../../data/data.dart';
 import '../../../../utils/utils.dart';

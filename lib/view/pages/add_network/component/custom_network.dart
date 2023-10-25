@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mintsafe_wallet/utils/extension/extension.dart';
-import 'package:mintsafe_wallet/view/widget/warning.dart';
 
 import '../../../../domain/controller/add_network_controller.dart';
 import '../../../widget/widget.dart';

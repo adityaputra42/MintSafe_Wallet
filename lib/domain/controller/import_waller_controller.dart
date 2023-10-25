@@ -6,10 +6,9 @@ import '../../config/config.dart';
 import '../../data/data.dart';
 import '../../utils/utils.dart';
 import '../../view/pages/page.dart';
-import '../repository/repository.dart';
 
 Future<Address?> importMnemonic(String mnemonic) async {
-  var account = WalletRepository().getAccountInfo(mnemonic);
+  var account = WalletHelper().getAccountInfo(mnemonic);
   final mnemonicEncrypted = Ecryption().encrypt(mnemonic);
   final privateKeyEncrypted = Ecryption().encrypt(
     account['private_key']!,
@@ -44,7 +43,7 @@ class ImportWalletController extends GetxController {
 
   void import(String mnemonic) async {
     isLoading.value = true;
-    if (WalletRepository().validateMnemonic(mnemonic)) {
+    if (WalletHelper().validateMnemonic(mnemonic)) {
       var address = await compute(importMnemonic, mnemonic);
       await DbHelper.instance.setPassword(Password(password: password.text));
       await DbHelper.instance.addAddress(address!);

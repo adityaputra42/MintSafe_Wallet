@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mintsafe_wallet/utils/helper/method_helper.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 
 import '../../../../config/config.dart';

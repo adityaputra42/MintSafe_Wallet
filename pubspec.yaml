@@ -17,7 +17,6 @@ dependencies:
   convert: ^3.1.1
   cupertino_icons: ^1.0.2
   dart_bip32_bip44: ^0.2.0
-  dio: ^5.3.2
   encrypt: ^5.0.1
   erc20: ^1.0.1
   eth_abi_codec:
@@ -40,7 +39,6 @@ dependencies:
   isar: ^3.1.0+1
   isar_flutter_libs: ^3.1.0+1
   isar_generator: ^3.1.0+1
-  logging: ^1.2.0
   mobile_scanner: ^3.2.0
   number_system: ^0.0.6+8
   path_provider: ^2.0.15

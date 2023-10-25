@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:logging/logging.dart';
 import 'package:mintsafe_wallet/config/theme/style.dart';
 import 'package:mintsafe_wallet/utils/helper/helper.dart';
 import 'package:mintsafe_wallet/view/pages/spalsh/splash_screen.dart';
@@ -18,10 +17,6 @@ void main() async {
     name: 'activity',
   ).init();
   DbHelper.instance.onInit();
-  Logger.root.level = Level.ALL;
-  Logger.root.onRecord.listen((event) {
-    debugPrint(event.message);
-  });
 
   runApp(const MyApp());
 }

@@ -3,12 +3,12 @@ import 'package:dart_bip32_bip44/dart_bip32_bip44.dart';
 import 'package:ethereum_addresses/ethereum_addresses.dart';
 import 'package:web3dart/web3dart.dart';
 
-class WalletRepository {
-  WalletRepository._constructor();
+class WalletHelper {
+  WalletHelper._constructor();
 
-  static final WalletRepository _instance = WalletRepository._constructor();
+  static final WalletHelper _instance = WalletHelper._constructor();
 
-  factory WalletRepository() => _instance;
+  factory WalletHelper() => _instance;
 
   String generateMnemonic() {
     var mnemonic = bip39.generateMnemonic();
@@ -43,9 +43,5 @@ class WalletRepository {
     } else {
       return false;
     }
-    // final decodedKey = base64Url.decode(privateKey);
-    // final hash = sha256.convert(decodedKey);
-    // final firstByte = hash.bytes[0];
-    // return firstByte <= 0x7f;
   }
 }
