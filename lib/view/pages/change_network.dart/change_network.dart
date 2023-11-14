@@ -3,7 +3,7 @@ import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/model/chain_network/list_chain_selected.dart';
-import 'package:mintsafe_wallet/domain/controller/change_network_controller.dart';
+import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/view/pages/add_network/add_network.dart';
 
 import '../../../config/config.dart';
@@ -13,14 +13,14 @@ import '../../widget/widget.dart';
 
 class ChangeNetwork extends StatelessWidget {
   ChangeNetwork({super.key});
-  final ChangeNetworkController controller = Get.put(ChangeNetworkController());
+  final EvmNewController evm = Get.find();
   @override
   Widget build(BuildContext context) {
     Widget cardNetwork(
         {required ListChainSelected chain, bool isSelected = false}) {
       return GestureDetector(
         onTap: () {
-          controller.changeNetwork(chain, context);
+          evm.changeNetwork(chain);
         },
         child: Row(
           children: [
@@ -69,12 +69,12 @@ class ChangeNetwork extends StatelessWidget {
                 itemBuilder: (context, index) => Padding(
                   padding: EdgeInsets.only(bottom: 12.h),
                   child: cardNetwork(
-                    chain: controller.listChain[index],
-                    isSelected: controller.listChain[index].chainId ==
-                        controller.evm.selectedChain.value.chainId,
+                    chain: evm.listChainSelected[index],
+                    isSelected: evm.listChainSelected[index].chainId ==
+                        evm.selectedChain.value.chainId,
                   ),
                 ),
-                itemCount: controller.listChain.length,
+                itemCount: evm.listChainSelected.length,
               )),
               Column(
                 mainAxisSize: MainAxisSize.min,

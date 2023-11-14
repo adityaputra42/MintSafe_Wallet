@@ -2,20 +2,22 @@
       {
           "name" : "Ethereum Mainnet",
           "symbol" : "ETH",
-          "RPC" : "https://mainnet.infura.io/v3/",
+          "RPC" : "https://eth.llamarpc.com",
           "chainId" : "1",
           "explorer" : "https://etherscan.io",
+          "explorerAPI" : "https://api.etherscan.io",
           "logo":"asset/logo/eth.png",
           "color":"0xff5631FA",
           "isTestnet": false
           
       },
       {
-          "name" : "BNB Smart Chain Mainnet",
-          "symbol" : "BSC",
+          "name" : "Binance Smart Chain Mainnet",
+          "symbol" : "BNB",
           "RPC" : "https://bsc-dataseed1.bnbchain.org",
           "chainId" : "56",
           "explorer" : "https://bscscan.com",
+          "explorerAPI" : "https://api.bscscan.com",
           "logo":  "asset/logo/bnb.png", 
           "color":"0xffF3BA2F",
           "isTestnet": false
@@ -23,9 +25,10 @@
       {
           "name" : "Polygon Mainnet",
           "symbol" : "MATIC",
-          "RPC" : "https://polygon-rpc.com/",
+          "RPC" : "https://polygon-rpc.com",
           "chainId" : "137",
           "explorer" : "https://polygonscan.com",
+          "explorerAPI" : "https://api.polygonscan.com",
           "logo":"asset/logo/matic.png", 
           "color":"0xff8247E5",
           "isTestnet": false
@@ -36,6 +39,7 @@
           "RPC" : "https://arb1.arbitrum.io/rpc",
           "chainId" : "42161",
           "explorer" : "https://arbiscan.io",
+          "explorerAPI" : "https://api.arbiscan.io",
           "logo":"asset/logo/arb.png", 
           "color":"0xff2D374B",
           "isTestnet": false
@@ -56,6 +60,7 @@
           "RPC" : "https://pacific-rpc.manta.network/http",
           "chainId" : "169",
           "explorer" : "https://pacific-explorer.manta.network",
+          "explorerAPI" : "https://pacific-explorer.manta.network",
           "logo":"asset/logo/eth.png", 
           "color":"0xffE1147B",
           "isTestnet": false
@@ -66,6 +71,7 @@
           "RPC" : "https://mainnet.base.org/",
           "chainId" : "8453",
           "explorer" : "https://basescan.org",
+          "explorerAPI" : "https://api.basescan.org",
           "logo":"asset/logo/eth.png", 
           "color":"0xff0033AD",
           "isTestnet": false
@@ -76,6 +82,7 @@
           "RPC" : "https://api.avax.network/ext/bc/C/rpc",
           "chainId" : "43114",
           "explorer" : "https://snowtrace.io",
+          "explorerAPI" : "https://api.snowtrace.io",
           "logo":"asset/logo/avax.png",
           "color":"0xffE84142",
           "isTestnet": false
@@ -86,6 +93,7 @@
           "RPC" : "https://rpc.linea.build",
           "chainId" : "59144",
           "explorer" : "https://bridge.linea.build",
+          "explorerAPI" : "https://bridge.linea.build",
           "logo":"asset/logo/eth.png", 
           "color":"0xff171717",
           "isTestnet": false
@@ -96,6 +104,7 @@
           "RPC" : "https://ethereum-goerli.publicnode.com",
           "chainId" : "5",
           "explorer" : "https://goerli.etherscan.io/",
+          "explorerAPI" : "https://goerli.etherscan.io/",
           "logo":"asset/logo/eth.png", 
           "color":"0xff171717",
           "isTestnet": true
@@ -103,9 +112,10 @@
       {
           "name" : "Base Goerli Testnet",
           "symbol" : "ETH",
-          "RPC" : "https://1rpc.io/base-goerli",
+          "RPC" : "https://base-goerli.publicnode.com",
           "chainId" : "84531",
           "explorer" : "https://goerli.basescan.org/",
+          "explorerAPI" : "https://goerli.basescan.org/",
           "logo":"asset/logo/eth.png", 
           "color":"0xff171717",
           "isTestnet": true

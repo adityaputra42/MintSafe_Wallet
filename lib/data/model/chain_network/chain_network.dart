@@ -17,6 +17,7 @@ class ChainNetwork {
     this.rpc,
     this.chainId,
     this.explorer,
+    this.explorerApi,
     this.logo,
     this.color,
     this.isTestnet,
@@ -27,6 +28,7 @@ class ChainNetwork {
   String? rpc;
   String? chainId;
   String? explorer;
+  String? explorerApi;
   String? logo;
   String? color;
   bool? isTestnet;
@@ -37,6 +39,7 @@ class ChainNetwork {
     String? rpc,
     String? chainId,
     String? explorer,
+    String? explorerApi,
     String? logo,
     String? color,
     bool? isTestnet,
@@ -47,6 +50,7 @@ class ChainNetwork {
         rpc: rpc ?? this.rpc,
         chainId: chainId ?? this.chainId,
         explorer: explorer ?? this.explorer,
+        explorerApi: explorerApi ?? this.explorerApi,
         logo: logo ?? this.logo,
         color: color ?? this.color,
         isTestnet: isTestnet ?? this.isTestnet,
@@ -58,6 +62,7 @@ class ChainNetwork {
         rpc: json["RPC"],
         chainId: json["chainId"],
         explorer: json["explorer"],
+        explorerApi: json["explorerAPI"],
         logo: json["logo"],
         color: json["color"],
         isTestnet: json["isTestnet"],
@@ -69,6 +74,7 @@ class ChainNetwork {
         "RPC": rpc,
         "chainId": chainId,
         "explorer": explorer,
+        "explorerAPI": explorerApi,
         "color": color,
         "logo": logo,
         "isTestnet": isTestnet,

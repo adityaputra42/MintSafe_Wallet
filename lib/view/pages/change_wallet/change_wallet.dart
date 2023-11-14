@@ -22,45 +22,60 @@ class ChangeWallet extends StatelessWidget {
             evm.changeAddress(address);
           }
         },
-        child: Row(
-          children: [
-            Container(
-              width: 48.w,
-              height: 48.w,
-              padding: EdgeInsets.all(2.h),
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(width: 2.h, color: AppColor.primaryColor)),
-              child: Blockies(
-                  size: 0.55,
-                  data: address.address ?? "-",
-                  shape: BlockiesShape.circle),
-            ),
-            8.0.width,
-            Expanded(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${address.name} ${address.id}",
-                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
-                ),
-                8.0.height,
-                Text(
-                  MethodHelper().shortAddress(address: address.address ?? ""),
-                  style: AppFont.reguler12.copyWith(color: AppColor.textDark),
-                )
-              ],
-            )),
-            8.0.height,
-            address.address == evm.selectedAddress.value.address
-                ? Icon(
-                    Icons.check_circle_outline_rounded,
-                    size: 24.w,
-                    color: AppColor.primaryColor,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 16.w,
+            vertical: 12.w,
+          ),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.r),
+              color: AppColor.cardDark,
+              border: Border.all(
+                  width: 1.w,
+                  color: address.address == evm.selectedAddress.value.address
+                      ? AppColor.primaryColor
+                      : Colors.transparent)),
+          child: Row(
+            children: [
+              Container(
+                width: 48.w,
+                height: 48.w,
+                padding: EdgeInsets.all(2.h),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border:
+                        Border.all(width: 2.h, color: AppColor.primaryColor)),
+                child: Blockies(
+                    size: 0.55,
+                    data: address.address ?? "-",
+                    shape: BlockiesShape.circle),
+              ),
+              8.0.width,
+              Expanded(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "${address.name} ${address.id}",
+                    style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                  ),
+                  8.0.height,
+                  Text(
+                    MethodHelper().shortAddress(address: address.address ?? "", length: 8),
+                    style: AppFont.reguler12.copyWith(color: AppColor.textDark),
                   )
-                : 24.0.width
-          ],
+                ],
+              )),
+              8.0.height,
+              address.address == evm.selectedAddress.value.address
+                  ? Icon(
+                      Icons.check_circle_outline_rounded,
+                      size: 24.w,
+                      color: AppColor.primaryColor,
+                    )
+                  : 24.0.width
+            ],
+          ),
         ),
       );
     }
@@ -101,10 +116,11 @@ class ChangeWallet extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
                 children: [
+                  24.0.height,
                   Expanded(
                     child: ListView.builder(
                       itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.only(bottom: 12.h),
+                        padding: EdgeInsets.only(bottom: 16.h),
                         child: cardAccount(address: evm.addressList[index]),
                       ),
                       itemCount: evm.addressList.length,

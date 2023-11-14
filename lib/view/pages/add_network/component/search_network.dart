@@ -26,6 +26,7 @@ class SearchNetwork extends StatelessWidget {
             rpc: chain.rpc,
             chainId: chain.chainId,
             explorer: chain.explorer,
+            explorerApi: chain.explorerApi,
             logo: chain.logo,
             color: chain.color,
             isTestnet: chain.isTestnet,

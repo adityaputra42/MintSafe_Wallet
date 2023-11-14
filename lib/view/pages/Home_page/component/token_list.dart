@@ -56,50 +56,19 @@ class TokenList extends StatelessWidget {
                       children: [
                         Text(
                           token.name ?? "",
-                          style: AppFont.medium16
+                          style: AppFont.semibold18
                               .copyWith(color: AppColor.textDark),
                         ),
                         Text(
                           NumberFormat.currency(
-                                  symbol: '', decimalDigits: 4, locale: "en_US")
-                              .format(0),
+                                  symbol: '', decimalDigits: 5, locale: "en_US")
+                              .format(token.balance??0),
                           style: AppFont.medium16.copyWith(
                               fontFamily: "Roboto", color: AppColor.textDark),
                         )
                       ],
                     ),
-                    4.0.height,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(1813.98)}",
-                              style: AppFont.reguler14.copyWith(
-                                  color: AppColor.grayColor,
-                                  fontFamily: "Roboto"),
-                            ),
-                            4.0.width,
-                            Icon(
-                              Icons.arrow_outward_rounded,
-                              size: 16.h,
-                              color: AppColor.primaryColor,
-                            ),
-                            Text(
-                              "0.10%",
-                              style: AppFont.reguler14
-                                  .copyWith(color: AppColor.primaryColor),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          "\$${NumberFormat.currency(symbol: '', decimalDigits: 2, locale: "en_US").format(0)}",
-                          style: AppFont.reguler14.copyWith(
-                              color: AppColor.grayColor, fontFamily: "Roboto"),
-                        ),
-                      ],
-                    )
+                    // 
                   ],
                 ),
               )

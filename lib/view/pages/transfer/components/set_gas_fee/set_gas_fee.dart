@@ -73,8 +73,8 @@ class SetGasFee extends StatelessWidget {
                 ),
                 8.0.height,
                 controller.selectedTab.value == 0
-                    ? const SelectGasFee()
-                    : const AdvanceSetting()
+                    ? SelectGasFee()
+                    : AdvanceSetting()
                 // // TabBarView(children: [Wall()])
               ],
             ),
@@ -117,9 +117,12 @@ class SetGasFee extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: PrimaryButton(
-        title: "Continue",
+        title: "Confirm",
         activeColor: AppColor.primaryColor,
-        onPressed: () {},
+        onPressed: () {
+          controller.saveFee();
+          Get.back();
+        },
         margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       ),
     );

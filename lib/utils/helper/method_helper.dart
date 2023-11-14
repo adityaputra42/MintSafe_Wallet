@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -27,4 +29,16 @@ class MethodHelper {
       controller.text = clipboardData.text!;
     }
   }
+
+Uint8List convertBase64ToUint8List(String base64String) {
+  List<int> byteList = base64Decode(base64String);
+  Uint8List uint8List = Uint8List.fromList(byteList);
+  return uint8List;
+}
+
+String convertUint8ListToString(Uint8List uint8List) {
+  String base64String = base64Encode(uint8List);
+  return base64String;
+}
+
 }

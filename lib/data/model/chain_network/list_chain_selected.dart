@@ -19,6 +19,7 @@ class ListChainSelected {
     this.chainId,
     this.walletAddress,
     this.explorer,
+    this.explorerApi,
     this.logo,
     this.color,
     this.isTestnet,
@@ -30,6 +31,7 @@ class ListChainSelected {
   String? chainId;
   String? walletAddress;
   String? explorer;
+  String? explorerApi;
   String? logo;
   String? color;
   bool? isTestnet;
@@ -41,6 +43,7 @@ class ListChainSelected {
     String? chainId,
     String? walletAddress,
     String? explorer,
+    String? explorerApi,
     String? logo,
     String? color,
     bool? isTestnet,
@@ -52,6 +55,7 @@ class ListChainSelected {
         chainId: chainId ?? this.chainId,
         walletAddress: walletAddress ?? this.walletAddress,
         explorer: explorer ?? this.explorer,
+        explorerApi: explorerApi ?? this.explorerApi,
         logo: logo ?? this.logo,
         color: color ?? this.color,
         isTestnet: isTestnet ?? this.isTestnet,
@@ -64,6 +68,7 @@ class ListChainSelected {
         rpc: json["RPC"],
         chainId: json["chainId"],
         explorer: json["explorer"],
+        explorerApi: json["explorerAPI"],
         logo: json["logo"],
         color: json["color"],
         isTestnet: json["isTestnet"],
@@ -75,6 +80,7 @@ class ListChainSelected {
         "RPC": rpc,
         "chainId": chainId,
         "explorer": explorer,
+        "exploreAPI": explorerApi,
         "color": color,
         "logo": logo,
         "isTestnet": isTestnet,

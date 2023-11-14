@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:mintsafe_wallet/domain/controller/detail_token_controller.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
@@ -13,7 +14,7 @@ import '../../../utils/utils.dart';
 import '../../widget/card_activity.dart';
 import '../receive_token/receive_token.dart';
 import '../scan/scann_page.dart';
-import '../transfer/transfer_page.dart';
+import '../transfer/choose_receiver.dart';
 
 class DetailToken extends StatelessWidget {
   DetailToken({super.key, required this.token});
@@ -74,10 +75,13 @@ class DetailToken extends StatelessWidget {
                 Get.to(() => const ScannPage());
               },
               receive: () {
-                Get.to(() => const ReceiveTokenPage());
+                Get.to(() => ReceiveTokenPage());
               },
               transfer: () {
-                Get.to(() => TransferPage());
+                Get.to(() => ChooseReceiver(
+                      assetType: AssetType.token,
+                      token: token,
+                    ));
               },
             ),
           ],

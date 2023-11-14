@@ -18,12 +18,16 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../config/config.dart';
 import '../../../domain/controller/controller.dart';
 import '../../../domain/controller/evm_new_controller.dart';
-import '../transfer/transfer_page.dart';
+import '../transfer/choose_receiver.dart';
 
 class HomePage extends StatelessWidget {
-  final EvmNewController evm;
-  HomePage({super.key, required this.evm});
+  HomePage({
+    super.key,
+  });
   final HomeController controller = Get.put(HomeController());
+
+  final EvmNewController evm = Get.find();
+
   @override
   Widget build(BuildContext context) {
     Widget cardWallet() {
@@ -47,7 +51,7 @@ class HomePage extends StatelessWidget {
           children: [
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
                     width: 48.h,
@@ -68,10 +72,10 @@ class HomePage extends StatelessWidget {
                       style: AppFont.semibold24.copyWith(
                         color: AppColor.textDark,
                       )),
-                  Text("~\$ 0.0",
-                      style: AppFont.medium16.copyWith(
-                        color: AppColor.textDark,
-                      )),
+                  // Text("~\$ 0.0",
+                  //     style: AppFont.medium16.copyWith(
+                  //       color: AppColor.textDark,
+                  //     )),
                 ],
               ),
             ),
@@ -84,10 +88,12 @@ class HomePage extends StatelessWidget {
                 Get.to(() => const ScannPage());
               },
               receive: () {
-                Get.to(() => const ReceiveTokenPage());
+                Get.to(() => ReceiveTokenPage());
               },
               transfer: () {
-                Get.to(() => TransferPage());
+                Get.to(() => const ChooseReceiver(
+                      assetType: AssetType.coin,
+                    ));
               },
             ),
           ],
@@ -109,183 +115,173 @@ class HomePage extends StatelessWidget {
             Obx(() {
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Skeletonizer(
-                  enabled: evm.isLoadingNetwork.value,
-                  effect: const ShimmerEffect(
-                      baseColor: AppColor.grayColor,
-                      // highlightColor: AppColor.grayColor,
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight),
-                  child: Column(
-                    children: [
-                      24.0.height,
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(() => ChangeWallet());
-                        },
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 48.w,
-                              height: 48.w,
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    width: 48.w,
-                                    height: 48.w,
+                child: Column(
+                  children: [
+                    24.0.height,
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => ChangeWallet());
+                      },
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 48.w,
+                            height: 48.w,
+                            child: Stack(
+                              children: [
+                                Container(
+                                  width: 48.w,
+                                  height: 48.w,
+                                  padding: EdgeInsets.all(2.h),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          width: 2.h,
+                                          color: AppColor.primaryColor)),
+                                  child: Blockies(
+                                      size: 0.55,
+                                      data: evm.selectedAddress.value.address ??
+                                          "-",
+                                      shape: BlockiesShape.circle),
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: Container(
+                                    width: 16.w,
+                                    height: 16.w,
                                     padding: EdgeInsets.all(2.h),
                                     decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            width: 2.h,
-                                            color: AppColor.primaryColor)),
-                                    child: Blockies(
-                                        size: 0.55,
-                                        data:
-                                            evm.selectedAddress.value.address ??
-                                                "-",
-                                        shape: BlockiesShape.circle),
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
+                                        color: AppColor.secondaryColor),
+                                    child: Image.asset(AppIcon.chnageIcon),
                                   ),
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Container(
-                                      width: 16.w,
-                                      height: 16.w,
-                                      padding: EdgeInsets.all(2.h),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4.r),
-                                          color: AppColor.secondaryColor),
-                                      child: Image.asset(AppIcon.chnageIcon),
-                                    ),
-                                  )
-                                ],
-                              ),
+                                )
+                              ],
                             ),
-                            12.0.width,
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
+                          12.0.width,
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Hi, Welcome Back",
+                                  style: AppFont.reguler12
+                                      .copyWith(color: AppColor.grayColor),
+                                ),
+                                Text(
+                                  MethodHelper().shortAddress(
+                                      address:
+                                          evm.selectedAddress.value.address ??
+                                              '',length: 8),
+                                  style: AppFont.medium14
+                                      .copyWith(color: AppColor.textDark),
+                                )
+                              ],
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(() => ChangeNetwork());
+                            },
+                            child: Container(
+                              width: MediaQuery.sizeOf(context).width * 0.36,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12.w, vertical: 6.h),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6.r),
+                                  color: AppColor.cardDark),
+                              child: Row(
                                 children: [
-                                  Text(
-                                    "Hi, Welcome Back",
-                                    style: AppFont.reguler12
-                                        .copyWith(color: AppColor.grayColor),
+                                  Expanded(
+                                    child: Text(
+                                      "${evm.selectedChain.value.name}",
+                                      style: AppFont.medium14.copyWith(
+                                          color: AppColor.primaryColor),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
-                                  Text(
-                                    MethodHelper().shortAddress(
-                                        address:
-                                            evm.selectedAddress.value.address ??
-                                                ''),
-                                    style: AppFont.medium14
-                                        .copyWith(color: AppColor.textDark),
-                                  )
+                                  4.0.width,
+                                  Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    color: AppColor.primaryColor,
+                                    size: 14.w,
+                                  ),
                                 ],
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(() => ChangeNetwork());
-                              },
-                              child: Container(
-                                width: MediaQuery.sizeOf(context).width * 0.36,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 12.w, vertical: 6.h),
+                          )
+                        ],
+                      ),
+                    ),
+                    24.0.height,
+                    cardWallet(),
+                    16.0.height,
+                    Expanded(
+                      child: Obx(() {
+                        return DefaultTabController(
+                          length: 2,
+                          initialIndex: controller.tabIndex.value,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                height: 60.h,
+                                padding: EdgeInsets.all(4.h),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(6.r),
-                                    color: AppColor.cardDark),
-                                child: Row(
-                                  children: [
-                                    Expanded(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  color: AppColor.cardDark,
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        blurRadius: 0.5,
+                                        spreadRadius: 0.5,
+                                        color: Colors.black12)
+                                  ],
+                                ),
+                                child: TabBar(
+                                  // automaticIndicatorColorAdjustment: false,
+                                  indicator: BoxDecoration(
+                                      color: AppColor.primaryColor,
+                                      borderRadius: BorderRadius.circular(8.r)),
+                                  isScrollable: false,
+                                  dividerColor: AppColor.cardDark,
+                                  indicatorColor: AppColor.cardDark,
+                                  labelColor: AppColor.textDark,
+                                  labelPadding: EdgeInsets.zero,
+                                  labelStyle: AppFont.semibold16,
+                                  unselectedLabelColor: AppColor.grayColor,
+                                  unselectedLabelStyle: AppFont.medium16,
+                                  indicatorSize: TabBarIndicatorSize.tab,
+                                  onTap: (index) {
+                                    controller.onChangeTabIndex(index);
+                                  },
+                                  tabs: const [
+                                    Tab(
                                       child: Text(
-                                        "${evm.selectedChain.value.name}",
-                                        style: AppFont.medium14.copyWith(
-                                            color: AppColor.primaryColor),
-                                        overflow: TextOverflow.ellipsis,
+                                        "Token",
                                       ),
                                     ),
-                                    4.0.width,
-                                    Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      color: AppColor.primaryColor,
-                                      size: 14.w,
+                                    Tab(
+                                      child: Text(
+                                        "NFT",
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                      24.0.height,
-                      cardWallet(),
-                      16.0.height,
-                      Expanded(
-                        child: Obx(() {
-                          return DefaultTabController(
-                            length: 2,
-                            initialIndex: controller.tabIndex.value,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: double.infinity,
-                                  height: 60.h,
-                                  padding: EdgeInsets.all(4.h),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    color: AppColor.cardDark,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          blurRadius: 0.5,
-                                          spreadRadius: 0.5,
-                                          color: Colors.black12)
-                                    ],
-                                  ),
-                                  child: TabBar(
-                                    // automaticIndicatorColorAdjustment: false,
-                                    indicator: BoxDecoration(
-                                        color: AppColor.primaryColor,
-                                        borderRadius:
-                                            BorderRadius.circular(8.r)),
-                                    isScrollable: false,
-                                    dividerColor: AppColor.cardDark,
-                                    indicatorColor: AppColor.cardDark,
-                                    labelColor: AppColor.textDark,
-                                    labelPadding: EdgeInsets.zero,
-                                    labelStyle: AppFont.semibold16,
-                                    unselectedLabelColor: AppColor.grayColor,
-                                    unselectedLabelStyle: AppFont.medium16,
-                                    indicatorSize: TabBarIndicatorSize.tab,
-                                    onTap: (index) {
-                                      controller.onChangeTabIndex(index);
-                                    },
-                                    tabs: const [
-                                      Tab(
-                                        child: Text(
-                                          "Token",
-                                        ),
-                                      ),
-                                      Tab(
-                                        child: Text(
-                                          "NFT",
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                16.0.height,
-                                controller.tabIndex.value == 0
-                                    ? TokenList()
-                                    : const NftList()
-                                // TabBarView(children: [Wall()])
-                              ],
-                            ),
-                          );
-                        }),
-                      ),
-                    ],
-                  ),
+                              16.0.height,
+                              controller.tabIndex.value == 0
+                                  ? TokenList()
+                                  : const NftList()
+                              // TabBarView(children: [Wall()])
+                            ],
+                          ),
+                        );
+                      }),
+                    ),
+                  ],
                 ),
               );
             }),

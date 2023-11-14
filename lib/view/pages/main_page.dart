@@ -1,9 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:loading_overlay/loading_overlay.dart';
+
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/domain/controller/controller.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
+import 'package:mintsafe_wallet/utils/utils.dart';
 import 'package:mintsafe_wallet/view/pages/activity/activity_page.dart';
 import 'package:mintsafe_wallet/view/pages/dapp/dapp_page.dart';
 import 'package:mintsafe_wallet/view/pages/setting/setting_page.dart';
@@ -33,9 +37,7 @@ class _MainPageState extends State<MainPage> {
     body() {
       switch (controller.indexBar.value) {
         case 0:
-          return HomePage(
-            evm: evm,
-          );
+          return HomePage();
         case 1:
           return ActivityPage();
         case 2:
@@ -45,9 +47,7 @@ class _MainPageState extends State<MainPage> {
           return SettingPage();
 
         default:
-          HomePage(
-            evm: evm,
-          );
+          HomePage();
       }
     }
     // isLoadingNetwork.value,
@@ -55,7 +55,30 @@ class _MainPageState extends State<MainPage> {
     return Obx(() {
       return Scaffold(
         backgroundColor: AppColor.bgDark,
-        body: body(),
+        body: LoadingOverlay(
+          isLoading: evm.isLoadingNetwork.value,
+          color: Colors.black,
+          opacity: 0.3,
+          progressIndicator: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CupertinoActivityIndicator(
+                  radius: 20.r,
+                  color: Theme.of(context).primaryColor,
+                ),
+                12.0.height,
+                Text(
+                  "Conneting to ${evm.selectedChain.value.name}",
+                  style: AppFont.medium16.copyWith(
+                    color: Theme.of(context).indicatorColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          child: body()!,
+        ),
         bottomNavigationBar: Container(
           width: double.infinity,
           // height: 72.h,

@@ -5,6 +5,7 @@ import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../data/data.dart';
+import '../../data/model/nft/nft.dart';
 
 class DbHelper {
   DbHelper._privateConstructor();
@@ -28,6 +29,7 @@ class DbHelper {
         SelectedTokenSchema,
         SelectedChainSchema,
         ListChainSelectedSchema,
+        NftSchema,
       ],
       inspector: true,
       directory: dir.path,
@@ -297,6 +299,45 @@ class DbHelper {
         .findFirst();
     await isar.writeTxn(() async {
       await isar.listChainSelecteds.delete(chain?.id ?? 0);
+    });
+  }
+
+  /// ######################### NFT #######################
+  Future<List<Nft>> getAllNFT(
+      {required String chainId, required String owner}) async {
+    List<Nft> tokens = [];
+    await isar.txn(() async {
+      tokens = await isar.nfts
+          .where()
+          .filter()
+          .chainIdEqualTo(chainId)
+          .ownerEqualTo(owner)
+          .findAll();
+    });
+    return tokens;
+  }
+
+  Future<void> addAllNFT(List<Nft> nft) async {
+    await isar.writeTxn(() async {
+      await isar.nfts.putAll(nft);
+    });
+  }
+
+  Future<void> addNFT(Nft nft) async {
+    await isar.writeTxn(() async {
+      await isar.nfts.put(nft);
+    });
+  }
+
+  Future<void> deleteNFT(int id) async {
+    await isar.writeTxn(() async {
+      await isar.nfts.delete(id);
+    });
+  }
+
+  Future<void> deleteAllNft() async {
+    await isar.writeTxn(() async {
+      await isar.nfts.clear();
     });
   }
 }

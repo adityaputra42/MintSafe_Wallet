@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'chain_network.dart';
+part of 'nft.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator
@@ -9,76 +9,66 @@ part of 'chain_network.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetChainNetworkCollection on Isar {
-  IsarCollection<ChainNetwork> get chainNetworks => this.collection();
+extension GetNftCollection on Isar {
+  IsarCollection<Nft> get nfts => this.collection();
 }
 
-const ChainNetworkSchema = CollectionSchema(
-  name: r'ChainNetwork',
-  id: -5240540234564865694,
+const NftSchema = CollectionSchema(
+  name: r'Nft',
+  id: 1022743197614150260,
   properties: {
     r'chainId': PropertySchema(
       id: 0,
       name: r'chainId',
       type: IsarType.string,
     ),
-    r'color': PropertySchema(
+    r'contractAddress': PropertySchema(
       id: 1,
-      name: r'color',
+      name: r'contractAddress',
       type: IsarType.string,
     ),
-    r'explorer': PropertySchema(
+    r'description': PropertySchema(
       id: 2,
-      name: r'explorer',
+      name: r'description',
       type: IsarType.string,
     ),
-    r'explorerApi': PropertySchema(
+    r'imageByte': PropertySchema(
       id: 3,
-      name: r'explorerApi',
-      type: IsarType.string,
-    ),
-    r'isTestnet': PropertySchema(
-      id: 4,
-      name: r'isTestnet',
-      type: IsarType.bool,
-    ),
-    r'logo': PropertySchema(
-      id: 5,
-      name: r'logo',
+      name: r'imageByte',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 6,
+      id: 4,
       name: r'name',
       type: IsarType.string,
     ),
-    r'rpc': PropertySchema(
-      id: 7,
-      name: r'rpc',
+    r'owner': PropertySchema(
+      id: 5,
+      name: r'owner',
       type: IsarType.string,
     ),
-    r'symbol': PropertySchema(
-      id: 8,
-      name: r'symbol',
-      type: IsarType.string,
+    r'tokenId': PropertySchema(
+      id: 6,
+      name: r'tokenId',
+      type: IsarType.long,
     )
   },
-  estimateSize: _chainNetworkEstimateSize,
-  serialize: _chainNetworkSerialize,
-  deserialize: _chainNetworkDeserialize,
-  deserializeProp: _chainNetworkDeserializeProp,
+  estimateSize: _nftEstimateSize,
+  serialize: _nftSerialize,
+  deserialize: _nftDeserialize,
+  deserializeProp: _nftDeserializeProp,
   idName: r'id',
   indexes: {},
   links: {},
   embeddedSchemas: {},
-  getId: _chainNetworkGetId,
-  getLinks: _chainNetworkGetLinks,
-  attach: _chainNetworkAttach,
+  getId: _nftGetId,
+  getLinks: _nftGetLinks,
+  attach: _nftAttach,
   version: '3.1.0+1',
 );
 
-int _chainNetworkEstimateSize(
-  ChainNetwork object,
+int _nftEstimateSize(
+  Nft object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -90,25 +80,19 @@ int _chainNetworkEstimateSize(
     }
   }
   {
-    final value = object.color;
+    final value = object.contractAddress;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   {
-    final value = object.explorer;
+    final value = object.description;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   {
-    final value = object.explorerApi;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.logo;
+    final value = object.imageByte;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -120,13 +104,7 @@ int _chainNetworkEstimateSize(
     }
   }
   {
-    final value = object.rpc;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.symbol;
+    final value = object.owner;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -134,45 +112,41 @@ int _chainNetworkEstimateSize(
   return bytesCount;
 }
 
-void _chainNetworkSerialize(
-  ChainNetwork object,
+void _nftSerialize(
+  Nft object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.chainId);
-  writer.writeString(offsets[1], object.color);
-  writer.writeString(offsets[2], object.explorer);
-  writer.writeString(offsets[3], object.explorerApi);
-  writer.writeBool(offsets[4], object.isTestnet);
-  writer.writeString(offsets[5], object.logo);
-  writer.writeString(offsets[6], object.name);
-  writer.writeString(offsets[7], object.rpc);
-  writer.writeString(offsets[8], object.symbol);
+  writer.writeString(offsets[1], object.contractAddress);
+  writer.writeString(offsets[2], object.description);
+  writer.writeString(offsets[3], object.imageByte);
+  writer.writeString(offsets[4], object.name);
+  writer.writeString(offsets[5], object.owner);
+  writer.writeLong(offsets[6], object.tokenId);
 }
 
-ChainNetwork _chainNetworkDeserialize(
+Nft _nftDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = ChainNetwork(
+  final object = Nft(
     chainId: reader.readStringOrNull(offsets[0]),
-    color: reader.readStringOrNull(offsets[1]),
-    explorer: reader.readStringOrNull(offsets[2]),
-    explorerApi: reader.readStringOrNull(offsets[3]),
+    contractAddress: reader.readStringOrNull(offsets[1]),
+    description: reader.readStringOrNull(offsets[2]),
     id: id,
-    isTestnet: reader.readBoolOrNull(offsets[4]),
-    logo: reader.readStringOrNull(offsets[5]),
-    name: reader.readStringOrNull(offsets[6]),
-    rpc: reader.readStringOrNull(offsets[7]),
-    symbol: reader.readStringOrNull(offsets[8]),
+    imageByte: reader.readStringOrNull(offsets[3]),
+    name: reader.readStringOrNull(offsets[4]),
+    owner: reader.readStringOrNull(offsets[5]),
+    tokenId: reader.readLongOrNull(offsets[6]),
   );
   return object;
 }
 
-P _chainNetworkDeserializeProp<P>(
+P _nftDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -188,45 +162,38 @@ P _chainNetworkDeserializeProp<P>(
     case 3:
       return (reader.readStringOrNull(offset)) as P;
     case 4:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
-      return (reader.readStringOrNull(offset)) as P;
-    case 7:
-      return (reader.readStringOrNull(offset)) as P;
-    case 8:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
-Id _chainNetworkGetId(ChainNetwork object) {
+Id _nftGetId(Nft object) {
   return object.id ?? Isar.autoIncrement;
 }
 
-List<IsarLinkBase<dynamic>> _chainNetworkGetLinks(ChainNetwork object) {
+List<IsarLinkBase<dynamic>> _nftGetLinks(Nft object) {
   return [];
 }
 
-void _chainNetworkAttach(
-    IsarCollection<dynamic> col, Id id, ChainNetwork object) {
+void _nftAttach(IsarCollection<dynamic> col, Id id, Nft object) {
   object.id = id;
 }
 
-extension ChainNetworkQueryWhereSort
-    on QueryBuilder<ChainNetwork, ChainNetwork, QWhere> {
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterWhere> anyId() {
+extension NftQueryWhereSort on QueryBuilder<Nft, Nft, QWhere> {
+  QueryBuilder<Nft, Nft, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 }
 
-extension ChainNetworkQueryWhere
-    on QueryBuilder<ChainNetwork, ChainNetwork, QWhereClause> {
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterWhereClause> idEqualTo(Id id) {
+extension NftQueryWhere on QueryBuilder<Nft, Nft, QWhereClause> {
+  QueryBuilder<Nft, Nft, QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -235,8 +202,7 @@ extension ChainNetworkQueryWhere
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterWhereClause> idNotEqualTo(
-      Id id) {
+  QueryBuilder<Nft, Nft, QAfterWhereClause> idNotEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -258,8 +224,7 @@ extension ChainNetworkQueryWhere
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterWhereClause> idGreaterThan(
-      Id id,
+  QueryBuilder<Nft, Nft, QAfterWhereClause> idGreaterThan(Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -268,7 +233,7 @@ extension ChainNetworkQueryWhere
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterWhereClause> idLessThan(Id id,
+  QueryBuilder<Nft, Nft, QAfterWhereClause> idLessThan(Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -277,7 +242,7 @@ extension ChainNetworkQueryWhere
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterWhereClause> idBetween(
+  QueryBuilder<Nft, Nft, QAfterWhereClause> idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
@@ -294,10 +259,8 @@ extension ChainNetworkQueryWhere
   }
 }
 
-extension ChainNetworkQueryFilter
-    on QueryBuilder<ChainNetwork, ChainNetwork, QFilterCondition> {
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      chainIdIsNull() {
+extension NftQueryFilter on QueryBuilder<Nft, Nft, QFilterCondition> {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> chainIdIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'chainId',
@@ -305,8 +268,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      chainIdIsNotNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> chainIdIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'chainId',
@@ -314,8 +276,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      chainIdEqualTo(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> chainIdEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -328,8 +289,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      chainIdGreaterThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> chainIdGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -344,8 +304,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      chainIdLessThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> chainIdLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -360,8 +319,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      chainIdBetween(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> chainIdBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -380,8 +338,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      chainIdStartsWith(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> chainIdStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -394,8 +351,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      chainIdEndsWith(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> chainIdEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -408,8 +364,8 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      chainIdContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> chainIdContains(String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'chainId',
@@ -419,8 +375,8 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      chainIdMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> chainIdMatches(String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
         property: r'chainId',
@@ -430,8 +386,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      chainIdIsEmpty() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> chainIdIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'chainId',
@@ -440,8 +395,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      chainIdIsNotEmpty() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> chainIdIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'chainId',
@@ -450,39 +404,36 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      colorIsNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> contractAddressIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'color',
+        property: r'contractAddress',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      colorIsNotNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> contractAddressIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'color',
+        property: r'contractAddress',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> colorEqualTo(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> contractAddressEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'color',
+        property: r'contractAddress',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      colorGreaterThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> contractAddressGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -490,14 +441,14 @@ extension ChainNetworkQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'color',
+        property: r'contractAddress',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> colorLessThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> contractAddressLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -505,14 +456,14 @@ extension ChainNetworkQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'color',
+        property: r'contractAddress',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> colorBetween(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> contractAddressBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -521,7 +472,7 @@ extension ChainNetworkQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'color',
+        property: r'contractAddress',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -531,111 +482,104 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      colorStartsWith(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> contractAddressStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'color',
+        property: r'contractAddress',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> colorEndsWith(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> contractAddressEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'color',
+        property: r'contractAddress',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> colorContains(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> contractAddressContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'color',
+        property: r'contractAddress',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> colorMatches(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> contractAddressMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'color',
+        property: r'contractAddress',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      colorIsEmpty() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> contractAddressIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'color',
+        property: r'contractAddress',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      colorIsNotEmpty() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> contractAddressIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'color',
+        property: r'contractAddress',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerIsNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> descriptionIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'explorer',
+        property: r'description',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerIsNotNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> descriptionIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'explorer',
+        property: r'description',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerEqualTo(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> descriptionEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'explorer',
+        property: r'description',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerGreaterThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> descriptionGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -643,15 +587,14 @@ extension ChainNetworkQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'explorer',
+        property: r'description',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerLessThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> descriptionLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -659,15 +602,14 @@ extension ChainNetworkQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'explorer',
+        property: r'description',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerBetween(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> descriptionBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -676,7 +618,7 @@ extension ChainNetworkQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'explorer',
+        property: r'description',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -686,231 +628,75 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerStartsWith(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> descriptionStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'explorer',
+        property: r'description',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerEndsWith(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> descriptionEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'explorer',
+        property: r'description',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> descriptionContains(
+      String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'explorer',
+        property: r'description',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> descriptionMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'explorer',
+        property: r'description',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerIsEmpty() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> descriptionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'explorer',
+        property: r'description',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerIsNotEmpty() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> descriptionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'explorer',
+        property: r'description',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerApiIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'explorerApi',
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerApiIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'explorerApi',
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerApiEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'explorerApi',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerApiGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'explorerApi',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerApiLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'explorerApi',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerApiBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'explorerApi',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerApiStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'explorerApi',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerApiEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'explorerApi',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerApiContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'explorerApi',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerApiMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'explorerApi',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerApiIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'explorerApi',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      explorerApiIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'explorerApi',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> idIsNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> idIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'id',
@@ -918,8 +704,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      idIsNotNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> idIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'id',
@@ -927,8 +712,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> idEqualTo(
-      Id? value) {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> idEqualTo(Id? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -937,7 +721,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> idGreaterThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> idGreaterThan(
     Id? value, {
     bool include = false,
   }) {
@@ -950,7 +734,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> idLessThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> idLessThan(
     Id? value, {
     bool include = false,
   }) {
@@ -963,7 +747,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> idBetween(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> idBetween(
     Id? lower,
     Id? upper, {
     bool includeLower = true,
@@ -980,66 +764,36 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      isTestnetIsNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> imageByteIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'isTestnet',
+        property: r'imageByte',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      isTestnetIsNotNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> imageByteIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'isTestnet',
+        property: r'imageByte',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      isTestnetEqualTo(bool? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'isTestnet',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> logoIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'logo',
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      logoIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'logo',
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> logoEqualTo(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> imageByteEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'logo',
+        property: r'imageByte',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      logoGreaterThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> imageByteGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1047,14 +801,14 @@ extension ChainNetworkQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'logo',
+        property: r'imageByte',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> logoLessThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> imageByteLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1062,14 +816,14 @@ extension ChainNetworkQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'logo',
+        property: r'imageByte',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> logoBetween(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> imageByteBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -1078,7 +832,7 @@ extension ChainNetworkQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'logo',
+        property: r'imageByte',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1088,78 +842,73 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      logoStartsWith(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> imageByteStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'logo',
+        property: r'imageByte',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> logoEndsWith(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> imageByteEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'logo',
+        property: r'imageByte',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> logoContains(
-      String value,
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> imageByteContains(String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'logo',
+        property: r'imageByte',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> logoMatches(
-      String pattern,
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> imageByteMatches(String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'logo',
+        property: r'imageByte',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      logoIsEmpty() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> imageByteIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'logo',
+        property: r'imageByte',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      logoIsNotEmpty() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> imageByteIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'logo',
+        property: r'imageByte',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> nameIsNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> nameIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'name',
@@ -1167,8 +916,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      nameIsNotNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> nameIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'name',
@@ -1176,7 +924,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> nameEqualTo(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> nameEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -1189,8 +937,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      nameGreaterThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> nameGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1205,7 +952,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> nameLessThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> nameLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1220,7 +967,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> nameBetween(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> nameBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -1239,8 +986,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      nameStartsWith(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> nameStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1253,7 +999,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> nameEndsWith(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> nameEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1266,8 +1012,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> nameContains(
-      String value,
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> nameContains(String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -1278,8 +1023,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> nameMatches(
-      String pattern,
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> nameMatches(String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -1290,8 +1034,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      nameIsEmpty() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> nameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'name',
@@ -1300,8 +1043,7 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      nameIsNotEmpty() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> nameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'name',
@@ -1310,38 +1052,36 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> rpcIsNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> ownerIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'rpc',
+        property: r'owner',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      rpcIsNotNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> ownerIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'rpc',
+        property: r'owner',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> rpcEqualTo(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> ownerEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'rpc',
+        property: r'owner',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      rpcGreaterThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> ownerGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1349,14 +1089,14 @@ extension ChainNetworkQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'rpc',
+        property: r'owner',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> rpcLessThan(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> ownerLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1364,14 +1104,14 @@ extension ChainNetworkQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'rpc',
+        property: r'owner',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> rpcBetween(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> ownerBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -1380,7 +1120,7 @@ extension ChainNetworkQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'rpc',
+        property: r'owner',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1390,595 +1130,426 @@ extension ChainNetworkQueryFilter
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> rpcStartsWith(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> ownerStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'rpc',
+        property: r'owner',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> rpcEndsWith(
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> ownerEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'rpc',
+        property: r'owner',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> rpcContains(
-      String value,
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> ownerContains(String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'rpc',
+        property: r'owner',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> rpcMatches(
-      String pattern,
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> ownerMatches(String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'rpc',
+        property: r'owner',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> rpcIsEmpty() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> ownerIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'rpc',
+        property: r'owner',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      rpcIsNotEmpty() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> ownerIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'rpc',
+        property: r'owner',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      symbolIsNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> tokenIdIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'symbol',
+        property: r'tokenId',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      symbolIsNotNull() {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> tokenIdIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'symbol',
+        property: r'tokenId',
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> symbolEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> tokenIdEqualTo(int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'symbol',
+        property: r'tokenId',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      symbolGreaterThan(
-    String? value, {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> tokenIdGreaterThan(
+    int? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'symbol',
+        property: r'tokenId',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      symbolLessThan(
-    String? value, {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> tokenIdLessThan(
+    int? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'symbol',
+        property: r'tokenId',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> symbolBetween(
-    String? lower,
-    String? upper, {
+  QueryBuilder<Nft, Nft, QAfterFilterCondition> tokenIdBetween(
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'symbol',
+        property: r'tokenId',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      symbolStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'symbol',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      symbolEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'symbol',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      symbolContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'symbol',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> symbolMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'symbol',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      symbolIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'symbol',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
-      symbolIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'symbol',
-        value: '',
       ));
     });
   }
 }
 
-extension ChainNetworkQueryObject
-    on QueryBuilder<ChainNetwork, ChainNetwork, QFilterCondition> {}
+extension NftQueryObject on QueryBuilder<Nft, Nft, QFilterCondition> {}
 
-extension ChainNetworkQueryLinks
-    on QueryBuilder<ChainNetwork, ChainNetwork, QFilterCondition> {}
+extension NftQueryLinks on QueryBuilder<Nft, Nft, QFilterCondition> {}
 
-extension ChainNetworkQuerySortBy
-    on QueryBuilder<ChainNetwork, ChainNetwork, QSortBy> {
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByChainId() {
+extension NftQuerySortBy on QueryBuilder<Nft, Nft, QSortBy> {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByChainId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'chainId', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByChainIdDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByChainIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'chainId', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByColor() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByContractAddress() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'color', Sort.asc);
+      return query.addSortBy(r'contractAddress', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByColorDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByContractAddressDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'color', Sort.desc);
+      return query.addSortBy(r'contractAddress', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByExplorer() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByDescription() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'explorer', Sort.asc);
+      return query.addSortBy(r'description', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByExplorerDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByDescriptionDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'explorer', Sort.desc);
+      return query.addSortBy(r'description', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByExplorerApi() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByImageByte() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'explorerApi', Sort.asc);
+      return query.addSortBy(r'imageByte', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy>
-      sortByExplorerApiDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByImageByteDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'explorerApi', Sort.desc);
+      return query.addSortBy(r'imageByte', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByIsTestnet() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isTestnet', Sort.asc);
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByIsTestnetDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isTestnet', Sort.desc);
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByLogo() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'logo', Sort.asc);
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByLogoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'logo', Sort.desc);
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByName() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByNameDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByRpc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByOwner() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'rpc', Sort.asc);
+      return query.addSortBy(r'owner', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByRpcDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByOwnerDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'rpc', Sort.desc);
+      return query.addSortBy(r'owner', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortBySymbol() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByTokenId() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'symbol', Sort.asc);
+      return query.addSortBy(r'tokenId', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortBySymbolDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> sortByTokenIdDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'symbol', Sort.desc);
+      return query.addSortBy(r'tokenId', Sort.desc);
     });
   }
 }
 
-extension ChainNetworkQuerySortThenBy
-    on QueryBuilder<ChainNetwork, ChainNetwork, QSortThenBy> {
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByChainId() {
+extension NftQuerySortThenBy on QueryBuilder<Nft, Nft, QSortThenBy> {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByChainId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'chainId', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByChainIdDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByChainIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'chainId', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByColor() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByContractAddress() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'color', Sort.asc);
+      return query.addSortBy(r'contractAddress', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByColorDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByContractAddressDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'color', Sort.desc);
+      return query.addSortBy(r'contractAddress', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByExplorer() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByDescription() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'explorer', Sort.asc);
+      return query.addSortBy(r'description', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByExplorerDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByDescriptionDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'explorer', Sort.desc);
+      return query.addSortBy(r'description', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByExplorerApi() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'explorerApi', Sort.asc);
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy>
-      thenByExplorerApiDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'explorerApi', Sort.desc);
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenById() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByIsTestnet() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByImageByte() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isTestnet', Sort.asc);
+      return query.addSortBy(r'imageByte', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByIsTestnetDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByImageByteDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isTestnet', Sort.desc);
+      return query.addSortBy(r'imageByte', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByLogo() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'logo', Sort.asc);
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByLogoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'logo', Sort.desc);
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByName() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByNameDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByRpc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByOwner() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'rpc', Sort.asc);
+      return query.addSortBy(r'owner', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByRpcDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByOwnerDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'rpc', Sort.desc);
+      return query.addSortBy(r'owner', Sort.desc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenBySymbol() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByTokenId() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'symbol', Sort.asc);
+      return query.addSortBy(r'tokenId', Sort.asc);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenBySymbolDesc() {
+  QueryBuilder<Nft, Nft, QAfterSortBy> thenByTokenIdDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'symbol', Sort.desc);
+      return query.addSortBy(r'tokenId', Sort.desc);
     });
   }
 }
 
-extension ChainNetworkQueryWhereDistinct
-    on QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> {
-  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByChainId(
+extension NftQueryWhereDistinct on QueryBuilder<Nft, Nft, QDistinct> {
+  QueryBuilder<Nft, Nft, QDistinct> distinctByChainId(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'chainId', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByColor(
+  QueryBuilder<Nft, Nft, QDistinct> distinctByContractAddress(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'color', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'contractAddress',
+          caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByExplorer(
+  QueryBuilder<Nft, Nft, QDistinct> distinctByDescription(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'explorer', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'description', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByExplorerApi(
+  QueryBuilder<Nft, Nft, QDistinct> distinctByImageByte(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'explorerApi', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'imageByte', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByIsTestnet() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'isTestnet');
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByLogo(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'logo', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByName(
+  QueryBuilder<Nft, Nft, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByRpc(
+  QueryBuilder<Nft, Nft, QDistinct> distinctByOwner(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'rpc', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'owner', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctBySymbol(
-      {bool caseSensitive = true}) {
+  QueryBuilder<Nft, Nft, QDistinct> distinctByTokenId() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'symbol', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'tokenId');
     });
   }
 }
 
-extension ChainNetworkQueryProperty
-    on QueryBuilder<ChainNetwork, ChainNetwork, QQueryProperty> {
-  QueryBuilder<ChainNetwork, int, QQueryOperations> idProperty() {
+extension NftQueryProperty on QueryBuilder<Nft, Nft, QQueryProperty> {
+  QueryBuilder<Nft, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<ChainNetwork, String?, QQueryOperations> chainIdProperty() {
+  QueryBuilder<Nft, String?, QQueryOperations> chainIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'chainId');
     });
   }
 
-  QueryBuilder<ChainNetwork, String?, QQueryOperations> colorProperty() {
+  QueryBuilder<Nft, String?, QQueryOperations> contractAddressProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'color');
+      return query.addPropertyName(r'contractAddress');
     });
   }
 
-  QueryBuilder<ChainNetwork, String?, QQueryOperations> explorerProperty() {
+  QueryBuilder<Nft, String?, QQueryOperations> descriptionProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'explorer');
+      return query.addPropertyName(r'description');
     });
   }
 
-  QueryBuilder<ChainNetwork, String?, QQueryOperations> explorerApiProperty() {
+  QueryBuilder<Nft, String?, QQueryOperations> imageByteProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'explorerApi');
+      return query.addPropertyName(r'imageByte');
     });
   }
 
-  QueryBuilder<ChainNetwork, bool?, QQueryOperations> isTestnetProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'isTestnet');
-    });
-  }
-
-  QueryBuilder<ChainNetwork, String?, QQueryOperations> logoProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'logo');
-    });
-  }
-
-  QueryBuilder<ChainNetwork, String?, QQueryOperations> nameProperty() {
+  QueryBuilder<Nft, String?, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
     });
   }
 
-  QueryBuilder<ChainNetwork, String?, QQueryOperations> rpcProperty() {
+  QueryBuilder<Nft, String?, QQueryOperations> ownerProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'rpc');
+      return query.addPropertyName(r'owner');
     });
   }
 
-  QueryBuilder<ChainNetwork, String?, QQueryOperations> symbolProperty() {
+  QueryBuilder<Nft, int?, QQueryOperations> tokenIdProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'symbol');
+      return query.addPropertyName(r'tokenId');
     });
   }
 }

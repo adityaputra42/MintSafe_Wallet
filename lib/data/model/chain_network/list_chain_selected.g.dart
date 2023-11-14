@@ -32,33 +32,38 @@ const ListChainSelectedSchema = CollectionSchema(
       name: r'explorer',
       type: IsarType.string,
     ),
-    r'isTestnet': PropertySchema(
+    r'explorerApi': PropertySchema(
       id: 3,
+      name: r'explorerApi',
+      type: IsarType.string,
+    ),
+    r'isTestnet': PropertySchema(
+      id: 4,
       name: r'isTestnet',
       type: IsarType.bool,
     ),
     r'logo': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'logo',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'name',
       type: IsarType.string,
     ),
     r'rpc': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'rpc',
       type: IsarType.string,
     ),
     r'symbol': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'symbol',
       type: IsarType.string,
     ),
     r'walletAddress': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'walletAddress',
       type: IsarType.string,
     )
@@ -97,6 +102,12 @@ int _listChainSelectedEstimateSize(
   }
   {
     final value = object.explorer;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.explorerApi;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -143,12 +154,13 @@ void _listChainSelectedSerialize(
   writer.writeString(offsets[0], object.chainId);
   writer.writeString(offsets[1], object.color);
   writer.writeString(offsets[2], object.explorer);
-  writer.writeBool(offsets[3], object.isTestnet);
-  writer.writeString(offsets[4], object.logo);
-  writer.writeString(offsets[5], object.name);
-  writer.writeString(offsets[6], object.rpc);
-  writer.writeString(offsets[7], object.symbol);
-  writer.writeString(offsets[8], object.walletAddress);
+  writer.writeString(offsets[3], object.explorerApi);
+  writer.writeBool(offsets[4], object.isTestnet);
+  writer.writeString(offsets[5], object.logo);
+  writer.writeString(offsets[6], object.name);
+  writer.writeString(offsets[7], object.rpc);
+  writer.writeString(offsets[8], object.symbol);
+  writer.writeString(offsets[9], object.walletAddress);
 }
 
 ListChainSelected _listChainSelectedDeserialize(
@@ -161,13 +173,14 @@ ListChainSelected _listChainSelectedDeserialize(
     chainId: reader.readStringOrNull(offsets[0]),
     color: reader.readStringOrNull(offsets[1]),
     explorer: reader.readStringOrNull(offsets[2]),
+    explorerApi: reader.readStringOrNull(offsets[3]),
     id: id,
-    isTestnet: reader.readBoolOrNull(offsets[3]),
-    logo: reader.readStringOrNull(offsets[4]),
-    name: reader.readStringOrNull(offsets[5]),
-    rpc: reader.readStringOrNull(offsets[6]),
-    symbol: reader.readStringOrNull(offsets[7]),
-    walletAddress: reader.readStringOrNull(offsets[8]),
+    isTestnet: reader.readBoolOrNull(offsets[4]),
+    logo: reader.readStringOrNull(offsets[5]),
+    name: reader.readStringOrNull(offsets[6]),
+    rpc: reader.readStringOrNull(offsets[7]),
+    symbol: reader.readStringOrNull(offsets[8]),
+    walletAddress: reader.readStringOrNull(offsets[9]),
   );
   return object;
 }
@@ -186,9 +199,9 @@ P _listChainSelectedDeserializeProp<P>(
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readBoolOrNull(offset)) as P;
-    case 4:
       return (reader.readStringOrNull(offset)) as P;
+    case 4:
+      return (reader.readBoolOrNull(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
@@ -196,6 +209,8 @@ P _listChainSelectedDeserializeProp<P>(
     case 7:
       return (reader.readStringOrNull(offset)) as P;
     case 8:
+      return (reader.readStringOrNull(offset)) as P;
+    case 9:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -755,6 +770,160 @@ extension ListChainSelectedQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'explorer',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterFilterCondition>
+      explorerApiIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'explorerApi',
+      ));
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterFilterCondition>
+      explorerApiIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'explorerApi',
+      ));
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterFilterCondition>
+      explorerApiEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'explorerApi',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterFilterCondition>
+      explorerApiGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'explorerApi',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterFilterCondition>
+      explorerApiLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'explorerApi',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterFilterCondition>
+      explorerApiBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'explorerApi',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterFilterCondition>
+      explorerApiStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'explorerApi',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterFilterCondition>
+      explorerApiEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'explorerApi',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterFilterCondition>
+      explorerApiContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'explorerApi',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterFilterCondition>
+      explorerApiMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'explorerApi',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterFilterCondition>
+      explorerApiIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'explorerApi',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterFilterCondition>
+      explorerApiIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'explorerApi',
         value: '',
       ));
     });
@@ -1684,6 +1853,20 @@ extension ListChainSelectedQuerySortBy
   }
 
   QueryBuilder<ListChainSelected, ListChainSelected, QAfterSortBy>
+      sortByExplorerApi() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'explorerApi', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterSortBy>
+      sortByExplorerApiDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'explorerApi', Sort.desc);
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterSortBy>
       sortByIsTestnet() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isTestnet', Sort.asc);
@@ -1811,6 +1994,20 @@ extension ListChainSelectedQuerySortThenBy
     });
   }
 
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterSortBy>
+      thenByExplorerApi() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'explorerApi', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QAfterSortBy>
+      thenByExplorerApiDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'explorerApi', Sort.desc);
+    });
+  }
+
   QueryBuilder<ListChainSelected, ListChainSelected, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -1932,6 +2129,13 @@ extension ListChainSelectedQueryWhereDistinct
   }
 
   QueryBuilder<ListChainSelected, ListChainSelected, QDistinct>
+      distinctByExplorerApi({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'explorerApi', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<ListChainSelected, ListChainSelected, QDistinct>
       distinctByIsTestnet() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isTestnet');
@@ -1999,6 +2203,13 @@ extension ListChainSelectedQueryProperty
       explorerProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'explorer');
+    });
+  }
+
+  QueryBuilder<ListChainSelected, String?, QQueryOperations>
+      explorerApiProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'explorerApi');
     });
   }
 
