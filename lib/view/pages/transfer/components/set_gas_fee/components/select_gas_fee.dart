@@ -40,7 +40,7 @@ class SelectGasFee extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        '${fee.toStringAsPrecision(5)} ${controller.evm.selectedChain.value.symbol}',
+                        '~ ${fee.toStringAsFixed(8)} ${controller.evm.selectedChain.value.symbol}',
                         style:
                             AppFont.medium14.copyWith(color: AppColor.textDark),
                       ),

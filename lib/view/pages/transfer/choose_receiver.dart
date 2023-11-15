@@ -3,18 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/domain/controller/transfer_controller.dart';
 import 'package:mintsafe_wallet/view/pages/transfer/set_amount.dart';
-
 import '../../../config/config.dart';
 import '../../../data/data.dart';
 import '../../../utils/utils.dart';
 import '../../widget/widget.dart';
 import '../change_wallet/change_wallet.dart';
-import 'components/set_gas_fee/set_gas_fee.dart';
 
 enum AssetType { coin, token }
 
@@ -78,26 +75,35 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    address.name ?? "",
+                    "${address.name} ${address.id}",
                     style: AppFont.medium14.copyWith(
                       color: Theme.of(context).indicatorColor,
                     ),
                   ),
                   4.0.height,
                   Text(
-                    widget.assetType == AssetType.token
-                        ? "${controller.evm.tokenSelected.singleWhere(
-                              (element) =>
-                                  element.walletAddress == address.address &&
-                                  element.contractAddress ==
-                                      widget.token?.contractAddress,
-                              orElse: () => SelectedToken(),
-                            ).balance ?? 0} \$${controller.selectedToken.value.symbol}"
-                        : "${address.balance} \$${evm.selectedChain.value.symbol}",
-                    style: AppFont.medium12.copyWith(color: AppColor.grayColor),
-                  )
+                    MethodHelper().shortAddress(
+                        address: address.address ?? "", length: 8),
+                    style:  AppFont.medium12.copyWith(color: AppColor.grayColor),
+                   
+                  ),
                 ],
               )),
+              8.0.width,
+              Text(
+                widget.assetType == AssetType.token
+                    ? "${controller.evm.tokenSelected.singleWhere(
+                          (element) =>
+                              element.walletAddress == address.address &&
+                              element.contractAddress ==
+                                  widget.token?.contractAddress,
+                          orElse: () => SelectedToken(),
+                        ).balance ?? 0} \$${controller.selectedToken.value.symbol}"
+                    : "${address.balance} \$${evm.selectedChain.value.symbol}",
+                style:  AppFont.medium16.copyWith(
+                      color: Theme.of(context).indicatorColor,
+                    ),
+              )
             ],
           ),
         ),
@@ -332,7 +338,7 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
                   assetType: widget.assetType,
                 ));
           },
-          margin: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
+          margin: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 32.h),
         ),
       );
     });

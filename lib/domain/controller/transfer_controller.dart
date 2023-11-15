@@ -214,7 +214,7 @@ dev.log("Get total amount===>");
     gasPriceController.text = evm.gasPrice.value.ceilToDouble().toString();
   }
 
-  Future<void> getGasPriceAndLimit() async {}
+  // Future<void> getGasPriceAndLimit() async {}
 
   void useMaxAmount() async {
     setUseMax();

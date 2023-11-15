@@ -20,7 +20,9 @@ class TokenList extends StatelessWidget {
     Widget cardToken(SelectedToken token) {
       return GestureDetector(
         onTap: () {
-          Get.to(() => DetailToken(token: token,));
+          Get.to(() => DetailToken(
+                token: token,
+              ));
         },
         child: Container(
           width: double.infinity,
@@ -60,15 +62,13 @@ class TokenList extends StatelessWidget {
                               .copyWith(color: AppColor.textDark),
                         ),
                         Text(
-                          NumberFormat.currency(
-                                  symbol: '', decimalDigits: 5, locale: "en_US")
-                              .format(token.balance??0),
+                          (token.balance ?? 0).toStringAsPrecision(5),
                           style: AppFont.medium16.copyWith(
                               fontFamily: "Roboto", color: AppColor.textDark),
                         )
                       ],
                     ),
-                    // 
+                    //
                   ],
                 ),
               )
@@ -82,14 +82,11 @@ class TokenList extends StatelessWidget {
       child: Column(
         children: [
           Obx(() {
-            return  Expanded(
-                child:  controller.tokenSelected.isEmpty
-                
-                
-                    ?   const Center(
+            return Expanded(
+                child: controller.tokenSelected.isEmpty
+                    ? const Center(
                         child: Empty(title: "No Token List"),
                       )
-                  
                     : ListView.builder(
                         padding: EdgeInsets.symmetric(horizontal: 0.5.h),
                         itemBuilder: (context, index) => Padding(

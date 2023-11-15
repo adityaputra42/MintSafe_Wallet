@@ -68,7 +68,7 @@
       {
           "name" : "Base",
           "symbol" : "ETH",
-          "RPC" : "https://mainnet.base.org/",
+          "RPC" : "https://mainnet.base.org",
           "chainId" : "8453",
           "explorer" : "https://basescan.org",
           "explorerAPI" : "https://api.basescan.org",
@@ -99,25 +99,25 @@
           "isTestnet": false
       },
       {
-          "name" : "Goerli",
-          "symbol" : "ETH",
+          "name" : "Goerli Testnet",
+          "symbol" : "gETH",
           "RPC" : "https://ethereum-goerli.publicnode.com",
           "chainId" : "5",
-          "explorer" : "https://goerli.etherscan.io/",
-          "explorerAPI" : "https://goerli.etherscan.io/",
+          "explorer" : "https://goerli.etherscan.io",
+          "explorerAPI" : "https://api-goerli.etherscan.io",
           "logo":"asset/logo/eth.png", 
           "color":"0xff171717",
           "isTestnet": true
       },
       {
-          "name" : "Base Goerli Testnet",
+          "name" : "Base Goerli",
           "symbol" : "ETH",
           "RPC" : "https://base-goerli.publicnode.com",
           "chainId" : "84531",
-          "explorer" : "https://goerli.basescan.org/",
-          "explorerAPI" : "https://goerli.basescan.org/",
+          "explorer" : "https://goerli.basescan.org",
+          "explorerAPI" : "https://goerli.basescan.org",
           "logo":"asset/logo/eth.png", 
           "color":"0xff171717",
-          "isTestnet": true
+          "isTestnet": false
       }
 ]
