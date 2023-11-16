@@ -12,10 +12,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
-import 'package:mintsafe_wallet/view/pages/onboarding/onboarding_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -340,6 +338,7 @@ class EvmNewController extends GetxController {
     Get.back();
 
     if (await ConnectivityWrapper.instance.isConnected) {
+      await initialzedNetwork();
       await findAllActivity(isRefresh: true);
       await initializeNFt();
       await getBalance();

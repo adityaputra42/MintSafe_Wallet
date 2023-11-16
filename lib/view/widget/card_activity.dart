@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,19 +8,28 @@ import 'package:mintsafe_wallet/utils/utils.dart';
 
 import '../../config/config.dart';
 import '../../data/data.dart';
+import '../../domain/controller/evm_new_controller.dart';
 import 'alert_detail_activity.dart';
 
 class CardActivity extends StatelessWidget {
-  const CardActivity({
-    this.title,
+  CardActivity({
+    required this.activity,
     super.key,
   });
-  final String? title;
+
+  final EvmNewController evm = Get.find();
+  final Activity activity;
   @override
   Widget build(BuildContext context) {
+    String state = activity.from == evm.selectedAddress.value.address
+        ? "Transfer"
+        : "Receiced";
     return GestureDetector(
       onTap: () {
-        Get.dialog(const AlertDetailActivity());
+        Get.dialog(AlertDetailActivity(
+          activity: activity,
+          state: state,
+        ));
       },
       child: Container(
         padding: EdgeInsets.all(10.w),
@@ -28,7 +39,9 @@ class CardActivity extends StatelessWidget {
         child: Row(
           children: [
             Image.asset(
-              AppIcon.receiveActivity,
+              state == "Transfer"
+                  ? AppIcon.sendActivity
+                  : AppIcon.receiveActivity,
               color: AppColor.textDark,
               width: 36.w,
             ),
@@ -42,20 +55,20 @@ class CardActivity extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          title ?? "Smart Contract Call",
+                          state,
                           style: AppFont.medium16
                               .copyWith(color: AppColor.textDark),
                         ),
                         4.0.width,
                         Text(
-                          "(ETH)",
+                          "(${activity.symbol == "" ? evm.selectedChain.value.symbol : activity.symbol})",
                           style: AppFont.medium14
                               .copyWith(color: AppColor.grayColor),
                         ),
                       ],
                     ),
                     Text(
-                      "0.00 ETH",
+                      "${(BigInt.parse(activity.value!).toDouble() / pow(10, 18)).toStringAsFixed(2)} ${activity.symbol == "" ? evm.selectedChain.value.symbol : activity.symbol}",
                       style:
                           AppFont.medium16.copyWith(color: AppColor.textDark),
                     )
@@ -70,7 +83,10 @@ class CardActivity extends StatelessWidget {
                           .copyWith(color: AppColor.primaryColor),
                     ),
                     Text(
-                      DateFormat("MMM dd, yyyy").format(DateTime.now()),
+                      DateFormat("MMM dd 'at' h:mm a").format(
+                          DateTime.fromMillisecondsSinceEpoch(
+                                  int.parse(activity.timeStamp!) * 1000)
+                              .toLocal()),
                       style:
                           AppFont.reguler14.copyWith(color: AppColor.grayColor),
                     )

@@ -6,8 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
-import 'package:mintsafe_wallet/utils/helper/db_helper.dart';
-
 import '../../data/data.dart';
 
 class Transfercontroller extends GetxController {

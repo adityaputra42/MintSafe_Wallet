@@ -5,6 +5,7 @@ import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../data/data.dart';
+import '../../data/model/browser/browser_tab.dart';
 import '../../data/model/nft/nft.dart';
 
 class DbHelper {
@@ -24,6 +25,7 @@ class DbHelper {
         ChainNetworkSchema,
         TransactionHistorySchema,
         RecentAddressSchema,
+        BrowserTabSchema,
         DappsHistorySchema,
         TokenSchema,
         SelectedTokenSchema,
@@ -340,4 +342,88 @@ class DbHelper {
       await isar.nfts.clear();
     });
   }
+
+  // Dapps History
+
+
+  Future<List<DappsHistory>> getDappsHistory() async {
+    List<DappsHistory> list = [];
+    await isar.txn(() async {
+      list = await isar.dappsHistorys.where().findAll();
+    });
+
+    return list;
+  }
+
+  Future<void> addHistoryDapps(DappsHistory history) async {
+    await isar.writeTxn(() async {
+      await isar.dappsHistorys.put(history);
+    });
+  }
+
+  Future<void> deleteDappsHistory(int id) async {
+    await isar.writeTxn(() async {
+      await isar.dappsHistorys.delete(id);
+    });
+  }
+
+
+  ///// BROWSER TAB
+  ///
+  Future<List<BrowserTab>> getAllBrowserTab() async {
+    var list = <BrowserTab>[];
+    await isar.txn(() async {
+      list = await isar.browserTabs.where().findAll();
+    });
+
+    return list;
+  }
+
+  Future<void> addBrowserTab(BrowserTab tab) async {
+    await isar.writeTxn(() async {
+      await isar.browserTabs.put(tab);
+    });
+  }
+
+  Future<void> deleteBrowserTab(int id) async {
+    await isar.writeTxn(() async {
+      await isar.browserTabs.delete(id);
+    });
+  }
+
+  onTabStateChanged(BrowserTab tab) async {
+    await isar.writeTxn(() async {
+      var tabs = await isar.browserTabs.get(tab.id!);
+      tabs!.isSelected = tab.isSelected;
+      tabs.name = tab.name;
+      tabs.url = tab.url;
+      tabs.image = tab.image;
+
+      await isar.browserTabs.put(tabs);
+    });
+  }
+
+  Future<void> changeBrowserTab(BrowserTab tab) async {
+    await isar.writeTxn(() async {
+      var tabs = await isar.browserTabs.where().findAll();
+      for (var element in tabs) {
+        element.isSelected = false;
+      }
+
+      await isar.browserTabs.putAll(tabs);
+      final selectedTab = await isar.browserTabs.get(tab.id!);
+      selectedTab!.isSelected = true;
+      selectedTab.name = tab.name ?? "";
+      selectedTab.url = tab.url ?? "";
+
+      isar.browserTabs.put(selectedTab);
+    });
+  }
+
+  Future<void> closeAllBrowserTab() async {
+    await isar.writeTxn(() async {
+      await isar.browserTabs.clear();
+    });
+  }
+
 }

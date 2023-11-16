@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:mintsafe_wallet/domain/controller/detail_token_controller.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
@@ -89,57 +88,79 @@ class DetailToken extends StatelessWidget {
       );
     }
 
-    return Scaffold(
-      backgroundColor: AppColor.bgDark,
-      appBar: WidgetHelper.appBar(
-          title: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textDark,
-              size: 24.h,
+    return Obx(() {
+      final listActivity = evm.listActivity
+          .where(
+            (e) =>
+                e.contractAddress!.toLowerCase() ==
+                token.contractAddress!.toLowerCase(),
+          )
+          .toList();
+      return Scaffold(
+        backgroundColor: AppColor.bgDark,
+        appBar: WidgetHelper.appBar(
+            title: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: AppColor.textDark,
+                size: 24.h,
+              ),
             ),
-          ),
-          16.0.width,
-          Text(
-            "${token.name}",
-            style: AppFont.medium16.copyWith(color: AppColor.textDark),
-          ),
-        ],
-      )),
-      body: Stack(
-        children: [
-          SizedBox(
-            width: ScreenUtil().screenWidth,
-            child: Image.asset(
-              AppImage.maskHome,
-              fit: BoxFit.cover,
+            16.0.width,
+            Text(
+              "${token.name}",
+              style: AppFont.medium16.copyWith(color: AppColor.textDark),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: Column(
-              children: [
-                16.0.height,
-                cardWallet(),
-                24.0.height,
-                Expanded(
-                    child: ListView.builder(
-                  itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.only(bottom: 16.h),
-                    child: const CardActivity(),
+          ],
+        )),
+        body: Stack(
+          children: [
+            SizedBox(
+              width: ScreenUtil().screenWidth,
+              child: Image.asset(
+                AppImage.maskHome,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Column(
+                children: [
+                  16.0.height,
+                  cardWallet(),
+                  24.0.height,
+                  Expanded(
+                    child: evm.isLoading.value
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : listActivity.isEmpty
+                            ? const Center(
+                                child: Empty(title: "No Transaction yet!"))
+                            : ListView.builder(
+                                itemCount: listActivity.length,
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(bottom: 12.h),
+                                    child: CardActivity(
+                                      activity: listActivity[index],
+                                    ),
+                                  );
+                                },
+                              ),
                   ),
-                  itemCount: 2,
-                ))
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }

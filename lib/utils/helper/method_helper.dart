@@ -41,4 +41,15 @@ String convertUint8ListToString(Uint8List uint8List) {
   return base64String;
 }
 
+bool isURL(String text) {
+  // Regular expression pattern to match a URL
+  RegExp urlRegex = RegExp(
+    r'^(?:http|https):\/\/[\w\-]+(?:\.[\w\-]+)+(?:[\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$',
+    caseSensitive: false,
+    multiLine: false,
+  );
+
+  return urlRegex.hasMatch(text);
+}
+
 }

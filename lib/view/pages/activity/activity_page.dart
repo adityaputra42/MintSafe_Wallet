@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 import 'package:mintsafe_wallet/view/widget/card_activity.dart';
 import 'package:mintsafe_wallet/view/widget/widget.dart';
 
 import '../../../config/config.dart';
 import '../../../data/src/app_image.dart';
-import '../../../domain/controller/activity_tx_controller.dart';
 
 class ActivityPage extends StatelessWidget {
   ActivityPage({super.key});
-  final ActivityTxController controller =
-      Get.isRegistered() ? Get.find() : Get.put(ActivityTxController());
+  final EvmNewController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,9 +90,11 @@ class ActivityPage extends StatelessWidget {
                               ),
                             ),
                             16.0.height,
-                            controller.selectedTabActivity.value == 0
-                                ? listActivityCoin()
-                                : listActivityToken()
+                            Expanded(
+                              child: controller.selectedTabActivity.value == 0
+                                  ? listActivityCoin()
+                                  : listActivityToken(),
+                            )
                             // TabBarView(children: [Wall()])
                           ],
                         ),
@@ -110,22 +111,51 @@ class ActivityPage extends StatelessWidget {
   }
 
   Widget listActivityCoin() {
-    return Expanded(
-        child: ListView.builder(
-      itemBuilder: (context, index) => Padding(
-        padding: EdgeInsets.only(bottom: 16.h),
-        child: const CardActivity(
-          title: "Transfer",
-        ),
-      ),
-      itemCount: 5,
-    ));
+    final list = controller.listActivity
+        .where((element) => element.symbol == "")
+        .toList();
+    return controller.isLoading.value
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : list.isEmpty
+            ? const Empty(title: "No transaction yet!")
+            : ListView.builder(
+                itemCount: list.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 12.h),
+                    child: CardActivity(
+                      activity: list[index],
+                    ),
+                  );
+                },
+              );
   }
 
   Widget listActivityToken() {
-    return const Expanded(
-        child: Center(
-      child: Empty(title: "No transaction yet?"),
-    ));
+    final list = controller.listActivity
+        .where((element) => element.contractAddress != "")
+        .toList();
+
+    return controller.isLoading.value
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : list.isEmpty
+            ? const Empty(title: "No transaction yet!")
+            : ListView.builder(
+                itemCount: list.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 12.h),
+                    child: CardActivity(
+                      activity: list[index],
+                    ),
+                  );
+                },
+              );
   }
 }

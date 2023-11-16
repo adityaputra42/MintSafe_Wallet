@@ -9,7 +9,7 @@ import 'package:mintsafe_wallet/domain/controller/controller.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 import 'package:mintsafe_wallet/view/pages/activity/activity_page.dart';
-import 'package:mintsafe_wallet/view/pages/dapp/dapp_page.dart';
+import 'package:mintsafe_wallet/view/pages/explorer/explorer_page.dart';
 import 'package:mintsafe_wallet/view/pages/setting/setting_page.dart';
 
 import '../../config/config.dart';
@@ -21,17 +21,14 @@ class MainPage extends StatefulWidget {
   @override
   State<MainPage> createState() => _MainPageState();
 }
-
 class _MainPageState extends State<MainPage> {
   final BottomNavBarController controller = Get.put(BottomNavBarController());
   late EvmNewController evm;
-
   @override
   void initState() {
     evm = Get.put(EvmNewController(widget.address));
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     body() {
@@ -41,11 +38,9 @@ class _MainPageState extends State<MainPage> {
         case 1:
           return ActivityPage();
         case 2:
-          return const DAppPage();
-
+          return ExplorerPage();
         case 3:
           return SettingPage();
-
         default:
           HomePage();
       }

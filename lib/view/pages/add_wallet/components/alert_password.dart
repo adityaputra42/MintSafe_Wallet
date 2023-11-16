@@ -20,7 +20,7 @@ class AlertPassword extends StatelessWidget {
         width: ScreenUtil().screenWidth,
         height: 60.h,
         decoration: BoxDecoration(
-            color: AppColor.primaryColor,
+            color: AppColor.bgDark,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16.r),
                 topRight: Radius.circular(16.r))),
@@ -28,11 +28,13 @@ class AlertPassword extends StatelessWidget {
           padding: EdgeInsets.all(16.w),
           child: Row(
             children: [
+              24.0.width,
               Expanded(
                 child: Text(
                   title,
-                  style: AppFont.medium16
-                      .copyWith(color: AppColor.textDark, fontSize: 18.sp),
+                  style: AppFont.medium16.copyWith(
+                    color: Theme.of(context).indicatorColor,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -42,7 +44,7 @@ class AlertPassword extends StatelessWidget {
                 },
                 child: Icon(
                   Icons.close,
-                  color: AppColor.textDark,
+                  color: Theme.of(context).indicatorColor,
                   size: 24.w,
                 ),
               )
@@ -59,16 +61,16 @@ class AlertPassword extends StatelessWidget {
           children: [
             Image.asset(
               AppImage.ilustrasi6,
-              width: 120.w,
+              width: 160.w,
               fit: BoxFit.cover,
             ),
-            24.0.height,
+            8.0.height,
             Text(
               subTitle ?? '',
               style: AppFont.reguler14.copyWith(color: AppColor.textDark),
               textAlign: TextAlign.center,
             ),
-            24.0.height,
+            16.0.height,
             InputText(
               title: 'Password',
               hintText: "Enter your password",
@@ -79,10 +81,11 @@ class AlertPassword extends StatelessWidget {
                 size: 20.w,
               ),
             ),
-            24.0.height,
+            32.0.height,
             PrimaryButton(
               loading: evm.isLoadingCreateAccount.value,
               title: "Confirm",
+            
               onPressed: () {
                 evm.createNewAddress();
               },
