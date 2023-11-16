@@ -35,7 +35,7 @@ class Styles {
       fontFamily: "Poppins",
       splashColor:
           isDarkTheme ? const Color(0xFF1F1F1F) : const Color(0xffEEF0F4),
-      cardColor: isDarkTheme ? const Color(0xFF1F1F1F) : Colors.white,
+      cardColor: isDarkTheme ? AppColor.cardDark : AppColor.cardLight,
       canvasColor:
           isDarkTheme ?  AppColor.grayColor : AppColor.grayColor,
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,

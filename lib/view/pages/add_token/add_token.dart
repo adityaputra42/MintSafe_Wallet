@@ -15,8 +15,8 @@ class AddTokenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgDark,
-      appBar: WidgetHelper.appBar(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: WidgetHelper.appBar(context: context,
           title: Row(
         children: [
           GestureDetector(
@@ -25,13 +25,13 @@ class AddTokenPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textDark,
+              color: Theme.of(context).indicatorColor,
               size: 24.h,
             ),
           ),
           16.0.width,
           Text("Add Token",
-              style: AppFont.medium16.copyWith(color: AppColor.textDark)),
+              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor)),
         ],
       )),
       body: Stack(
@@ -59,11 +59,11 @@ class AddTokenPage extends StatelessWidget {
                       padding: EdgeInsets.all(4.h),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12.r),
-                          color: AppColor.cardDark,
+                          color: Theme.of(context).cardColor,
                           boxShadow: const [
                             BoxShadow(
-                                spreadRadius: 1,
-                                blurRadius: 1,
+                                spreadRadius: 0.5,
+                                blurRadius: 0.5,
                                 color: Colors.black12)
                           ]),
                       child: TabBar(
@@ -72,8 +72,8 @@ class AddTokenPage extends StatelessWidget {
                             color: AppColor.primaryColor,
                             borderRadius: BorderRadius.circular(10.r)),
                         isScrollable: false,
-                        dividerColor: AppColor.cardDark,
-                        indicatorColor: AppColor.cardDark,
+                        dividerColor: Theme.of(context).cardColor,
+                        indicatorColor: Theme.of(context).cardColor,
                         labelColor: AppColor.textDark,
                         labelPadding: EdgeInsets.zero,
                         labelStyle: AppFont.semibold16,

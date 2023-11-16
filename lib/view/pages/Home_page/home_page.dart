@@ -37,8 +37,11 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
+            // color:AppColor.primaryColor,
+            // Color(int.parse(evm.selectedChain.value.color ?? "0xff1AA9A4")),
             gradient: LinearGradient(colors: [
               Color(int.parse(evm.selectedChain.value.color ?? "0xff1AA9A4")),
+              // Color(int.parse(evm.selectedChain.value.color ?? "0xff1AA9A4")),
               AppColor.cardDark
             ], begin: Alignment.topLeft, end: Alignment.bottomRight),
             boxShadow: const [
@@ -102,7 +105,7 @@ class HomePage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColor.bgDark,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Stack(
           children: [
@@ -174,9 +177,10 @@ class HomePage extends StatelessWidget {
                                   MethodHelper().shortAddress(
                                       address:
                                           evm.selectedAddress.value.address ??
-                                              '',length: 8),
-                                  style: AppFont.medium14
-                                      .copyWith(color: AppColor.textDark),
+                                              '',
+                                      length: 8),
+                                  style: AppFont.medium14.copyWith(
+                                      color: Theme.of(context).indicatorColor),
                                 )
                               ],
                             ),
@@ -191,7 +195,7 @@ class HomePage extends StatelessWidget {
                                   horizontal: 12.w, vertical: 6.h),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(6.r),
-                                  color: AppColor.cardDark),
+                                  color: Theme.of(context).cardColor),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -232,7 +236,7 @@ class HomePage extends StatelessWidget {
                                 padding: EdgeInsets.all(4.h),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12.r),
-                                  color: AppColor.cardDark,
+                                  color: Theme.of(context).cardColor,
                                   boxShadow: const [
                                     BoxShadow(
                                         blurRadius: 0.5,
@@ -246,8 +250,8 @@ class HomePage extends StatelessWidget {
                                       color: AppColor.primaryColor,
                                       borderRadius: BorderRadius.circular(8.r)),
                                   isScrollable: false,
-                                  dividerColor: AppColor.cardDark,
-                                  indicatorColor: AppColor.cardDark,
+                                  dividerColor: Theme.of(context).cardColor,
+                                  indicatorColor: Theme.of(context).cardColor,
                                   labelColor: AppColor.textDark,
                                   labelPadding: EdgeInsets.zero,
                                   labelStyle: AppFont.semibold16,

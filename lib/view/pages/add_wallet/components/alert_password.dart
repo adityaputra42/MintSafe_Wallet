@@ -20,7 +20,7 @@ class AlertPassword extends StatelessWidget {
         width: ScreenUtil().screenWidth,
         height: 60.h,
         decoration: BoxDecoration(
-            color: AppColor.bgDark,
+            color: Theme.of(context).colorScheme.background,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16.r),
                 topRight: Radius.circular(16.r))),
@@ -67,7 +67,7 @@ class AlertPassword extends StatelessWidget {
             8.0.height,
             Text(
               subTitle ?? '',
-              style: AppFont.reguler14.copyWith(color: AppColor.textDark),
+              style: AppFont.reguler14.copyWith(color: Theme.of(context).indicatorColor,),
               textAlign: TextAlign.center,
             ),
             16.0.height,
@@ -96,7 +96,7 @@ class AlertPassword extends StatelessWidget {
     }
 
     return AlertDialog(
-      backgroundColor: AppColor.bgDark,
+      backgroundColor: Theme.of(context).colorScheme.background,
       titlePadding: EdgeInsets.zero,
       title: header(),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),

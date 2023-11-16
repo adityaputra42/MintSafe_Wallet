@@ -25,25 +25,25 @@ class TokenList extends StatelessWidget {
         },
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
+          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
           decoration: BoxDecoration(
               boxShadow: const [
                 BoxShadow(
                     blurRadius: 0.3, spreadRadius: 0.5, color: Colors.black12)
               ],
-              borderRadius: BorderRadius.circular(12.r),
-              color: AppColor.cardDark),
+              borderRadius: BorderRadius.circular(8.r),
+              color: Theme.of(context).cardColor),
           child: Row(
             children: [
               SizedBox(
-                height: 48.h,
-                width: 48.h,
+                height: 42.h,
+                width: 42.h,
                 child: ClipPolygon(
                   sides: 6,
                   rotate: 0,
                   child: Container(
                       padding: EdgeInsets.all(1.h),
-                      color: AppColor.cardDark,
+                      color: Theme.of(context).cardColor,
                       child: Image.asset(token.logo ?? AppImage.eth)),
                 ),
               ),
@@ -57,13 +57,14 @@ class TokenList extends StatelessWidget {
                       children: [
                         Text(
                           token.name ?? "",
-                          style: AppFont.semibold18
-                              .copyWith(color: AppColor.textDark),
+                          style: AppFont.medium16.copyWith(
+                              color: Theme.of(context).indicatorColor),
                         ),
                         Text(
                           (token.balance ?? 0).toStringAsPrecision(5),
                           style: AppFont.medium16.copyWith(
-                              fontFamily: "Roboto", color: AppColor.textDark),
+                              fontFamily: "Roboto",
+                              color: Theme.of(context).indicatorColor),
                         )
                       ],
                     ),

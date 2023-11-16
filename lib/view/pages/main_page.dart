@@ -49,7 +49,7 @@ class _MainPageState extends State<MainPage> {
 
     return Obx(() {
       return Scaffold(
-        backgroundColor: AppColor.bgDark,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: LoadingOverlay(
           isLoading: evm.isLoadingNetwork.value,
           color: Colors.black,
@@ -78,7 +78,7 @@ class _MainPageState extends State<MainPage> {
           width: double.infinity,
           // height: 72.h,
           decoration: BoxDecoration(
-              color: AppColor.cardDark,
+              color: Theme.of(context).cardColor,
               boxShadow: [
                 BoxShadow(
                     spreadRadius: 1.h, blurRadius: 1.h, color: Colors.black12)

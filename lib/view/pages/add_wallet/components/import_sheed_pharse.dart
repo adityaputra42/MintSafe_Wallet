@@ -13,8 +13,8 @@ class ImportSheedPharse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgDark,
-      appBar: WidgetHelper.appBar(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: WidgetHelper.appBar(context: context,
           title: Row(
         children: [
           GestureDetector(
@@ -23,14 +23,14 @@ class ImportSheedPharse extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textDark,
+              color: Theme.of(context).indicatorColor,
               size: 24.h,
             ),
           ),
           16.0.width,
           Text(
             "Import Sheed Pharse",
-            style: AppFont.medium16.copyWith(color: AppColor.textDark),
+            style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor,),
           ),
         ],
       )),
@@ -51,7 +51,7 @@ class ImportSheedPharse extends StatelessWidget {
                   16.0.height,
                   Text(
                     'Enter Your Secret Recovery Phrase',
-                    style: AppFont.medium16.copyWith(color: AppColor.textDark),
+                    style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor,),
                   ),
                   8.0.height,
                   Text(

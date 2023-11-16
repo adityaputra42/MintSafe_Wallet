@@ -48,7 +48,7 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
           ),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.r),
-              color: AppColor.cardDark,
+              color: Theme.of(context).cardColor,
               border: Border.all(
                   width: 1.w,
                   color: address.address == evm.selectedAddress.value.address
@@ -120,14 +120,14 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
               16.0.height,
               Text(
                 "Asset",
-                style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor),
               ),
               8.0.height,
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                 decoration: BoxDecoration(
-                  color: AppColor.cardDark,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Row(
@@ -154,7 +154,7 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
                             ? (evm.selectedChain.value.name ?? '')
                             : (widget.token?.name ?? ''),
                         style:
-                            AppFont.medium16.copyWith(color: AppColor.textDark),
+                            AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -172,7 +172,7 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
               16.0.height,
               Text(
                 "From",
-                style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor),
               ),
               8.0.height,
               GestureDetector(
@@ -184,7 +184,7 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
                   padding:
                       EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                   decoration: BoxDecoration(
-                    color: AppColor.cardDark,
+                    color: Theme.of(context).cardColor,
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Row(
@@ -214,7 +214,7 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
                               //         evm.selectedAddress.value.address ?? '',
                               //     length: 8),
                               style: AppFont.medium14
-                                  .copyWith(color: AppColor.textDark),
+                                  .copyWith(color: Theme.of(context).indicatorColor),
                             ),
                             4.0.height,
                             Text(
@@ -296,8 +296,8 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
 
     return Obx(() {
       return Scaffold(
-        backgroundColor: AppColor.bgDark,
-        appBar: WidgetHelper.appBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: WidgetHelper.appBar(context: context,
             title: Row(
           children: [
             GestureDetector(
@@ -306,14 +306,14 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
               },
               child: Icon(
                 Icons.arrow_back_ios_new_rounded,
-                color: AppColor.textDark,
+                color: Theme.of(context).indicatorColor,
                 size: 24.h,
               ),
             ),
             16.0.width,
             Text(
               "Transfer ${widget.assetType == AssetType.coin ? evm.selectedChain.value.symbol : widget.token?.symbol}",
-              style: AppFont.medium16.copyWith(color: AppColor.textDark),
+              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
             ),
           ],
         )),

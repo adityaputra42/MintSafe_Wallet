@@ -5,6 +5,7 @@ import '../../config/config.dart';
 class WidgetHelper {
   static appBar({
     required Widget title,
+    required BuildContext context
   }) {
     return AppBar(
       elevation: 1,
@@ -12,7 +13,7 @@ class WidgetHelper {
       title: title,
       automaticallyImplyLeading: false,
       centerTitle: false,
-      backgroundColor: AppColor.bgDark,
+      backgroundColor: Theme.of(context).colorScheme.background
       // toolbarHeight: height,
     );
   }

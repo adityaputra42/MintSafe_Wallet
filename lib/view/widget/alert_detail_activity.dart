@@ -32,13 +32,13 @@ class AlertDetailActivity extends StatelessWidget {
                 width: 48.w,
                 height: 48.w,
                 padding: EdgeInsets.all(8.h),
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle, color: AppColor.cardDark),
+                decoration:  BoxDecoration(
+                    shape: BoxShape.circle, color:  Theme.of(context).cardColor),
                 child: Image.asset(
                   state == "Transfer"
                       ? AppIcon.sendActivity
                       : AppIcon.receiveActivity,
-                  color: AppColor.textDark,
+                  color:  AppColor.primaryColor
                 ),
               ),
               8.0.height,
@@ -207,7 +207,7 @@ class AlertDetailActivity extends StatelessWidget {
     }
 
     return AlertDialog(
-      backgroundColor: AppColor.bgDark,
+      backgroundColor:  Theme.of(context).colorScheme.background,
       titlePadding: EdgeInsets.zero,
       // title: header(),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),

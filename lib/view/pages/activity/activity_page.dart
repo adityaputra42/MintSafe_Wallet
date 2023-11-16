@@ -15,6 +15,7 @@ class ActivityPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Stack(
           children: [
@@ -33,7 +34,7 @@ class ActivityPage extends StatelessWidget {
                   Text(
                     "Activity",
                     style:
-                        AppFont.semibold20.copyWith(color: AppColor.textDark),
+                        AppFont.semibold20.copyWith(color: Theme.of(context).indicatorColor),
                   ),
                   24.0.height,
                   Expanded(
@@ -50,7 +51,7 @@ class ActivityPage extends StatelessWidget {
                               padding: EdgeInsets.all(4.h),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12.r),
-                                color: AppColor.cardDark,
+                                color:  Theme.of(context).cardColor,
                                 boxShadow: const [
                                   BoxShadow(
                                       blurRadius: 0.5,
@@ -64,8 +65,8 @@ class ActivityPage extends StatelessWidget {
                                     color: AppColor.primaryColor,
                                     borderRadius: BorderRadius.circular(8.r)),
                                 isScrollable: false,
-                                dividerColor: AppColor.cardDark,
-                                indicatorColor: AppColor.cardDark,
+                                dividerColor:  Theme.of(context).cardColor,
+                                indicatorColor:  Theme.of(context).cardColor,
                                 labelColor: AppColor.textDark,
                                 labelPadding: EdgeInsets.zero,
                                 labelStyle: AppFont.semibold16,

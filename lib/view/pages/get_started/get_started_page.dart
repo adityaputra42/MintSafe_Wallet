@@ -16,7 +16,7 @@ class GetStartedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgDark,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
@@ -39,7 +39,7 @@ class GetStartedPage extends StatelessWidget {
                       Text(
                         'MintSafe',
                         style: AppFont.semibold24
-                            .copyWith(color: AppColor.textDark),
+                            .copyWith(color: Theme.of(context).indicatorColor),
                       ),
                       Text(
                         'Unlock the Future of Digital Assets',

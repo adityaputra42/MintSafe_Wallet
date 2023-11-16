@@ -24,13 +24,13 @@ class SearchDapps extends StatelessWidget {
       value: SystemUiOverlayStyle.light, //,
       child: Obx(() {
         return Scaffold(
-            backgroundColor: AppColor.bgDark,
+            backgroundColor: Theme.of(context).colorScheme.background,
             appBar: PreferredSize(
                 preferredSize: Size(AppBar().preferredSize.width,
                     AppBar().preferredSize.height + 100),
                 child: SafeArea(
                   child: Container(
-                    color: Theme.of(context).backgroundColor,
+                    color: Theme.of(context).colorScheme.background,
                     child: Padding(
                       padding: const EdgeInsets.all(8),
                       child: Row(

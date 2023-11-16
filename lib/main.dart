@@ -8,6 +8,8 @@ import 'package:mintsafe_wallet/config/theme/style.dart';
 import 'package:mintsafe_wallet/utils/helper/helper.dart';
 import 'package:mintsafe_wallet/view/pages/spalsh/splash_screen.dart';
 
+import 'domain/controller/theme_controller.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
@@ -21,8 +23,25 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  ThemeController themeController = Get.put(ThemeController());
+
+  @override
+  void initState() {
+    getCurrentAppTheme();
+    super.initState();
+  }
+
+  void getCurrentAppTheme() async {
+    await themeController.getTheme();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +51,14 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return GetMaterialApp(
-              title: 'MintSafe Wallet',
-              debugShowCheckedModeBanner: false,
-              theme: Styles.themeData(true, context),
-              home: SplashScreen());
+          return Obx(() {
+            return GetMaterialApp(
+                title: 'MintSafe Wallet',
+                debugShowCheckedModeBanner: false,
+                theme:
+                    Styles.themeData(themeController.darkTheme.value, context),
+                home: SplashScreen());
+          });
         });
   }
 }

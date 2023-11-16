@@ -16,7 +16,7 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgDark,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Stack(children: [
         SizedBox(
           width: ScreenUtil().screenWidth,
@@ -53,7 +53,7 @@ class OnboardingScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 320.h,
                 decoration: BoxDecoration(
-                    color: AppColor.cardDark,
+                    color: Theme.of(context).cardColor,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(24.w),
                         topRight: Radius.circular(24.w))),
@@ -65,8 +65,8 @@ class OnboardingScreen extends StatelessWidget {
                           : controller.selectedIndex.value == 1
                               ? "Protect"
                               : "Trusted",
-                      style:
-                          AppFont.semibold24.copyWith(color: AppColor.textDark),
+                      style: AppFont.semibold24
+                          .copyWith(color: Theme.of(context).indicatorColor),
                     ),
                     8.0.height,
                     Text(

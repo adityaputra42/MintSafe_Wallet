@@ -35,15 +35,16 @@ class CardActivity extends StatelessWidget {
         padding: EdgeInsets.all(10.w),
         decoration: BoxDecoration(boxShadow: const [
           BoxShadow(blurRadius: 0.3, spreadRadius: 0.5, color: Colors.black12)
-        ], borderRadius: BorderRadius.circular(8.r), color: AppColor.cardDark),
+        ], borderRadius: BorderRadius.circular(8.r), color: Theme.of(context).cardColor),
         child: Row(
           children: [
             Image.asset(
               state == "Transfer"
                   ? AppIcon.sendActivity
                   : AppIcon.receiveActivity,
-              color: AppColor.textDark,
-              width: 36.w,
+              color: AppColor.primaryColor,
+              width: 32.w,
+            
             ),
             8.0.width,
             Expanded(
@@ -57,7 +58,7 @@ class CardActivity extends StatelessWidget {
                         Text(
                           state,
                           style: AppFont.medium16
-                              .copyWith(color: AppColor.textDark),
+                              .copyWith(color:  Theme.of(context).indicatorColor,),
                         ),
                         4.0.width,
                         Text(
@@ -68,9 +69,9 @@ class CardActivity extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      "${(BigInt.parse(activity.value!).toDouble() / pow(10, 18)).toStringAsFixed(2)} ${activity.symbol == "" ? evm.selectedChain.value.symbol : activity.symbol}",
+                      "${(BigInt.parse(activity.value!).toDouble() / pow(10, 18)).toStringAsFixed(5)} ${activity.symbol == "" ? evm.selectedChain.value.symbol : activity.symbol}",
                       style:
-                          AppFont.medium16.copyWith(color: AppColor.textDark),
+                          AppFont.medium16.copyWith(color:  Theme.of(context).indicatorColor,),
                     )
                   ],
                 ),

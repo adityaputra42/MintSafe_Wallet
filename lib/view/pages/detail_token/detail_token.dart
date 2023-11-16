@@ -97,27 +97,28 @@ class DetailToken extends StatelessWidget {
           )
           .toList();
       return Scaffold(
-        backgroundColor: AppColor.bgDark,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: WidgetHelper.appBar(
+            context: context,
             title: Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: AppColor.textDark,
-                size: 24.h,
-              ),
-            ),
-            16.0.width,
-            Text(
-              "${token.name}",
-              style: AppFont.medium16.copyWith(color: AppColor.textDark),
-            ),
-          ],
-        )),
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: Theme.of(context).indicatorColor,
+                    size: 24.h,
+                  ),
+                ),
+                16.0.width,
+                Text(
+                  "${token.name}",
+                  style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
+                ),
+              ],
+            )),
         body: Stack(
           children: [
             SizedBox(
@@ -130,10 +131,17 @@ class DetailToken extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   16.0.height,
                   cardWallet(),
-                  24.0.height,
+                  16.0.height,
+                  Text(
+                    "Activity Token",
+                    style: AppFont.semibold16
+                        .copyWith(color: Theme.of(context).indicatorColor),
+                  ),
+                  16.0.height,
                   Expanded(
                     child: evm.isLoading.value
                         ? const Center(

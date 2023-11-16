@@ -29,7 +29,8 @@ class ChangeWallet extends StatelessWidget {
           ),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.r),
-              color: AppColor.cardDark,
+              color: Theme.of(context).cardColor,
+              boxShadow: [BoxShadow(spreadRadius: 0.5.h,blurRadius: 0.3,color: Colors.black12)],
               border: Border.all(
                   width: 1.w,
                   color: address.address == evm.selectedAddress.value.address
@@ -57,12 +58,13 @@ class ChangeWallet extends StatelessWidget {
                 children: [
                   Text(
                     "${address.name} ${address.id}",
-                    style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                    style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor,),
                   ),
                   8.0.height,
                   Text(
-                    MethodHelper().shortAddress(address: address.address ?? "", length: 8),
-                    style: AppFont.reguler12.copyWith(color: AppColor.textDark),
+                    MethodHelper().shortAddress(
+                        address: address.address ?? "", length: 8),
+                    style: AppFont.reguler12.copyWith(color: Theme.of(context).indicatorColor,),
                   )
                 ],
               )),
@@ -82,8 +84,8 @@ class ChangeWallet extends StatelessWidget {
 
     return Obx(() {
       return Scaffold(
-        backgroundColor: AppColor.bgDark,
-        appBar: WidgetHelper.appBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: WidgetHelper.appBar(context: context,
             title: Row(
           children: [
             GestureDetector(
@@ -92,14 +94,14 @@ class ChangeWallet extends StatelessWidget {
               },
               child: Icon(
                 Icons.arrow_back_ios_new_rounded,
-                color: AppColor.textDark,
+                color: Theme.of(context).indicatorColor,
                 size: 24.h,
               ),
             ),
             16.0.width,
             Text(
               "Change Wallet",
-              style: AppFont.medium16.copyWith(color: AppColor.textDark),
+              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor,),
             ),
           ],
         )),

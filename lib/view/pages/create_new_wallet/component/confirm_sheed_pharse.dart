@@ -40,11 +40,11 @@ class ConfirmSheedPharse extends StatelessWidget {
                       color: AppColor.grayColor.withOpacity(0.25))
                 ],
                 borderRadius: BorderRadius.circular(8.r),
-                color: AppColor.cardDark),
+                color: Theme.of(context).cardColor),
             child: Text(
                 "$number. ${(controller.confirmPharse.singleWhere((element) => element['id'] == number, orElse: () => <String, dynamic>{})['data']) ?? ''}",
                 style: AppFont.medium16.copyWith(
-                  color: AppColor.textDark,
+                  color: Theme.of(context).indicatorColor,
                 )),
           );
         },
@@ -81,7 +81,7 @@ class ConfirmSheedPharse extends StatelessWidget {
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
                 blurRadius: 0.7.h, spreadRadius: 0.7.h, color: Colors.black12)
-          ], borderRadius: BorderRadius.circular(8.r), color: AppColor.bgDark),
+          ], borderRadius: BorderRadius.circular(8.r), color: Theme.of(context).colorScheme.background),
           child: Center(
             child: Text(text,
                 style: AppFont.medium16.copyWith(
@@ -118,7 +118,7 @@ class ConfirmSheedPharse extends StatelessWidget {
         children: [
           Text(
             'Secret recovery phrase',
-            style: AppFont.medium16.copyWith(color: AppColor.textDark),
+            style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
           ),
           4.0.height,
           Text(
@@ -185,7 +185,7 @@ class ConfirmSheedPharse extends StatelessWidget {
                             color: AppColor.grayColor.withOpacity(0.25))
                       ],
                       borderRadius: BorderRadius.circular(12.r),
-                      color: AppColor.cardDark),
+                      color: Theme.of(context).cardColor),
                   child: Wrap(
                       crossAxisAlignment: WrapCrossAlignment.center,
                       runAlignment: WrapAlignment.center,

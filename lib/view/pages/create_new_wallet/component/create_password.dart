@@ -22,7 +22,7 @@ class CreatePassword extends StatelessWidget {
           children: [
             Text(
               'Create a password',
-              style: AppFont.medium16.copyWith(color: AppColor.textDark),
+              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
             ),
             6.0.height,
             Text(

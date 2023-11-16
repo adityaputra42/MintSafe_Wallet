@@ -23,17 +23,17 @@ class SelectGasFee extends StatelessWidget {
             controller.changeIndexFee(index);
           },
           child: Container(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 20.h),
             margin: EdgeInsets.only(bottom: 12.h),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.r),
-                color: AppColor.cardDark),
+                color: Theme.of(context).cardColor),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   title,
-                  style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                  style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor),
                 ),
                 Expanded(
                   child: Row(
@@ -42,7 +42,7 @@ class SelectGasFee extends StatelessWidget {
                       Text(
                         '~ ${fee.toStringAsFixed(8)} ${controller.evm.selectedChain.value.symbol}',
                         style:
-                            AppFont.medium14.copyWith(color: AppColor.textDark),
+                            AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor),
                       ),
                       16.0.width,
                       SizedBox(

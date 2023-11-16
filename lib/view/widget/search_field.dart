@@ -29,7 +29,7 @@ class SearchField extends StatelessWidget {
       height: 54.h,
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        style: AppFont.medium14.copyWith(color: AppColor.textDark),
+        style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor,),
         controller: controller,
         onChanged: onChange,
         validator: validator,
@@ -38,7 +38,7 @@ class SearchField extends StatelessWidget {
         inputFormatters: inputFormatters,
         focusNode: focusNode,
         decoration: InputDecoration(
-            fillColor: AppColor.cardDark,
+            fillColor: Theme.of(context).cardColor,
             filled: true,
             suffixIcon: Icon(
               Icons.search,

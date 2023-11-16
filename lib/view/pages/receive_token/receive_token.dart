@@ -39,13 +39,13 @@ class ReceiveTokenPage extends StatelessWidget {
                         : token!.logo!)),
               ),
             ),
-            16.0.height,
+            8.0.height,
             Text(
-              evm.selectedChain.value.symbol ?? '',
-              style: AppFont.medium14
-                  .copyWith(fontSize: 20, color: AppColor.textDark),
+              evm.selectedChain.value.name ?? '',
+              style: AppFont.medium16
+                  .copyWith(color: Theme.of(context).indicatorColor),
             ),
-            24.0.height,
+            16.0.height,
             const Warning(
                 warning:
                     "Send only ERC-20 to this address, or you might loose your funds."),
@@ -60,7 +60,7 @@ class ReceiveTokenPage extends StatelessWidget {
                         spreadRadius: 1, blurRadius: 1, color: Colors.black12)
                   ],
                   borderRadius: BorderRadius.circular(12.r),
-                  color: AppColor.cardDark),
+                  color: Theme.of(context).cardColor),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
@@ -105,8 +105,8 @@ class ReceiveTokenPage extends StatelessWidget {
 
     return Obx(() {
       return Scaffold(
-        backgroundColor: AppColor.bgDark,
-        appBar: WidgetHelper.appBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: WidgetHelper.appBar(context: context,
             title: Row(
           children: [
             GestureDetector(
@@ -115,14 +115,14 @@ class ReceiveTokenPage extends StatelessWidget {
               },
               child: Icon(
                 Icons.arrow_back_ios_new_rounded,
-                color: AppColor.textDark,
+                color: Theme.of(context).indicatorColor,
                 size: 24.h,
               ),
             ),
             16.0.width,
             Text(
-              "Receive ${token?.id == null ? (evm.selectedChain.value.name ?? '') : (token?.name ?? "")}",
-              style: AppFont.medium16.copyWith(color: AppColor.textDark),
+              "Receive ${token?.id == null ? (evm.selectedChain.value.symbol ?? '') : (token?.symbol ?? "")}",
+              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
             ),
           ],
         )),
@@ -140,7 +140,7 @@ class ReceiveTokenPage extends StatelessWidget {
         bottomNavigationBar: Container(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
           decoration: BoxDecoration(
-              color: AppColor.cardDark,
+              color: Theme.of(context).cardColor,
               boxShadow: const [
                 BoxShadow(spreadRadius: 1, blurRadius: 1, color: Colors.black12)
               ],

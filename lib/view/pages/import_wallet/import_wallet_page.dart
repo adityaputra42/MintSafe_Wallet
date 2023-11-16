@@ -27,7 +27,7 @@ class ImportWalletPage extends StatelessWidget {
             children: [
               16.0.height,
               Text('Import via Seed Phrase',
-                  style: AppFont.medium16.copyWith(color: AppColor.textDark)),
+                  style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor)),
               4.0.height,
               Text(
                 'To import an existing wallet, please enter the recovery seed phrase here:',
@@ -169,8 +169,8 @@ class ImportWalletPage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColor.bgDark,
-      appBar: WidgetHelper.appBar(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: WidgetHelper.appBar(context: context,
           title: Row(
         children: [
           GestureDetector(
@@ -179,14 +179,14 @@ class ImportWalletPage extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textDark,
+              color: Theme.of(context).indicatorColor,
               size: 24.h,
             ),
           ),
           16.0.width,
           Text(
             "Import an Existing Wallet",
-            style: AppFont.medium16.copyWith(color: AppColor.textDark),
+            style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
           ),
         ],
       )),

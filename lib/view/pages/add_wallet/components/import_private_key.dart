@@ -14,8 +14,8 @@ class ImportPrivateKey extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgDark,
-      appBar: WidgetHelper.appBar(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: WidgetHelper.appBar(context: context,
           title: Row(
         children: [
           GestureDetector(
@@ -24,14 +24,14 @@ class ImportPrivateKey extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textDark,
+              color: Theme.of(context).indicatorColor,
               size: 24.h,
             ),
           ),
           16.0.width,
           Text(
             "Import Private Key",
-            style: AppFont.medium16.copyWith(color: AppColor.textDark),
+            style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor,),
           ),
         ],
       )),
@@ -52,7 +52,7 @@ class ImportPrivateKey extends StatelessWidget {
                   16.0.height,
                   Text('Enter Your Private Key',
                       style:
-                          AppFont.medium16.copyWith(color: AppColor.textDark)),
+                          AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor,)),
                   12.0.height,
                   Text(
                     'This 12-word phrase allows you to recover your wallet and access to the coins inside.',

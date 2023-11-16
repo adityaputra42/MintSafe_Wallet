@@ -29,8 +29,9 @@ class SearchToken extends StatelessWidget {
                     : ListView.builder(
                         itemBuilder: (context, index) => Padding(
                           padding: EdgeInsets.only(bottom: 16.h),
-                          child:
-                              cardCoin(token: controller.evm.tokenList[index]),
+                          child: cardCoin(
+                              token: controller.evm.tokenList[index],
+                              context: context),
                         ),
                         itemCount: controller.evm.tokenList.length,
                       ))
@@ -42,6 +43,7 @@ class SearchToken extends StatelessWidget {
 
   Widget cardCoin({
     required Token token,
+    required BuildContext context,
   }) {
     return Obx(() {
       return GestureDetector(
@@ -75,8 +77,8 @@ class SearchToken extends StatelessWidget {
               8.0.width,
               Expanded(
                   child: Text(token.name ?? "",
-                      style:
-                          AppFont.medium16.copyWith(color: AppColor.textDark))),
+                      style: AppFont.medium16
+                          .copyWith(color: Theme.of(context).indicatorColor))),
               16.0.width,
               controller.evm.tokenSelected.any((element) =>
                       element.contractAddress!.toLowerCase() ==

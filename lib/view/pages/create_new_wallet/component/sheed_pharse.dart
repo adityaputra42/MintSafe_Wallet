@@ -21,10 +21,10 @@ class SheedPharse extends StatelessWidget {
               blurRadius: 0.1,
               spreadRadius: 0.1,
               color: AppColor.grayColor.withOpacity(0.25))
-        ], borderRadius: BorderRadius.circular(8.r), color: AppColor.cardDark),
+        ], borderRadius: BorderRadius.circular(8.r), color: Theme.of(context).cardColor),
         child: Text("$number. $text",
             style: AppFont.medium14.copyWith(
-              color: AppColor.textDark,
+              color: Theme.of(context).indicatorColor,
             )),
       );
     }
@@ -34,7 +34,7 @@ class SheedPharse extends StatelessWidget {
       children: [
         Text(
           'Secret recovery phrase',
-          style: AppFont.medium16.copyWith(color: AppColor.textDark),
+          style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
         ),
         4.0.height,
         Text(

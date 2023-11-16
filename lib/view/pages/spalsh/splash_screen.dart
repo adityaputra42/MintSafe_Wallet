@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgDark,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
@@ -30,7 +30,7 @@ class SplashScreen extends StatelessWidget {
             16.0.height,
             Text(
               'MintSafe',
-              style: AppFont.semibold24.copyWith(color: AppColor.textDark)
+              style: AppFont.semibold24.copyWith(color: Theme.of(context).indicatorColor)
             )
           ],
         )),

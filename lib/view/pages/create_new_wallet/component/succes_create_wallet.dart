@@ -13,7 +13,7 @@ class SuccesCreateWallet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgDark,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -25,7 +25,8 @@ class SuccesCreateWallet extends StatelessWidget {
             24.0.height,
             Text(
               "Yeay 🎉",
-              style: AppFont.semibold24.copyWith(color: AppColor.textDark),
+              style: AppFont.semibold24
+                  .copyWith(color: Theme.of(context).indicatorColor),
             ),
             8.0.height,
             Text(

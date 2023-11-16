@@ -32,7 +32,7 @@ class ChangeNetwork extends StatelessWidget {
                 rotate: 0,
                 child: Container(
                     padding: EdgeInsets.all(1.h),
-                    color: Colors.transparent,
+                    color: Theme.of(context).cardColor,
                     child: Image.asset(chain.logo ?? AppImage.eth)),
               ),
             ),
@@ -40,7 +40,7 @@ class ChangeNetwork extends StatelessWidget {
             Expanded(
                 child: Text(
               chain.name ?? '',
-              style: AppFont.medium16.copyWith(color: AppColor.textDark),
+              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor,),
             )),
             16.0.width,
             isSelected
@@ -107,8 +107,8 @@ class ChangeNetwork extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColor.bgDark,
-      appBar: WidgetHelper.appBar(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: WidgetHelper.appBar(context: context,
           title: Row(
         children: [
           GestureDetector(
@@ -117,14 +117,14 @@ class ChangeNetwork extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textDark,
+              color: Theme.of(context).indicatorColor,
               size: 24.h,
             ),
           ),
           16.0.width,
           Text(
             "Change Network",
-            style: AppFont.medium16.copyWith(color: AppColor.textDark),
+            style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
           ),
         ],
       )),

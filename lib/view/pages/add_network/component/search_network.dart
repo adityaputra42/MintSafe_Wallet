@@ -41,6 +41,9 @@ class SearchNetwork extends StatelessWidget {
               child: ClipPolygon(
                 sides: 6,
                 rotate: 0,
+                boxShadows: [
+                  PolygonBoxShadow(color: Colors.black12, elevation: 1.h)
+                ],
                 child: Container(
                     padding: EdgeInsets.all(1.h),
                     color: Colors.transparent,
@@ -50,8 +53,8 @@ class SearchNetwork extends StatelessWidget {
             8.0.width,
             Expanded(
                 child: Text(chain.name ?? "",
-                    style:
-                        AppFont.medium16.copyWith(color: AppColor.textDark))),
+                    style: AppFont.medium16
+                        .copyWith(color: Theme.of(context).indicatorColor))),
             16.0.width,
             evm.listChainSelected.any((element) =>
                     element.chainId!.toLowerCase() ==

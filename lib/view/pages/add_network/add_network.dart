@@ -12,7 +12,7 @@ import '../../../utils/utils.dart';
 class AddNetworkPage extends StatelessWidget {
   AddNetworkPage({super.key});
   final AddNetworkController controller = Get.put(AddNetworkController());
- 
+
   @override
   Widget build(BuildContext context) {
     Widget body() {
@@ -32,7 +32,7 @@ class AddNetworkPage extends StatelessWidget {
                   padding: EdgeInsets.all(4.h),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
-                      color: AppColor.cardDark,
+                      color: Theme.of(context).cardColor,
                       boxShadow: const [
                         BoxShadow(
                             spreadRadius: 1,
@@ -45,12 +45,12 @@ class AddNetworkPage extends StatelessWidget {
                         color: AppColor.primaryColor,
                         borderRadius: BorderRadius.circular(8.r)),
                     isScrollable: false,
-                    indicatorColor: AppColor.cardDark,
-                    dividerColor: AppColor.cardDark,
+                    indicatorColor: Theme.of(context).cardColor,
+                    dividerColor: Theme.of(context).cardColor,
                     labelColor: AppColor.textDark,
                     labelPadding: EdgeInsets.zero,
                     labelStyle:
-                        AppFont.semibold16.copyWith(color: AppColor.textDark),
+                        AppFont.semibold16.copyWith(color: Theme.of(context).indicatorColor),
                     unselectedLabelColor: AppColor.grayColor,
                     unselectedLabelStyle: AppFont.medium16,
                     indicatorSize: TabBarIndicatorSize.tab,
@@ -88,27 +88,28 @@ class AddNetworkPage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: AppColor.bgDark,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: WidgetHelper.appBar(
+          context: context,
           title: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: AppColor.textDark,
-              size: 24.h,
-            ),
-          ),
-          16.0.width,
-          Text(
-            "Add Network",
-            style: AppFont.medium16.copyWith(color: AppColor.textDark),
-          ),
-        ],
-      )),
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Theme.of(context).indicatorColor,
+                  size: 24.h,
+                ),
+              ),
+              16.0.width,
+              Text(
+                "Add Network",
+                style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
+              ),
+            ],
+          )),
       body: Stack(
         children: [
           SizedBox(

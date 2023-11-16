@@ -56,7 +56,7 @@ class ConfirmTransfer extends StatelessWidget {
                             ? (evm.selectedChain.value.name ?? '')
                             : (controller.selectedToken.value.name ?? ''),
                         style:
-                            AppFont.medium16.copyWith(color: AppColor.textDark),
+                            AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
                         overflow: TextOverflow.ellipsis,
                       ),
                       4.0.width,
@@ -78,7 +78,7 @@ class ConfirmTransfer extends StatelessWidget {
             ),
             24.0.height,
             Text("From",
-                style: AppFont.medium14.copyWith(color: AppColor.textDark)),
+                style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor)),
             8.0.height,
             Container(
               padding: EdgeInsets.symmetric(
@@ -87,7 +87,7 @@ class ConfirmTransfer extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
-                color: AppColor.cardDark,
+                color: Theme.of(context).cardColor,
               ),
               child: Row(
                 children: [
@@ -130,7 +130,7 @@ class ConfirmTransfer extends StatelessWidget {
             ),
             16.0.height,
             Text("To",
-                style: AppFont.medium14.copyWith(color: AppColor.textDark)),
+                style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor)),
             8.0.height,
             Container(
               padding: EdgeInsets.symmetric(
@@ -139,7 +139,7 @@ class ConfirmTransfer extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
-                color: AppColor.cardDark,
+                color: Theme.of(context).cardColor,
               ),
               child: Row(
                 children: [
@@ -169,13 +169,13 @@ class ConfirmTransfer extends StatelessWidget {
             ),
             16.0.height,
             Text("Gas fee",
-                style: AppFont.medium14.copyWith(color: AppColor.textDark)),
+                style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor)),
             8.0.height,
             Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
               decoration: BoxDecoration(
-                color: AppColor.cardDark,
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(8.r),
               ),
               child: Row(
@@ -188,7 +188,7 @@ class ConfirmTransfer extends StatelessWidget {
                         Text(
                           "Estimated Gas Fee",
                           style: AppFont.medium14
-                              .copyWith(color: AppColor.textDark),
+                              .copyWith(color: Theme.of(context).indicatorColor),
                         ),
                         4.0.height,
                         Text(
@@ -205,7 +205,7 @@ class ConfirmTransfer extends StatelessWidget {
                   8.0.width,
                   Text(
                     '~ ${controller.networkFee.value.toStringAsFixed(6)} ${evm.selectedChain.value.symbol}',
-                    style: AppFont.medium14.copyWith(color: AppColor.textDark),
+                    style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor),
                   ),
                 ],
               ),
@@ -217,8 +217,8 @@ class ConfirmTransfer extends StatelessWidget {
 
     return Obx(() {
       return Scaffold(
-        backgroundColor: AppColor.bgDark,
-        appBar: WidgetHelper.appBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: WidgetHelper.appBar(context: context,
             title: Row(
           children: [
             GestureDetector(
@@ -227,14 +227,14 @@ class ConfirmTransfer extends StatelessWidget {
               },
               child: Icon(
                 Icons.arrow_back_ios_new_rounded,
-                color: AppColor.textDark,
+                color: Theme.of(context).indicatorColor,
                 size: 24.h,
               ),
             ),
             16.0.width,
             Text(
               "Transfer ${assetType == AssetType.coin ? evm.selectedChain.value.symbol : controller.selectedToken.value.symbol}",
-              style: AppFont.medium16.copyWith(color: AppColor.textDark),
+              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
             ),
           ],
         )),
