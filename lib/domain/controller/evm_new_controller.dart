@@ -808,7 +808,7 @@ class EvmNewController extends GetxController {
   }
 
   List<NftView> removeDuplicates(List<Nft> list) {
-    Set<String> seen = Set();
+    Set<String> seen = {};
     List<String> itemContract = [];
     List<NftView> nftView = [];
     for (var item in list) {

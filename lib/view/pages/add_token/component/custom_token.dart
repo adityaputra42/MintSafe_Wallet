@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 
+import '../../../../domain/controller/controller.dart';
 import '../../../widget/widget.dart';
 
 class CustomToken extends StatelessWidget {
-  const CustomToken({super.key});
-
+  CustomToken({super.key});
+  final AddTokenController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
         children: [
+          Warning(
+              warning:
+                  "Make sure you enter the correct information according to the ${controller.evm.selectedChain.value.name} network."),
+          16.0.height,
           const InputText(
               title: "Token Address", hintText: "Enter token address"),
           16.0.height,

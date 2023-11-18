@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -157,7 +157,10 @@ class SearchDapps extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     child: Row(
                       children: [
-                        Icon(Icons.public),
+                        Icon(
+                          Icons.public,
+                          size: 24.w,
+                        ),
                         12.0.width,
                         Expanded(
                           child: Column(
@@ -179,7 +182,7 @@ class SearchDapps extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Spacer(),
+                      const  Spacer(),
                         GestureDetector(
                           onTap: () {
                             browserController.deleteDappsHistory(item.id!);

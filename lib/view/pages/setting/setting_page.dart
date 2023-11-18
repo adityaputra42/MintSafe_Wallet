@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/domain/controller/theme_controller.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
+import 'package:mintsafe_wallet/view/pages/setting/security/security_page.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../config/config.dart';
 import '../../../data/src/src.dart';
@@ -18,25 +20,42 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget cardMenu(
-        {required IconData icon, required String title, Widget? widget}) {
-      return Row(
-        children: [
-          Icon(
-            icon,
-            size: 32.h,
-            color: AppColor.primaryColor,
+        {required IconData icon,
+        required String title,
+        Widget? widget,
+        Function()? onTap}) {
+      return GestureDetector(
+        onTap: onTap ?? () {},
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+          decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                    blurRadius: 0.3, spreadRadius: 0.5, color: Colors.black12)
+              ],
+              borderRadius: BorderRadius.circular(8.r),
+              color: Theme.of(context).cardColor),
+          child: Row(
+            children: [
+              Icon(
+                icon,
+                size: 32.h,
+                color: AppColor.primaryColor,
+              ),
+              12.0.width,
+              Expanded(
+                  child: Text(
+                title,
+                style: AppFont.medium16.copyWith(
+                  color: Theme.of(context).indicatorColor,
+                ),
+              )),
+              8.0.width,
+              widget ?? const SizedBox(),
+            ],
           ),
-          12.0.width,
-          Expanded(
-              child: Text(
-            title,
-            style: AppFont.medium16.copyWith(
-              color: Theme.of(context).indicatorColor,
-            ),
-          )),
-          8.0.width,
-          widget ?? const SizedBox(),
-        ],
+        ),
       );
     }
 
@@ -102,15 +121,39 @@ class SettingPage extends StatelessWidget {
                   ),
                   16.0.height,
                   cardMenu(
-                      icon: Icons.people_outline_rounded, title: "Contact"),
+                    icon: Icons.share_outlined,
+                    title: "Share My Public Address",
+                    widget: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 24.w,
+                      color: Theme.of(context).indicatorColor,
+                    ),
+                    onTap: () {
+                      Share.share(
+                          controller.selectedAddress.value.address ?? '');
+                    },
+                  ),
                   16.0.height,
                   cardMenu(
                       icon: Icons.cast_connected_outlined,
-                      title: "Wallet Connect"),
+                      title: "Wallet Connect",
+                      widget: Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 24.w,
+                        color: Theme.of(context).indicatorColor,
+                      )),
                   16.0.height,
                   cardMenu(
                       icon: Icons.settings_outlined,
-                      title: "Security & Privacy"),
+                      title: "Security & Privacy",
+                      onTap: () {
+                        Get.to(() => SecurityPage());
+                      },
+                      widget: Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 24.w,
+                        color: Theme.of(context).indicatorColor,
+                      )),
                   16.0.height,
                   cardMenu(
                     icon: Icons.dark_mode_outlined,
@@ -132,7 +175,23 @@ class SettingPage extends StatelessWidget {
                     ),
                   ),
                   16.0.height,
-                  cardMenu(icon: Icons.logout, title: "Reset Wallet"),
+                  cardMenu(
+                      icon: Icons.info_outline_rounded,
+                      title: "About",
+                      widget: Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 24.w,
+                        color: Theme.of(context).indicatorColor,
+                      )),
+                  16.0.height,
+                  cardMenu(
+                      icon: Icons.logout,
+                      title: "Reset Wallet",
+                      widget: Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 24.w,
+                        color: Theme.of(context).indicatorColor,
+                      )),
                 ],
               ),
             ),

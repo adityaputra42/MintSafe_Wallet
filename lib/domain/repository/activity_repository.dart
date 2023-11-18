@@ -19,10 +19,9 @@ class ActivityRepository {
 
     String url =
         "$explorer/api?module=account&action=txlist&address=$address&sort=desc&page=$page";
-    print(url);
+   
 
     if (await ConnectivityWrapper.instance.isConnected) {
-      print("CONNECTED");
       var response = await http.get(Uri.parse(url));
 
       log("response => ${response.body}");
@@ -32,11 +31,8 @@ class ActivityRepository {
         return json.map((e) => Activity.fromJson(e)).toList();
       }
     } else {
-      print("NO DATA");
 
-      print("CACHE : $cache");
       var json = await cache.getJSON('key');
-      print(json);
 
       if (json is List) {
         return json.map((e) => Activity.fromJson(e)).toList();
@@ -55,10 +51,8 @@ class ActivityRepository {
 
     String url =
         "$explorer/api?module=account&action=tokentx&address=$address&sort=desc&page=$page";
-    print(url);
 
     if (await ConnectivityWrapper.instance.isConnected) {
-      print("CONNECTED");
       var response = await http.get(Uri.parse(url));
       var json = jsonDecode(response.body)['result'];
       if (json is List && json.isNotEmpty) {
@@ -66,11 +60,8 @@ class ActivityRepository {
         return json.map((e) => Activity.fromJson(e)).toList();
       }
     } else {
-      print("NO DATA");
 
-      print("CACHE : $cache");
       var json = await cache.getJSON('key1');
-      print(json);
 
       if (json is List) {
         return json.map((e) => Activity.fromJson(e)).toList();

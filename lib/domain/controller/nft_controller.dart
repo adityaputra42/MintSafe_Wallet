@@ -15,7 +15,6 @@ import '../../config/config.dart';
 import '../../data/data.dart';
 import '../../data/model/nft/nft.dart';
 
-
 class NftController extends GetxController {
   EvmNewController evm = Get.find();
   final contractController = TextEditingController();
@@ -37,6 +36,23 @@ class NftController extends GetxController {
   var selectedIndexFee = 1.obs;
   var isValidAddressSent = false.obs;
   var isNextLoading = false.obs;
+  var isAddDisable = true.obs;
+
+  validateButton() {
+    if (contractController.text != '' && tokenIdController.text != '') {
+      isAddDisable.value = false;
+    } else {
+      isAddDisable.value = true;
+    }
+  }
+
+  onChangeContract(String value) {
+    validateButton();
+  }
+
+  onChangeTokenId(String value) {
+    validateButton();
+  }
 
   void reset() {
     contractController.clear();
@@ -125,14 +141,14 @@ class NftController extends GetxController {
 
                   if (imageResponse.statusCode == 200) {
                     final imageBytes = imageResponse.bodyBytes;
-                    String imageBase64 = MethodHelper().convertUint8ListToString(imageBytes);
+                    String imageBase64 =
+                        MethodHelper().convertUint8ListToString(imageBytes);
                     Nft nft = Nft(
                         contractAddress: contractAddress,
                         tokenId: tokenId,
                         name: metadata['name'],
                         owner: owner,
-                        chainId:
-                            evm.selectedChain.value.chainId,
+                        chainId: evm.selectedChain.value.chainId,
                         imageByte: imageBase64,
                         description: metadata['description']);
                     await DbHelper.instance.addNFT(nft);
@@ -141,13 +157,13 @@ class NftController extends GetxController {
                   final imageResponse = await http.get(Uri.parse(imageURL));
                   if (imageResponse.statusCode == 200) {
                     final imageBytes = imageResponse.bodyBytes;
-                    String imageBase64 = MethodHelper().convertUint8ListToString(imageBytes);
+                    String imageBase64 =
+                        MethodHelper().convertUint8ListToString(imageBytes);
                     Nft nft = Nft(
                         contractAddress: contractAddress,
                         tokenId: tokenId,
                         owner: owner,
-                        chainId:
-                            evm.selectedChain.value.chainId,
+                        chainId: evm.selectedChain.value.chainId,
                         name: metadata['name'],
                         imageByte: imageBase64,
                         description: metadata['description']);
@@ -170,13 +186,13 @@ class NftController extends GetxController {
 
                   if (imageResponse.statusCode == 200) {
                     final imageBytes = imageResponse.bodyBytes;
-                    String imageBase64 = MethodHelper().convertUint8ListToString(imageBytes);
+                    String imageBase64 =
+                        MethodHelper().convertUint8ListToString(imageBytes);
                     Nft nft = Nft(
                         contractAddress: contractAddress,
                         tokenId: tokenId,
                         owner: owner,
-                        chainId:
-                            evm.selectedChain.value.chainId,
+                        chainId: evm.selectedChain.value.chainId,
                         name: metadata['name'],
                         imageByte: imageBase64,
                         description: metadata['description']);
@@ -187,14 +203,14 @@ class NftController extends GetxController {
                   if (imageResponse.statusCode == 200) {
                     final imageBytes = imageResponse.bodyBytes;
                     dev.log(imageBytes.toString());
-                    String imageBase64 = MethodHelper().convertUint8ListToString(imageBytes);
+                    String imageBase64 =
+                        MethodHelper().convertUint8ListToString(imageBytes);
                     dev.log("response image byte => $imageBase64");
                     Nft nft = Nft(
                         contractAddress: contractAddress,
                         tokenId: tokenId,
                         owner: owner,
-                        chainId:
-                            evm.selectedChain.value.chainId,
+                        chainId: evm.selectedChain.value.chainId,
                         name: metadata['name'],
                         imageByte: imageBase64,
                         description: metadata['description']);
@@ -301,14 +317,12 @@ class NftController extends GetxController {
 
       final response = await evm.web3client!.sendTransaction(
           credentials, transaction,
-          chainId:
-              int.parse(evm.selectedChain.value.chainId!));
+          chainId: int.parse(evm.selectedChain.value.chainId!));
       dev.log("Transfer NFT Result : $response");
       await DbHelper.instance.deleteNFT(nft.id!);
       evm.initializeNFt();
       Get.snackbar("Success", "NFT has been sent",
-          backgroundColor: AppColor.primaryColor,
-          colorText: Colors.white);
+          backgroundColor: AppColor.primaryColor, colorText: Colors.white);
       Get.close(4);
 
       isloadingTransfer.value = false;

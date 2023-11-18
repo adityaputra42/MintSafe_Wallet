@@ -22,21 +22,23 @@ class ChangeWallet extends StatelessWidget {
             evm.changeAddress(address);
           }
         },
-        child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 16.w,
-            vertical: 12.w,
-          ),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.r),
-              color: Theme.of(context).cardColor,
-              boxShadow: [BoxShadow(spreadRadius: 0.5.h,blurRadius: 0.3,color: Colors.black12)],
-              border: Border.all(
-                  width: 1.w,
-                  color: address.address == evm.selectedAddress.value.address
-                      ? AppColor.primaryColor
-                      : Colors.transparent)),
-          child: Row(
+        child: 
+        // Container(
+        //   padding: EdgeInsets.symmetric(
+        //     horizontal: 16.w,
+        //     vertical: 12.w,
+        //   ),
+        //   decoration: BoxDecoration(
+        //       borderRadius: BorderRadius.circular(12.r),
+        //       color: Theme.of(context).cardColor,
+        //       boxShadow: [BoxShadow(spreadRadius: 0.5.h,blurRadius: 0.3,color: Colors.black12)],
+        //       border: Border.all(
+        //           width: 1.w,
+        //           color: address.address == evm.selectedAddress.value.address
+        //               ? AppColor.primaryColor
+        //               : Colors.transparent)),
+        //   child: 
+          Row(
             children: [
               Container(
                 width: 48.w,
@@ -60,11 +62,11 @@ class ChangeWallet extends StatelessWidget {
                     "${address.name} ${address.id}",
                     style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor,),
                   ),
-                  8.0.height,
+                  4.0.height,
                   Text(
                     MethodHelper().shortAddress(
                         address: address.address ?? "", length: 8),
-                    style: AppFont.reguler12.copyWith(color: Theme.of(context).indicatorColor,),
+                    style: AppFont.medium12.copyWith(color: AppColor.grayColor,),
                   )
                 ],
               )),
@@ -78,7 +80,7 @@ class ChangeWallet extends StatelessWidget {
                   : 24.0.width
             ],
           ),
-        ),
+        // ),
       );
     }
 

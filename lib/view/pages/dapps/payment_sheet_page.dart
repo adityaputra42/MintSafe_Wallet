@@ -27,7 +27,7 @@ class PaymentSheetText {
 }
 
 class PaymentSheet extends StatefulWidget {
-  PaymentSheet(
+  const PaymentSheet(
       {Key? key,
       required this.datas,
       required this.nextAction,
@@ -112,7 +112,7 @@ class _PaymentSheetState extends State<PaymentSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height / 1.5,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.h),

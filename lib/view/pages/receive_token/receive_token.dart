@@ -40,10 +40,20 @@ class ReceiveTokenPage extends StatelessWidget {
               ),
             ),
             8.0.height,
-            Text(
-              evm.selectedChain.value.name ?? '',
-              style: AppFont.medium16
-                  .copyWith(color: Theme.of(context).indicatorColor),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  evm.selectedChain.value.name ?? '',
+                  style: AppFont.medium16
+                      .copyWith(color: Theme.of(context).indicatorColor),
+                ),
+                4.0.width,
+                Text(
+                  "(${evm.selectedChain.value.symbol})",
+                  style: AppFont.medium16.copyWith(color: AppColor.grayColor),
+                ),
+              ],
             ),
             16.0.height,
             const Warning(
@@ -106,26 +116,28 @@ class ReceiveTokenPage extends StatelessWidget {
     return Obx(() {
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: WidgetHelper.appBar(context: context,
+        appBar: WidgetHelper.appBar(
+            context: context,
             title: Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: Theme.of(context).indicatorColor,
-                size: 24.h,
-              ),
-            ),
-            16.0.width,
-            Text(
-              "Receive ${token?.id == null ? (evm.selectedChain.value.symbol ?? '') : (token?.symbol ?? "")}",
-              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
-            ),
-          ],
-        )),
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: Theme.of(context).indicatorColor,
+                    size: 24.h,
+                  ),
+                ),
+                16.0.width,
+                Text(
+                  "Receive ${token?.id == null ? (evm.selectedChain.value.symbol ?? '') : (token?.symbol ?? "")}",
+                  style: AppFont.medium16
+                      .copyWith(color: Theme.of(context).indicatorColor),
+                ),
+              ],
+            )),
         body: Stack(
           children: [
             SizedBox(

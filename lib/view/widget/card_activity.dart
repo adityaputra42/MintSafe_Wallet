@@ -32,7 +32,7 @@ class CardActivity extends StatelessWidget {
         ));
       },
       child: Container(
-        padding: EdgeInsets.all(10.w),
+        padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(boxShadow: const [
           BoxShadow(blurRadius: 0.3, spreadRadius: 0.5, color: Colors.black12)
         ], borderRadius: BorderRadius.circular(8.r), color: Theme.of(context).cardColor),
@@ -57,7 +57,7 @@ class CardActivity extends StatelessWidget {
                       children: [
                         Text(
                           state,
-                          style: AppFont.medium16
+                          style: AppFont.medium14
                               .copyWith(color:  Theme.of(context).indicatorColor,),
                         ),
                         4.0.width,
@@ -71,7 +71,7 @@ class CardActivity extends StatelessWidget {
                     Text(
                       "${(BigInt.parse(activity.value!).toDouble() / pow(10, 18)).toStringAsFixed(5)} ${activity.symbol == "" ? evm.selectedChain.value.symbol : activity.symbol}",
                       style:
-                          AppFont.medium16.copyWith(color:  Theme.of(context).indicatorColor,),
+                          AppFont.medium14.copyWith(color:  Theme.of(context).indicatorColor,),
                     )
                   ],
                 ),
@@ -80,7 +80,7 @@ class CardActivity extends StatelessWidget {
                   children: [
                     Text(
                       "Confirmed",
-                      style: AppFont.medium14
+                      style: AppFont.medium12
                           .copyWith(color: AppColor.primaryColor),
                     ),
                     Text(
@@ -89,7 +89,7 @@ class CardActivity extends StatelessWidget {
                                   int.parse(activity.timeStamp!) * 1000)
                               .toLocal()),
                       style:
-                          AppFont.reguler14.copyWith(color: AppColor.grayColor),
+                          AppFont.reguler12.copyWith(color: AppColor.grayColor),
                     )
                   ],
                 )

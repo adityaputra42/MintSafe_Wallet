@@ -6,6 +6,7 @@ class WidgetHelper {
   static appBar({
     required Widget title,
     required BuildContext context
+    
   }) {
     return AppBar(
       elevation: 1,

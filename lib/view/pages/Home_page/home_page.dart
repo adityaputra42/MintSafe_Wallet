@@ -13,7 +13,6 @@ import 'package:mintsafe_wallet/view/pages/change_wallet/change_wallet.dart';
 import 'package:mintsafe_wallet/view/pages/receive_token/receive_token.dart';
 import 'package:mintsafe_wallet/view/pages/scan/scann_page.dart';
 import 'package:mintsafe_wallet/view/widget/card_action.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../config/config.dart';
 import '../../../domain/controller/controller.dart';

@@ -155,7 +155,7 @@ class _DappsWeb3State extends State<DappsWeb3> {
     String? favicon = "",
   }) {
     Get.bottomSheet(
-      Container(
+      SizedBox(
         height: MediaQuery.of(context).size.height / 1.7,
         child: PaymentSheet(
           favicon: favicon,
@@ -302,7 +302,6 @@ class _DappsWeb3State extends State<DappsWeb3> {
       },
       child: Scaffold(
         appBar: AppBar(
-          actions: [],
           title: GestureDetector(
             onTap: () {
               Get.to(() => SearchDapps(), transition: Transition.downToUp);
@@ -474,7 +473,7 @@ class _DappsWeb3State extends State<DappsWeb3> {
     return showModalBottomSheet(
         context: context,
         isScrollControlled: true,
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(16.r),
@@ -606,7 +605,7 @@ class _DappsWeb3State extends State<DappsWeb3> {
     return showModalBottomSheet(
         context: context,
         isScrollControlled: true,
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(16.r),
@@ -753,7 +752,7 @@ class _DappsWeb3State extends State<DappsWeb3> {
     return showModalBottomSheet(
         context: context,
         isScrollControlled: true,
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(16.r),

@@ -16,24 +16,26 @@ class AddTokenPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: WidgetHelper.appBar(context: context,
+      appBar: WidgetHelper.appBar(
+          context: context,
           title: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Theme.of(context).indicatorColor,
-              size: 24.h,
-            ),
-          ),
-          16.0.width,
-          Text("Add Token",
-              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor)),
-        ],
-      )),
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Theme.of(context).indicatorColor,
+                  size: 24.h,
+                ),
+              ),
+              16.0.width,
+              Text("Add Token",
+                  style: AppFont.medium16
+                      .copyWith(color: Theme.of(context).indicatorColor)),
+            ],
+          )),
       body: Stack(
         children: [
           SizedBox(
@@ -100,7 +102,7 @@ class AddTokenPage extends StatelessWidget {
                     16.0.height,
                     controller.selectedTab.value == 0
                         ? SearchToken()
-                        : const CustomToken()
+                        : CustomToken()
                     // TabBarView(children: [Wall()])
                   ],
                 ),

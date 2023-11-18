@@ -116,22 +116,18 @@ class Transfercontroller extends GetxController {
     if (selectedToken.value.contractAddress == null) {
       if (total <= evm.balanceEth.value) {
         isAmountValid.value = true;
-        print("total : $total");
-        print("is valid amount");
+       
       } else {
         isAmountValid.value = false;
-        print("total : $total");
-        print("is invalid");
+       
       }
     } else {
       if (total <= selectedToken.value.balance!) {
         isAmountValid.value = true;
-        print("total : $total");
-        print("is valid amount");
+        
       } else {
         isAmountValid.value = false;
-        print("total : $total");
-        print("is invalid");
+        
       }
     }
 
