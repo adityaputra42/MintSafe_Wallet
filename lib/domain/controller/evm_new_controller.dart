@@ -313,7 +313,7 @@ class EvmNewController extends GetxController {
   }
 
   void getEthBalancePeriodic() {
-    timer = Timer.periodic(const Duration(seconds: 15), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 20), (timer) {
       getBalance();
       getMultipleTokenBalances();
     });
@@ -496,13 +496,12 @@ class EvmNewController extends GetxController {
     tokenList.clear();
     tokenSelected.clear();
     final listTokens = await DbHelper.instance.getAllTokens();
-
     if (listTokens.isEmpty) {
       final tokens = await rootBundle.loadString('asset/abi/token.json');
       dev.log(tokens);
       final listToken = tokenFromJson(tokens);
 
-      await DbHelper.instance.setToken(listToken);
+      await DbHelper.instance.setAllToken(listToken);
       final tokenByChain = await DbHelper.instance
           .getListTokenByChainId(chainId: selectedChain.value.chainId ?? "");
       tokenList.assignAll(tokenByChain);
@@ -778,7 +777,6 @@ class EvmNewController extends GetxController {
   /// ###############
   var listNFT = <Nft>[].obs;
   var listUniqueNft = <NftView>[].obs;
-  var listSearchNFt = <NftView>[].obs;
 
   initializeNFt() async {
     listNFT.clear();
@@ -789,23 +787,8 @@ class EvmNewController extends GetxController {
     listNFT.assignAll(nfts);
     var unique = removeDuplicates(nfts);
     listUniqueNft.assignAll(unique);
-    listSearchNFt.addAll(listUniqueNft);
   }
 
-  searchNFT(
-    String key,
-  ) {
-    List<NftView> result = [];
-    if (key.isEmpty) {
-      result.addAll(listUniqueNft);
-    } else {
-      result = listUniqueNft
-          .where(
-              (value) => value.name!.toLowerCase().contains(key.toLowerCase()))
-          .toList();
-    }
-    listSearchNFt.value = result;
-  }
 
   List<NftView> removeDuplicates(List<Nft> list) {
     Set<String> seen = {};

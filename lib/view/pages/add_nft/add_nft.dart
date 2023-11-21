@@ -66,6 +66,7 @@ class AddNft extends StatelessWidget {
                       title: "Token Id",
                       controller: controller.tokenIdController,
                       onChange: controller.onChangeTokenId,
+                      keyboardType: TextInputType.number,
                       hintText: "Enter your token id")
                 ],
               ),

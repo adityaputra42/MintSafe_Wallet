@@ -216,9 +216,15 @@ class DbHelper {
     return list;
   }
 
-  Future<void> setToken(List<Token> tokens) async {
+  Future<void> setAllToken(List<Token> tokens) async {
     await isar.writeTxn(() async {
       await isar.tokens.putAll(tokens);
+    });
+  }
+
+  Future<void> setToken(Token token) async {
+    await isar.writeTxn(() async {
+      await isar.tokens.put(token);
     });
   }
 
@@ -259,7 +265,7 @@ class DbHelper {
     });
   }
 
-  Future<void> changeSelectedToken(SelectedToken token) async {
+  Future<void> setSelectedToken(SelectedToken token) async {
     await isar.writeTxn(() async {
       await isar.selectedTokens.put(token);
     });
@@ -345,7 +351,6 @@ class DbHelper {
 
   // Dapps History
 
-
   Future<List<DappsHistory>> getDappsHistory() async {
     List<DappsHistory> list = [];
     await isar.txn(() async {
@@ -366,7 +371,6 @@ class DbHelper {
       await isar.dappsHistorys.delete(id);
     });
   }
-
 
   ///// BROWSER TAB
   ///
@@ -425,5 +429,4 @@ class DbHelper {
       await isar.browserTabs.clear();
     });
   }
-
 }

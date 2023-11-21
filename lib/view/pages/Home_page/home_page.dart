@@ -277,7 +277,7 @@ class HomePage extends StatelessWidget {
                               16.0.height,
                               controller.tabIndex.value == 0
                                   ? TokenList()
-                                  : const NftList()
+                                  :  NftList()
                               // TabBarView(children: [Wall()])
                             ],
                           ),
