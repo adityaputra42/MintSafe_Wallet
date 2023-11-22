@@ -20,11 +20,13 @@ class InputText extends StatelessWidget {
   final Widget? crossTitle;
   final List<TextInputFormatter>? inputFormatters;
   final FocusNode? focusNode;
+  final bool enable;
   const InputText({
     Key? key,
     this.obscureText = false,
     required this.title,
     required this.hintText,
+    this.enable = true,
     this.onChange,
     this.ontaped,
     this.textInputAction,
@@ -47,7 +49,9 @@ class InputText extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(title,
-                style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor,)),
+                style: AppFont.medium14.copyWith(
+                  color: Theme.of(context).indicatorColor,
+                )),
             crossTitle ?? const SizedBox()
           ],
         ),
@@ -64,8 +68,11 @@ class InputText extends StatelessWidget {
             controller: controller,
             onTap: ontaped,
             maxLines: maxLine,
-            style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor,),
+            style: AppFont.medium14.copyWith(
+              color: Theme.of(context).indicatorColor,
+            ),
             decoration: InputDecoration(
+              enabled: enable,
               filled: true,
               fillColor: Theme.of(context).cardColor,
               contentPadding:
@@ -75,6 +82,11 @@ class InputText extends StatelessWidget {
               hintStyle: AppFont.reguler14.copyWith(
                   fontWeight: FontWeight.w300, color: AppColor.grayColor),
               border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.r),
+                borderSide:
+                    const BorderSide(color: Colors.transparent, width: 0.5),
+              ),
+              disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.r),
                 borderSide:
                     const BorderSide(color: Colors.transparent, width: 0.5),

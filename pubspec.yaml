@@ -32,6 +32,7 @@ dependencies:
   flutter_inappwebview: ^5.7.2+3
   flutter_polygon: ^0.3.0+2
   flutter_screenutil: ^5.8.1
+  flutter_slidable: ^3.0.1
   flutter_switch: ^0.3.2
   get: ^4.6.5
   http: ^0.13.5

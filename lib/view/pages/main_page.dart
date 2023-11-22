@@ -21,6 +21,7 @@ class MainPage extends StatefulWidget {
   @override
   State<MainPage> createState() => _MainPageState();
 }
+
 class _MainPageState extends State<MainPage> {
   final BottomNavBarController controller = Get.put(BottomNavBarController());
   late EvmNewController evm;
@@ -29,6 +30,7 @@ class _MainPageState extends State<MainPage> {
     evm = Get.put(EvmNewController(widget.address));
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     body() {
@@ -100,6 +102,7 @@ class _MainPageState extends State<MainPage> {
                           child: Image.asset(
                             AppIcon.walletInactive,
                             width: 32.h,
+                            color: AppColor.grayColor,
                           )),
                       activeIcon: Padding(
                         padding: EdgeInsets.all(4.h),
@@ -117,6 +120,7 @@ class _MainPageState extends State<MainPage> {
                           child: Image.asset(
                             AppIcon.diacoverInactive,
                             width: 32.h,
+                            color: AppColor.grayColor,
                           )),
                       activeIcon: Padding(
                           padding: EdgeInsets.all(4.h),
@@ -134,6 +138,7 @@ class _MainPageState extends State<MainPage> {
                           child: Image.asset(
                             AppIcon.dappInactive,
                             width: 32.h,
+                            color: AppColor.grayColor,
                           )),
                       activeIcon: Padding(
                           padding: EdgeInsets.all(4.h),
@@ -150,6 +155,7 @@ class _MainPageState extends State<MainPage> {
                           child: Image.asset(
                             AppIcon.settingInactive,
                             width: 32.h,
+                            color: AppColor.grayColor,
                           )),
                       activeIcon: Padding(
                           padding: EdgeInsets.all(4.h),

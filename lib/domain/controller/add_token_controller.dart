@@ -99,5 +99,6 @@ class AddTokenController extends GetxController {
       evm.tokenList.refresh();
       evm.tokenSelected.refresh();
     }
+    Get.back();
   }
 }

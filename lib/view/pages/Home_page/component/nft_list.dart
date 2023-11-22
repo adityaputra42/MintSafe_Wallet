@@ -3,7 +3,6 @@ import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/config/config.dart';
-import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/utils/helper/method_helper.dart';

@@ -122,7 +122,7 @@ class EvmNewController extends GetxController {
   @override
   void onInit() {
     initialize();
-    checkForUpdate();
+    // checkForUpdate();
     super.onInit();
   }
 
@@ -153,15 +153,13 @@ class EvmNewController extends GetxController {
     listChain.clear();
     listChainSelected.clear();
     final networkList = await DbHelper.instance.getAllChainNetwork();
-    List<int> id = [];
-    for (final value in networkList) {
-      id.add(value.id!);
+    if (networkList.isEmpty) {
+      final chainlist = await rootBundle.loadString('asset/abi/chain.json');
+      listChain.value = chainNetworkFromJson(chainlist);
+      await DbHelper.instance.setChainNetwork(listChain);
+    } else {
+      listChain.assignAll(networkList);
     }
-    await DbHelper.instance.deleteAllChainNetwork(id);
-    final chainlist = await rootBundle.loadString('asset/abi/chain.json');
-    listChain.value = chainNetworkFromJson(chainlist);
-    await DbHelper.instance.setChainNetwork(listChain);
-
     final listChainWallet = await DbHelper.instance.getSelectedChainWallet(
       walletAddress: selectedAddress.value.address ?? "",
     );
@@ -209,6 +207,68 @@ class EvmNewController extends GetxController {
       dev.log("List Chain ==> ${value.chainId}");
     }
   }
+
+  // Future<void> initialzedNetwork() async {
+  //   /// GET LIST NETWORK
+  //   listChain.clear();
+  //   listChainSelected.clear();
+  //   final networkList = await DbHelper.instance.getAllChainNetwork();
+  //   List<int> id = [];
+  //   for (final value in networkList) {
+  //     id.add(value.id!);
+  //   }
+  //   await DbHelper.instance.deleteAllChainNetwork(id);
+  //   final chainlist = await rootBundle.loadString('asset/abi/chain.json');
+  //   listChain.value = chainNetworkFromJson(chainlist);
+  //   await DbHelper.instance.setChainNetwork(listChain);
+
+  //   final listChainWallet = await DbHelper.instance.getSelectedChainWallet(
+  //     walletAddress: selectedAddress.value.address ?? "",
+  //   );
+  //   if (listChainWallet.isEmpty) {
+  //     var selectChain = ListChainSelected(
+  //       name: listChain.first.name,
+  //       symbol: listChain.first.symbol,
+  //       rpc: listChain.first.rpc,
+  //       chainId: listChain.first.chainId,
+  //       explorer: listChain.first.explorer,
+  //       explorerApi: listChain.first.explorerApi,
+  //       logo: listChain.first.logo,
+  //       color: listChain.first.color,
+  //       isTestnet: listChain.first.isTestnet,
+  //       walletAddress: selectedAddress.value.address ?? "",
+  //     );
+  //     await DbHelper.instance.setSelectedChainWallet(selectChain);
+  //     final chainWallet = await DbHelper.instance.getSelectedChainWallet(
+  //       walletAddress: selectedAddress.value.address ?? "",
+  //     );
+  //     listChainSelected.assignAll(chainWallet);
+  //   } else {
+  //     listChainSelected.assignAll(listChainWallet);
+  //   }
+
+  //   final chainSelected = await DbHelper.instance.getSelectedChain();
+  //   dev.log("SelectedChain => ${chainSelected.chainId}");
+  //   if (chainSelected.chainId == null) {
+  //     final selected = SelectedChain(chainId: listChain.first.chainId);
+  //     await DbHelper.instance.setSelectedChain(selected);
+  //     selectedChain.value = listChainSelected.first;
+  //   } else if (!listChainSelected.any((element) =>
+  //       element.chainId!.toLowerCase() ==
+  //       chainSelected.chainId!.toLowerCase())) {
+  //     changeNetwork(listChainSelected.first);
+  //   } else {
+  //     var chain = await DbHelper.instance.getSelectedChainNetwork();
+  //     selectedChain.value = chain!;
+  //   }
+  //   selectedChain.refresh();
+  //   listChain.refresh();
+  //   listChainSelected.refresh();
+  //   dev.log("Selected chain ==> ${selectedChain.value.chainId}");
+  //   for (var value in listChain) {
+  //     dev.log("List Chain ==> ${value.chainId}");
+  //   }
+  // }
 
   void changeNetwork(ListChainSelected network) async {
     isLoadingNetwork.value = true;
@@ -788,7 +848,6 @@ class EvmNewController extends GetxController {
     var unique = removeDuplicates(nfts);
     listUniqueNft.assignAll(unique);
   }
-
 
   List<NftView> removeDuplicates(List<Nft> list) {
     Set<String> seen = {};
