@@ -10,6 +10,7 @@ class InputText extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final Widget? icon;
+
   final Function()? ontaped;
   final Function(String)? onChange;
   final String? Function(String?)? validator;
@@ -21,12 +22,14 @@ class InputText extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final FocusNode? focusNode;
   final bool enable;
+  final bool autoFocus;
   const InputText({
     Key? key,
     this.obscureText = false,
     required this.title,
     required this.hintText,
     this.enable = true,
+    this.autoFocus = false,
     this.onChange,
     this.ontaped,
     this.textInputAction,
@@ -60,6 +63,7 @@ class InputText extends StatelessWidget {
             focusNode: focusNode,
             onChanged: onChange,
             validator: validator,
+            autofocus: autoFocus,
             textInputAction: textInputAction,
             inputFormatters: inputFormatters,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -69,7 +73,9 @@ class InputText extends StatelessWidget {
             onTap: ontaped,
             maxLines: maxLine,
             style: AppFont.medium14.copyWith(
-              color: Theme.of(context).indicatorColor,
+              color: enable
+                  ? Theme.of(context).indicatorColor
+                  : AppColor.grayColor,
             ),
             decoration: InputDecoration(
               enabled: enable,

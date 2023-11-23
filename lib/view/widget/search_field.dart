@@ -12,6 +12,7 @@ class SearchField extends StatelessWidget {
     this.controller,
     this.focusNode,
     this.inputFormatters,
+    this.onEditingComplete,
     this.keyboardType,
     this.textInputAction,
   });
@@ -21,6 +22,7 @@ class SearchField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
+  final Function()? onEditingComplete;
   final List<TextInputFormatter>? inputFormatters;
   final FocusNode? focusNode;
   @override
@@ -35,6 +37,7 @@ class SearchField extends StatelessWidget {
         validator: validator,
         textInputAction: textInputAction,
         keyboardType: keyboardType,
+        onEditingComplete:onEditingComplete ,
         inputFormatters: inputFormatters,
         focusNode: focusNode,
         decoration: InputDecoration(

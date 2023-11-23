@@ -4,12 +4,12 @@ import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:mintsafe_wallet/domain/controller/browser_controller.dart';
-import 'package:mintsafe_wallet/utils/utils.dart';
 import 'package:web3_provider/web3_provider.dart';
 import 'package:web3dart/web3dart.dart';
 
 import '../../data/data.dart';
 import '../../data/model/browser/browser_tab.dart';
+import '../../utils/utils.dart';
 import 'evm_new_controller.dart';
 
 class DappsController extends GetxController {
@@ -90,12 +90,6 @@ class DappsController extends GetxController {
   }
 
   BrowserTab selectedTab() {
-    // final selected = listBrowserTab.singleWhere(
-    //   (element) => element.isSelected == true,
-    //   orElse: () => BrowserTab(),
-    // );
-    // return selected;
-
     final selected = listBrowserTab.where(
       (element) => element.isSelected == true,
     );

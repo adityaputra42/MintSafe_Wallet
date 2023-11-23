@@ -9,7 +9,7 @@ import 'package:mintsafe_wallet/domain/controller/controller.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 import 'package:mintsafe_wallet/view/pages/activity/activity_page.dart';
-import 'package:mintsafe_wallet/view/pages/explorer/explorer_page.dart';
+import 'package:mintsafe_wallet/view/pages/dapps/search_dapps.dart';
 import 'package:mintsafe_wallet/view/pages/setting/setting_page.dart';
 
 import '../../config/config.dart';
@@ -40,7 +40,7 @@ class _MainPageState extends State<MainPage> {
         case 1:
           return ActivityPage();
         case 2:
-          return ExplorerPage();
+          return SearchDapps();
         case 3:
           return SettingPage();
         default:

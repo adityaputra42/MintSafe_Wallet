@@ -22,7 +22,6 @@ import '../../../config/config.dart';
 import '../../../domain/controller/controller.dart';
 import 'js_bridge_bean.dart';
 import 'payment_sheet_page.dart';
-import 'search_dapps.dart';
 
 class DappsWeb3 extends StatefulWidget {
   final String initialUrl;
@@ -37,6 +36,7 @@ class _DappsWeb3State extends State<DappsWeb3> {
   BottomNavBarController controller = Get.find();
 
   String urlValidator(String url) {
+    log(url.toString());
     if (MethodHelper().isURL(url)) {
       return url;
     } else {
@@ -301,18 +301,32 @@ class _DappsWeb3State extends State<DappsWeb3> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: GestureDetector(
-            onTap: () {
-              Get.to(() => SearchDapps(), transition: Transition.downToUp);
-            },
-            child: Text(
-              web3.title.value,
-              style: AppFont.medium12
-                  .copyWith(color: Theme.of(context).indicatorColor),
-            ),
-          ),
-        ),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: WidgetHelper.appBar(
+            context: context,
+            title: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: Theme.of(context).indicatorColor,
+                    size: 24.h,
+                  ),
+                ),
+                16.0.width,
+                Expanded(
+                  child: Text(
+                    web3.title.value,
+                    style: AppFont.medium14
+                        .copyWith(color: Theme.of(context).indicatorColor),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            )),
         body: Obx(() {
           return LoadingOverlay(
             isLoading: web3.evm.isLoadingNetwork.value,
@@ -400,7 +414,7 @@ class _DappsWeb3State extends State<DappsWeb3> {
                   case EIP1193.signPersonalMessage:
                     Map<String, dynamic> object = params["object"];
                     String data = object["data"];
-                    log("signTx personal ${object}");
+                    log("signTx personal $object");
                     log(params.toString());
                     _showModalConfirm(
                         from: web3.evm.selectedAddress.value.address!,
@@ -579,8 +593,8 @@ class _DappsWeb3State extends State<DappsWeb3> {
                                   //           radix: 16)
                                   //       .toString(),
                                   // ));
-                                  // web3.evm.changeNetwork(
-                                  //     web3.evm.networkController.listChain.last);
+                                  // web3.evm.changeNetwork(web3
+                                  //     .evm.listChainSelected.last);
                                 },
                                 title: 'Add',
                                 height: 48.h,

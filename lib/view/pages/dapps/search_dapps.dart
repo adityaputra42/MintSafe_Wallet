@@ -1,22 +1,26 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/config/config.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 
+import '../../../data/data.dart';
 import '../../../domain/controller/bottom_navbar_controller.dart';
 import '../../../domain/controller/browser_controller.dart';
 import '../../../domain/controller/dapp_controller.dart';
+import '../../widget/widget.dart';
+import 'new_dapps.dart';
 
 class SearchDapps extends StatelessWidget {
   SearchDapps({super.key});
 
   final BottomNavBarController controller = Get.put(BottomNavBarController());
   final BrowserController browserController = Get.put(BrowserController());
-  final DappsController web3 = Get.find();
+  final DappsController web3 = Get.put(DappsController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,180 +29,251 @@ class SearchDapps extends StatelessWidget {
       child: Obx(() {
         return Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
-            appBar: PreferredSize(
-                preferredSize: Size(AppBar().preferredSize.width,
-                    AppBar().preferredSize.height + 100),
-                child: SafeArea(
-                  child: Container(
-                    color: Theme.of(context).colorScheme.background,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                                autofocus: true,
-                                controller: controller.initialUrl,
-                                cursorHeight: 16.h,
-                                style: AppFont.semibold14.copyWith(
-                                  color: Theme.of(context).indicatorColor,
-                                ),
-                                onChanged: (value) =>
-                                    controller.setSearch(value),
-                                onEditingComplete: () {
-                                  Get.back();
-                                  // web3.loadUrl(controller.initialUrl.text);
-                                  final uri =
-                                      Uri.tryParse(controller.initialUrl.text);
-
-                                  if (uri != null && uri.isAbsolute) {
-                                    web3.webController.loadUrl(
-                                        urlRequest: URLRequest(
-                                            url: Uri.parse(
-                                                controller.initialUrl.text)));
-                                  } else {
-                                    web3.webController.loadUrl(
-                                        urlRequest: URLRequest(
-                                            url: Uri.parse(
-                                                "https://www.google.com/search?q=${controller.initialUrl.text}")));
-                                  }
-
-                                  controller.initialUrl.clear();
-                                  // web3.webController.loadUrl(
-                                  //     urlRequest: URLRequest(
-                                  //         url: Uri.parse(
-                                  //             "https://www.google.com/search?q=${controller.initialUrl.text}")));
-
-                                  // web3.webController.reload();
-
-                                  // if (controller.initialUrl.text.isNotEmpty) {
-                                  //   Get.to(() => DappsWeb3(
-                                  //       initialUrl:
-                                  //           controller.initialUrl.text));
-                                  // }
-                                },
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                    Icons.search,
-                                    color: Theme.of(context).indicatorColor,
-                                  ),
-                                  // suffixIcon: GestureDetector(
-                                  //   onTap: () {
-                                  //     controller.searchController.text = '';
-                                  //   },
-                                  //   child: Icon(
-                                  //     Icons.close,
-                                  //     color: Theme.of(context).indicatorColor,
-                                  //   ),
-                                  // ),
-
-                                  hintText: "Search or enter website url",
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 0.h, horizontal: 24.w),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16.r),
-                                      borderSide: BorderSide(
-                                          width: 1.h,
-                                          color:
-                                              Theme.of(context).primaryColor)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16.r),
-                                      borderSide: BorderSide(
-                                          width: 1.h,
-                                          color:
-                                              Theme.of(context).primaryColor)),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16.r),
-                                      borderSide: BorderSide(
-                                          width: 1.h,
-                                          color:
-                                              Theme.of(context).primaryColor)),
-                                )),
-                          ),
-                          GestureDetector(
-                            onTap: () => Get.back(),
-                            child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                child: Text(
-                                  "Cancel",
-                                  style: AppFont.medium12.copyWith(
-                                      color: Theme.of(context).indicatorColor),
-                                )),
-                          )
-                        ],
-                      ),
-                    ),
+            body: Stack(
+              children: [
+                SizedBox(
+                  width: ScreenUtil().screenWidth,
+                  child: Image.asset(
+                    AppImage.maskHome,
+                    fit: BoxFit.cover,
                   ),
-                )),
-            body: ListView.builder(
-              itemCount: browserController.dappsHistory.length,
-              itemBuilder: (context, index) {
-                final item =
-                    browserController.dappsHistory.reversed.toList()[index];
-                return GestureDetector(
-                  onTap: () {
-                    Get.back();
-                    // web3.loadUrl(controller.initialUrl.text);
-                    final uri = Uri.tryParse(item.url!);
+                ),
+                SafeArea(child: body(context)),
+              ],
+            ));
+      }),
+    );
+  }
 
-                    if (uri != null && uri.isAbsolute) {
-                      web3.webController.loadUrl(
-                          urlRequest: URLRequest(url: Uri.parse(item.url!)));
-                    } else {
-                      web3.webController.loadUrl(
-                          urlRequest: URLRequest(
-                              url: Uri.parse(
-                                  "https://www.google.com/search?q=${item.url!}")));
-                    }
-                  },
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.public,
-                          size: 24.w,
-                        ),
-                        12.0.width,
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+  Widget cardDefi({
+    required BuildContext context,
+    String? image,
+    String? title,
+    String? subtitle,
+    String? url,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => DappsWeb3(
+              initialUrl: url!,
+            ));
+      },
+      child: SizedBox(
+        child: Row(
+          children: [
+            SizedBox(
+              width: 48.h,
+              height: 48.h,
+              child: ClipPolygon(
+                sides: 6,
+                rotate: 0,
+                child: Container(
+                    padding: EdgeInsets.all(0.25.h),
+                    color: AppColor.textDark,
+                    child: Image.asset(
+                      image!,
+                      fit: BoxFit.cover,
+                    )),
+              ),
+            ),
+            8.0.width,
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title!,
+                  style: AppFont.medium16
+                      .copyWith(color: Theme.of(context).indicatorColor),
+                ),
+                Text(
+                  subtitle!,
+                  style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            )),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget body(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 8.h),
+          child: SearchField(
+            controller: controller.initialUrl,
+            onChange: (value) => controller.setSearch(value),
+            onEditingComplete: () {
+              log(controller.initialUrl.text);
+              if (controller.initialUrl.text.isNotEmpty) {
+                Get.to(() => DappsWeb3(initialUrl: controller.initialUrl.text));
+              }
+              controller.initialUrl.clear();
+            },
+          ),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                browserController.dappsHistory.isEmpty
+                    ? const SizedBox()
+                    : Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                item.title ?? "",
-                                maxLines: 1,
-                                style: AppFont.medium12.copyWith(
+                                "History",
+                                style: AppFont.medium16.copyWith(
                                     color: Theme.of(context).indicatorColor),
                               ),
                               Text(
-                                item.url ?? "",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: AppFont.light10.copyWith(
-                                    color: Theme.of(context).indicatorColor),
+                                "View all",
+                                style: AppFont.medium14
+                                    .copyWith(color: AppColor.primaryColor),
                               ),
                             ],
                           ),
-                        ),
-                      const  Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            browserController.deleteDappsHistory(item.id!);
-                          },
-                          child: Icon(
-                            Icons.close,
-                            color: Theme.of(context).indicatorColor,
+                          Column(
+                            children: List.generate(
+                                browserController.dappsHistory.length < 5
+                                    ? browserController.dappsHistory.length
+                                    : 5, (index) {
+                              final item = browserController
+                                  .dappsHistory.reversed
+                                  .toList()[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Get.to(() => DappsWeb3(
+                                        initialUrl: item.url!,
+                                      ));
+                                },
+                                child: cardHitoryBrowser(item, context),
+                              );
+                            }),
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ));
-      }),
+                          16.0.height,
+                        ],
+                      ),
+                Text(
+                  "Recomendation",
+                  style: AppFont.medium16
+                      .copyWith(color: Theme.of(context).indicatorColor),
+                ),
+                16.0.height,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    cardDefi(
+                        context: context,
+                        image: AppImage.pancakeSwap,
+                        title: "PancakeSwap",
+                        subtitle:
+                            "Trade, earn and win crypto in decentralize app and more oportunity",
+                        url: 'https://pancakeswap.finance/'),
+                    16.0.height,
+                    cardDefi(
+                        context: context,
+                        image: AppImage.uniswap,
+                        title: "Uniswap",
+                        subtitle:
+                            "Trade, earn and win crypto in decentralize app and more oportunity",
+                        url: 'https://app.uniswap.org/'),
+                    16.0.height,
+                    cardDefi(
+                        context: context,
+                        image: AppImage.opensea,
+                        title: "OpenSea",
+                        subtitle:
+                            "Trade, earn and win crypto in decentralize app and more oportunity",
+                        url: 'https://opensea.io/'),
+                    16.0.height,
+                    cardDefi(
+                        context: context,
+                        image: AppImage.quickswap,
+                        title: "QuickSwqp",
+                        subtitle:
+                            "Trade, earn and win crypto in decentralize app and more oportunity",
+                        url: 'https://quickswap.exchange/#/'),
+                    16.0.height,
+                    cardDefi(
+                        context: context,
+                        image: AppImage.ens,
+                        title: "Ens ETH",
+                        subtitle:
+                            "Trade, earn and win crypto in decentralize app and more oportunity",
+                        url: 'https://ens.domains/'),
+                    16.0.height,
+                    cardDefi(
+                        context: context,
+                        image: AppImage.chainlink,
+                        title: "ChainLink",
+                        subtitle:
+                            "Trade, earn and win crypto in decentralize app and more oportunity",
+                        url: 'https://chain.link/'),
+                    16.0.height,
+                  ],
+                ),
+                16.0.height,
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Padding cardHitoryBrowser(DappsHistory item, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        children: [
+          Icon(
+            Icons.public,
+            size: 24.w,
+          ),
+          12.0.width,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item.title ?? "",
+                  maxLines: 1,
+                  style: AppFont.medium12
+                      .copyWith(color: Theme.of(context).indicatorColor),
+                ),
+                Text(
+                  item.url ?? "",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppFont.light10
+                      .copyWith(color: Theme.of(context).indicatorColor),
+                ),
+              ],
+            ),
+          ),
+          const Spacer(),
+          GestureDetector(
+            onTap: () {
+              browserController.deleteDappsHistory(item.id!);
+            },
+            child: Icon(
+              Icons.delete,
+              color: AppColor.redColor,
+              size: 20.w,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
