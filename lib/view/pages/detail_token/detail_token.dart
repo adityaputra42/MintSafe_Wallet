@@ -71,7 +71,11 @@ class DetailToken extends StatelessWidget {
             ),
             CardAction(
               scan: () {
-                Get.to(() => const ScannPage());
+                Get.to(() => ScannPage(
+                      scanType: ScanType.address,
+                      asset: AssetType.token,
+                      token: token,
+                    ));
               },
               receive: () {
                 Get.to(() => ReceiveTokenPage());
@@ -115,7 +119,8 @@ class DetailToken extends StatelessWidget {
                 16.0.width,
                 Text(
                   "${token.name}",
-                  style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
+                  style: AppFont.medium16
+                      .copyWith(color: Theme.of(context).indicatorColor),
                 ),
               ],
             )),

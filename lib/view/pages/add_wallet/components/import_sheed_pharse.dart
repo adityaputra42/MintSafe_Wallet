@@ -6,6 +6,7 @@ import '../../../../config/config.dart';
 import '../../../../data/data.dart';
 import '../../../../utils/utils.dart';
 import '../../../widget/widget.dart';
+import '../../scan/scann_page.dart';
 
 class ImportSheedPharse extends StatelessWidget {
   ImportSheedPharse({super.key});
@@ -14,26 +15,29 @@ class ImportSheedPharse extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: WidgetHelper.appBar(context: context,
+      appBar: WidgetHelper.appBar(
+          context: context,
           title: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Theme.of(context).indicatorColor,
-              size: 24.h,
-            ),
-          ),
-          16.0.width,
-          Text(
-            "Import Sheed Pharse",
-            style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor,),
-          ),
-        ],
-      )),
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Theme.of(context).indicatorColor,
+                  size: 24.h,
+                ),
+              ),
+              16.0.width,
+              Text(
+                "Import Sheed Pharse",
+                style: AppFont.medium16.copyWith(
+                  color: Theme.of(context).indicatorColor,
+                ),
+              ),
+            ],
+          )),
       body: Stack(
         children: [
           SizedBox(
@@ -51,7 +55,9 @@ class ImportSheedPharse extends StatelessWidget {
                   16.0.height,
                   Text(
                     'Enter Your Secret Recovery Phrase',
-                    style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor,),
+                    style: AppFont.medium16.copyWith(
+                      color: Theme.of(context).indicatorColor,
+                    ),
                   ),
                   8.0.height,
                   Text(
@@ -66,17 +72,25 @@ class ImportSheedPharse extends StatelessWidget {
                     textInputAction: TextInputAction.done,
                     controller: evm.importAddressMnemonicController,
                     maxLine: 6,
-                    icon: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        8.0.width,
-                        Icon(
-                          Icons.qr_code_scanner_rounded,
-                          size: 32.h,
-                        ),
-                        24.0.width
-                      ],
+                    icon: GestureDetector(
+                      onTap: () {
+                        Get.to(() => ScannPage(
+                              textController:
+                                  evm.importAddressMnemonicController,
+                            ));
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          8.0.width,
+                          Icon(
+                            Icons.qr_code_scanner_rounded,
+                            size: 32.h,
+                          ),
+                          24.0.width
+                        ],
+                      ),
                     ),
                   ),
                   SecondaryButton(

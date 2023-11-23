@@ -87,7 +87,11 @@ class HomePage extends StatelessWidget {
               //             "0xff1AA9A4"))
               //     .withOpacity(0.4),
               scan: () {
-                Get.to(() => const ScannPage());
+                Get.to(
+                  () => const ScannPage(
+                    scanType: ScanType.address,
+                  ),
+                );
               },
               receive: () {
                 Get.to(() => ReceiveTokenPage());
@@ -277,7 +281,7 @@ class HomePage extends StatelessWidget {
                               16.0.height,
                               controller.tabIndex.value == 0
                                   ? TokenList()
-                                  :  NftList()
+                                  : NftList()
                               // TabBarView(children: [Wall()])
                             ],
                           ),

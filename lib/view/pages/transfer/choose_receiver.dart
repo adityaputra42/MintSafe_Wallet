@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/domain/controller/transfer_controller.dart';
+import 'package:mintsafe_wallet/view/pages/scan/scann_page.dart';
 import 'package:mintsafe_wallet/view/pages/transfer/set_amount.dart';
 import '../../../config/config.dart';
 import '../../../data/data.dart';
@@ -84,8 +85,7 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
                   Text(
                     MethodHelper().shortAddress(
                         address: address.address ?? "", length: 8),
-                    style:  AppFont.medium12.copyWith(color: AppColor.grayColor),
-                   
+                    style: AppFont.medium12.copyWith(color: AppColor.grayColor),
                   ),
                 ],
               )),
@@ -100,9 +100,9 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
                           orElse: () => SelectedToken(),
                         ).balance ?? 0} \$${controller.selectedToken.value.symbol}"
                     : "${address.balance} \$${evm.selectedChain.value.symbol}",
-                style:  AppFont.medium16.copyWith(
-                      color: Theme.of(context).indicatorColor,
-                    ),
+                style: AppFont.medium16.copyWith(
+                  color: Theme.of(context).indicatorColor,
+                ),
               )
             ],
           ),
@@ -120,7 +120,8 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
               16.0.height,
               Text(
                 "Asset",
-                style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor),
+                style: AppFont.medium14
+                    .copyWith(color: Theme.of(context).indicatorColor),
               ),
               8.0.height,
               Container(
@@ -153,8 +154,8 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
                         widget.assetType == AssetType.coin
                             ? (evm.selectedChain.value.name ?? '')
                             : (widget.token?.name ?? ''),
-                        style:
-                            AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
+                        style: AppFont.medium16
+                            .copyWith(color: Theme.of(context).indicatorColor),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -172,7 +173,8 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
               16.0.height,
               Text(
                 "From",
-                style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor),
+                style: AppFont.medium14
+                    .copyWith(color: Theme.of(context).indicatorColor),
               ),
               8.0.height,
               GestureDetector(
@@ -213,8 +215,8 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
                               //     address:
                               //         evm.selectedAddress.value.address ?? '',
                               //     length: 8),
-                              style: AppFont.medium14
-                                  .copyWith(color: Theme.of(context).indicatorColor),
+                              style: AppFont.medium14.copyWith(
+                                  color: Theme.of(context).indicatorColor),
                             ),
                             4.0.height,
                             Text(
@@ -243,17 +245,24 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
                 hintText: "Receive Address",
                 controller: controller.addressController,
                 onChange: controller.checkAddressSent,
-                icon: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    8.0.width,
-                    Icon(
-                      Icons.qr_code_scanner_rounded,
-                      size: 24.h,
-                    ),
-                    16.0.width
-                  ],
+                icon: GestureDetector(
+                  onTap: () {
+                    Get.to(() => ScannPage(
+                          textController: controller.addressController,
+                        ));
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      8.0.width,
+                      Icon(
+                        Icons.qr_code_scanner_rounded,
+                        size: 24.h,
+                      ),
+                      16.0.width
+                    ],
+                  ),
                 ),
               ),
               32.0.height,
@@ -297,26 +306,28 @@ class _ChooseReceiverState extends State<ChooseReceiver> {
     return Obx(() {
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: WidgetHelper.appBar(context: context,
+        appBar: WidgetHelper.appBar(
+            context: context,
             title: Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: Theme.of(context).indicatorColor,
-                size: 24.h,
-              ),
-            ),
-            16.0.width,
-            Text(
-              "Transfer ${widget.assetType == AssetType.coin ? evm.selectedChain.value.symbol : widget.token?.symbol}",
-              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
-            ),
-          ],
-        )),
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: Theme.of(context).indicatorColor,
+                    size: 24.h,
+                  ),
+                ),
+                16.0.width,
+                Text(
+                  "Transfer ${widget.assetType == AssetType.coin ? evm.selectedChain.value.symbol : widget.token?.symbol}",
+                  style: AppFont.medium16
+                      .copyWith(color: Theme.of(context).indicatorColor),
+                ),
+              ],
+            )),
         body: Stack(
           children: [
             SizedBox(

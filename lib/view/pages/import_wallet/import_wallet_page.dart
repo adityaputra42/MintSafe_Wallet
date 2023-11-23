@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:mintsafe_wallet/domain/controller/import_waller_controller.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/utils/helper/helper.dart';
+import 'package:mintsafe_wallet/view/pages/scan/scann_page.dart';
 import 'package:mintsafe_wallet/view/widget/input_text.dart';
 import 'package:mintsafe_wallet/view/widget/primary_button.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -27,7 +28,8 @@ class ImportWalletPage extends StatelessWidget {
             children: [
               16.0.height,
               Text('Import via Seed Phrase',
-                  style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor)),
+                  style: AppFont.medium16
+                      .copyWith(color: Theme.of(context).indicatorColor)),
               4.0.height,
               Text(
                 'To import an existing wallet, please enter the recovery seed phrase here:',
@@ -47,9 +49,16 @@ class ImportWalletPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     8.0.width,
-                    Icon(
-                      Icons.qr_code_scanner_rounded,
-                      size: 32.h,
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => const ScannPage(
+                              scanType: ScanType.mnemonic,
+                            ));
+                      },
+                      child: Icon(
+                        Icons.qr_code_scanner_rounded,
+                        size: 32.h,
+                      ),
                     ),
                     24.0.width
                   ],
@@ -170,26 +179,28 @@ class ImportWalletPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: WidgetHelper.appBar(context: context,
+      appBar: WidgetHelper.appBar(
+          context: context,
           title: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Theme.of(context).indicatorColor,
-              size: 24.h,
-            ),
-          ),
-          16.0.width,
-          Text(
-            "Import an Existing Wallet",
-            style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
-          ),
-        ],
-      )),
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Theme.of(context).indicatorColor,
+                  size: 24.h,
+                ),
+              ),
+              16.0.width,
+              Text(
+                "Import an Existing Wallet",
+                style: AppFont.medium16
+                    .copyWith(color: Theme.of(context).indicatorColor),
+              ),
+            ],
+          )),
       body: Stack(
         children: [
           SizedBox(
