@@ -112,7 +112,6 @@ class SearchDapps extends StatelessWidget {
               if (controller.initialUrl.text.isNotEmpty) {
                 Get.to(() => DappsWeb3(initialUrl: controller.initialUrl.text));
               }
-              controller.initialUrl.clear();
             },
           ),
         ),
@@ -238,7 +237,7 @@ class SearchDapps extends StatelessWidget {
         children: [
           Icon(
             Icons.public,
-            size: 24.w,
+            size: 32.w,
           ),
           12.0.width,
           Expanded(
@@ -248,15 +247,14 @@ class SearchDapps extends StatelessWidget {
                 Text(
                   item.title ?? "",
                   maxLines: 1,
-                  style: AppFont.medium12
+                  style: AppFont.medium14
                       .copyWith(color: Theme.of(context).indicatorColor),
                 ),
                 Text(
                   item.url ?? "",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: AppFont.light10
-                      .copyWith(color: Theme.of(context).indicatorColor),
+                  style: AppFont.light12.copyWith(color: AppColor.grayColor),
                 ),
               ],
             ),

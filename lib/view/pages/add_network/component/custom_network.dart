@@ -51,7 +51,7 @@ class CustomNetwork extends StatelessWidget {
                   ),
                   16.0.height,
                   InputText(
-                    title: "Block explorer URL (Optional)",
+                    title: "Block explorer URL",
                     hintText: "Enter block explorer url",
                     onChange: controller.onChangeInputText,
                     controller: controller.blockExplorerController,

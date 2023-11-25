@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/data.dart';
@@ -18,6 +20,31 @@ class AddNetworkController extends GetxController {
   final EvmNewController evm = Get.find();
 
   void changeTab(int index) => selectedTab.value = index;
+
+  List<String> listColor = [
+    "0xffFF6C22",
+    "0xff00A9FF",
+    "0xff190482",
+    "0xff64CCC5",
+    "0xffEBE76C",
+    "0xff91C8E4",
+    "0xffD71313",
+    "0xff9BABB8",
+    "0xff643843",
+    "0xff088395",
+    "0xffE5BEEC",
+    "0xffC9A7EB",
+    "0xffB0DAFF",
+    "0xffD5B4B4",
+    "0xff867070",
+    "0xff7752FE",
+    "0xffC2D9FF",
+  ];
+  String getRandomValue() {
+    Random random = Random();
+    int randomIndex = random.nextInt(listColor.length);
+    return listColor[randomIndex];
+  }
 
   validateButton() {
     if (networkNameController.text != '' &&
@@ -61,7 +88,7 @@ class AddNetworkController extends GetxController {
         rpc: rpcUrlController.text,
         explorer: blockExplorerController.text,
         explorerApi: blockExplorerController.text,
-        color: '0xff1AA9A4',
+        color: getRandomValue(),
         isTestnet: false,
         logo: 'asset/logo/logo_default.png');
     ChainNetwork chain = ChainNetwork(
@@ -71,7 +98,7 @@ class AddNetworkController extends GetxController {
         rpc: rpcUrlController.text,
         explorer: blockExplorerController.text,
         explorerApi: blockExplorerController.text,
-        color: '0xff1AA9A4',
+        color: getRandomValue(),
         isTestnet: false,
         logo: 'asset/logo/logo_default.png');
     if (evm.listChainSelected.any((element) =>

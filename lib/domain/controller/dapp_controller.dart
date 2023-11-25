@@ -21,7 +21,7 @@ class DappsController extends GetxController {
   var url = "".obs;
   var isSearch = false.obs;
   Web3Client? web3client;
-
+  DebouncerHelper debouncer = DebouncerHelper(milliseconds: 500);
   late InAppWebViewController webController;
 
   var listBrowserTab = <BrowserTab>[].obs;
@@ -65,6 +65,12 @@ class DappsController extends GetxController {
       await browserController
           .addDappsHistory(DappsHistory(title: title, url: uri.toString()));
     }
+  }
+
+  void onSearchChange(String value) {
+    debouncer.run(() {
+      loadUrl(value);
+    });
   }
 
   loadUrl(String? url) {

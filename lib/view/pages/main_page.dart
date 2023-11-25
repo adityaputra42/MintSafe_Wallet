@@ -79,6 +79,7 @@ class _MainPageState extends State<MainPage> {
         bottomNavigationBar: Container(
           width: double.infinity,
           // height: 72.h,
+          padding: EdgeInsets.only(top: 6.h, bottom: 8.h),
           decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
               boxShadow: [
@@ -101,14 +102,14 @@ class _MainPageState extends State<MainPage> {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.walletInactive,
-                            width: 32.h,
+                            width: 28.h,
                             color: AppColor.grayColor,
                           )),
                       activeIcon: Padding(
                         padding: EdgeInsets.all(4.h),
                         child: Image.asset(
                           AppIcon.walletActive,
-                          width: 32.h,
+                          width: 28.h,
                           color: AppColor.primaryColor,
                         ),
                       ),
@@ -119,14 +120,14 @@ class _MainPageState extends State<MainPage> {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.diacoverInactive,
-                            width: 32.h,
+                            width: 28.h,
                             color: AppColor.grayColor,
                           )),
                       activeIcon: Padding(
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.discoverActive,
-                            width: 32.h,
+                            width: 28.h,
                             color: AppColor.primaryColor,
                           )),
                       label: 'Activity',
@@ -137,14 +138,14 @@ class _MainPageState extends State<MainPage> {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.dappInactive,
-                            width: 32.h,
+                            width: 28.h,
                             color: AppColor.grayColor,
                           )),
                       activeIcon: Padding(
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.dappActive,
-                            width: 32.h,
+                            width: 28.h,
                             color: AppColor.primaryColor,
                           )),
                       label: 'DApp',
@@ -154,14 +155,14 @@ class _MainPageState extends State<MainPage> {
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.settingInactive,
-                            width: 32.h,
+                            width: 28.h,
                             color: AppColor.grayColor,
                           )),
                       activeIcon: Padding(
                           padding: EdgeInsets.all(4.h),
                           child: Image.asset(
                             AppIcon.settingActive,
-                            width: 32.h,
+                            width: 28.h,
                             color: AppColor.primaryColor,
                           )),
                       label: 'Settings',
@@ -172,11 +173,11 @@ class _MainPageState extends State<MainPage> {
                   onTap: (value) => controller.changeIndexBar(value),
                   backgroundColor: Colors.transparent,
                   selectedItemColor: AppColor.primaryColor,
-                  selectedLabelStyle: AppFont.semibold12,
+                  selectedLabelStyle: AppFont.medium12,
                   unselectedItemColor: AppColor.grayColor,
                   showUnselectedLabels: true,
                   unselectedLabelStyle:
-                      AppFont.medium12.copyWith(color: AppColor.grayColor),
+                      AppFont.reguler12.copyWith(color: AppColor.grayColor),
                 ),
                 // evm.isLoadingNetwork.value
                 //     ? Container(

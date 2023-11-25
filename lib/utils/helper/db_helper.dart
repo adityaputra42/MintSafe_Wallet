@@ -119,6 +119,7 @@ class DbHelper {
       await isar.chainNetworks.putAll(networks);
     });
   }
+
   Future<void> setChainNetwork(ChainNetwork network) async {
     await isar.writeTxn(() async {
       await isar.chainNetworks.put(network);
@@ -133,14 +134,22 @@ class DbHelper {
     });
   }
 
-  // Future<void> unSelectNetwork(int id) async {
-  //   await isar.writeTxn(() async {
-  //     final add = await isar.chainNetworks.get(id);
-
-  //     add!.selected = false;
-  //     await isar.chainNetworks.put(add);
-  //   });
-  // }
+  Future<void> updateRPC({required String chainId, required String rpc}) async {
+    await isar.writeTxn(() async {
+      final chain =
+          await isar.chainNetworks.filter().chainIdEqualTo(chainId).findFirst();
+      final selectedChain = await isar.listChainSelecteds
+          .filter()
+          .chainIdEqualTo(chainId)
+          .findFirst();
+      chain!.rpc = rpc;
+      await isar.chainNetworks.put(chain);
+      if (selectedChain?.id != null) {
+        selectedChain!.rpc = rpc;
+        await isar.listChainSelecteds.put(selectedChain);
+      }
+    });
+  }
 
   Future<List<ChainNetwork>> getAllChainNetwork() async {
     List<ChainNetwork> networks = [];

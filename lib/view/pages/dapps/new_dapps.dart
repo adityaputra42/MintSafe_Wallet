@@ -36,12 +36,14 @@ class _DappsWeb3State extends State<DappsWeb3> {
   BottomNavBarController controller = Get.find();
 
   String urlValidator(String url) {
-    log(url.toString());
+    String value = '';
     if (MethodHelper().isURL(url)) {
-      return url;
+      value = url;
     } else {
-      return "https://www.google.com/search?q=$url";
+      value = "https://www.google.com/search?q=$url";
     }
+    log(value.toString());
+    return value;
   }
 
   InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
@@ -309,6 +311,7 @@ class _DappsWeb3State extends State<DappsWeb3> {
                 GestureDetector(
                   onTap: () {
                     Get.back();
+                    controller.initialUrl.clear();
                   },
                   child: Icon(
                     Icons.arrow_back_ios_new_rounded,

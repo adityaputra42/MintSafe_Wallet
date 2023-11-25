@@ -109,8 +109,9 @@ class _EditNetworkState extends State<EditNetwork> {
           bottomNavigationBar: controller.rpcEnable.value
               ? PrimaryButton(
                   title: "Save",
+                  loading: controller.isLoading.value,
                   onPressed: () {
-                    controller.changeEnable(false);
+                    controller.updateRpc();
                   },
                   margin: EdgeInsets.fromLTRB(24.w, 8.h, 24.w, 24.h),
                 )
