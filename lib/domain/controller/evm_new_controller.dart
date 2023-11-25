@@ -156,7 +156,7 @@ class EvmNewController extends GetxController {
     if (networkList.isEmpty) {
       final chainlist = await rootBundle.loadString('asset/abi/chain.json');
       listChain.value = chainNetworkFromJson(chainlist);
-      await DbHelper.instance.setChainNetwork(listChain);
+      await DbHelper.instance.setAllChainNetwork(listChain);
     } else {
       listChain.assignAll(networkList);
     }

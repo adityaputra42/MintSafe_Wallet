@@ -10,6 +10,7 @@ import 'evm_new_controller.dart';
 class AddTokenController extends GetxController {
   EvmNewController evm = Get.find();
   var selectedTab = 0.obs;
+  var isLoading = false.obs;
   var disableImportButton = true.obs;
   var isValidAddress = false.obs;
   final nameController = TextEditingController();
@@ -66,6 +67,7 @@ class AddTokenController extends GetxController {
   }
 
   void setCustomToken() async {
+    isLoading.value = true;
     SelectedToken selectedToken = SelectedToken(
         name: nameController.text,
         chainId: evm.selectedChain.value.chainId,
@@ -100,5 +102,7 @@ class AddTokenController extends GetxController {
       evm.tokenSelected.refresh();
     }
     Get.back();
+
+    isLoading.value = false;
   }
 }

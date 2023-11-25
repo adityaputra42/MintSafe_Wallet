@@ -56,8 +56,9 @@ class CustomToken extends StatelessWidget {
                   ],
                 ),
                 PrimaryButton(
-                  title: "Confirm",
+                  title: "Import",
                   disable: controller.disableImportButton.value,
+                  loading: controller.isLoading.value,
                   onPressed: () {
                     controller.setCustomToken();
                   },

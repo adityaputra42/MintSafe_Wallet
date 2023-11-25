@@ -114,9 +114,14 @@ class DbHelper {
     }
   }
 
-  Future<void> setChainNetwork(List<ChainNetwork> networks) async {
+  Future<void> setAllChainNetwork(List<ChainNetwork> networks) async {
     await isar.writeTxn(() async {
       await isar.chainNetworks.putAll(networks);
+    });
+  }
+  Future<void> setChainNetwork(ChainNetwork network) async {
+    await isar.writeTxn(() async {
+      await isar.chainNetworks.put(network);
     });
   }
 
@@ -413,7 +418,6 @@ class DbHelper {
       for (var element in tabs) {
         element.isSelected = false;
       }
-
       await isar.browserTabs.putAll(tabs);
       final selectedTab = await isar.browserTabs.get(tab.id!);
       selectedTab!.isSelected = true;
