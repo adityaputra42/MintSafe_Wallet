@@ -40,7 +40,9 @@ class ChangeNetwork extends StatelessWidget {
             Expanded(
                 child: Text(
               chain.name ?? '',
-              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor,),
+              style: AppFont.medium16.copyWith(
+                color: Theme.of(context).indicatorColor,
+              ),
             )),
             16.0.width,
             isSelected
@@ -62,20 +64,27 @@ class ChangeNetwork extends StatelessWidget {
           return Column(
             children: [
               16.0.height,
-              const SearchField(),
+              SearchField(
+                onChange: (key) {
+                  evm.searchChainNetworkSelected(key);
+                },
+              ),
               16.0.height,
               Expanded(
-                  child: ListView.builder(
-                itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.only(bottom: 12.h),
-                  child: cardNetwork(
-                    chain: evm.listChainSelected[index],
-                    isSelected: evm.listChainSelected[index].chainId ==
-                        evm.selectedChain.value.chainId,
-                  ),
-                ),
-                itemCount: evm.listChainSelected.length,
-              )),
+                  child: evm.searchChainSelected.isEmpty
+                      ? const Empty(title: "Chain Not Found")
+                      : ListView.builder(
+                          itemBuilder: (context, index) => Padding(
+                            padding: EdgeInsets.only(bottom: 12.h),
+                            child: cardNetwork(
+                              chain: evm.searchChainSelected[index],
+                              isSelected:
+                                  evm.searchChainSelected[index].chainId ==
+                                      evm.selectedChain.value.chainId,
+                            ),
+                          ),
+                          itemCount: evm.searchChainSelected.length,
+                        )),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -108,26 +117,28 @@ class ChangeNetwork extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: WidgetHelper.appBar(context: context,
+      appBar: WidgetHelper.appBar(
+          context: context,
           title: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Theme.of(context).indicatorColor,
-              size: 24.h,
-            ),
-          ),
-          16.0.width,
-          Text(
-            "Change Network",
-            style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
-          ),
-        ],
-      )),
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Theme.of(context).indicatorColor,
+                  size: 24.h,
+                ),
+              ),
+              16.0.width,
+              Text(
+                "Change Network",
+                style: AppFont.medium16
+                    .copyWith(color: Theme.of(context).indicatorColor),
+              ),
+            ],
+          )),
       body: Stack(
         children: [
           SizedBox(

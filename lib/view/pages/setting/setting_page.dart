@@ -7,6 +7,7 @@ import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/domain/controller/theme_controller.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 import 'package:mintsafe_wallet/view/pages/setting/about/about_page.dart';
+import 'package:mintsafe_wallet/view/pages/setting/component/alert_reset.dart';
 import 'package:mintsafe_wallet/view/pages/setting/network/network_setting.dart';
 import 'package:mintsafe_wallet/view/pages/setting/security/security_page.dart';
 import 'package:share_plus/share_plus.dart';
@@ -195,6 +196,9 @@ class SettingPage extends StatelessWidget {
                   cardMenu(
                       icon: Icons.logout,
                       title: "Reset Wallet",
+                      onTap: () {
+                        Get.dialog(AlertResetWallet());
+                      },
                       widget: Icon(
                         Icons.arrow_forward_ios_rounded,
                         size: 24.w,

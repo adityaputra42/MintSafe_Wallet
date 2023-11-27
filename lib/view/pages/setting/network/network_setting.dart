@@ -46,24 +46,31 @@ class NetworkSetting extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Column(
-            children: [
-              24.0.height,
-              const SearchField(),
-              16.0.height,
-              Expanded(
-                  child: ListView.builder(
-                itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.only(bottom: 12.h),
-                  child: cardNetwork(context, evm.listChain[index]),
+        Obx(() {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              children: [
+                24.0.height,
+                SearchField(
+                  onChange: (key) => evm.searchChainNetwork(key),
                 ),
-                itemCount: evm.listChain.length,
-              ))
-            ],
-          ),
-        )
+                16.0.height,
+                Expanded(
+                    child: evm.searchChain.isEmpty
+                        ? const Empty(title: "Chain Not Found")
+                        : ListView.builder(
+                            itemBuilder: (context, index) => Padding(
+                              padding: EdgeInsets.only(bottom: 12.h),
+                              child:
+                                  cardNetwork(context, evm.searchChain[index]),
+                            ),
+                            itemCount: evm.searchChain.length,
+                          ))
+              ],
+            ),
+          );
+        })
       ]),
     );
   }

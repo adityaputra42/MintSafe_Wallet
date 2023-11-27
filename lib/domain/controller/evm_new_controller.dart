@@ -28,9 +28,6 @@ import '../repository/activity_repository.dart';
 import 'bottom_navbar_controller.dart';
 
 class EvmNewController extends GetxController {
-  /// #######################################
-  /// ############### HOME STATE ###############
-  /// #######################################
   var isShowImportBottomSheet = false.obs;
 
   showImportBottomSheet() => isShowImportBottomSheet.value = true;
@@ -84,33 +81,19 @@ class EvmNewController extends GetxController {
 
   void initialize() async {
     isLoadingNetwork.value = true;
-    // INIT NETWORK
-
     await initAccount();
     await initialzedNetwork();
-
-    /// INIT RPC
     initWeb3RPC();
-
-    /// INIT CONTRACT
     final erc20AbiString = await rootBundle.loadString('asset/abi/ERC-20.json');
     final nftAbiString = await rootBundle.loadString('asset/abi/ERC-721.json');
     erc20Abi = ContractAbi.fromJson(erc20AbiString, 'ERC20');
     erc721Abi = ContractAbi.fromJson(nftAbiString, 'ERC721');
-
-    /// INIT ACCOUNT
     decrypted(
       selectedAddress.value.privateKey!,
     );
-
-    // INIT TOKEN
-
     await initializeNFt();
     await initialzedToken();
-
-    // getVersionInfo();
     isLoadingNetwork.value = false;
-    //  GET BALANCE
     if (await ConnectivityWrapper.instance.isConnected) {
       findAllActivity();
       await getBalance();
@@ -146,19 +129,24 @@ class EvmNewController extends GetxController {
   var isLoadingNetwork = false.obs;
   var selectedChain = ListChainSelected().obs;
   var listChain = <ChainNetwork>[].obs;
+  var searchChain = <ChainNetwork>[].obs;
   var listChainSelected = <ListChainSelected>[].obs;
+  var searchChainSelected = <ListChainSelected>[].obs;
 
   Future<void> initialzedNetwork() async {
-    /// GET LIST NETWORK
+    searchChain.clear();
+    searchChainSelected.clear();
     listChain.clear();
     listChainSelected.clear();
     final networkList = await DbHelper.instance.getAllChainNetwork();
     if (networkList.isEmpty) {
       final chainlist = await rootBundle.loadString('asset/abi/chain.json');
       listChain.value = chainNetworkFromJson(chainlist);
+      searchChain.value = chainNetworkFromJson(chainlist);
       await DbHelper.instance.setAllChainNetwork(listChain);
     } else {
       listChain.assignAll(networkList);
+      searchChain.assignAll(networkList);
     }
     final listChainWallet = await DbHelper.instance.getSelectedChainWallet(
       walletAddress: selectedAddress.value.address ?? "",
@@ -181,8 +169,10 @@ class EvmNewController extends GetxController {
         walletAddress: selectedAddress.value.address ?? "",
       );
       listChainSelected.assignAll(chainWallet);
+      searchChainSelected.assignAll(chainWallet);
     } else {
       listChainSelected.assignAll(listChainWallet);
+      searchChainSelected.assignAll(listChainWallet);
     }
 
     final chainSelected = await DbHelper.instance.getSelectedChain();
@@ -202,73 +192,43 @@ class EvmNewController extends GetxController {
     selectedChain.refresh();
     listChain.refresh();
     listChainSelected.refresh();
+    searchChain.refresh();
+    searchChainSelected.refresh();
     dev.log("Selected chain ==> ${selectedChain.value.chainId}");
     for (var value in listChain) {
       dev.log("List Chain ==> ${value.chainId}");
     }
   }
 
-  // Future<void> initialzedNetwork() async {
-  //   /// GET LIST NETWORK
-  //   listChain.clear();
-  //   listChainSelected.clear();
-  //   final networkList = await DbHelper.instance.getAllChainNetwork();
-  //   List<int> id = [];
-  //   for (final value in networkList) {
-  //     id.add(value.id!);
-  //   }
-  //   await DbHelper.instance.deleteAllChainNetwork(id);
-  //   final chainlist = await rootBundle.loadString('asset/abi/chain.json');
-  //   listChain.value = chainNetworkFromJson(chainlist);
-  //   await DbHelper.instance.setChainNetwork(listChain);
+  searchChainNetwork(
+    String key,
+  ) {
+    List<ChainNetwork> result = [];
+    if (key.isEmpty) {
+      result.addAll(listChain);
+    } else {
+      result = listChain
+          .where(
+              (value) => value.name!.toLowerCase().contains(key.toLowerCase()))
+          .toList();
+    }
+    searchChain.value = result;
+  }
 
-  //   final listChainWallet = await DbHelper.instance.getSelectedChainWallet(
-  //     walletAddress: selectedAddress.value.address ?? "",
-  //   );
-  //   if (listChainWallet.isEmpty) {
-  //     var selectChain = ListChainSelected(
-  //       name: listChain.first.name,
-  //       symbol: listChain.first.symbol,
-  //       rpc: listChain.first.rpc,
-  //       chainId: listChain.first.chainId,
-  //       explorer: listChain.first.explorer,
-  //       explorerApi: listChain.first.explorerApi,
-  //       logo: listChain.first.logo,
-  //       color: listChain.first.color,
-  //       isTestnet: listChain.first.isTestnet,
-  //       walletAddress: selectedAddress.value.address ?? "",
-  //     );
-  //     await DbHelper.instance.setSelectedChainWallet(selectChain);
-  //     final chainWallet = await DbHelper.instance.getSelectedChainWallet(
-  //       walletAddress: selectedAddress.value.address ?? "",
-  //     );
-  //     listChainSelected.assignAll(chainWallet);
-  //   } else {
-  //     listChainSelected.assignAll(listChainWallet);
-  //   }
-
-  //   final chainSelected = await DbHelper.instance.getSelectedChain();
-  //   dev.log("SelectedChain => ${chainSelected.chainId}");
-  //   if (chainSelected.chainId == null) {
-  //     final selected = SelectedChain(chainId: listChain.first.chainId);
-  //     await DbHelper.instance.setSelectedChain(selected);
-  //     selectedChain.value = listChainSelected.first;
-  //   } else if (!listChainSelected.any((element) =>
-  //       element.chainId!.toLowerCase() ==
-  //       chainSelected.chainId!.toLowerCase())) {
-  //     changeNetwork(listChainSelected.first);
-  //   } else {
-  //     var chain = await DbHelper.instance.getSelectedChainNetwork();
-  //     selectedChain.value = chain!;
-  //   }
-  //   selectedChain.refresh();
-  //   listChain.refresh();
-  //   listChainSelected.refresh();
-  //   dev.log("Selected chain ==> ${selectedChain.value.chainId}");
-  //   for (var value in listChain) {
-  //     dev.log("List Chain ==> ${value.chainId}");
-  //   }
-  // }
+  searchChainNetworkSelected(
+    String key,
+  ) {
+    List<ListChainSelected> result = [];
+    if (key.isEmpty) {
+      result.addAll(listChainSelected);
+    } else {
+      result = listChainSelected
+          .where(
+              (value) => value.name!.toLowerCase().contains(key.toLowerCase()))
+          .toList();
+    }
+    searchChainSelected.value = result;
+  }
 
   void changeNetwork(ListChainSelected network) async {
     isLoadingNetwork.value = true;
@@ -548,12 +508,14 @@ class EvmNewController extends GetxController {
   /// ############### TOKEN ###############
   /// #######################################
   RxList<Token> tokenList = <Token>[].obs;
+  RxList<Token> searchToken = <Token>[].obs;
   RxList<SelectedToken> tokenSelected = <SelectedToken>[].obs;
 
   TextEditingController searchTokenController = TextEditingController();
 
   Future<void> initialzedToken() async {
     tokenList.clear();
+    searchToken.clear();
     tokenSelected.clear();
     final listTokens = await DbHelper.instance.getAllTokens();
     if (listTokens.isEmpty) {
@@ -565,6 +527,7 @@ class EvmNewController extends GetxController {
       final tokenByChain = await DbHelper.instance
           .getListTokenByChainId(chainId: selectedChain.value.chainId ?? "");
       tokenList.assignAll(tokenByChain);
+      searchToken.assignAll(tokenByChain);
       final selectedToken = await DbHelper.instance.getSelectedToken(
         walletAddress: selectedAddress.value.address ?? "",
         chainID: selectedChain.value.chainId ?? "",
@@ -574,6 +537,7 @@ class EvmNewController extends GetxController {
       final tokenByChain = await DbHelper.instance
           .getListTokenByChainId(chainId: selectedChain.value.chainId ?? "");
       tokenList.assignAll(tokenByChain);
+      searchToken.assignAll(tokenByChain);
       final token = await DbHelper.instance.getSelectedToken(
         walletAddress: selectedAddress.value.address ?? "",
         chainID: selectedChain.value.chainId ?? "",
@@ -583,6 +547,22 @@ class EvmNewController extends GetxController {
 
     tokenSelected.refresh();
     tokenList.refresh();
+    searchToken.refresh();
+  }
+
+  searchTokenList(
+    String key,
+  ) {
+    List<Token> result = [];
+    if (key.isEmpty) {
+      result.addAll(tokenList);
+    } else {
+      result = tokenList
+          .where(
+              (value) => value.name!.toLowerCase().contains(key.toLowerCase()))
+          .toList();
+    }
+    searchToken.value = result;
   }
 
   Future<void> getMultipleTokenBalances() async {
@@ -882,8 +862,6 @@ class EvmNewController extends GetxController {
 }
 
 Future<Address?> importMnemonic(String mnemonic) async {
-  // await db.setPassword(Password(password: password));
-
   var account = WalletHelper().getAccountInfo(mnemonic);
   final mnemonicEncrypted = Ecryption().encrypt(
     mnemonic,
@@ -901,14 +879,5 @@ Future<Address?> importMnemonic(String mnemonic) async {
   dev.log(address.mnemonic.toString());
   dev.log(address.privateKey.toString());
 
-  // await db.addAddress(address);
-
-  // Get.offAll(() => MainPage(address: address));
   return address;
-
-  //// ##############
-  /// SETTING
-  /// ###############
-  ///
-  ///
 }

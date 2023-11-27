@@ -73,16 +73,22 @@ class SearchNetwork extends StatelessWidget {
     return Expanded(child: Obx(() {
       return Column(
         children: [
-          const SearchField(),
+          SearchField(
+            onChange: (key) {
+              evm.searchChainNetwork(key);
+            },
+          ),
           16.0.height,
           Expanded(
-              child: ListView.builder(
-            itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.only(bottom: 12.h),
-              child: cardCoin(chain: evm.listChain[index]),
-            ),
-            itemCount: evm.listChain.length,
-          ))
+              child: evm.searchChain.isEmpty
+                  ? const Empty(title: "Chain Not Found")
+                  : ListView.builder(
+                      itemBuilder: (context, index) => Padding(
+                        padding: EdgeInsets.only(bottom: 12.h),
+                        child: cardCoin(chain: evm.searchChain[index]),
+                      ),
+                      itemCount: evm.searchChain.length,
+                    ))
         ],
       );
     }));

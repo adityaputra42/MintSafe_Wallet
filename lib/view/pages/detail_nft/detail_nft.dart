@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/utils/extension/double_extension.dart';
 import 'package:mintsafe_wallet/utils/helper/method_helper.dart';
+import 'package:mintsafe_wallet/view/pages/detail_nft/transfer_nft.dart';
 import 'package:mintsafe_wallet/view/widget/primary_button.dart';
 
 import '../../../config/config.dart';
@@ -194,7 +195,9 @@ class DetailNft extends StatelessWidget {
               const Spacer(),
               PrimaryButton(
                 title: "Send",
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => TransferNft(nft: nft));
+                },
                 margin: EdgeInsets.only(bottom: 24.w, top: 8.h),
               )
             ],
