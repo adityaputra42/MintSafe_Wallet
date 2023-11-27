@@ -55,19 +55,27 @@ class DetailGroupNft extends StatelessWidget {
               Row(
                 children: [
                   SizedBox(
-                    height: 86.h,
-                    width: 86.h,
+                    height: 96.h,
+                    width: 96.h,
                     child: ClipPolygon(
                       sides: 6,
                       rotate: 0,
                       child: Container(
-                          padding: EdgeInsets.all(1.h),
-                          color: Theme.of(context).cardColor,
-                          child: Image.memory(
-                            MethodHelper()
-                                .convertBase64ToUint8List(nftView.image ?? ''),
-                            fit: BoxFit.cover,
-                          )),
+                        padding: EdgeInsets.all(6.h),
+                        color: Theme.of(context).cardColor,
+                        child: ClipPolygon(
+                          sides: 6,
+                          rotate: 0,
+                          child: Container(
+                              padding: EdgeInsets.all(1.h),
+                              color: Theme.of(context).cardColor,
+                              child: Image.memory(
+                                MethodHelper().convertBase64ToUint8List(
+                                    nftView.image ?? ''),
+                                fit: BoxFit.cover,
+                              )),
+                        ),
+                      ),
                     ),
                   ),
                   8.0.width,
