@@ -73,8 +73,8 @@ class OnboardingScreen extends StatelessWidget {
                       controller.selectedIndex.value == 0
                           ? "Protecting Your Digital Fortune, One Wallet at a Time."
                           : controller.selectedIndex.value == 1
-                              ? "Guarding Your Assets in the Digital Frontier"
-                              : "Your Vault to Digital Wealth",
+                              ? "Where Your Assets Thrive, Protected with Precision."
+                              : "Crypto Wallet Trusted\nYour Gateway to Financial Confidence",
                       style:
                           AppFont.reguler16.copyWith(color: AppColor.grayColor),
                       textAlign: TextAlign.center,

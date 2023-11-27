@@ -19,10 +19,14 @@ class SearchToken extends StatelessWidget {
       child: Obx(() {
         return Column(
           children: [
-            const SearchField(),
+            SearchField(
+              onChange: (key) {
+                controller.evm.searchTokenList(key);
+              },
+            ),
             16.0.height,
             Expanded(
-                child: controller.evm.tokenList.isEmpty
+                child: controller.evm.searchToken.isEmpty
                     ? const Center(
                         child: Empty(title: "No data token"),
                       )
@@ -30,10 +34,10 @@ class SearchToken extends StatelessWidget {
                         itemBuilder: (context, index) => Padding(
                           padding: EdgeInsets.only(bottom: 16.h),
                           child: cardCoin(
-                              token: controller.evm.tokenList[index],
+                              token: controller.evm.searchToken[index],
                               context: context),
                         ),
-                        itemCount: controller.evm.tokenList.length,
+                        itemCount: controller.evm.searchToken.length,
                       ))
           ],
         );

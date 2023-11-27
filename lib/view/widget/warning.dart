@@ -26,8 +26,9 @@ class Warning extends StatelessWidget {
           Expanded(
             child: Text(
               warning,
-              style: AppFont.reguler14,
+              style: AppFont.reguler12,
               overflow: TextOverflow.clip,
+              textAlign: TextAlign.justify,
             ),
           ),
         ],

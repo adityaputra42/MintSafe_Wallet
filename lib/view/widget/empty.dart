@@ -5,7 +5,7 @@ import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/utils/extension/extension.dart';
 
 class Empty extends StatelessWidget {
-  const Empty({super.key, required this.title, this.width=120});
+  const Empty({super.key, required this.title, this.width = 160});
   final String title;
   final double width;
   @override
@@ -18,10 +18,11 @@ class Empty extends StatelessWidget {
             AppImage.empty,
             width: width.w,
           ),
-          8.0.height,
+          0.0.height,
           Text(
             title,
-            style: AppFont.medium14.copyWith(color: AppColor.primaryColor),
+            style: AppFont.medium14
+                .copyWith(color: Theme.of(context).indicatorColor),
           )
         ],
       ),
