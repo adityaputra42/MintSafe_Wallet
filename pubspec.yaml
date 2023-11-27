@@ -42,6 +42,7 @@ dependencies:
   isar_flutter_libs: ^3.1.0+1
   isar_generator: ^3.1.0+1
   loading_overlay: ^0.3.0
+  local_session_timeout: ^2.3.2
   mobile_scanner: ^3.2.0
   number_system: ^0.0.6+8
   package_info_plus: ^4.2.0
@@ -71,7 +72,7 @@ flutter:
     - asset/abi/ERC-721.json
     - asset/abi/token.json
     - asset/logo/
-    - .env
+
 
   fonts:
     - family: Poppins

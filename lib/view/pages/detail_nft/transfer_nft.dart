@@ -2,6 +2,7 @@
 
 import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/data/data.dart';
@@ -25,7 +26,7 @@ class TransferNft extends StatelessWidget {
     return Obx(() {
       return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Theme.of(context).dialogBackgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: WidgetHelper.appBar(
             context: context,
             title: Row(
@@ -55,68 +56,60 @@ class TransferNft extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            Column(
-              children: [
-                16.0.height,
-                Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16.w),
-                    padding: EdgeInsets.all(16.w),
-                    height: 98.h,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Column(
+                children: [
+                  16.0.height,
+                  Container(
                     width: double.infinity,
+                    padding: EdgeInsets.all(8.w),
                     decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.circular(8.r)),
-                    child: Container(
-                      width: double.infinity,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.r),
-                          color: Theme.of(context).dialogBackgroundColor),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8.r),
-                            child: Image.memory(
-                              MethodHelper().convertBase64ToUint8List(
-                                nft.imageByte ?? '',
-                              ),
-                              width: 48.w,
-                              height: 48.w,
-                              fit: BoxFit.cover,
-                            ),
+                        borderRadius: BorderRadius.circular(8.r),
+                        color: Theme.of(context).cardColor),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          height: 48.h,
+                          width: 48.h,
+                          child: ClipPolygon(
+                            sides: 6,
+                            rotate: 0,
+                            child: Container(
+                                padding: EdgeInsets.all(1.h),
+                                color: Theme.of(context).cardColor,
+                                child: Image.memory(
+                                  MethodHelper().convertBase64ToUint8List(
+                                      nft.imageByte ?? ''),
+                                  fit: BoxFit.cover,
+                                )),
                           ),
-                          8.0.width,
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  nft.name ?? '',
-                                  style: AppFont.semibold14.copyWith(
-                                      color: Theme.of(context).indicatorColor),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                4.0.height,
-                                Text("#${nft.tokenId}",
-                                    style: AppFont.medium12.copyWith(
-                                      color: AppColor.grayColor,
-                                    ))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    )),
-                Expanded(
-                  child: Container(
-                    margin: EdgeInsets.all(16.w),
-                    padding: EdgeInsets.all(16.w),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.circular(8.r)),
+                        ),
+                        8.0.width,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                nft.name ?? '',
+                                style: AppFont.semibold14.copyWith(
+                                    color: Theme.of(context).indicatorColor),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              4.0.height,
+                              Text("#${nft.tokenId}",
+                                  style: AppFont.medium12.copyWith(
+                                    color: AppColor.grayColor,
+                                  ))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  16.0.height,
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -128,11 +121,10 @@ class TransferNft extends StatelessWidget {
                         8.0.height,
                         Container(
                           width: double.infinity,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16.w, vertical: 10.h),
+                          padding: EdgeInsets.all(12.w),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.r),
-                              color: Theme.of(context).dialogBackgroundColor),
+                              color: Theme.of(context).cardColor),
                           child: Row(
                             children: [
                               Container(
@@ -153,7 +145,11 @@ class TransferNft extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    evm.selectedAddress.value.name ?? "",
+                                    MethodHelper().shortAddress(
+                                        address:
+                                            evm.selectedAddress.value.address ??
+                                                '',
+                                        length: 8),
                                     style: AppFont.semibold14.copyWith(
                                         color:
                                             Theme.of(context).indicatorColor),
@@ -234,6 +230,7 @@ class TransferNft extends StatelessWidget {
                             title: "Next",
                             disable: controller.buttonNext.value,
                             loading: controller.isNextLoading.value,
+                            margin: EdgeInsets.only(bottom: 24.w),
                             onPressed: () async {
                               await controller.getNetworkFee(nft: nft);
                               Get.to(() => TransferNftConfirm(
@@ -242,8 +239,8 @@ class TransferNft extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
@@ -293,7 +290,8 @@ class TransferNft extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    address.name ?? "",
+                    MethodHelper().shortAddress(
+                        address: address.address ?? '', length: 8),
                     style: AppFont.semibold14.copyWith(
                       color: Theme.of(context).indicatorColor,
                     ),
@@ -336,7 +334,7 @@ class TransferNft extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                address.name ?? "",
+                "${address.name} ${address.id}",
                 style: AppFont.semibold14.copyWith(
                   color: Theme.of(context).indicatorColor,
                 ),

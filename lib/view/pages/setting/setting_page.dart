@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:mintsafe_wallet/domain/controller/evm_new_controller.dart';
 import 'package:mintsafe_wallet/domain/controller/theme_controller.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
+import 'package:mintsafe_wallet/view/pages/dialog_login.dart';
 import 'package:mintsafe_wallet/view/pages/setting/about/about_page.dart';
 import 'package:mintsafe_wallet/view/pages/setting/component/alert_reset.dart';
 import 'package:mintsafe_wallet/view/pages/setting/network/network_setting.dart';
@@ -197,7 +198,7 @@ class SettingPage extends StatelessWidget {
                       icon: Icons.logout,
                       title: "Reset Wallet",
                       onTap: () {
-                        Get.dialog(AlertResetWallet());
+                        Get.dialog(DialogLogin());
                       },
                       widget: Icon(
                         Icons.arrow_forward_ios_rounded,
