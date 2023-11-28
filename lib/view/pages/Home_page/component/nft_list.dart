@@ -21,7 +21,9 @@ class NftList extends StatelessWidget {
     ) {
       return GestureDetector(
         onTap: () {
-          Get.to(()=>DetailGroupNft(nftView: nft,));
+          Get.to(() => DetailGroupNft(
+                nftView: nft,
+              ));
         },
         child: Container(
           width: double.infinity,
@@ -110,7 +112,6 @@ class NftList extends StatelessWidget {
             onPressed: () {
               Get.to(() => AddNft());
             },
-            margin: EdgeInsets.only(bottom: 16.h),
           )
         ],
       );

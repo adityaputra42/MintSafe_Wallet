@@ -67,25 +67,35 @@ class AlertPassword extends StatelessWidget {
             8.0.height,
             Text(
               subTitle ?? '',
-              style: AppFont.reguler14.copyWith(color: Theme.of(context).indicatorColor,),
+              style: AppFont.reguler14.copyWith(
+                color: Theme.of(context).indicatorColor,
+              ),
               textAlign: TextAlign.center,
             ),
             16.0.height,
             InputText(
               title: 'Password',
               hintText: "Enter your password",
+              onChange: evm.onchangePassword,
               controller: evm.passwordCreateAccountController,
-              obscureText: true,
-              icon: Icon(
-                Icons.visibility_outlined,
-                size: 20.w,
+              obscureText: evm.obsecurePassword.value,
+              icon: GestureDetector(
+                onTap: () {
+                  evm.onchangeObsecure();
+                },
+                child: Icon(
+                  evm.obsecurePassword.value
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
+                  size: 20.w,
+                ),
               ),
             ),
             32.0.height,
             PrimaryButton(
               loading: evm.isLoadingCreateAccount.value,
+              disable: evm.disablePassword.value,
               title: "Confirm",
-            
               onPressed: () {
                 evm.createNewAddress();
               },

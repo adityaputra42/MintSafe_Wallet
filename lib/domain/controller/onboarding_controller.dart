@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mintsafe_wallet/utils/utils.dart';
 
 import '../../view/pages/page.dart';
 
@@ -8,6 +9,7 @@ class OnboardingController extends GetxController {
     if (selectedIndex.value < 2) {
       selectedIndex.value++;
     } else {
+      PrefHelper.instance.setFirstInstall();
       Get.to(() => const GetStartedPage());
       selectedIndex.value = 0;
     }

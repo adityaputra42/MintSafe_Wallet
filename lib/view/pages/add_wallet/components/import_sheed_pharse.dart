@@ -72,6 +72,7 @@ class ImportSheedPharse extends StatelessWidget {
                     textInputAction: TextInputAction.done,
                     controller: evm.importAddressMnemonicController,
                     maxLine: 6,
+                    onChange: evm.onchangeImportMnemonic,
                     icon: GestureDetector(
                       onTap: () {
                         Get.to(() => ScannPage(
@@ -104,6 +105,7 @@ class ImportSheedPharse extends StatelessWidget {
                   PrimaryButton(
                     title: 'Continue',
                     loading: evm.isLoadingImportMnemonic.value,
+                    disable: evm.disableMnemonic.value,
                     onPressed: () {
                       evm.importAddressByMnemonic(
                           evm.importAddressMnemonicController.text);

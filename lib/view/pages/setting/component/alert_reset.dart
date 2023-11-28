@@ -66,7 +66,9 @@ class AlertResetWallet extends StatelessWidget {
               Expanded(
                 child: SecondaryButton(
                   title: "Reset",
-                  onPressed: () {},
+                  onPressed: () {
+                    evm.resetWallet();
+                  },
                 ),
               )
             ],

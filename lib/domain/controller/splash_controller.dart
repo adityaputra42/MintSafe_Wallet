@@ -22,8 +22,10 @@ class SplashController extends GetxController {
       Get.offAll(() => MainPage(
             address: selectedAddress,
           ));
+    } else if (PrefHelper.instance.isFirstInstall) {
+      Get.offAll(() => OnboardingScreen());
     } else {
-      Get.to(() => OnboardingScreen());
+      Get.offAll(() => const GetStartedPage());
     }
   }
 }

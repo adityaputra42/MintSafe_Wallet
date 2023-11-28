@@ -103,6 +103,7 @@ class CreateWalletController extends GetxController {
 
     if (listOrigin == listConfirm) {
       await saveNewWallet();
+      PrefHelper.instance.setLogin(true);
       Get.to(() => SuccesCreateWallet(address: createdAddress.value));
     } else {
       Get.snackbar("Fail", "Pharse Didn't Match",

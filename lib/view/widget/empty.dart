@@ -11,20 +11,23 @@ class Empty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            AppImage.empty,
-            width: width.w,
-          ),
-          0.0.height,
-          Text(
-            title,
-            style: AppFont.medium14
-                .copyWith(color: Theme.of(context).indicatorColor),
-          )
-        ],
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              AppImage.empty,
+              width: width.w,
+            ),
+            0.0.height,
+            Text(
+              title,
+              style: AppFont.medium14
+                  .copyWith(color: Theme.of(context).indicatorColor),
+            )
+          ],
+        ),
       ),
     );
   }

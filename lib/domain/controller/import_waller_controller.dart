@@ -47,6 +47,7 @@ class ImportWalletController extends GetxController {
       var address = await compute(importMnemonic, mnemonic);
       await DbHelper.instance.setPassword(Password(password: password.text));
       await DbHelper.instance.addAddress(address!);
+      PrefHelper.instance.setLogin(true);
       Get.offAll(() => MainPage(address: address));
     } else {
       isLoading.value = false;

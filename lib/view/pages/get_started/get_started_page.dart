@@ -28,14 +28,15 @@ class GetStartedPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      80.0.height,
+                      200.0.height,
                       Image.asset(
                         AppImage.logo,
                         width: 136.w,
                       ),
-                      24.0.height,
+                      16.0.height,
                       Text(
                         'MintSafe',
                         style: AppFont.semibold24
@@ -72,7 +73,7 @@ class GetStartedPage extends StatelessWidget {
                           ..onTap = () => Get.to(() => ImportWalletPage()),
                       )
                     ])),
-                    48.0.height,
+                    100.0.height,
                   ],
                 ),
               ],

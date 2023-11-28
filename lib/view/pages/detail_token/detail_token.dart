@@ -135,40 +135,52 @@ class DetailToken extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  16.0.height,
-                  cardWallet(),
-                  16.0.height,
-                  Text(
-                    "Activity Token",
-                    style: AppFont.semibold16
-                        .copyWith(color: Theme.of(context).indicatorColor),
-                  ),
-                  16.0.height,
-                  Expanded(
-                    child: evm.isLoading.value
-                        ? const Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : listActivity.isEmpty
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  await evm.findAllActivity(isRefresh: true);
+                  await evm.getBalance();
+                  await evm.getMultipleTokenBalances();
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      16.0.height,
+                      cardWallet(),
+                      16.0.height,
+                      Text(
+                        "Activity Token",
+                        style: AppFont.semibold16
+                            .copyWith(color: Theme.of(context).indicatorColor),
+                      ),
+                      16.0.height,
+                      SizedBox(
+                        height: ScreenUtil().screenHeight * 0.58,
+                        child: evm.isLoading.value
                             ? const Center(
-                                child: Empty(title: "No Transaction yet!"))
-                            : ListView.builder(
-                                itemCount: listActivity.length,
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(bottom: 12.h),
-                                    child: CardActivity(
-                                      activity: listActivity[index],
-                                    ),
-                                  );
-                                },
-                              ),
+                                child: CircularProgressIndicator(),
+                              )
+                            : listActivity.isEmpty
+                                ? const Center(
+                                    child: Empty(title: "No Transaction yet!"))
+                                : ListView.builder(
+                                    itemCount: listActivity.length,
+                                    physics:
+                                        const AlwaysScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: EdgeInsets.only(bottom: 12.h),
+                                        child: CardActivity(
+                                          activity: listActivity[index],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ],

@@ -33,47 +33,47 @@ class TokenList extends StatelessWidget {
               ],
               borderRadius: BorderRadius.circular(8.r),
               color: Theme.of(context).cardColor),
-        child: Row(
-          children: [
-            SizedBox(
-              height: 42.h,
-              width: 42.h,
-              child: ClipPolygon(
-                sides: 6,
-                rotate: 0,
-                child: Container(
-                    padding: EdgeInsets.all(1.h),
-                    color: Theme.of(context).cardColor,
-                    child: Image.asset(token.logo ?? AppImage.eth)),
+          child: Row(
+            children: [
+              SizedBox(
+                height: 42.h,
+                width: 42.h,
+                child: ClipPolygon(
+                  sides: 6,
+                  rotate: 0,
+                  child: Container(
+                      padding: EdgeInsets.all(1.h),
+                      color: Theme.of(context).cardColor,
+                      child: Image.asset(token.logo ?? AppImage.eth)),
+                ),
               ),
-            ),
-            8.0.width,
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        token.name ?? "",
-                        style: AppFont.medium14
-                            .copyWith(color: Theme.of(context).indicatorColor),
-                      ),
-                      Text(
-                        "${(token.balance ?? 0).toStringAsPrecision(5)} ${token.symbol}",
-                        style: AppFont.medium14.copyWith(
-                            fontFamily: "Roboto",
-                            color: Theme.of(context).indicatorColor),
-                      )
-                    ],
-                  ),
-                  //
-                ],
-              ),
-            )
-          ],
-        ),
+              8.0.width,
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          token.name ?? "",
+                          style: AppFont.medium14.copyWith(
+                              color: Theme.of(context).indicatorColor),
+                        ),
+                        Text(
+                          "${(token.balance ?? 0).toStringAsPrecision(5)} ${token.symbol}",
+                          style: AppFont.medium14.copyWith(
+                              fontFamily: "Roboto",
+                              color: Theme.of(context).indicatorColor),
+                        )
+                      ],
+                    ),
+                    //
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       );
     }
@@ -106,7 +106,6 @@ class TokenList extends StatelessWidget {
             onPressed: () {
               Get.to(() => AddTokenPage());
             },
-            margin: EdgeInsets.only(bottom: 16.h),
           )
         ],
       ),

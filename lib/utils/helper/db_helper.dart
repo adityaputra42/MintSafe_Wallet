@@ -442,4 +442,20 @@ class DbHelper {
       await isar.browserTabs.clear();
     });
   }
+
+  Future<void> resetWallet() async {
+    await isar.writeTxn(() async {
+      await isar.address.clear();
+      await isar.passwords.clear();
+      await isar.listChainSelecteds.clear();
+      await isar.recentAddress.clear();
+      await isar.dappsHistorys.clear();
+      await isar.tokens.clear();
+      await isar.selectedChains.clear();
+      await isar.selectedTokens.clear();
+      await isar.chainNetworks.clear();
+      await isar.browserTabs.clear();
+      await isar.nfts.clear();
+    });
+  }
 }

@@ -5,6 +5,7 @@ import 'package:mintsafe_wallet/config/config.dart';
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/domain/controller/onboarding_controller.dart';
 import 'package:mintsafe_wallet/utils/extension/extension.dart';
+import 'package:mintsafe_wallet/utils/utils.dart';
 import 'package:mintsafe_wallet/view/pages/page.dart';
 import 'package:mintsafe_wallet/view/widget/primary_button.dart';
 import 'package:mintsafe_wallet/view/widget/secondary_button.dart';
@@ -93,6 +94,7 @@ class OnboardingScreen extends StatelessWidget {
                         : SecondaryButton(
                             title: "Skip",
                             onPressed: () {
+                              PrefHelper.instance.setFirstInstall();
                               Get.to(() => const GetStartedPage());
                               controller.selectedIndex.value = 0;
                             })

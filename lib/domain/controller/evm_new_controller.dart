@@ -14,6 +14,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:in_app_update/in_app_update.dart';
 import 'package:mintsafe_wallet/data/model/token/selected_token.dart';
+import 'package:mintsafe_wallet/view/pages/dialog_login.dart';
+import 'package:mintsafe_wallet/view/pages/page.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -51,6 +53,14 @@ class EvmNewController extends GetxController {
 
   EvmNewController(this.initAddress);
 
+  validateLogin() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (PrefHelper.instance.isLogin == false) {
+        Get.dialog(DialogLogin(), barrierDismissible: false);
+      }
+    });
+  }
+
   var versionApp = "".obs;
 
   void getVersionInfo() async {
@@ -58,7 +68,7 @@ class EvmNewController extends GetxController {
     String version = packageInfo.version;
     String buildNumber = packageInfo.buildNumber;
 
-    versionApp.value = "v$version ($buildNumber)";
+    versionApp.value = "v$version+$buildNumber";
   }
 
   Future<void> checkForUpdate() async {
@@ -93,11 +103,13 @@ class EvmNewController extends GetxController {
     );
     await initializeNFt();
     await initialzedToken();
+    getVersionInfo();
     isLoadingNetwork.value = false;
     if (await ConnectivityWrapper.instance.isConnected) {
       findAllActivity();
       await getBalance();
       await getMultipleTokenBalances();
+      validateLogin();
       getEthBalancePeriodic();
     }
   }
@@ -105,6 +117,7 @@ class EvmNewController extends GetxController {
   @override
   void onInit() {
     initialize();
+    // validateLogin();
     // checkForUpdate();
     super.onInit();
   }
@@ -424,6 +437,39 @@ class EvmNewController extends GetxController {
   var importAddressMnemonicController = TextEditingController();
   var isLoadingImportMnemonic = false.obs;
   var isLoadingImportPrivateKey = false.obs;
+  var obsecurePassword = true.obs;
+  var disablePassword = true.obs;
+  var disablePrivateKey = true.obs;
+  var disableMnemonic = true.obs;
+
+  onchangeObsecure() {
+    obsecurePassword.value = !obsecurePassword.value;
+  }
+
+  onchangeImportMnemonic(String value) {
+    if (importAddressMnemonicController.text != '') {
+      disableMnemonic.value = false;
+    } else {
+      disableMnemonic.value = true;
+    }
+  }
+
+  onchangePassword(String value) {
+    if (passwordCreateAccountController.text != '') {
+      disablePassword.value = false;
+    } else {
+      disablePassword.value = true;
+    }
+  }
+
+  onchangeImportPrivateKey(String value) {
+    if (importAddressPrivateKeyController.text != '') {
+      disablePrivateKey.value = false;
+    } else {
+      disablePrivateKey.value = true;
+    }
+  }
+
   Future<void> importAddressByMnemonic(String key) async {
     isLoadingImportMnemonic.value = true;
 
@@ -592,10 +638,10 @@ class EvmNewController extends GetxController {
     }
   }
 
-  // Future<void> resetWallet() async {
-  //   await DbHelper.instance.resetWallet();
-  //   Get.offAll(() => OnboardingScreen());
-  // }
+  Future<void> resetWallet() async {
+    await DbHelper.instance.resetWallet();
+    Get.offAll(() => const GetStartedPage());
+  }
 
   Future<String?> transferToken(
       {required String contractAddress,

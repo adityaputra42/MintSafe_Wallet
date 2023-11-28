@@ -33,8 +33,8 @@ class ActivityPage extends StatelessWidget {
                   16.0.height,
                   Text(
                     "Activity",
-                    style:
-                        AppFont.semibold20.copyWith(color: Theme.of(context).indicatorColor),
+                    style: AppFont.semibold20
+                        .copyWith(color: Theme.of(context).indicatorColor),
                   ),
                   24.0.height,
                   Expanded(
@@ -51,7 +51,7 @@ class ActivityPage extends StatelessWidget {
                               padding: EdgeInsets.all(4.h),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12.r),
-                                color:  Theme.of(context).cardColor,
+                                color: Theme.of(context).cardColor,
                                 boxShadow: const [
                                   BoxShadow(
                                       blurRadius: 0.5,
@@ -65,8 +65,8 @@ class ActivityPage extends StatelessWidget {
                                     color: AppColor.primaryColor,
                                     borderRadius: BorderRadius.circular(8.r)),
                                 isScrollable: false,
-                                dividerColor:  Theme.of(context).cardColor,
-                                indicatorColor:  Theme.of(context).cardColor,
+                                dividerColor: Theme.of(context).cardColor,
+                                indicatorColor: Theme.of(context).cardColor,
                                 labelColor: AppColor.textDark,
                                 labelPadding: EdgeInsets.zero,
                                 labelStyle: AppFont.semibold16,
@@ -92,9 +92,15 @@ class ActivityPage extends StatelessWidget {
                             ),
                             16.0.height,
                             Expanded(
-                              child: controller.selectedTabActivity.value == 0
-                                  ? listActivityCoin()
-                                  : listActivityToken(),
+                              child: RefreshIndicator(
+                                onRefresh: () async {
+                                  await controller.findAllActivity(
+                                      isRefresh: true);
+                                },
+                                child: controller.selectedTabActivity.value == 0
+                                    ? listActivityCoin()
+                                    : listActivityToken(),
+                              ),
                             )
                             // TabBarView(children: [Wall()])
                           ],

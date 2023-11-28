@@ -60,7 +60,7 @@ class ImportPrivateKey extends StatelessWidget {
                       )),
                   12.0.height,
                   Text(
-                    'This 12-word phrase allows you to recover your wallet and access to the coins inside.',
+                    'The private key is a secret piece of information that is used to sign transactions and prove ownership of the associated cryptocurrency.',
                     style:
                         AppFont.reguler14.copyWith(color: AppColor.grayColor),
                   ),
@@ -70,6 +70,7 @@ class ImportPrivateKey extends StatelessWidget {
                     hintText: 'Enter your private key',
                     textInputAction: TextInputAction.next,
                     controller: evm.importAddressPrivateKeyController,
+                    onChange: evm.onchangeImportPrivateKey,
                     maxLine: 6,
                     icon: GestureDetector(
                       onTap: () {
@@ -101,8 +102,9 @@ class ImportPrivateKey extends StatelessWidget {
                     margin: EdgeInsets.only(top: 36.h, bottom: 16.h),
                   ),
                   PrimaryButton(
-                    title: 'Continue',
+                    title: 'Import',
                     loading: evm.isLoadingImportPrivateKey.value,
+                    disable: evm.disablePrivateKey.value,
                     onPressed: () {
                       evm.importAddressByPrivatekey(
                           evm.importAddressPrivateKeyController.text);
