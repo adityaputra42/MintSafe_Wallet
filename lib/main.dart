@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
         builder: (context, child) {
           return Obx(() {
             return SessionTimeoutListener(
-              duration: const Duration(minutes: 60),
+              duration: const Duration(minutes: 5),
               onTimeOut: () async {
                 log("Time out");
                 final selectedAddress =

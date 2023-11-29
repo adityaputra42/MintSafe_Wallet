@@ -51,8 +51,8 @@ class ImportWalletPage extends StatelessWidget {
                     8.0.width,
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => const ScannPage(
-                              scanType: ScanType.mnemonic,
+                        Get.to(() => ScannPage(
+                              textController: controller.sheedPharse,
                             ));
                       },
                       child: Icon(
