@@ -17,29 +17,19 @@ class DialogLogin extends StatelessWidget {
     Widget header() {
       return Container(
         width: ScreenUtil().screenWidth,
-        padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 0),
+        padding: EdgeInsets.fromLTRB(24.w,24.h, 24.w, 0),
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.background,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16.r),
                 topRight: Radius.circular(16.r))),
         child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "Hello",
-                style: AppFont.reguler14.copyWith(color: AppColor.grayColor),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "Wellcome Back!",
-                style: AppFont.medium16.copyWith(
-                  color: Theme.of(context).indicatorColor,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+          child: Text(
+            "session has expired",
+            style: AppFont.medium16.copyWith(
+              color: Theme.of(context).indicatorColor,
+            ),
+            textAlign: TextAlign.center,
           ),
         ),
       );
@@ -84,7 +74,7 @@ class DialogLogin extends StatelessWidget {
             ),
             32.0.height,
             PrimaryButton(
-              title: "Confirm",
+              title: "Confirm",height: 48,
               disable: controller.buttonDiasable.value,
               loading: controller.isLoadingLogin.value,
               onPressed: () {
