@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/config/config.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
+import 'package:mintsafe_wallet/view/pages/dapps/history_browser.dart';
 
 import '../../../data/data.dart';
 import '../../../domain/controller/bottom_navbar_controller.dart';
@@ -134,10 +135,15 @@ class SearchDapps extends StatelessWidget {
                                 style: AppFont.medium16.copyWith(
                                     color: Theme.of(context).indicatorColor),
                               ),
-                              Text(
-                                "View all",
-                                style: AppFont.medium14
-                                    .copyWith(color: AppColor.primaryColor),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(() => HistoryBrowser());
+                                },
+                                child: Text(
+                                  "View all",
+                                  style: AppFont.medium14
+                                      .copyWith(color: AppColor.primaryColor),
+                                ),
                               ),
                             ],
                           ),

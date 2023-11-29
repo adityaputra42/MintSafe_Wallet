@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mintsafe_wallet/config/config.dart';
@@ -9,16 +10,17 @@ import 'package:mintsafe_wallet/utils/utils.dart';
 import 'package:mintsafe_wallet/view/pages/dapps/utils.dart';
 import 'package:mintsafe_wallet/view/widget/primary_button.dart';
 import 'package:mintsafe_wallet/view/widget/secondary_button.dart';
+import 'package:mintsafe_wallet/view/widget/warning.dart';
 
 import '../../../domain/controller/evm_new_controller.dart';
 
-class PaymentSheetText {
+class PaymentDialogText {
   String? title;
   TextStyle? titleStyle;
   String? content;
   TextStyle? contentStyle;
 
-  PaymentSheetText({
+  PaymentDialogText({
     this.title,
     this.content,
     this.contentStyle,
@@ -26,8 +28,8 @@ class PaymentSheetText {
   });
 }
 
-class PaymentSheet extends StatefulWidget {
-  const PaymentSheet(
+class PaymentDialog extends StatefulWidget {
+  const PaymentDialog(
       {Key? key,
       required this.datas,
       required this.nextAction,
@@ -40,7 +42,7 @@ class PaymentSheet extends StatefulWidget {
       this.msg = ""})
       : super(key: key);
 
-  final List<PaymentSheetText> datas;
+  final List<PaymentDialogText> datas;
   final VoidCallback nextAction;
   final VoidCallback cancelAction;
   final String amount;
@@ -51,24 +53,24 @@ class PaymentSheet extends StatefulWidget {
   final String? favicon;
 
   @override
-  _PaymentSheetState createState() => _PaymentSheetState();
+  _PaymentDialogState createState() => _PaymentDialogState();
 
-  static List<PaymentSheetText> getTransStyleList(
+  static List<PaymentDialogText> getTransStyleList(
       {String from = "", String to = "", String remark = "", String fee = ""}) {
-    List<PaymentSheetText> datas = [
-      PaymentSheetText(
+    List<PaymentDialogText> datas = [
+      PaymentDialogText(
         title: "Payment address",
         content: from,
       ),
-      PaymentSheetText(
+      PaymentDialogText(
         title: "Receive address",
         content: to,
       ),
-      PaymentSheetText(
+      PaymentDialogText(
         title: "Fee",
         content: fee,
       ),
-      PaymentSheetText(
+      PaymentDialogText(
         title: "Remark",
         content: remark,
       )
@@ -77,7 +79,7 @@ class PaymentSheet extends StatefulWidget {
   }
 }
 
-class _PaymentSheetState extends State<PaymentSheet> {
+class _PaymentDialogState extends State<PaymentDialog> {
   void _next() {
     Navigator.pop(context);
     widget.nextAction();
@@ -112,58 +114,62 @@ class _PaymentSheetState extends State<PaymentSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 1.5,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.h),
+    Widget header() {
+      return Container(
+        width: ScreenUtil().screenWidth,
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.background,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16.r),
+                topRight: Radius.circular(16.r))),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 0),
+          child: Center(
+            child: Text(
+              'Contract Confirmation',
+              style: AppFont.medium16.copyWith(
+                color: Theme.of(context).indicatorColor,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      );
+    }
+
+    Widget content() {
+      return SizedBox(
+        width: 900.w,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Center(
-              child: Text(
-                'Contract Confirmation',
-                style: AppFont.semibold16.copyWith(
-                  color: Theme.of(context).indicatorColor,
-                ),
-              ),
+            const Warning(
+              warning:
+                  'Make sure you trust this site. By interacting with it, you allow this site to access your funds.',
             ),
+            16.0.height,
             Container(
-              margin: EdgeInsets.symmetric(vertical: 16.h),
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.w),
+              padding: EdgeInsets.all(12.w),
               decoration: BoxDecoration(
-                color: AppColor.yellowColor.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(8.r),
-              ),
+                  borderRadius: BorderRadius.circular(8.r),
+                  color: Theme.of(context).cardColor),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.warning_amber_rounded,
-                    size: 40.w,
-                    color: AppColor.yellowColor,
-                  ),
-                  16.0.width,
-                  Flexible(
-                    child: Text(
-                      'Make sure you trust this site. By interacting with it, you allow this site to access your funds.',
-                      style: AppFont.reguler12.copyWith(
-                        color: AppColor.yellowColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 16.h),
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-              decoration: const BoxDecoration(color: AppColor.bgDark),
-              child: Row(
-                children: [
-                  Image.asset(
-                    evm.selectedChain.value.logo ?? '',
-                    width: 40.w,
+                  SizedBox(
+                    width: 48.h,
+                    height: 48.h,
+                    child: ClipPolygon(
+                        sides: 6,
+                        rotate: 0,
+                        child: Container(
+                            padding: EdgeInsets.all(1.h),
+                            color: Colors.transparent,
+                            child: Image.asset(
+                              evm.selectedChain.value.logo ?? '',
+                            ))),
                   ),
                   8.0.width,
-                  Flexible(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -188,207 +194,80 @@ class _PaymentSheetState extends State<PaymentSheet> {
                 ],
               ),
             ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  color: Theme.of(context).highlightColor,
-                ),
-                child: Column(
-                  children: [
-                    itemRow(
-                      context,
-                      title: 'Wallet',
-                      image: evm.selectedChain.value.logo,
-                      subtitle:
-                          '${evm.selectedAddress.value.name} ${evm.selectedAddress.value.id}',
-                      subStyle: AppFont.semibold12.copyWith(
-                        color: Theme.of(context).indicatorColor,
-                      ),
-                    ),
-                    8.0.height,
-                    itemRow(
-                      context,
-                      title: 'Authorized Network',
-                      image: evm.selectedChain.value.logo,
-                      subtitle: "${evm.selectedChain.value.name}",
-                      subStyle: AppFont.semibold12.copyWith(
-                        color: Theme.of(context).indicatorColor,
-                      ),
-                    ),
-                    8.0.height,
-                    itemRow(context,
-                        title: 'Estimated Gas Fee',
-                        subtitle: widget.estimateGas != null
-                            ? "${widget.estimateGas} ${evm.selectedChain.value.symbol}"
-                            : "-"),
-                    // 8.0.height,
-                    // itemRow(context, title: 'Nonce', subtitle: '53'),
-                    8.0.height,
-                    !widget.isSignMsg
-                        ? const SizedBox()
-                        : itemRow(
-                            context,
-                            title: 'Meta Data',
-                            subtitle: widget.msg,
-                            icon: Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 12,
-                              color: Theme.of(context).indicatorColor,
-                            ),
-                          ),
-                  ],
-                ),
+            8.0.height,
+            itemRow(
+              context,
+              title: 'Wallet',
+              image: evm.selectedChain.value.logo,
+              subtitle:
+                  '${evm.selectedAddress.value.name} ${evm.selectedAddress.value.id}',
+              subStyle: AppFont.semibold12.copyWith(
+                color: Theme.of(context).indicatorColor,
               ),
             ),
-            24.0.height,
+            8.0.height,
+            itemRow(
+              context,
+              title: 'Authorized Network',
+              image: evm.selectedChain.value.logo,
+              subtitle: "${evm.selectedChain.value.name}",
+              subStyle: AppFont.semibold12.copyWith(
+                color: Theme.of(context).indicatorColor,
+              ),
+            ),
+            8.0.height,
+            itemRow(context,
+                title: 'Estimated Gas Fee',
+                subtitle: widget.estimateGas != null
+                    ? "${widget.estimateGas} ${evm.selectedChain.value.symbol}"
+                    : "-"),
+            // 8.0.height,
+            // itemRow(context, title: 'Nonce', subtitle: '53'),
+            8.0.height,
+            !widget.isSignMsg
+                ? const SizedBox()
+                : itemRow(
+                    context,
+                    title: 'Meta Data',
+                    subtitle: widget.msg,
+                    icon: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 12,
+                      color: Theme.of(context).indicatorColor,
+                    ),
+                  ),
+            32.0.height,
             Row(
               children: [
-                Flexible(
+                Expanded(
                   child: SecondaryButton(
                     title: 'Cancel',
                     onPressed: sheetClose,
+                    height: 48,
                   ),
                 ),
                 8.0.width,
-                Flexible(
+                Expanded(
                   child: PrimaryButton(
                     title: widget.isSignMsg ? "Sign" : "Confirm",
                     onPressed: _next,
+                    height: 48,
                   ),
                 ),
               ],
             )
           ],
         ),
-      ),
-    );
-    // return Container(
-    //   height: ScreenUtil().screenHeight / 2,
-    //   color: Theme.of(context).backgroundColor,
-    //   child: Column(
-    //     children: [
-    //       Expanded(
-    //         child: Container(
-    //           padding: const EdgeInsets.only(
-    //             left: 16,
-    //             right: 16,
-    //             bottom: 20,
-    //           ),
-    //           child: Column(
-    //             children: [
-    //               Padding(
-    //                 padding: const EdgeInsets.symmetric(vertical: 12),
-    //                 child: Text(
-    //                   widget.isSignMsg
-    //                       ? "Signature Request"
-    //                       : "Contract Interaction",
-    //                   style: AppFont.medium12
-    //                       .copyWith(color: Theme.of(context).indicatorColor),
-    //                 ),
-    //               ),
-    //               widget.isSignMsg
-    //                   ? Container(
-    //                       alignment: Alignment.center,
-    //                       padding: const EdgeInsets.symmetric(vertical: 12),
-    //                       child: Text(
-    //                         "Only sign this message if you fully understand the content and trust the requesting site.",
-    //                         textAlign: TextAlign.center,
-    //                         style: AppFont.medium12.copyWith(
-    //                             color: Theme.of(context).indicatorColor),
-    //                       ),
-    //                     )
-    //                   : Container(
-    //                       alignment: Alignment.center,
-    //                       padding: const EdgeInsets.symmetric(vertical: 12),
-    //                       child: Text(
-    //                         widget.amount,
-    //                         textAlign: TextAlign.center,
-    //                         style: AppFont.medium24.copyWith(
-    //                             color: Theme.of(context).indicatorColor),
-    //                       ),
-    //                     ),
-    //               widget.isSignMsg
-    //                   ? Container(
-    //                       padding: EdgeInsets.all(12),
-    //                       decoration: BoxDecoration(
-    //                           borderRadius: BorderRadius.circular(12),
-    //                           border: Border.all(
-    //                               color: Theme.of(context).hintColor)),
-    //                       child: Text("Message : ${widget.msg}"))
-    //                   : Expanded(
-    //                       child: ListView.builder(
-    //                         itemCount: widget.datas.length,
-    //                         itemBuilder: (BuildContext context, int index) {
-    //                           PaymentSheetText sheet = widget.datas[index];
-    //                           return Container(
-    //                             padding:
-    //                                 const EdgeInsets.symmetric(vertical: 8),
-    //                             constraints: const BoxConstraints(
-    //                               minHeight: 45,
-    //                             ),
-    //                             decoration: const BoxDecoration(
-    //                                 border: Border(
-    //                                     bottom: BorderSide(
-    //                               width: 0.5,
-    //                               color: ColorUtils.lineColor,
-    //                             ))),
-    //                             child: Row(
-    //                               mainAxisAlignment:
-    //                                   MainAxisAlignment.spaceBetween,
-    //                               crossAxisAlignment: CrossAxisAlignment.center,
-    //                               children: [
-    //                                 Container(
-    //                                   width: 120,
-    //                                   child: Text(sheet.title!,
-    //                                       style: AppFont.reguler12.copyWith(
-    //                                           color: Theme.of(context)
-    //                                               .indicatorColor)),
-    //                                 ),
-    //                                 Expanded(
-    //                                   child: Container(
-    //                                     alignment: Alignment.centerRight,
-    //                                     child: Text(sheet.content!,
-    //                                         textAlign: TextAlign.right,
-    //                                         style: AppFont.medium12.copyWith(
-    //                                             color: Theme.of(context)
-    //                                                 .indicatorColor)),
-    //                                   ),
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           );
-    //                         },
-    //                       ),
-    //                     ),
+      );
+    }
 
-    //               widget.isSignMsg ? const Spacer() : const SizedBox(),
-    //               WidgetButton(
-    //                 title: widget.isSignMsg ? "Sign" : "Submit",
-    //                 onTap: _next,
-    //                 height: 48,
-    //                 isDark: themeController.darkTheme,
-    //               )
-    //               // NextButton(
-    //               //   onPressed: _next,
-    //               //   borderRadius: 12,
-    //               //   height: 48,
-    //               //   bgc: ColorUtils.blueColor,
-    //               //   title: "OK",
-    //               //   textStyle: const TextStyle(
-    //               //     fontSize: 16,
-    //               //     fontWeight: FontWeightUtils.medium,
-    //               //     color: Them,
-    //               //   ),
-    //               // ),
-    //             ],
-    //           ),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
+    return AlertDialog(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      titlePadding: EdgeInsets.zero,
+      title: header(),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+      content: content(),
+    );
   }
 }
 

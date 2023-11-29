@@ -13,7 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
-import 'package:mintsafe_wallet/view/widget/primary_button.dart';
+import 'package:mintsafe_wallet/view/pages/dapps/alert_add_network.dart';
+import 'package:mintsafe_wallet/view/pages/dapps/alert_switch_network.dart';
 import 'package:web3_provider/web3_provider.dart';
 import 'package:web3dart/json_rpc.dart';
 import 'package:web3dart/web3dart.dart';
@@ -156,40 +157,27 @@ class _DappsWeb3State extends State<DappsWeb3> {
     String? msg = "",
     String? favicon = "",
   }) {
-    Get.bottomSheet(
-      SizedBox(
-        height: MediaQuery.of(context).size.height / 1.7,
-        child: PaymentSheet(
-          favicon: favicon,
-          isSignMsg: isSignMsg,
-          host: host,
-          msg: msg ?? "",
-          estimateGas: fee,
-          datas: PaymentSheet.getTransStyleList(
-            from: from,
-            to: to,
-            remark: '',
-            fee: "$fee ${web3.evm..selectedChain.value.symbol}",
-          ),
-          amount:
-              "${value.tokenString(18)} ${web3.evm..selectedChain.value.symbol}",
-          nextAction: () async {
-            confirm.call();
-          },
-          cancelAction: () {
-            cancel.call();
-          },
+    Get.dialog(
+      PaymentDialog(
+        favicon: favicon,
+        isSignMsg: isSignMsg,
+        host: host,
+        msg: msg ?? "",
+        estimateGas: fee,
+        datas: PaymentDialog.getTransStyleList(
+          from: from,
+          to: to,
+          remark: '',
+          fee: "$fee ${web3.evm..selectedChain.value.symbol}",
         ),
-      ),
-      backgroundColor: Theme.of(context).cardColor,
-      elevation: 0,
-      isDismissible: true,
-      isScrollControlled: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.r),
-          topRight: Radius.circular(20.r),
-        ),
+        amount:
+            "${value.tokenString(18)} ${web3.evm..selectedChain.value.symbol}",
+        nextAction: () async {
+          confirm.call();
+        },
+        cancelAction: () {
+          cancel.call();
+        },
       ),
     );
   }
@@ -202,35 +190,22 @@ class _DappsWeb3State extends State<DappsWeb3> {
     required VoidCallback confirm,
     required VoidCallback cancel,
   }) {
-    showModalBottomSheet(
-        context: context,
-        elevation: 0,
-        isDismissible: true,
-        isScrollControlled: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-        ),
-        builder: (_) {
-          return PaymentSheet(
-            datas: PaymentSheet.getTransStyleList(
-              from: from,
-              to: to,
-              remark: '',
-              fee: "$fee ${web3.evm..selectedChain.value.symbol}",
-            ),
-            amount:
-                "${value.tokenString(18)} ${web3.evm..selectedChain.value.symbol}",
-            nextAction: () async {
-              confirm.call();
-            },
-            cancelAction: () {
-              cancel.call();
-            },
-          );
-        });
+    Get.dialog(PaymentDialog(
+      datas: PaymentDialog.getTransStyleList(
+        from: from,
+        to: to,
+        remark: '',
+        fee: "$fee ${web3.evm..selectedChain.value.symbol}",
+      ),
+      amount:
+          "${value.tokenString(18)} ${web3.evm..selectedChain.value.symbol}",
+      nextAction: () async {
+        confirm.call();
+      },
+      cancelAction: () {
+        cancel.call();
+      },
+    ));
   }
 
   _showModalSignTypedTx({
@@ -241,35 +216,22 @@ class _DappsWeb3State extends State<DappsWeb3> {
     required VoidCallback confirm,
     required VoidCallback cancel,
   }) {
-    showModalBottomSheet(
-        context: context,
-        elevation: 0,
-        isDismissible: true,
-        isScrollControlled: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-        ),
-        builder: (_) {
-          return PaymentSheet(
-            datas: PaymentSheet.getTransStyleList(
-              from: from,
-              to: to,
-              remark: '',
-              fee: "$fee ${web3.evm..selectedChain.value.symbol}",
-            ),
-            amount:
-                "${value.tokenString(18)} ${web3.evm..selectedChain.value.symbol}",
-            nextAction: () async {
-              confirm.call();
-            },
-            cancelAction: () {
-              cancel.call();
-            },
-          );
-        });
+    Get.dialog(PaymentDialog(
+      datas: PaymentDialog.getTransStyleList(
+        from: from,
+        to: to,
+        remark: '',
+        fee: "$fee ${web3.evm..selectedChain.value.symbol}",
+      ),
+      amount:
+          "${value.tokenString(18)} ${web3.evm..selectedChain.value.symbol}",
+      nextAction: () async {
+        confirm.call();
+      },
+      cancelAction: () {
+        cancel.call();
+      },
+    ));
   }
 
   String customFunctionInject({
@@ -468,6 +430,24 @@ class _DappsWeb3State extends State<DappsWeb3> {
                         });
                     break;
                   case EIP1193.addEthereumChain:
+                    // log(params.toString());
+                    if (params['name'] == 'addEthereumChain') {
+                      final data = jsonEncode(params);
+                      final finalData = jsonDecode(data);
+
+                      if (web3.evm.listChain.any((element) =>
+                          element.chainId ==
+                          int.parse(
+                                  finalData['object']['chainId']
+                                      .toString()
+                                      .substring(2),
+                                  radix: 16)
+                              .toString())) {
+                        Get.dialog(AlertSwitchNetwork(data: finalData));
+                      } else {
+                        Get.dialog(AlertAddNetwork(data: finalData));
+                      }
+                    }
                     break;
                 }
               },
@@ -480,286 +460,6 @@ class _DappsWeb3State extends State<DappsWeb3> {
           );
         }),
       ),
-    );
-  }
-
-  Future<dynamic> sheetAddNetwork(
-      BuildContext context, Map<String, dynamic> data) {
-    log(data.toString());
-    log(data['object']['chainName']);
-    return showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        backgroundColor: Theme.of(context).colorScheme.background,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(16.r),
-          ),
-        ),
-        builder: (context) {
-          return Builder(builder: (context) {
-            return StatefulBuilder(builder: (context, setStaxte) {
-              return Container(
-                margin: EdgeInsets.only(
-                  top: 16.h,
-                  left: 32.w,
-                  right: 32.w,
-                  bottom: 54.h,
-                ),
-                height: MediaQuery.of(context).size.height / 2,
-                child: Obx(() {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Text(
-                          'Add Network',
-                          style: AppFont.semibold16.copyWith(
-                              color: Theme.of(context).indicatorColor),
-                        ),
-                      ),
-                      24.0.height,
-                      Center(
-                        child: Text(
-                          'Allow this site to add network?',
-                          style: AppFont.semibold16
-                              .copyWith(color: AppColor.grayColor),
-                        ),
-                      ),
-                      24.0.height,
-                      Container(
-                        width: ScreenUtil().screenWidth,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: Theme.of(context).hintColor,
-                            )),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              itemNetwork(
-                                  "Network Name", data['object']['chainName']),
-                              itemNetwork(
-                                  "RPC Url", data['object']['rpcUrls'][0]),
-                              itemNetwork(
-                                  "Chain ID",
-                                  int.parse(
-                                          data['object']['chainId']
-                                              .toString()
-                                              .substring(2),
-                                          radix: 16)
-                                      .toString()),
-                              itemNetwork("Currency symbol",
-                                  data['object']['nativeCurrency']['symbol']),
-                              itemNetwork("Block explorer URL",
-                                  data['object']['blockExplorerUrls'][0]),
-                            ],
-                          ),
-                        ),
-                      ),
-                      35.0.height,
-                      Flexible(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            12.0.width,
-                            Flexible(
-                              child: GestureDetector(
-                                onTap: () => Get.back(),
-                                child: Text(
-                                  'Cancel',
-                                  style: AppFont.semibold16.copyWith(),
-                                ),
-                              ),
-                            ),
-                            28.0.width,
-                            Flexible(
-                              child: PrimaryButton(
-                                onPressed: () async {
-                                  // controller.delete(network, context);
-
-                                  // await web3.evm.addNetwork(ChainNetwork(
-                                  //   isTestnet: false,
-                                  //   name: data['object']['chainName'],
-                                  //   rpc: data['object']['rpcUrls'][0],
-                                  //   explorer: data['object']
-                                  //       ['blockExplorerUrls'][0],
-                                  //   selected: false,
-                                  //   symbol: data['object']['nativeCurrency']
-                                  //       ['symbol'],
-                                  //   chainId: int.parse(
-                                  //           data['object']['chainId']
-                                  //               .toString()
-                                  //               .substring(2),
-                                  //           radix: 16)
-                                  //       .toString(),
-                                  // ));
-                                  // web3.evm.changeNetwork(web3
-                                  //     .evm.listChainSelected.last);
-                                },
-                                title: 'Add',
-                                height: 48.h,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  );
-                }),
-              );
-            });
-          });
-        });
-  }
-
-  Future<dynamic> sheetSwitchNetwork(
-      BuildContext context, Map<String, dynamic> data) {
-    log(data.toString());
-    log(data['object']['chainName']);
-    return showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        backgroundColor: Theme.of(context).colorScheme.background,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(16.r),
-          ),
-        ),
-        builder: (context) {
-          return Builder(builder: (context) {
-            return StatefulBuilder(builder: (context, setStaxte) {
-              return Container(
-                margin: EdgeInsets.only(
-                  top: 16.h,
-                  left: 32.w,
-                  right: 32.w,
-                  bottom: 54.h,
-                ),
-                height: MediaQuery.of(context).size.height / 3.5,
-                child: Obx(() {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Text(
-                          'Switch Network',
-                          style: AppFont.semibold16.copyWith(
-                              color: Theme.of(context).indicatorColor),
-                        ),
-                      ),
-                      24.0.height,
-                      Center(
-                        child: Text(
-                          'Allow this site to switch the network?',
-                          style: AppFont.semibold14.copyWith(
-                            color: AppColor.grayColor,
-                          ),
-                        ),
-                      ),
-                      45.0.height,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              web3.evm.selectedChain.value.name ?? "",
-                              style: AppFont.medium14.copyWith(
-                                color: AppColor.grayColor,
-                              ),
-                            ),
-                          ),
-                          const Expanded(
-                            child: CircleAvatar(
-                                backgroundColor: AppColor.primaryColor,
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          Expanded(
-                            child: Text(
-                              data['object']['chainName'],
-                              style: AppFont.medium14.copyWith(
-                                color: AppColor.grayColor,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Spacer(),
-                      Flexible(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            12.0.width,
-                            Flexible(
-                              child: GestureDetector(
-                                onTap: () => Get.back(),
-                                child: Text(
-                                  'Cancel',
-                                  style: AppFont.semibold16.copyWith(
-                                    color: AppColor.primaryColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            28.0.width,
-                            Flexible(
-                              child: PrimaryButton(
-                                onPressed: () async {
-                                  // controller.delete(network, context);
-
-                                  web3.evm.changeNetwork(
-                                    web3.evm.listChainSelected.singleWhere(
-                                        (element) =>
-                                            element.chainId ==
-                                            int.parse(
-                                                    data['object']['chainId']
-                                                        .toString()
-                                                        .substring(2),
-                                                    radix: 16)
-                                                .toString()),
-                                  );
-                                },
-                                title: 'Switch',
-                                height: 48.h,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  );
-                }),
-              );
-            });
-          });
-        });
-  }
-
-  Column itemNetwork(String title, String value) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        5.0.height,
-        Text(
-          title,
-          style: AppFont.semibold14.copyWith(
-            color: AppColor.grayColor,
-          ),
-        ),
-        Text(
-          value,
-          style: AppFont.medium14.copyWith(
-            color: AppColor.grayColor,
-          ),
-        ),
-        5.0.height,
-      ],
     );
   }
 

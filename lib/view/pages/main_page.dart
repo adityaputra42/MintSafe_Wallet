@@ -179,12 +179,6 @@ class _MainPageState extends State<MainPage> {
                   unselectedLabelStyle:
                       AppFont.reguler12.copyWith(color: AppColor.grayColor),
                 ),
-                // evm.isLoadingNetwork.value
-                //     ? Container(
-                //         decoration:
-                //             BoxDecoration(color: Colors.black.withOpacity(0.3)),
-                //       )
-                //     : const SizedBox()
               ],
             );
           }),

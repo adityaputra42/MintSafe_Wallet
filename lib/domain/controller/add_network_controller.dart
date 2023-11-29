@@ -121,4 +121,20 @@ class AddNetworkController extends GetxController {
 
     isLoading.value = false;
   }
+
+  void setChainNetwork(
+      {required ListChainSelected chainSelected,
+      required ChainNetwork chainNetwork}) async {
+    isLoading.value = true;
+
+    await DbHelper.instance.setSelectedChainWallet(chainSelected);
+    await DbHelper.instance.setChainNetwork(chainNetwork);
+    await evm.initialzedNetwork();
+    evm.listChain.refresh();
+    evm.listChainSelected.refresh();
+
+    Get.back();
+
+    isLoading.value = false;
+  }
 }
