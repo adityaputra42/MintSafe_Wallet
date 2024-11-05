@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:mintsafe_wallet/config/config.dart';
 import 'package:mintsafe_wallet/data/data.dart';
 import 'package:mintsafe_wallet/domain/controller/onboarding_controller.dart';
-import 'package:mintsafe_wallet/utils/extension/extension.dart';
 import 'package:mintsafe_wallet/utils/utils.dart';
 import 'package:mintsafe_wallet/view/pages/page.dart';
 import 'package:mintsafe_wallet/view/widget/primary_button.dart';
@@ -17,7 +16,7 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Stack(children: [
         SizedBox(
           width: ScreenUtil().screenWidth,

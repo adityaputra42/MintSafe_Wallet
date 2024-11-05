@@ -33,7 +33,8 @@ class SetAmout extends StatelessWidget {
               16.0.height,
               Text(
                 "Asset",
-                style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor),
+                style: AppFont.medium14
+                    .copyWith(color: Theme.of(context).indicatorColor),
               ),
               8.0.height,
               Container(
@@ -66,8 +67,8 @@ class SetAmout extends StatelessWidget {
                         assetType == AssetType.coin
                             ? (evm.selectedChain.value.name ?? '')
                             : (controller.selectedToken.value.name ?? ''),
-                        style:
-                            AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
+                        style: AppFont.medium16
+                            .copyWith(color: Theme.of(context).indicatorColor),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -101,7 +102,8 @@ class SetAmout extends StatelessWidget {
                 children: [
                   Text(
                     "Available : ${assetType == AssetType.coin ? evm.selectedAddress.value.balance : controller.selectedToken.value.balance} ${assetType == AssetType.coin ? evm.selectedChain.value.symbol : controller.selectedToken.value.symbol}",
-                    style: AppFont.reguler12.copyWith(color: Theme.of(context).indicatorColor),
+                    style: AppFont.reguler12
+                        .copyWith(color: Theme.of(context).indicatorColor),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -117,7 +119,8 @@ class SetAmout extends StatelessWidget {
               ),
               16.0.height,
               Text("Gas fee",
-                  style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor)),
+                  style: AppFont.medium14
+                      .copyWith(color: Theme.of(context).indicatorColor)),
               8.0.height,
               GestureDetector(
                 onTap: () => Get.to(() => SetGasFee()),
@@ -138,8 +141,8 @@ class SetAmout extends StatelessWidget {
                           children: [
                             Text(
                               "Estimated Gas Fee",
-                              style: AppFont.medium14
-                                  .copyWith(color: Theme.of(context).indicatorColor),
+                              style: AppFont.medium14.copyWith(
+                                  color: Theme.of(context).indicatorColor),
                             ),
                             4.0.height,
                             Text(
@@ -156,8 +159,8 @@ class SetAmout extends StatelessWidget {
                       8.0.width,
                       Text(
                         '~ ${controller.networkFee.value.toStringAsFixed(8)} ${evm.selectedChain.value.symbol}',
-                        style:
-                            AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor),
+                        style: AppFont.medium14
+                            .copyWith(color: Theme.of(context).indicatorColor),
                       ),
                       8.0.width,
                       Icon(
@@ -177,27 +180,29 @@ class SetAmout extends StatelessWidget {
 
     return Obx(() {
       return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: WidgetHelper.appBar(context: context,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        appBar: WidgetHelper.appBar(
+            context: context,
             title: Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: Theme.of(context).indicatorColor,
-                size: 24.h,
-              ),
-            ),
-            16.0.width,
-            Text(
-              "Transfer ${assetType == AssetType.coin ? evm.selectedChain.value.symbol : controller.selectedToken.value.symbol}",
-              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
-            ),
-          ],
-        )),
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: Theme.of(context).indicatorColor,
+                    size: 24.h,
+                  ),
+                ),
+                16.0.width,
+                Text(
+                  "Transfer ${assetType == AssetType.coin ? evm.selectedChain.value.symbol : controller.selectedToken.value.symbol}",
+                  style: AppFont.medium16
+                      .copyWith(color: Theme.of(context).indicatorColor),
+                ),
+              ],
+            )),
         body: Stack(
           children: [
             SizedBox(

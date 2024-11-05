@@ -17,9 +17,9 @@ class DialogLogin extends StatelessWidget {
     Widget header() {
       return Container(
         width: ScreenUtil().screenWidth,
-        padding: EdgeInsets.fromLTRB(24.w,24.h, 24.w, 0),
+        padding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 0),
         decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16.r),
                 topRight: Radius.circular(16.r))),
@@ -74,7 +74,8 @@ class DialogLogin extends StatelessWidget {
             ),
             32.0.height,
             PrimaryButton(
-              title: "Confirm",height: 48,
+              title: "Confirm",
+              height: 48,
               disable: controller.buttonDiasable.value,
               loading: controller.isLoadingLogin.value,
               onPressed: () {
@@ -87,7 +88,7 @@ class DialogLogin extends StatelessWidget {
     }
 
     return AlertDialog(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       titlePadding: EdgeInsets.zero,
       title: header(),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),

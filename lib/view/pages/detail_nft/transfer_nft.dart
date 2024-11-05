@@ -26,7 +26,7 @@ class TransferNft extends StatelessWidget {
     return Obx(() {
       return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: WidgetHelper.appBar(
             context: context,
             title: Row(

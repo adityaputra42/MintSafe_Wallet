@@ -29,7 +29,7 @@ class SearchDapps extends StatelessWidget {
       value: SystemUiOverlayStyle.light, //,
       child: Obx(() {
         return Scaffold(
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             body: Stack(
               children: [
                 SizedBox(

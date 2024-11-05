@@ -49,8 +49,8 @@ class SetGasFee extends StatelessWidget {
                     dividerColor: Theme.of(context).cardColor,
                     labelColor: AppColor.textDark,
                     labelPadding: EdgeInsets.zero,
-                    labelStyle:
-                        AppFont.semibold16.copyWith(color: Theme.of(context).indicatorColor),
+                    labelStyle: AppFont.semibold16
+                        .copyWith(color: Theme.of(context).indicatorColor),
                     unselectedLabelColor: AppColor.grayColor,
                     unselectedLabelStyle: AppFont.medium16,
                     indicatorSize: TabBarIndicatorSize.tab,
@@ -84,27 +84,29 @@ class SetGasFee extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: WidgetHelper.appBar(context: context,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: WidgetHelper.appBar(
+          context: context,
           title: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Theme.of(context).indicatorColor,
-              size: 24.h,
-            ),
-          ),
-          16.0.width,
-          Text(
-            "Set Gas Fee",
-            style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
-          ),
-        ],
-      )),
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Theme.of(context).indicatorColor,
+                  size: 24.h,
+                ),
+              ),
+              16.0.width,
+              Text(
+                "Set Gas Fee",
+                style: AppFont.medium16
+                    .copyWith(color: Theme.of(context).indicatorColor),
+              ),
+            ],
+          )),
       body: Stack(
         children: [
           SizedBox(

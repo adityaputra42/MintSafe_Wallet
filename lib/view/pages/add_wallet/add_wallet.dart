@@ -45,7 +45,9 @@ class AddWallet extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor,),
+                    style: AppFont.medium16.copyWith(
+                      color: Theme.of(context).indicatorColor,
+                    ),
                   ),
                   4.0.height,
                   Text(
@@ -68,27 +70,30 @@ class AddWallet extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: WidgetHelper.appBar(context: context,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: WidgetHelper.appBar(
+          context: context,
           title: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Theme.of(context).indicatorColor,
-              size: 24.h,
-            ),
-          ),
-          16.0.width,
-          Text(
-            "Add Wallet",
-            style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor,),
-          ),
-        ],
-      )),
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Theme.of(context).indicatorColor,
+                  size: 24.h,
+                ),
+              ),
+              16.0.width,
+              Text(
+                "Add Wallet",
+                style: AppFont.medium16.copyWith(
+                  color: Theme.of(context).indicatorColor,
+                ),
+              ),
+            ],
+          )),
       body: Stack(
         children: [
           SizedBox(
@@ -105,7 +110,9 @@ class AddWallet extends StatelessWidget {
                 16.0.height,
                 Text(
                   "Create a new wallet",
-                  style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor,),
+                  style: AppFont.medium14.copyWith(
+                    color: Theme.of(context).indicatorColor,
+                  ),
                 ),
                 12.0.height,
                 cardMenu(
@@ -126,7 +133,9 @@ class AddWallet extends StatelessWidget {
                 16.0.height,
                 Text(
                   "Import an existing wallet",
-                  style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor,),
+                  style: AppFont.medium14.copyWith(
+                    color: Theme.of(context).indicatorColor,
+                  ),
                 ),
                 12.0.height,
                 cardMenu(

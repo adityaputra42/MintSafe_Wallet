@@ -26,7 +26,7 @@ class AlertPasswordSecurity extends StatelessWidget {
         width: ScreenUtil().screenWidth,
         height: 60.h,
         decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16.r),
                 topRight: Radius.circular(16.r))),
@@ -111,7 +111,7 @@ class AlertPasswordSecurity extends StatelessWidget {
     }
 
     return AlertDialog(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       titlePadding: EdgeInsets.zero,
       title: header(),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),

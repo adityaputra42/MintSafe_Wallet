@@ -49,8 +49,8 @@ class AddNetworkPage extends StatelessWidget {
                     dividerColor: Theme.of(context).cardColor,
                     labelColor: AppColor.textDark,
                     labelPadding: EdgeInsets.zero,
-                    labelStyle:
-                        AppFont.semibold16.copyWith(color: Theme.of(context).indicatorColor),
+                    labelStyle: AppFont.semibold16
+                        .copyWith(color: Theme.of(context).indicatorColor),
                     unselectedLabelColor: AppColor.grayColor,
                     unselectedLabelStyle: AppFont.medium16,
                     indicatorSize: TabBarIndicatorSize.tab,
@@ -88,7 +88,7 @@ class AddNetworkPage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
           context: context,
           title: Row(
@@ -106,7 +106,8 @@ class AddNetworkPage extends StatelessWidget {
               16.0.width,
               Text(
                 "Add Network",
-                style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
+                style: AppFont.medium16
+                    .copyWith(color: Theme.of(context).indicatorColor),
               ),
             ],
           )),

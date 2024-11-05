@@ -43,30 +43,32 @@ class CreateNewWalletPage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: WidgetHelper.appBar(context: context,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: WidgetHelper.appBar(
+          context: context,
           title: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              controller.changeStep(0);
-              controller.password.clear();
-              controller.confirmPassword.clear();
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Theme.of(context).indicatorColor,
-              size: 24.h,
-            ),
-          ),
-          16.0.width,
-          Text(
-            "Create a New Wallet",
-            style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
-          ),
-        ],
-      )),
+            children: [
+              GestureDetector(
+                onTap: () {
+                  controller.changeStep(0);
+                  controller.password.clear();
+                  controller.confirmPassword.clear();
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Theme.of(context).indicatorColor,
+                  size: 24.h,
+                ),
+              ),
+              16.0.width,
+              Text(
+                "Create a New Wallet",
+                style: AppFont.medium16
+                    .copyWith(color: Theme.of(context).indicatorColor),
+              ),
+            ],
+          )),
       body: Stack(
         children: [
           SizedBox(

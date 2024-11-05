@@ -118,7 +118,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
       return Container(
         width: ScreenUtil().screenWidth,
         decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16.r),
                 topRight: Radius.circular(16.r))),
@@ -262,7 +262,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
     }
 
     return AlertDialog(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       titlePadding: EdgeInsets.zero,
       title: header(),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),

@@ -51,7 +51,7 @@ class _MainPageState extends State<MainPage> {
 
     return Obx(() {
       return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: LoadingOverlay(
           isLoading: evm.isLoadingNetwork.value,
           color: Colors.black,

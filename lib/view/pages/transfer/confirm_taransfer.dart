@@ -55,8 +55,8 @@ class ConfirmTransfer extends StatelessWidget {
                         assetType == AssetType.coin
                             ? (evm.selectedChain.value.name ?? '')
                             : (controller.selectedToken.value.name ?? ''),
-                        style:
-                            AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
+                        style: AppFont.medium16
+                            .copyWith(color: Theme.of(context).indicatorColor),
                         overflow: TextOverflow.ellipsis,
                       ),
                       4.0.width,
@@ -78,7 +78,8 @@ class ConfirmTransfer extends StatelessWidget {
             ),
             24.0.height,
             Text("From",
-                style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor)),
+                style: AppFont.medium14
+                    .copyWith(color: Theme.of(context).indicatorColor)),
             8.0.height,
             Container(
               padding: EdgeInsets.symmetric(
@@ -130,7 +131,8 @@ class ConfirmTransfer extends StatelessWidget {
             ),
             16.0.height,
             Text("To",
-                style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor)),
+                style: AppFont.medium14
+                    .copyWith(color: Theme.of(context).indicatorColor)),
             8.0.height,
             Container(
               padding: EdgeInsets.symmetric(
@@ -169,7 +171,8 @@ class ConfirmTransfer extends StatelessWidget {
             ),
             16.0.height,
             Text("Gas fee",
-                style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor)),
+                style: AppFont.medium14
+                    .copyWith(color: Theme.of(context).indicatorColor)),
             8.0.height,
             Container(
               width: double.infinity,
@@ -187,8 +190,8 @@ class ConfirmTransfer extends StatelessWidget {
                       children: [
                         Text(
                           "Estimated Gas Fee",
-                          style: AppFont.medium14
-                              .copyWith(color: Theme.of(context).indicatorColor),
+                          style: AppFont.medium14.copyWith(
+                              color: Theme.of(context).indicatorColor),
                         ),
                         4.0.height,
                         Text(
@@ -205,7 +208,8 @@ class ConfirmTransfer extends StatelessWidget {
                   8.0.width,
                   Text(
                     '~ ${controller.networkFee.value.toStringAsFixed(6)} ${evm.selectedChain.value.symbol}',
-                    style: AppFont.medium14.copyWith(color: Theme.of(context).indicatorColor),
+                    style: AppFont.medium14
+                        .copyWith(color: Theme.of(context).indicatorColor),
                   ),
                 ],
               ),
@@ -217,27 +221,29 @@ class ConfirmTransfer extends StatelessWidget {
 
     return Obx(() {
       return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: WidgetHelper.appBar(context: context,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        appBar: WidgetHelper.appBar(
+            context: context,
             title: Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: Theme.of(context).indicatorColor,
-                size: 24.h,
-              ),
-            ),
-            16.0.width,
-            Text(
-              "Transfer ${assetType == AssetType.coin ? evm.selectedChain.value.symbol : controller.selectedToken.value.symbol}",
-              style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
-            ),
-          ],
-        )),
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: Theme.of(context).indicatorColor,
+                    size: 24.h,
+                  ),
+                ),
+                16.0.width,
+                Text(
+                  "Transfer ${assetType == AssetType.coin ? evm.selectedChain.value.symbol : controller.selectedToken.value.symbol}",
+                  style: AppFont.medium16
+                      .copyWith(color: Theme.of(context).indicatorColor),
+                ),
+              ],
+            )),
         body: Stack(
           children: [
             SizedBox(

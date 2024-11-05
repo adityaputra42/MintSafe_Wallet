@@ -20,8 +20,8 @@ class ConfirmSheedPharse extends StatelessWidget {
       required int number,
     }) {
       return DragTarget(
-        onAccept: (String value) {
-          controller.setConfrimPharse(id: number, text: value);
+        onAcceptWithDetails: (value) {
+          controller.setConfrimPharse(id: number, text: value.toString());
         },
         builder: (
           context,
@@ -78,10 +78,15 @@ class ConfirmSheedPharse extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
           height: 42.h,
           width: MediaQuery.of(context).size.width * 0.264,
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-                blurRadius: 0.7.h, spreadRadius: 0.7.h, color: Colors.black12)
-          ], borderRadius: BorderRadius.circular(8.r), color: Theme.of(context).colorScheme.background),
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    blurRadius: 0.7.h,
+                    spreadRadius: 0.7.h,
+                    color: Colors.black12)
+              ],
+              borderRadius: BorderRadius.circular(8.r),
+              color: Theme.of(context).colorScheme.surface),
           child: Center(
             child: Text(text,
                 style: AppFont.medium16.copyWith(
@@ -118,7 +123,8 @@ class ConfirmSheedPharse extends StatelessWidget {
         children: [
           Text(
             'Secret recovery phrase',
-            style: AppFont.medium16.copyWith(color: Theme.of(context).indicatorColor),
+            style: AppFont.medium16
+                .copyWith(color: Theme.of(context).indicatorColor),
           ),
           4.0.height,
           Text(

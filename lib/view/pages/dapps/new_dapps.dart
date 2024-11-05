@@ -265,7 +265,7 @@ class _DappsWeb3State extends State<DappsWeb3> {
         }
       },
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: WidgetHelper.appBar(
             context: context,
             title: Row(
@@ -469,7 +469,7 @@ class _DappsWeb3State extends State<DappsWeb3> {
     return showModalBottomSheet(
         context: context,
         isScrollControlled: true,
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(16.r),

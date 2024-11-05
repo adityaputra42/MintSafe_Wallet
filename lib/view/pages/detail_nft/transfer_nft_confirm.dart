@@ -25,7 +25,7 @@ class TransferNftConfirm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
           context: context,
           title: Row(
@@ -163,8 +163,7 @@ class TransferNftConfirm extends StatelessWidget {
                           Expanded(
                             child: Text(
                               MethodHelper().shortAddress(
-                                address: nft.owner ?? '',length: 8
-                              ),
+                                  address: nft.owner ?? '', length: 8),
                               style: AppFont.semibold14.copyWith(
                                   color: Theme.of(context).indicatorColor),
                               overflow: TextOverflow.ellipsis,
@@ -182,7 +181,6 @@ class TransferNftConfirm extends StatelessWidget {
                     8.0.height,
                     Container(
                       width: double.infinity,
-                     
                       padding: EdgeInsets.symmetric(
                           horizontal: 16.w, vertical: 12.h),
                       decoration: BoxDecoration(
@@ -205,7 +203,8 @@ class TransferNftConfirm extends StatelessWidget {
                           Expanded(
                             child: Text(
                               MethodHelper().shortAddress(
-                                  address: controller.addressController.text, length: 8),
+                                  address: controller.addressController.text,
+                                  length: 8),
                               style: AppFont.semibold14.copyWith(
                                   color: Theme.of(context).indicatorColor),
                               overflow: TextOverflow.ellipsis,
@@ -223,7 +222,6 @@ class TransferNftConfirm extends StatelessWidget {
                     8.0.height,
                     Container(
                       width: double.infinity,
-                     
                       padding: EdgeInsets.all(16.w),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.r),
@@ -233,8 +231,7 @@ class TransferNftConfirm extends StatelessWidget {
                           Expanded(
                               child: Text(
                             MethodHelper().shortAddress(
-                              address: nft.contractAddress ?? '',length: 12
-                            ),
+                                address: nft.contractAddress ?? '', length: 12),
                             style: AppFont.semibold14.copyWith(
                                 color: Theme.of(context).indicatorColor),
                             overflow: TextOverflow.ellipsis,
